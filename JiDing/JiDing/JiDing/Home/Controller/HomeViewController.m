@@ -16,11 +16,41 @@
 
 @property (strong, nonatomic) UIButton *hotelBtn;
 @property (strong, nonatomic) UIButton *KTVBtn;
-
+/*
+ * 开合动画完成
+ */
 @property (assign, nonatomic) BOOL isCompleteAnimation;
+/*
+ * 展开类型动画完成
+ */
+@property (assign, nonatomic) BOOL isCompleteTypeAnimation;
+
+@property (strong, nonatomic) NSMutableArray *typeArray;
+@property (strong, nonatomic) NSMutableArray *roomTypeArray;
+/*
+ * 选中类型frame保持全局
+ */
+@property (assign, nonatomic) CGRect selectedTypeVF;
+@property (assign, nonatomic) CGRect selectedImageViewVF;
+@property (assign, nonatomic) CGRect selectedTypeLabelVF;
 @end
 
 @implementation HomeViewController
+#pragma mark - 懒加载
+- (NSMutableArray *)typeArray
+{
+    if (_typeArray == nil) {
+        _typeArray = [NSMutableArray array];
+    }
+    return _typeArray;
+}
+- (NSMutableArray *)roomTypeArray
+{
+    if (_roomTypeArray == nil) {
+        _roomTypeArray = [NSMutableArray array];
+    }
+    return _roomTypeArray;
+}
 #pragma mark - 首页开合控件
 - (UIView *)screenView
 {
@@ -135,6 +165,9 @@
     [super viewDidLoad];
     [[self windowView] addSubview:self.screenView];
     
+    //设置首页控件
+    [self setupHomeView];
+    self.isCompleteTypeAnimation = YES;
 }
 - (void)actionAutoBack:(UIBarButtonItem *)barItem
 {
@@ -188,6 +221,50 @@
 {
     
 }
+/*
+ * 选中类型
+ */
+- (void)typeTap:(UIGestureRecognizer *)gestuer
+{
+    UIImageView *imageView = (UIImageView *)gestuer.view;
+    UIView *typeV;
+    UILabel *typeLabel;
+    if ([imageView.superview isKindOfClass:[UIView class]]) {
+        typeV = imageView.superview;
+        for (UIView *view in typeV.subviews) {
+            if ([view isKindOfClass:[UILabel class]]) {
+                typeLabel = (UILabel *)view;
+            }
+        }
+    }
+    if (self.isCompleteTypeAnimation) {
+        self.selectedTypeVF = typeV.frame;
+        self.selectedImageViewVF = imageView.frame;
+        self.selectedTypeLabelVF = typeLabel.frame;
+        [UIView animateWithDuration:0.75 animations:^{
+            
+            for (UIButton *button in self.roomTypeArray) {
+                button.alpha = 1.0;
+            }
+            for (UIView *typeV in self.typeArray) {
+                typeV.alpha = 0.0;
+            }
+            typeV.frame = CGRectMake(10, 0, SCREEN_WIDTH - 20, 200);
+            imageView.frame = CGRectMake(imageView.x - 5, imageView.y + 30, 40, 40);
+            typeLabel.frame = CGRectMake(CGRectGetMaxX(imageView.frame), imageView.y + 5, typeLabel.width, typeLabel.height);
+        } completion:^(BOOL finished) {
+            self.isCompleteTypeAnimation = NO;
+            imageView.userInteractionEnabled = NO;
+        }];
+    }else{
+        [UIView animateWithDuration:0.5 animations:^{
+            
+        } completion:^(BOOL finished) {
+            
+        }];
+    }
+    
+}
 #pragma mark - 人数，房间数加减action
 - (void)addBtnClicked:(UIButton *)button
 {
@@ -201,9 +278,12 @@
 - (void)setupHomeView
 {
     //TODO:模块
-    [self setupTypeView:[self setupDateView:[self setupNumView:[self setupLocationView]]]];
+    UIView *locationView = [self setupLocationView];
+    UIView *dateView = [self setupDateView:locationView];
+    UIView *numView = [self setupNumView:dateView];
+    [self setupTypeView:numView];
     
-    UIButton *nextBtn = [[UIButton alloc] initWithFrame:CGRectMake((SCREEN_WIDTH - 50/350*SCREEN_WIDTH) * 0.5, SCREEN_HEIGHT - 50/350*SCREEN_WIDTH - 10, 50/350*SCREEN_WIDTH, 50/350*SCREEN_WIDTH)];
+    UIButton *nextBtn = [[UIButton alloc] initWithFrame:CGRectMake((SCREEN_WIDTH - 50/350*SCREEN_WIDTH) * 0.5, SCREEN_HEIGHT - 50/350*SCREEN_WIDTH - 10 - 64, 50/350*SCREEN_WIDTH, 50/350*SCREEN_WIDTH)];
     nextBtn.backgroundColor = [UIColor blueColor];
     [nextBtn setImage:@""];
     [nextBtn addTarget:self action:@selector(next)];
@@ -214,7 +294,7 @@
  */
 - (UIView *)setupLocationView
 {
-    UIView *locationView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, 50)];
+    UIView *locationView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, 60)];
     [self.view addSubview:locationView];
     
     UIView *devider = [[UIView alloc] initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, 0.5)];
@@ -223,30 +303,31 @@
     
     UIImageView *addressIconView = [[UIImageView alloc] init];
     addressIconView.image = [UIImage imageNamed:@"地理位置"];
-    addressIconView.frame = CGRectMake(10, 10, 30, 30);
+    addressIconView.frame = CGRectMake(10, 15, 30, 30);
     addressIconView.contentMode = UIViewContentModeCenter;
     [locationView addSubview:addressIconView];
     
-    UIView *deviderOne = [[UIView alloc] initWithFrame:CGRectMake(CGRectGetMaxX(addressIconView.frame) + 5, 10, 1, 30)];
+    UIView *deviderOne = [[UIView alloc] initWithFrame:CGRectMake(CGRectGetMaxX(addressIconView.frame) + 5, 15, 1, 30)];
     deviderOne.backgroundColor = AppLineColor;
     [locationView addSubview:deviderOne];
     
     UILabel *addressContentLabel = [[UILabel alloc] init];
+    addressContentLabel.text = @"厦门市思明区，何厝下何300号";
     addressContentLabel.textColor = [UIColor blackColor];
     addressContentLabel.numberOfLines = 0;
     addressContentLabel.textColor = AppDeepGrayTextColor;
     [addressContentLabel setAppFontWithSize:15];
-    addressContentLabel.frame = CGRectMake(CGRectGetMaxX(deviderOne.frame) + 5, 5, SCREEN_WIDTH - SCREEN_WIDTH * 0.2 - CGRectGetMaxX(addressIconView.frame) - 20 - 50, 40);
+    addressContentLabel.frame = CGRectMake(CGRectGetMaxX(deviderOne.frame) + 5, 5, SCREEN_WIDTH - SCREEN_WIDTH * 0.2 - CGRectGetMaxX(addressIconView.frame) - 20 - 50, 50);
     [locationView addSubview:addressContentLabel];
     
     UIImageView *rightArrow = [[UIImageView alloc] init];
     rightArrow.image = [UIImage imageNamed:@"定位"];
     rightArrow.userInteractionEnabled = NO;
-    rightArrow.frame = CGRectMake(CGRectGetMaxX(addressContentLabel.frame), 0, 30, 30);
+    rightArrow.frame = CGRectMake(CGRectGetMaxX(addressContentLabel.frame), 15, 30, 30);
     rightArrow.contentMode = UIViewContentModeCenter;
     [locationView addSubview:rightArrow];
     
-    UIView *deviderTwo = [[UIView alloc] initWithFrame:CGRectMake(CGRectGetMaxX(rightArrow.frame) + 5, 10, 1, 30)];
+    UIView *deviderTwo = [[UIView alloc] initWithFrame:CGRectMake(CGRectGetMaxX(rightArrow.frame) + 5, 15, 1, 30)];
     deviderTwo.backgroundColor = AppLineColor;
     [locationView addSubview:deviderTwo];
     
@@ -271,7 +352,8 @@
     addressIconTwoView.contentMode = UIViewContentModeCenter;
     [locationView addSubview:addressIconTwoView];
     [addressIconTwoView addGestureRecognizer:addressIconTwoViewTap];
-    UIView *deviderThree = [[UIView alloc] initWithFrame:CGRectMake(20, 49, 1, SCREEN_WIDTH - 40)];
+    
+    UIView *deviderThree = [[UIView alloc] initWithFrame:CGRectMake(20, 59, SCREEN_WIDTH - 40, 1)];
     deviderThree.backgroundColor = AppLineColor;
     [locationView addSubview:deviderThree];
 
@@ -282,12 +364,13 @@
  */
 - (UIView *)setupDateView:(UIView *)locationView
 {
-    UIView *dateView = [[UIView alloc] initWithFrame:CGRectMake(0, CGRectGetMaxY(locationView.frame), SCREEN_WIDTH, 60/667*SCREEN_HEIGHT)];
+    UIView *dateView = [[UIView alloc] init];
+    dateView.frame = CGRectMake(0, CGRectGetMaxY(locationView.frame), SCREEN_WIDTH, 70);
     [self.view addSubview:dateView];
     
     UIImageView *clockImage = [[UIImageView alloc] init];
     clockImage.image = [UIImage imageNamed:@"定位"];
-    clockImage.frame = CGRectMake(10, 10, 40, 40);
+    clockImage.frame = CGRectMake(10, 15, 40, 40);
     clockImage.contentMode = UIViewContentModeCenter;
     [dateView addSubview:clockImage];
     
@@ -303,7 +386,7 @@
     
     UIImageView *slash = [[UIImageView alloc] init];
     slash.image = [UIImage imageNamed:@"定位"];
-    slash.frame = CGRectMake(CGRectGetMaxX(starDate.frame), 10, 40, 40);
+    slash.frame = CGRectMake(CGRectGetMaxX(starDate.frame), 15, 40, 40);
     slash.contentMode = UIViewContentModeCenter;
     [dateView addSubview:slash];
 
@@ -319,11 +402,11 @@
     
     UIImageView *rightArrow = [[UIImageView alloc] init];
     rightArrow.image = [UIImage imageNamed:@"定位"];
-    rightArrow.frame = CGRectMake(CGRectGetMaxX(endDate.frame) + 5, 15, 30, 30);
+    rightArrow.frame = CGRectMake(CGRectGetMaxX(endDate.frame) + 5, 20, 30, 30);
     rightArrow.contentMode = UIViewContentModeCenter;
     [dateView addSubview:rightArrow];
     
-    UIView *devider = [[UIView alloc] initWithFrame:CGRectMake(20, 59, 1, SCREEN_WIDTH - 40)];
+    UIView *devider = [[UIView alloc] initWithFrame:CGRectMake(20, 69, SCREEN_WIDTH - 40, 1)];
     devider.backgroundColor = AppLineColor;
     [dateView addSubview:devider];
     
@@ -334,7 +417,8 @@
  */
 - (UIView *)setupNumView:(UIView *)dateView
 {
-    UIView *numView = [[UIView alloc] initWithFrame:CGRectMake(0, CGRectGetMaxY(dateView.frame), SCREEN_WIDTH, 100/667*SCREEN_HEIGHT)];
+    UIView *numView = [[UIView alloc] init];
+    numView.frame = CGRectMake(0, CGRectGetMaxY(dateView.frame), SCREEN_WIDTH, 100);
     [self.view addSubview:numView];
     //订房人数
     UIView *peopleNumberView = [[UIView alloc] init];
@@ -344,6 +428,7 @@
     
     UILabel *peopleTitleLabel = [[UILabel alloc] init];
     peopleTitleLabel.text = @"客官人数";
+    peopleTitleLabel.textAlignment = NSTextAlignmentCenter;
     peopleTitleLabel.textColor = [UIColor blackColor];
     peopleTitleLabel.font = [UIFont systemFontOfSize:15];
     peopleTitleLabel.frame = CGRectMake(0, 5, SCREEN_WIDTH * 0.5, 30);
@@ -364,6 +449,8 @@
     numberLabel.textAlignment = NSTextAlignmentCenter;
     numberLabel.font = [UIFont systemFontOfSize:15];
     numberLabel.frame = CGRectMake(CGRectGetMaxX(addBtn.frame)+10, 35, 50, 30);
+    numberLabel.layer.borderWidth = 1;
+    numberLabel.layer.borderColor = AppLightGrayLineColor.CGColor;
     [peopleNumberView addSubview:numberLabel];
     
     UIButton *subBtn = [[UIButton alloc] init];
@@ -385,7 +472,8 @@
     [numView addSubview:roomNumberView];
     
     UILabel *roomTitleLabel = [[UILabel alloc] init];
-    roomTitleLabel.text = @"客官人数";
+    roomTitleLabel.text = @"房间数量";
+    roomTitleLabel.textAlignment = NSTextAlignmentCenter;
     roomTitleLabel.textColor = [UIColor blackColor];
     roomTitleLabel.font = [UIFont systemFontOfSize:15];
     roomTitleLabel.frame = CGRectMake(0, 5, SCREEN_WIDTH * 0.5, 30);
@@ -406,6 +494,8 @@
     roomNumberLabel.textAlignment = NSTextAlignmentCenter;
     roomNumberLabel.font = [UIFont systemFontOfSize:15];
     roomNumberLabel.frame = CGRectMake(CGRectGetMaxX(addBtn.frame)+10, 35, 50, 30);
+    roomNumberLabel.layer.borderWidth = 1;
+    roomNumberLabel.layer.borderColor = AppLightGrayLineColor.CGColor;
     [roomNumberView addSubview:roomNumberLabel];
     
     UIButton *roomSubBtn = [[UIButton alloc] init];
@@ -422,8 +512,57 @@
  */
 - (UIView *)setupTypeView:(UIView *)numView
 {
-    UIView *typeView = [[UIView alloc] initWithFrame:CGRectMake(0, CGRectGetMaxY(numView.frame), SCREEN_WIDTH, 200/667*SCREEN_HEIGHT)];
+    UIView *typeView = [[UIView alloc] initWithFrame:CGRectMake(0, CGRectGetMaxY(numView.frame) + 20, SCREEN_WIDTH, 200)];
     [self.view addSubview:typeView];
+    
+    for (int i = 0; i<3; i++) {
+        UITapGestureRecognizer *typeTap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(typeTap:)];
+        
+        UIView *typeV = [[UIButton alloc] initWithFrame:CGRectMake(10 + i*((SCREEN_WIDTH - 40)/3 + 10), 0, (SCREEN_WIDTH - 40)/3, 90)];
+        typeV.alpha = 1.0;
+        typeV.layer.cornerRadius = 5;
+        typeV.layer.borderWidth = 1;
+        typeV.layer.borderColor = AppLightGrayLineColor.CGColor;
+        [typeView addSubview:typeV];
+        [self.typeArray addObject:typeV];
+        
+        UIImageView * imageView = [[UIImageView alloc] initWithFrame:CGRectMake(((SCREEN_WIDTH - 40)/3 - 30)*0.5, 10, 30, 30)];
+        imageView.contentMode = UIViewContentModeCenter;
+        imageView.backgroundColor = [UIColor redColor];
+        imageView.userInteractionEnabled = YES;
+        [imageView addGestureRecognizer:typeTap];
+        [typeV addSubview:imageView];
+        
+        UILabel *typeLabel = [[UILabel alloc] initWithFrame:CGRectMake(0, 45, (SCREEN_WIDTH - 40)/3, 30)];
+        typeLabel.textAlignment = NSTextAlignmentCenter;
+        typeLabel.text = @"风情酒店";
+        typeLabel.tag = i;
+        typeLabel.textColor = AppDeepGrayTextColor;
+        [typeLabel setAppFontWithSize:16];
+        [typeV addSubview:typeLabel];
+        
+        UIView *devider = [[UIView alloc] initWithFrame:CGRectMake(20, 90, SCREEN_WIDTH - 60, 1)];
+        devider.backgroundColor = AppLightGrayLineColor;
+        [typeV addSubview:devider];
+        
+    }
+    for (int i = 0; i<3; i++) {
+        UIButton *button = [[UIButton alloc] initWithFrame:CGRectMake(10 + i*((SCREEN_WIDTH - 20)/3 + 10), 40 + 90, (SCREEN_WIDTH - 20)/3, 30)];
+        [button setTitle:@"标准房" forState:UIControlStateNormal];
+        [button setTitleColor:AppLightGrayTextColor forState:UIControlStateNormal];
+        [button setTitleColor:AppDeepGrayTextColor forState:UIControlStateSelected];
+        button.alpha = 0.0;
+        if (i == 0) {
+            button.selected = YES;
+        }
+        [typeView addSubview:button];
+        [self.roomTypeArray addObject:button];
+        if (i < 2) {
+            UIView *deviderButton = [[UIView alloc] initWithFrame:CGRectMake((SCREEN_WIDTH - 20)/3 - 1, 0, 1, 30)];
+            deviderButton.backgroundColor = AppDeepGrayTextColor;
+            [button addSubview:deviderButton];
+        }
+    }
     return typeView;
 }
 @end
