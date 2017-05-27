@@ -17,6 +17,9 @@
 #import "HomeHeader.h"
 #import "LoginHeader.h"
 #import "OrderHeader.h"
+#import "UserCenterViewController.h"
+#import "SettingHeader.h"
+#import "LibraryHeader.h"
 
 #import "AFNetworking.h"
 #import "MJExtension.h"
@@ -35,17 +38,24 @@
 //应用字体类型
 #define STHeitiSC_Light @"STHeitiSC-Light"
 //应用颜色
+#define AppMainColor HEXCOLOR(0x333333)
+
 #define AppLightGrayLineColor HEXCOLOR(0xAAAAAA)
 #define AppLineColor HEXCOLOR(0x333333)
+
+#define AppGreenTextColor HEXCOLOR(0x333333)
 #define AppDeepGrayTextColor HEXCOLOR(0x333333)
 #define AppGrayTextColor HEXCOLOR(0x404040)
 #define AppLightGrayTextColor HEXCOLOR(0xA7A7A7)
-#define AppGreenTextColor HEXCOLOR(0x333333)
+#define AppLightGrayTextColorTwo HEXCOLOR(0x6D6D6D)
+#define AppLightGrayTextColorThree HEXCOLOR(0x505050)
 
 #define DefineWeakSelf __weak __typeof(self) weakSelf = self
 
 #define IPHONE_W ([UIScreen mainScreen].bounds.size.width)          //设备宽
 #define IPHONE_H ([UIScreen mainScreen].bounds.size.height)         //设备高
+#define SCREEN_Width [UIScreen mainScreen].bounds.size.width
+#define SCREEN_Height [UIScreen mainScreen].bounds.size.height
 
 #define SCREEN_WIDTH [[UIScreen mainScreen] bounds].size.width
 #define SCREEN_HEIGHT [[UIScreen mainScreen] bounds].size.height

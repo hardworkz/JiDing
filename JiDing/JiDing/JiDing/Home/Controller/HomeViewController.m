@@ -8,7 +8,25 @@
 
 #import "HomeViewController.h"
 
+/**
+ *  性别
+ */
+typedef NS_ENUM(NSUInteger, SelectedHomeType) {
+    /**
+     *  酒店
+     */
+    SelectedHomeTypeHotel = 1,
+    /**
+     *  KTV
+     */
+    SelectedHomeTypeKTV = 2,
+};
+
 @interface HomeViewController ()
+/**
+ *  当前选择的首页类型，默认为酒店
+ */
+@property (assign, nonatomic) SelectedHomeType homeType;
 @property (strong, nonatomic) UIView *screenView;
 
 @property (strong, nonatomic) UIView *topView;
@@ -16,6 +34,13 @@
 
 @property (strong, nonatomic) UIButton *hotelBtn;
 @property (strong, nonatomic) UIButton *KTVBtn;
+@property (strong, nonatomic) UIButton *backBtn;
+@property (strong, nonatomic) UIButton *nextBtn;
+/*
+ * 点击用户中心遮盖view
+ */
+@property (strong, nonatomic) UIView *bigRoundCoverView;
+@property (strong, nonatomic) UIView *bigRoundCoverViewSetting;
 /*
  * 开合动画完成
  */
@@ -27,6 +52,13 @@
 
 @property (strong, nonatomic) NSMutableArray *typeArray;
 @property (strong, nonatomic) NSMutableArray *roomTypeArray;
+/*
+ * 选中的类型
+ */
+@property (strong, nonatomic) UIView *selectedTypeV;
+@property (strong, nonatomic) UIImageView *selectedImageViewV;
+@property (strong, nonatomic) UILabel *selectedTypeLabelV;
+@property (strong, nonatomic) UIView *devider;
 /*
  * 选中类型frame保持全局
  */
@@ -74,6 +106,13 @@
         [_topView addSubview:devider];
         
         [_topView addSubview:self.hotelBtn];
+        
+        UILabel *hotelLabel = [[UILabel alloc] initWithFrame:CGRectMake(self.hotelBtn.x, CGRectGetMaxY(self.hotelBtn.frame) - 10, self.hotelBtn.width, 20)];
+        hotelLabel.text = @"酒店";
+        hotelLabel.textAlignment = NSTextAlignmentCenter;
+        hotelLabel.textColor = AppDeepGrayTextColor;
+        [hotelLabel setAppFontWithSize:16.0f];
+        [_topView addSubview:hotelLabel];
     }
     return _topView;
 }
@@ -88,16 +127,23 @@
         [_bottomView addSubview:devider];
         
         UIButton *setting = [[UIButton alloc] initWithFrame:CGRectMake(15, SCREEN_HEIGHT * 0.5 - 70, 50, 50)];
-        setting.backgroundColor = [UIColor yellowColor];
         [setting addTarget:self action:@selector(setting)];
+        [setting setImage:@"设置"];
         [_bottomView addSubview:setting];
         
         UIButton *userCenter = [[UIButton alloc] initWithFrame:CGRectMake(SCREEN_WIDTH - 65, SCREEN_HEIGHT * 0.5 - 70, 50, 50)];
-        userCenter.backgroundColor = [UIColor grayColor];
         [userCenter addTarget:self action:@selector(userCenter)];
+        [userCenter setImage:@"个人"];
         [_bottomView addSubview:userCenter];
         
         [_bottomView addSubview:self.KTVBtn];
+        
+        UILabel *ktvLabel = [[UILabel alloc] initWithFrame:CGRectMake(self.KTVBtn.x, CGRectGetMaxY(self.KTVBtn.frame) - 10, self.KTVBtn.width, 20)];
+        ktvLabel.text = @"KTV";
+        ktvLabel.textAlignment = NSTextAlignmentCenter;
+        ktvLabel.textColor = AppDeepGrayTextColor;
+        [ktvLabel setAppFontWithSize:16.0f];
+        [_bottomView addSubview:ktvLabel];
     }
     return _bottomView;
 }
@@ -105,7 +151,7 @@
 {
     if (_hotelBtn == nil) {
         _hotelBtn = [[UIButton alloc] initWithFrame:CGRectMake((SCREEN_WIDTH - 100) * 0.5, (SCREEN_HEIGHT *0.5 - 100) * 0.5 + 20, 100, 100)];
-        _hotelBtn.backgroundColor = [UIColor blackColor];
+        [_hotelBtn setImage:@"首页"];
         [_hotelBtn addTarget:self action:@selector(select_hotel)];
     }
     return _hotelBtn;
@@ -114,7 +160,7 @@
 {
     if (_KTVBtn == nil) {
         _KTVBtn = [[UIButton alloc] initWithFrame:CGRectMake((SCREEN_WIDTH - 100) * 0.5, (SCREEN_HEIGHT *0.5 - 100) * 0.5 - 20, 100, 100)];
-        _KTVBtn.backgroundColor = [UIColor redColor];
+        [_KTVBtn setImage:@"KTV"];
         [_KTVBtn addTarget:self action:@selector(select_ktv)];
     }
     return _KTVBtn;
@@ -122,6 +168,26 @@
 -(UIView *)windowView
 {
     return [[[UIApplication sharedApplication] delegate] window];
+}
+- (UIView *)bigRoundCoverView
+{
+    if (_bigRoundCoverView == nil) {
+        _bigRoundCoverView = [[UIView alloc] init];
+        _bigRoundCoverView.backgroundColor = [UIColor greenColor];
+        _bigRoundCoverView.layer.cornerRadius = SCREEN_HEIGHT;
+        _bigRoundCoverView.frame = CGRectMake(SCREEN_WIDTH, SCREEN_HEIGHT, SCREEN_HEIGHT * 2, SCREEN_HEIGHT * 2);
+    }
+    return _bigRoundCoverView;
+}
+- (UIView *)bigRoundCoverViewSetting
+{
+    if (_bigRoundCoverViewSetting == nil) {
+        _bigRoundCoverViewSetting = [[UIView alloc] init];
+        _bigRoundCoverViewSetting.backgroundColor = [UIColor redColor];
+        _bigRoundCoverViewSetting.layer.cornerRadius = SCREEN_HEIGHT;
+        _bigRoundCoverViewSetting.frame = CGRectMake(-SCREEN_WIDTH - SCREEN_HEIGHT * 2, SCREEN_HEIGHT, SCREEN_HEIGHT * 2, SCREEN_HEIGHT * 2);
+    }
+    return _bigRoundCoverViewSetting;
 }
 #pragma mark - 首页开合动画
 - (void)animationOpen
@@ -165,6 +231,7 @@
     [super viewDidLoad];
     [[self windowView] addSubview:self.screenView];
     
+    self.homeType = SelectedHomeTypeHotel;
     //设置首页控件
     [self setupHomeView];
     self.isCompleteTypeAnimation = YES;
@@ -208,62 +275,137 @@
 //    [_CLLocationManager startUpdatingLocation];
 }
 /*
- * 跳转设置
+ * 跳转设置动画
  */
 - (void)setting
 {
-    
+    [[self windowView] addSubview:self.bigRoundCoverViewSetting];
+    [UIView animateWithDuration:0.75 animations:^{
+        self.bigRoundCoverViewSetting.center = self.view.center;
+    }completion:^(BOOL finished) {
+        [UIView animateWithDuration:0.5 animations:^{
+            self.bigRoundCoverViewSetting.alpha = 0.0;
+        } completion:^(BOOL finished) {
+            [self.bigRoundCoverViewSetting removeFromSuperview];
+            self.bigRoundCoverViewSetting = nil;
+            //跳转到用户中心
+            if (self.homeType == SelectedHomeTypeHotel) {
+                [self select_hotel];
+            }else{
+                [self select_ktv];
+            }
+            SettingViewController *settingVC = [[SettingViewController alloc] init];
+            [self.navigationController pushViewController:settingVC animated:NO];
+        }];
+    }];
 }
 /*
- * 跳转用户中心
+ * 跳转用户中心动画
  */
 - (void)userCenter
 {
-    
+    [[self windowView] addSubview:self.bigRoundCoverView];
+    [UIView animateWithDuration:0.75 animations:^{
+        self.bigRoundCoverView.center = self.view.center;
+    }completion:^(BOOL finished) {
+        [UIView animateWithDuration:0.5 animations:^{
+            self.bigRoundCoverView.alpha = 0.0;
+        } completion:^(BOOL finished) {
+            [self.bigRoundCoverView removeFromSuperview];
+            self.bigRoundCoverView = nil;
+            //跳转到用户中心
+            if (self.homeType == SelectedHomeTypeHotel) {
+                [self select_hotel];
+            }else{
+                [self select_ktv];
+            }
+            UserCenterViewController *userCenterVC = [[UserCenterViewController alloc] init];
+            [self.navigationController pushViewController:userCenterVC animated:NO];
+        }];
+    }];
 }
 /*
- * 选中类型
+ * 选中类型动画
  */
 - (void)typeTap:(UIGestureRecognizer *)gestuer
 {
-    UIImageView *imageView = (UIImageView *)gestuer.view;
-    UIView *typeV;
-    UILabel *typeLabel;
-    if ([imageView.superview isKindOfClass:[UIView class]]) {
-        typeV = imageView.superview;
+    //判断是否可以展开动画
+    if (self.isCompleteTypeAnimation) {
+        
+        UIView *typeV = (UIImageView *)gestuer.view;
+        UIImageView *imageView;
+        UILabel *typeLabel;
         for (UIView *view in typeV.subviews) {
             if ([view isKindOfClass:[UILabel class]]) {
                 typeLabel = (UILabel *)view;
+            }else if ([view isKindOfClass:[UIImageView class]]) {
+                imageView = (UIImageView *)view;
             }
         }
-    }
-    if (self.isCompleteTypeAnimation) {
+        //设置选中类型
+        self.selectedTypeV = typeV;
+        self.selectedImageViewV = imageView;
+        self.selectedTypeLabelV = typeLabel;
+        //保存选中控件原来frame,方便之后返回动画
         self.selectedTypeVF = typeV.frame;
         self.selectedImageViewVF = imageView.frame;
         self.selectedTypeLabelVF = typeLabel.frame;
+        
+        for (UIView *typeView in self.typeArray) {
+            if ([typeView isEqual:typeV]) {//如果为当前选中uiview则不隐藏
+                typeView.hidden = NO;
+            }else{
+                typeView.hidden = YES;
+            }
+        }
         [UIView animateWithDuration:0.75 animations:^{
             
-            for (UIButton *button in self.roomTypeArray) {
-                button.alpha = 1.0;
-            }
-            for (UIView *typeV in self.typeArray) {
-                typeV.alpha = 0.0;
-            }
+            _backBtn.alpha = 1.0;
+            
             typeV.frame = CGRectMake(10, 0, SCREEN_WIDTH - 20, 200);
             imageView.frame = CGRectMake(imageView.x - 5, imageView.y + 30, 40, 40);
             typeLabel.frame = CGRectMake(CGRectGetMaxX(imageView.frame), imageView.y + 5, typeLabel.width, typeLabel.height);
+            _nextBtn.frame = CGRectMake((SCREEN_WIDTH - 50) * 0.5  +100, SCREEN_HEIGHT - 50 - 10 - 64, 50, 50);
         } completion:^(BOOL finished) {
             self.isCompleteTypeAnimation = NO;
-            imageView.userInteractionEnabled = NO;
-        }];
-    }else{
-        [UIView animateWithDuration:0.5 animations:^{
+            typeV.userInteractionEnabled = NO;
             
-        } completion:^(BOOL finished) {
-            
+            self.devider.hidden = NO;
+            for (UIButton *button in self.roomTypeArray) {
+                button.hidden = NO;
+            }
+
         }];
     }
-    
+}
+/*
+ * 返回缩放动画
+ */
+- (void)back
+{
+    if (!self.isCompleteTypeAnimation) {
+        
+        self.devider.hidden = YES;
+        
+        for (UIButton *button in self.roomTypeArray) {
+            button.hidden = YES;
+        }
+        [UIView animateWithDuration:0.75 animations:^{
+            
+            _backBtn.alpha = 0.0;
+            self.selectedTypeV.frame = self.selectedTypeVF;
+            self.selectedImageViewV.frame = self.selectedImageViewVF;
+            self.selectedTypeLabelV.frame = self.selectedTypeLabelVF;
+            _nextBtn.frame = CGRectMake((SCREEN_WIDTH - 50) * 0.5, SCREEN_HEIGHT - 50 - 10 - 64, 50, 50);
+        } completion:^(BOOL finished) {
+            self.isCompleteTypeAnimation = YES;
+            self.selectedTypeV.userInteractionEnabled = YES;
+            
+            for (UIView *typeV in self.typeArray) {
+                typeV.hidden = NO;
+            }
+        }];
+    }
 }
 #pragma mark - 人数，房间数加减action
 - (void)addBtnClicked:(UIButton *)button
@@ -283,11 +425,18 @@
     UIView *numView = [self setupNumView:dateView];
     [self setupTypeView:numView];
     
-    UIButton *nextBtn = [[UIButton alloc] initWithFrame:CGRectMake((SCREEN_WIDTH - 50/350*SCREEN_WIDTH) * 0.5, SCREEN_HEIGHT - 50/350*SCREEN_WIDTH - 10 - 64, 50/350*SCREEN_WIDTH, 50/350*SCREEN_WIDTH)];
-    nextBtn.backgroundColor = [UIColor blueColor];
-    [nextBtn setImage:@""];
-    [nextBtn addTarget:self action:@selector(next)];
-    [self.view addSubview:nextBtn];
+    _nextBtn = [[UIButton alloc] initWithFrame:CGRectMake((SCREEN_WIDTH - 50) * 0.5, SCREEN_HEIGHT - 50 - 10 - 64, 50, 50)];
+    _nextBtn.alpha = 1.0;
+    [_nextBtn setImage:@"下一步"];
+    [_nextBtn addTarget:self action:@selector(next)];
+    [self.view addSubview:_nextBtn];
+    
+    _backBtn = [[UIButton alloc] initWithFrame:CGRectMake((SCREEN_WIDTH - 50) * 0.5 - 100, SCREEN_HEIGHT - 50 - 10 - 64, 50, 50)];
+    _backBtn.alpha = 0.0;
+    _backBtn.backgroundColor = [UIColor redColor];
+    [_backBtn setImage:@""];
+    [_backBtn addTarget:self action:@selector(back)];
+    [self.view addSubview:_backBtn];
 }
 /*
  * 定位模块
@@ -302,7 +451,7 @@
     [locationView addSubview:devider];
     
     UIImageView *addressIconView = [[UIImageView alloc] init];
-    addressIconView.image = [UIImage imageNamed:@"地理位置"];
+    addressIconView.image = [UIImage imageNamed:@"地标"];
     addressIconView.frame = CGRectMake(10, 15, 30, 30);
     addressIconView.contentMode = UIViewContentModeCenter;
     [locationView addSubview:addressIconView];
@@ -321,7 +470,7 @@
     [locationView addSubview:addressContentLabel];
     
     UIImageView *rightArrow = [[UIImageView alloc] init];
-    rightArrow.image = [UIImage imageNamed:@"定位"];
+    rightArrow.image = [UIImage imageNamed:@"箭头"];
     rightArrow.userInteractionEnabled = NO;
     rightArrow.frame = CGRectMake(CGRectGetMaxX(addressContentLabel.frame), 15, 30, 30);
     rightArrow.contentMode = UIViewContentModeCenter;
@@ -346,7 +495,7 @@
     [myAddress addGestureRecognizer:myAddressTap];
     
     UIImageView *addressIconTwoView = [[UIImageView alloc] init];
-    addressIconTwoView.image = [UIImage imageNamed:@"定位"];
+    addressIconTwoView.image = [UIImage imageNamed:@"我的位置"];
     addressIconTwoView.userInteractionEnabled = YES;
     addressIconTwoView.frame = CGRectMake(myAddress.x, 0, 80, 40);
     addressIconTwoView.contentMode = UIViewContentModeCenter;
@@ -369,7 +518,7 @@
     [self.view addSubview:dateView];
     
     UIImageView *clockImage = [[UIImageView alloc] init];
-    clockImage.image = [UIImage imageNamed:@"定位"];
+    clockImage.image = [UIImage imageNamed:@"时间"];
     clockImage.frame = CGRectMake(10, 15, 40, 40);
     clockImage.contentMode = UIViewContentModeCenter;
     [dateView addSubview:clockImage];
@@ -385,8 +534,8 @@
     [dateView addSubview:starDate];
     
     UIImageView *slash = [[UIImageView alloc] init];
-    slash.image = [UIImage imageNamed:@"定位"];
-    slash.frame = CGRectMake(CGRectGetMaxX(starDate.frame), 15, 40, 40);
+    slash.image = [UIImage imageNamed:@"斜线"];
+    slash.frame = CGRectMake(CGRectGetMaxX(starDate.frame), 0, 40, 70);
     slash.contentMode = UIViewContentModeCenter;
     [dateView addSubview:slash];
 
@@ -401,8 +550,8 @@
     [dateView addSubview:endDate];
     
     UIImageView *rightArrow = [[UIImageView alloc] init];
-    rightArrow.image = [UIImage imageNamed:@"定位"];
-    rightArrow.frame = CGRectMake(CGRectGetMaxX(endDate.frame) + 5, 20, 30, 30);
+    rightArrow.image = [UIImage imageNamed:@"箭头"];
+    rightArrow.frame = CGRectMake(SCREEN_WIDTH - 20 - 30, 20, 30, 30);
     rightArrow.contentMode = UIViewContentModeCenter;
     [dateView addSubview:rightArrow];
     
@@ -519,18 +668,17 @@
         UITapGestureRecognizer *typeTap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(typeTap:)];
         
         UIView *typeV = [[UIButton alloc] initWithFrame:CGRectMake(10 + i*((SCREEN_WIDTH - 40)/3 + 10), 0, (SCREEN_WIDTH - 40)/3, 90)];
-        typeV.alpha = 1.0;
         typeV.layer.cornerRadius = 5;
         typeV.layer.borderWidth = 1;
         typeV.layer.borderColor = AppLightGrayLineColor.CGColor;
         [typeView addSubview:typeV];
+        typeV.userInteractionEnabled = YES;
+        [typeV addGestureRecognizer:typeTap];
         [self.typeArray addObject:typeV];
         
         UIImageView * imageView = [[UIImageView alloc] initWithFrame:CGRectMake(((SCREEN_WIDTH - 40)/3 - 30)*0.5, 10, 30, 30)];
         imageView.contentMode = UIViewContentModeCenter;
         imageView.backgroundColor = [UIColor redColor];
-        imageView.userInteractionEnabled = YES;
-        [imageView addGestureRecognizer:typeTap];
         [typeV addSubview:imageView];
         
         UILabel *typeLabel = [[UILabel alloc] initWithFrame:CGRectMake(0, 45, (SCREEN_WIDTH - 40)/3, 30)];
@@ -541,17 +689,21 @@
         [typeLabel setAppFontWithSize:16];
         [typeV addSubview:typeLabel];
         
-        UIView *devider = [[UIView alloc] initWithFrame:CGRectMake(20, 90, SCREEN_WIDTH - 60, 1)];
-        devider.backgroundColor = AppLightGrayLineColor;
-        [typeV addSubview:devider];
         
     }
+    
+    UIView *devider = [[UIView alloc] initWithFrame:CGRectMake(20, 90, SCREEN_WIDTH - 60, 1)];
+    devider.hidden = YES;
+    devider.backgroundColor = AppLightGrayLineColor;
+    [typeView addSubview:devider];
+    self.devider = devider;
+    
     for (int i = 0; i<3; i++) {
         UIButton *button = [[UIButton alloc] initWithFrame:CGRectMake(10 + i*((SCREEN_WIDTH - 20)/3 + 10), 40 + 90, (SCREEN_WIDTH - 20)/3, 30)];
         [button setTitle:@"标准房" forState:UIControlStateNormal];
         [button setTitleColor:AppLightGrayTextColor forState:UIControlStateNormal];
         [button setTitleColor:AppDeepGrayTextColor forState:UIControlStateSelected];
-        button.alpha = 0.0;
+        button.hidden = YES;
         if (i == 0) {
             button.selected = YES;
         }
