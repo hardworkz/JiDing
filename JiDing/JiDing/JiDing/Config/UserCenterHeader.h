@@ -11,4 +11,8 @@
 
 #import "UserCenterViewController.h"
 
+#import "UserDataTableViewCell.h"
+#import "UserCenterOrderCell.h"
+#import "UserCenterMessageCell.h"
+
 #endif /* UserCenterHeader_h */

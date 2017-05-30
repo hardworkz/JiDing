@@ -17,7 +17,7 @@
 #import "HomeHeader.h"
 #import "LoginHeader.h"
 #import "OrderHeader.h"
-#import "UserCenterViewController.h"
+#import "UserCenterHeader.h"
 #import "SettingHeader.h"
 #import "LibraryHeader.h"
 
@@ -35,6 +35,12 @@
 #import "UILabel+Xzb_Label.h"
 #import "UINavigationController+FDFullscreenPopGesture.h"
 
+//定义宏（限制输入内容）
+#define kAlphaNum  @"ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789"
+#define kAlpha      @"ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz"
+#define kNumbers     @"0123456789"
+#define kNumbersPeriod  @"0123456789."
+
 //应用字体类型
 #define STHeitiSC_Light @"STHeitiSC-Light"
 //应用颜色
@@ -42,8 +48,9 @@
 
 #define AppLightGrayLineColor HEXCOLOR(0xAAAAAA)
 #define AppLineColor HEXCOLOR(0x333333)
+#define AppLightLineColor HEXCOLOR(0xf9f9f9)
 
-#define AppGreenTextColor HEXCOLOR(0x333333)
+#define AppGreenTextColor HEXCOLOR(0x13D0AB)
 #define AppDeepGrayTextColor HEXCOLOR(0x333333)
 #define AppGrayTextColor HEXCOLOR(0x404040)
 #define AppLightGrayTextColor HEXCOLOR(0xA7A7A7)

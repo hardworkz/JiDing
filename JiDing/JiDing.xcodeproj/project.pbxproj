@@ -33,6 +33,17 @@
 		746169B21ED71B7700029B60 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 746169B01ED71B7700029B60 /* LaunchScreen.storyboard */; };
 		746169BD1ED71B7700029B60 /* JiDingTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 746169BC1ED71B7700029B60 /* JiDingTests.m */; };
 		746169C81ED71B7700029B60 /* JiDingUITests.m in Sources */ = {isa = PBXBuildFile; fileRef = 746169C71ED71B7700029B60 /* JiDingUITests.m */; };
+		749921551EDAEAA500459E5C /* UserDataTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 749921541EDAEAA500459E5C /* UserDataTableViewCell.m */; };
+		749921581EDAEC7000459E5C /* UserCenterOrderCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 749921571EDAEC7000459E5C /* UserCenterOrderCell.m */; };
+		7499215B1EDAEC8A00459E5C /* UserCenterMessageCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 7499215A1EDAEC8A00459E5C /* UserCenterMessageCell.m */; };
+		7499215F1EDBD37600459E5C /* CustomAlertView.m in Sources */ = {isa = PBXBuildFile; fileRef = 7499215E1EDBD37600459E5C /* CustomAlertView.m */; };
+		749921661EDBD5F700459E5C /* RegisterViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 749921651EDBD5F700459E5C /* RegisterViewController.m */; };
+		749921691EDBD61F00459E5C /* ForgetPwdViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 749921681EDBD61F00459E5C /* ForgetPwdViewController.m */; };
+		7499216C1EDBD8A600459E5C /* Xzb_CountDownButton.m in Sources */ = {isa = PBXBuildFile; fileRef = 7499216B1EDBD8A600459E5C /* Xzb_CountDownButton.m */; };
+		749921701EDBDAF700459E5C /* RTHttpTool.m in Sources */ = {isa = PBXBuildFile; fileRef = 7499216F1EDBDAF700459E5C /* RTHttpTool.m */; };
+		749921731EDBDE3900459E5C /* LoginViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 749921721EDBDE3900459E5C /* LoginViewController.m */; };
+		749921761EDC203900459E5C /* LoginNavigationController.m in Sources */ = {isa = PBXBuildFile; fileRef = 749921751EDC203900459E5C /* LoginNavigationController.m */; };
+		749921791EDC220B00459E5C /* Toast.m in Sources */ = {isa = PBXBuildFile; fileRef = 749921781EDC220B00459E5C /* Toast.m */; };
 		8F64611CB370FBDA06906FC4 /* Pods_JiDing.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 763C68979D71F7612962AD0F /* Pods_JiDing.framework */; };
 /* End PBXBuildFile section */
 
@@ -115,6 +126,28 @@
 		746169C31ED71B7700029B60 /* JiDingUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = JiDingUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		746169C71ED71B7700029B60 /* JiDingUITests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = JiDingUITests.m; sourceTree = "<group>"; };
 		746169C91ED71B7700029B60 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		749921531EDAEAA500459E5C /* UserDataTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UserDataTableViewCell.h; sourceTree = "<group>"; };
+		749921541EDAEAA500459E5C /* UserDataTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UserDataTableViewCell.m; sourceTree = "<group>"; };
+		749921561EDAEC7000459E5C /* UserCenterOrderCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UserCenterOrderCell.h; sourceTree = "<group>"; };
+		749921571EDAEC7000459E5C /* UserCenterOrderCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UserCenterOrderCell.m; sourceTree = "<group>"; };
+		749921591EDAEC8A00459E5C /* UserCenterMessageCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UserCenterMessageCell.h; sourceTree = "<group>"; };
+		7499215A1EDAEC8A00459E5C /* UserCenterMessageCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UserCenterMessageCell.m; sourceTree = "<group>"; };
+		7499215D1EDBD37600459E5C /* CustomAlertView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CustomAlertView.h; sourceTree = "<group>"; };
+		7499215E1EDBD37600459E5C /* CustomAlertView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CustomAlertView.m; sourceTree = "<group>"; };
+		749921641EDBD5F700459E5C /* RegisterViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RegisterViewController.h; sourceTree = "<group>"; };
+		749921651EDBD5F700459E5C /* RegisterViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RegisterViewController.m; sourceTree = "<group>"; };
+		749921671EDBD61F00459E5C /* ForgetPwdViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ForgetPwdViewController.h; sourceTree = "<group>"; };
+		749921681EDBD61F00459E5C /* ForgetPwdViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ForgetPwdViewController.m; sourceTree = "<group>"; };
+		7499216A1EDBD8A600459E5C /* Xzb_CountDownButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Xzb_CountDownButton.h; sourceTree = "<group>"; };
+		7499216B1EDBD8A600459E5C /* Xzb_CountDownButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Xzb_CountDownButton.m; sourceTree = "<group>"; };
+		7499216E1EDBDAF700459E5C /* RTHttpTool.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RTHttpTool.h; sourceTree = "<group>"; };
+		7499216F1EDBDAF700459E5C /* RTHttpTool.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RTHttpTool.m; sourceTree = "<group>"; };
+		749921711EDBDE3900459E5C /* LoginViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LoginViewController.h; sourceTree = "<group>"; };
+		749921721EDBDE3900459E5C /* LoginViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LoginViewController.m; sourceTree = "<group>"; };
+		749921741EDC203900459E5C /* LoginNavigationController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LoginNavigationController.h; sourceTree = "<group>"; };
+		749921751EDC203900459E5C /* LoginNavigationController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LoginNavigationController.m; sourceTree = "<group>"; };
+		749921771EDC220B00459E5C /* Toast.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Toast.h; sourceTree = "<group>"; };
+		749921781EDC220B00459E5C /* Toast.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Toast.m; sourceTree = "<group>"; };
 		763C68979D71F7612962AD0F /* Pods_JiDing.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_JiDing.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		87AC6AD55B8101D2FC8EAB05 /* Pods-JiDing.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-JiDing.release.xcconfig"; path = "Pods/Target Support Files/Pods-JiDing/Pods-JiDing.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -157,6 +190,8 @@
 		6983A1891ED9439F0032CF36 /* UserCenter */ = {
 			isa = PBXGroup;
 			children = (
+				749921511EDAEA5000459E5C /* Model */,
+				749921521EDAEA5000459E5C /* View */,
 				6983A18A1ED9439F0032CF36 /* Controller */,
 				6983A18B1ED9439F0032CF36 /* Model */,
 				6983A18C1ED9439F0032CF36 /* View */,
@@ -225,6 +260,10 @@
 		6983A19C1ED967B50032CF36 /* Library */ = {
 			isa = PBXGroup;
 			children = (
+				749921771EDC220B00459E5C /* Toast.h */,
+				749921781EDC220B00459E5C /* Toast.m */,
+				7499216D1EDBDAF700459E5C /* HttpTool */,
+				7499215C1EDBD37600459E5C /* CustomAlertView */,
 				6983A1A21ED96A3C0032CF36 /* XWAlertView */,
 				6983A19D1ED967BF0032CF36 /* DQAlertView */,
 			);
@@ -252,8 +291,8 @@
 		6988A6441ED7BE00002CABAE /* JiDing */ = {
 			isa = PBXGroup;
 			children = (
+				749921601EDBD5C100459E5C /* Login */,
 				6983A19C1ED967B50032CF36 /* Library */,
-				6988A64B1ED7BE00002CABAE /* Login */,
 				6988A6471ED7BE00002CABAE /* Home */,
 				6988A6501ED7BE00002CABAE /* Order */,
 				6983A1891ED9439F0032CF36 /* UserCenter */,
@@ -328,37 +367,6 @@
 			sourceTree = "<group>";
 		};
 		6988A64A1ED7BE00002CABAE /* View */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = View;
-			sourceTree = "<group>";
-		};
-		6988A64B1ED7BE00002CABAE /* Login */ = {
-			isa = PBXGroup;
-			children = (
-				6988A64C1ED7BE00002CABAE /* Controller */,
-				6988A64D1ED7BE00002CABAE /* Model */,
-				6988A64E1ED7BE00002CABAE /* View */,
-			);
-			path = Login;
-			sourceTree = "<group>";
-		};
-		6988A64C1ED7BE00002CABAE /* Controller */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = Controller;
-			sourceTree = "<group>";
-		};
-		6988A64D1ED7BE00002CABAE /* Model */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = Model;
-			sourceTree = "<group>";
-		};
-		6988A64E1ED7BE00002CABAE /* View */ = {
 			isa = PBXGroup;
 			children = (
 			);
@@ -492,6 +500,85 @@
 				746169C91ED71B7700029B60 /* Info.plist */,
 			);
 			path = JiDingUITests;
+			sourceTree = "<group>";
+		};
+		749921511EDAEA5000459E5C /* Model */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		749921521EDAEA5000459E5C /* View */ = {
+			isa = PBXGroup;
+			children = (
+				749921531EDAEAA500459E5C /* UserDataTableViewCell.h */,
+				749921541EDAEAA500459E5C /* UserDataTableViewCell.m */,
+				749921561EDAEC7000459E5C /* UserCenterOrderCell.h */,
+				749921571EDAEC7000459E5C /* UserCenterOrderCell.m */,
+				749921591EDAEC8A00459E5C /* UserCenterMessageCell.h */,
+				7499215A1EDAEC8A00459E5C /* UserCenterMessageCell.m */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		7499215C1EDBD37600459E5C /* CustomAlertView */ = {
+			isa = PBXGroup;
+			children = (
+				7499215D1EDBD37600459E5C /* CustomAlertView.h */,
+				7499215E1EDBD37600459E5C /* CustomAlertView.m */,
+			);
+			path = CustomAlertView;
+			sourceTree = "<group>";
+		};
+		749921601EDBD5C100459E5C /* Login */ = {
+			isa = PBXGroup;
+			children = (
+				749921611EDBD5C100459E5C /* Controller */,
+				749921621EDBD5C100459E5C /* Model */,
+				749921631EDBD5C100459E5C /* View */,
+			);
+			path = Login;
+			sourceTree = "<group>";
+		};
+		749921611EDBD5C100459E5C /* Controller */ = {
+			isa = PBXGroup;
+			children = (
+				749921641EDBD5F700459E5C /* RegisterViewController.h */,
+				749921651EDBD5F700459E5C /* RegisterViewController.m */,
+				749921671EDBD61F00459E5C /* ForgetPwdViewController.h */,
+				749921681EDBD61F00459E5C /* ForgetPwdViewController.m */,
+				749921711EDBDE3900459E5C /* LoginViewController.h */,
+				749921721EDBDE3900459E5C /* LoginViewController.m */,
+				749921741EDC203900459E5C /* LoginNavigationController.h */,
+				749921751EDC203900459E5C /* LoginNavigationController.m */,
+			);
+			path = Controller;
+			sourceTree = "<group>";
+		};
+		749921621EDBD5C100459E5C /* Model */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		749921631EDBD5C100459E5C /* View */ = {
+			isa = PBXGroup;
+			children = (
+				7499216A1EDBD8A600459E5C /* Xzb_CountDownButton.h */,
+				7499216B1EDBD8A600459E5C /* Xzb_CountDownButton.m */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		7499216D1EDBDAF700459E5C /* HttpTool */ = {
+			isa = PBXGroup;
+			children = (
+				7499216E1EDBDAF700459E5C /* RTHttpTool.h */,
+				7499216F1EDBDAF700459E5C /* RTHttpTool.m */,
+			);
+			path = HttpTool;
 			sourceTree = "<group>";
 		};
 		C8B57854D7E2755F41BB9F8C /* Frameworks */ = {
@@ -689,25 +776,36 @@
 				6988A6761ED7C553002CABAE /* DSE.m in Sources */,
 				6988A6861ED7D6E0002CABAE /* UIImage+Extension.m in Sources */,
 				6988A67A1ED7C8AA002CABAE /* UIViewController+AutoBack.m in Sources */,
+				749921761EDC203900459E5C /* LoginNavigationController.m in Sources */,
+				749921701EDBDAF700459E5C /* RTHttpTool.m in Sources */,
 				6983A1A01ED967BF0032CF36 /* DQAlertView.m in Sources */,
+				749921791EDC220B00459E5C /* Toast.m in Sources */,
+				749921661EDBD5F700459E5C /* RegisterViewController.m in Sources */,
 				6988A6751ED7C553002CABAE /* Besa64.m in Sources */,
 				6988A6871ED7D6E0002CABAE /* UIImageView+Extension.m in Sources */,
 				6988A66C1ED7C52D002CABAE /* CommonCode.m in Sources */,
 				6983A18F1ED943B10032CF36 /* UserCenterViewController.m in Sources */,
+				749921691EDBD61F00459E5C /* ForgetPwdViewController.m in Sources */,
 				746169A71ED71B7700029B60 /* AppDelegate.m in Sources */,
 				6983A1971ED963A20032CF36 /* SettingViewController.m in Sources */,
 				6988A6651ED7C207002CABAE /* HomeNavigationController.m in Sources */,
 				6983A1A51ED96A3C0032CF36 /* XWAlerLoginView.m in Sources */,
+				749921581EDAEC7000459E5C /* UserCenterOrderCell.m in Sources */,
 				6988A65F1ED7BFD5002CABAE /* RootNavigationController.m in Sources */,
+				749921551EDAEAA500459E5C /* UserDataTableViewCell.m in Sources */,
 				746169A41ED71B7700029B60 /* main.m in Sources */,
 				6988A6771ED7C553002CABAE /* GTMBase64.m in Sources */,
 				6988A65C1ED7BFC0002CABAE /* RootViewController.m in Sources */,
 				6988A68B1ED7FF04002CABAE /* UILabel+Xzb_Label.m in Sources */,
 				6988A6681ED7C21E002CABAE /* HomeViewController.m in Sources */,
+				7499215F1EDBD37600459E5C /* CustomAlertView.m in Sources */,
+				7499216C1EDBD8A600459E5C /* Xzb_CountDownButton.m in Sources */,
 				6988A6851ED7D6E0002CABAE /* UIButton+Extension.m in Sources */,
 				6988A6881ED7D6E0002CABAE /* UIView+Extension.m in Sources */,
 				6983A19B1ED966FD0032CF36 /* SettingCell.m in Sources */,
 				6988A67C1ED7D6C2002CABAE /* Foundation+Log.m in Sources */,
+				7499215B1EDAEC8A00459E5C /* UserCenterMessageCell.m in Sources */,
+				749921731EDBDE3900459E5C /* LoginViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

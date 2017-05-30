@@ -364,7 +364,7 @@ typedef NS_ENUM(NSUInteger, SelectedHomeType) {
             
             typeV.frame = CGRectMake(10, 0, SCREEN_WIDTH - 20, 200);
             imageView.frame = CGRectMake(imageView.x - 5, imageView.y + 30, 40, 40);
-            typeLabel.frame = CGRectMake(CGRectGetMaxX(imageView.frame), imageView.y + 5, typeLabel.width, typeLabel.height);
+            typeLabel.frame = CGRectMake(CGRectGetMaxX(imageView.frame) - 15, imageView.y + 5, typeLabel.width, typeLabel.height);
             _nextBtn.frame = CGRectMake((SCREEN_WIDTH - 50) * 0.5  +100, SCREEN_HEIGHT - 50 - 10 - 64, 50, 50);
         } completion:^(BOOL finished) {
             self.isCompleteTypeAnimation = NO;
