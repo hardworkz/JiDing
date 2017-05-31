@@ -28,7 +28,14 @@
     
     self.title = @"我的";
     
+    
     [self.view addSubview:self.tableView];
+}
+- (void)actionAutoBack:(UIBarButtonItem *)barItem
+{
+    if ([self.delegate respondsToSelector:@selector(userCenterVCDidPop:)]) {
+        [self.delegate userCenterVCDidPop:self];
+    }
 }
 #pragma mark - table dataSource
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
@@ -63,4 +70,5 @@
 {
     
 }
+
 @end

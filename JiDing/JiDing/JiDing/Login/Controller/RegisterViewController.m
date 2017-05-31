@@ -35,6 +35,7 @@
     phoneTextField.delegate = self;
     phoneTextField.tintColor = AppMainColor;
     phoneTextField.frame = CGRectMake(10, 0, SCREEN_Width * 0.5, 44);
+    phoneTextField.placeholder = @"输入手机号码";
     phoneTextField.enabled = NO;
     phoneTextField.backgroundColor = [UIColor whiteColor];
     [phoneView addSubview:phoneTextField];
@@ -61,7 +62,7 @@
     verifyCodeTextField.keyboardType = UIKeyboardTypePhonePad;
     verifyCodeTextField.delegate = self;
     verifyCodeTextField.tintColor = AppMainColor;
-    verifyCodeTextField.placeholder = @"请输入验证码";
+    verifyCodeTextField.placeholder = @"输入验证码";
     verifyCodeTextField.frame = CGRectMake(10, 0, SCREEN_Width * 0.5, 44);
     verifyCodeTextField.backgroundColor = [UIColor whiteColor];
     [verifyCodeView addSubview:verifyCodeTextField];
@@ -93,17 +94,16 @@
     confirmPasswordTextField.frame = CGRectMake(10, 0, SCREEN_Width * 0.5, 44);
     confirmPasswordTextField.secureTextEntry = YES;
     confirmPasswordTextField.backgroundColor = [UIColor whiteColor];
-    [newPasswordView addSubview:confirmPasswordTextField];
+    [confirmPasswordView addSubview:confirmPasswordTextField];
     //下一步按钮
     UIButton *commitBtn = [[UIButton alloc] init];
     commitBtn.backgroundColor = AppGrayTextColor;
     commitBtn.layer.cornerRadius = 25;
     [commitBtn setTitle:@"注册" forState:UIControlStateNormal];
     [commitBtn setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
-    commitBtn.frame = CGRectMake(30, CGRectGetMaxY(newPasswordView.frame) + 20, SCREEN_Width - 60, 50);
+    commitBtn.frame = CGRectMake(40, CGRectGetMaxY(confirmPasswordView.frame) + 20, SCREEN_Width - 80, 50);
     [commitBtn addTarget:self action:@selector(commitBtnClicked:) forControlEvents:UIControlEventTouchUpInside];
     [self.view addSubview:commitBtn];
-
 }
 /**
  *  提交

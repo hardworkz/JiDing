@@ -69,6 +69,12 @@
     [logoutBtn addTarget:self action:@selector(logoutBtnClick) forControlEvents:UIControlEventTouchUpInside];
     [self.view addSubview:logoutBtn];
 }
+- (void)actionAutoBack:(UIBarButtonItem *)barItem
+{
+    if ([self.delegate respondsToSelector:@selector(settingVCDidPop:)]) {
+        [self.delegate settingVCDidPop:self];
+    }
+}
 //退出登录
 - (void)logoutBtnClick
 {

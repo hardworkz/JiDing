@@ -137,10 +137,12 @@
 }
 - (void)registerBtnClicked:(UIButton *)button
 {
-    
+    RegisterViewController *registerVC = [[RegisterViewController alloc] init];
+    [self.navigationController pushViewController:registerVC animated:YES];
 }
 - (void)forgetPwdBtnClicked:(UIButton *)button
 {
-    
+    ForgetPwdViewController *forgetPwdVC = [[ForgetPwdViewController alloc] init];
+    [self.navigationController pushViewController:forgetPwdVC animated:YES];
 }
 @end
