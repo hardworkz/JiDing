@@ -46,21 +46,24 @@
 {
     if (indexPath.row == 0) {
         UserDataTableViewCell *cell = [UserDataTableViewCell cellWithTableView:tableView];
+        cell.selectionStyle = UITableViewCellSelectionStyleNone;
         return cell;
     }else if (indexPath.row == 1) {
         UserCenterOrderCell *cell = [UserCenterOrderCell cellWithTableView:tableView];
+        cell.selectionStyle = UITableViewCellSelectionStyleNone;
         return cell;
     }else {
         UserCenterMessageCell *cell = [UserCenterMessageCell cellWithTableView:tableView];
+        cell.selectionStyle = UITableViewCellSelectionStyleNone;
         return cell;
     }
 }
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     if (indexPath.row == 0) {
-        return 200;
+        return 180;
     }else if (indexPath.row == 1) {
-        return 200;
+        return 210;
     }else {
         return 200;
     }
@@ -68,7 +71,14 @@
 #pragma mark - table delegate
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    
+    if (indexPath.row == 0) {
+        
+    }else if (indexPath.row == 1) {
+        Xzb_MyOrderViewController *myOrderVC = [[Xzb_MyOrderViewController alloc] init];
+        [self.navigationController pushViewController:myOrderVC animated:YES];
+    }else {
+        
+    }
 }
 
 @end

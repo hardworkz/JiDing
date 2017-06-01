@@ -20,6 +20,7 @@
 #import "UserCenterHeader.h"
 #import "SettingHeader.h"
 #import "LibraryHeader.h"
+#import "InterfaceAPIHeader.h"
 
 #import "AFNetworking.h"
 #import "MJExtension.h"
@@ -34,6 +35,9 @@
 #import "UIViewController+AutoBack.h"
 #import "UILabel+Xzb_Label.h"
 #import "UINavigationController+FDFullscreenPopGesture.h"
+
+#import "UserAccount.h"
+#import "UserAccountTool.h"
 
 //定义宏（限制输入内容）
 #define kAlphaNum  @"ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789"
@@ -56,13 +60,22 @@
 #define AppLightGrayTextColor HEXCOLOR(0xA7A7A7)
 #define AppLightGrayTextColorTwo HEXCOLOR(0x6D6D6D)
 #define AppLightGrayTextColorThree HEXCOLOR(0x505050)
+#define AppMainGrayTextColor HEXCOLOR(0x5a5a5a)
 
+/**
+ *  弱引用
+ */
+#define WeakObj(o) autoreleasepool{} __weak typeof(o) o##Weak = o;
 #define DefineWeakSelf __weak __typeof(self) weakSelf = self
 
 #define IPHONE_W ([UIScreen mainScreen].bounds.size.width)          //设备宽
 #define IPHONE_H ([UIScreen mainScreen].bounds.size.height)         //设备高
+
 #define SCREEN_Width [UIScreen mainScreen].bounds.size.width
 #define SCREEN_Height [UIScreen mainScreen].bounds.size.height
+
+#define ScreenWidth  CGRectGetWidth([UIScreen mainScreen].bounds)
+#define ScreenHeight CGRectGetHeight([UIScreen mainScreen].bounds)
 
 #define SCREEN_WIDTH [[UIScreen mainScreen] bounds].size.width
 #define SCREEN_HEIGHT [[UIScreen mainScreen] bounds].size.height
@@ -84,7 +97,14 @@
  *  @return UIColor对象
  */
 #define ColorWithRGBA(R, G, B, A) [UIColor colorWithRed:R/255.0 green:G/255.0 blue:B/255.0 alpha:A]
-
+//RGB颜色
+#define Color(r,g,b) AColor(r,g,b,255)
+//ARGB颜色
+#define AColor(r,g,b,a) [UIColor colorWithRed:(r)/255.0 green:(g)/255.0 blue:(b)/255.0 alpha:(a)]
+/**
+ *  随机颜色
+ */
+#define RANDOM_COLOR [UIColor colorWithRed:arc4random_uniform(255) / 255.0 green:arc4random_uniform(255) / 255.0 blue:arc4random_uniform(255) / 255.0 alpha:1]
 //HEXCOLOR(0x00ffff)
 #define HEXCOLOR(c)                         [UIColor colorWithRed:((c>>16)&0xFF)/255.0 green:((c>>8)&0xFF)/255.0 blue:(c&0xFF)/255.0 alpha:1.0]
 //图片对象
@@ -96,5 +116,52 @@
 #else
 #define RTLog(...)
 #endif
+
+//常量
+static NSString *const MESSAGE = @"msg";
+static NSString *const SUCCESS = @"success";
+static NSString *const TOTAL = @"total";
+static NSString *const ID = @"id";
+static NSString *const TOTAL_PAGE = @"totalPage";
+static NSString *const USERID = @"userId";
+static NSString *const ORDERID = @"orderId";
+static NSString *const ENTITIES = @"entities";
+static NSString *const PHONE_CODE = @"phoneCode";
+static NSString *const PIC_TEXT = @"picText";
+static NSString *const VERIFY_CODE = @"verifyCode";
+static NSString *const CUSTOMER_INFO = @"customerInfo";
+static NSString *const advertisementInfos = @"advertisementInfos";
+static NSString *const TOKEN = @"token";
+static NSString *const MAP = @"map";
+static NSString *const LIST = @"list";
+static NSString *const RESULT = @"result";
+static NSString *const OFFERS = @"offes";
+static NSString *const DATA = @"data";
+static NSString *const HIDDEN_NAV_WEB = @"?hiddentitle=1";
+
+#define STHeitiSC_Light @"STHeitiSC-Light"
+
+//通知
+static NSString *const UserUpdateHeadImageNotification = @"userUpdateHeadImageNotification";
+static NSString *const UserUpdateMessageNotification = @"userUpdateMessageNotification";
+static NSString *const ChooseLocationNotification = @"chooseLocationNotification";
+static NSString *const LogoutNotification = @"logoutNotification";
+static NSString *const LogoutBySelfNotification = @"logoutByselfNotification";
+static NSString *const LoginNotification = @"loginNotification";
+static NSString *const NettypReceiveDataNotification = @"nettypReceiveDataNotification";
+static NSString *const RefreshDataNotification = @"refreshDataNotification";
+static NSString *const ActivityRefreshDataNotification = @"activityRefreshDataNotification";
+static NSString *const UserDidBackHomeNotification = @"userDidBackHomeNotification";
+static NSString *const HotelDetailTwoCellBtnClickedNotification = @"hotelDetailTwoCellBtnClickedNotification";
+static NSString *const OrderDetailCellFunctionClickedNotification = @"orderDetailCellFunctionClickedNotification";
+static NSString *const BankCardSuccessNotification = @"bankCardSuccessNotification";
+static NSString *const TitleLabelTapNotification = @"titleLabelTapNotification";
+static NSString *const IntoMessageCenterNotification = @"intoMessageCenterNotification";
+static NSString *const ReceivePushMessageNotification = @"receivePushMessageNotification";
+static NSString *const VCDidPresentNotification = @"VCDidPresentNotification";
+static NSString *const ApplicationDidEnterBackgroundNotification = @"applicationDidEnterBackgroundNotification";
+static NSString *const checkinNotification = @"receiveCheckinNotification";
+static NSString *const OrderPaySuccessNotification = @"orderPaySuccessNotification";
+static NSString *const DynamicNeedRefreshNotification = @"dynamicNeedRefreshNotification";
 
 #endif /* JiDingPrefixHeader_pch */

@@ -129,7 +129,66 @@
 #pragma mark - action
 - (void)loginBtnClicked:(UIButton *)button
 {
+    if ([phoneTextField.text isEqualToString:@""]) {
+        [[Toast makeText:@"请先输入手机号码"] show];
+        return;
+    }
+    if (phoneTextField.text.length != 11) {
+        [[Toast makeText:@"请输入正确手机号码"] show];
+        return;
+    }
+    if ([pwdTextField.text isEqualToString:@""]) {
+        [[Toast makeText:@"请先输入密码"] show];
+        return;
+    }if (pwdTextField.text.length >= 6 && pwdTextField.text.length <= 20) {
+        
+    }else {
+        [[Toast makeText:@"密码长度不正确！（6~20位之间）"] show];
+        return;
+    }
+    button.enabled = NO;
     
+    //        NSString *identifier = [[NSBundle mainBundle] bundleIdentifier];
+    /** 初始化一个保存用户帐号的KeychainItemWrapper */
+    //        KeychainItemWrapper *wrapper = [[KeychainItemWrapper alloc] initWithIdentifier:identifier accessGroup:nil];
+//    NSString *openUDID;
+    //        NSString *openudid = [wrapper objectForKey:(id)kSecAttrAccount];
+    //        if (openudid.length) {
+    //            openUDID = openudid;
+    //        }else
+    //        {
+//    openUDID = [OpenUDID value];
+    //        }
+    //保存数据
+    //        [wrapper setObject:openUDID forKey:(id)kSecAttrAccount];
+    
+//    RTLog(@"openUDID---------------%@",openUDID);
+//    @"equipmentCode":openUDID,
+    //获取当前版本号
+    NSString *currentVersion = [NSBundle mainBundle].infoDictionary[@"CFBundleShortVersionString"];
+    
+    NSDictionary *param = @{@"username":phoneTextField.text,@"password":pwdTextField.text,USERID:@"0",@"equipmentType":@"2",@"channelId":@"",@"appVersion":currentVersion};
+    RTLog(@"%@",param);
+    [RTHttpTool post:PwdLogin addHUD:YES param:param success:^(id responseObj) {
+        button.enabled = YES;
+        RTLog(@"登录返回信息为：%@",responseObj);
+        if ([responseObj[SUCCESS] intValue] == 1) {
+            //保存登录用户数据
+            UserAccount *account = [UserAccount mj_objectWithKeyValues:responseObj[ENTITIES][CUSTOMER_INFO] context:nil];
+            [UserAccountTool saveWithAccount:account];
+            
+            [[NSNotificationCenter defaultCenter] postNotificationName:UserUpdateMessageNotification object:nil];
+            [[NSNotificationCenter defaultCenter] postNotificationName:LoginNotification object:nil];
+            
+        }else
+        {
+            [[Toast makeText:responseObj[MESSAGE]] show];
+        }
+    } failure:^(NSError *error) {
+        button.enabled = YES;
+        RTLog(@"error:%@",error);
+    }];
+
 }
 - (void)SDKLogin:(UIButton *)button
 {
