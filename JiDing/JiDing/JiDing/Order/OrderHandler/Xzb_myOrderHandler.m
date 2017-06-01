@@ -265,28 +265,28 @@
 
 #pragma mark - 支付点击
 - (void)payMonyWithOrderID:(NSString *)orderId {
-    Xzb_OrderDetailController *detailVC = [[Xzb_OrderDetailController alloc] init];
-    detailVC.orderRelID = orderId;
-    detailVC.orderID = orderId;
-    detailVC.view.backgroundColor = AppMainBgColor;
-    @WeakObj(self)
-    detailVC.didChange = ^() {
-        [selfWeak.tableView.mj_header beginRefreshing];
-    };
-    [self.navigationController pushViewController:detailVC animated:YES];
+//    Xzb_OrderDetailController *detailVC = [[Xzb_OrderDetailController alloc] init];
+//    detailVC.orderRelID = orderId;
+//    detailVC.orderID = orderId;
+//    detailVC.view.backgroundColor = AppMainBgColor;
+//    @WeakObj(self)
+//    detailVC.didChange = ^() {
+//        [selfWeak.tableView.mj_header beginRefreshing];
+//    };
+//    [self.navigationController pushViewController:detailVC animated:YES];
 }
 
 #pragma mark - 订单详情
 - (void)pushOrderDetailVCWithOrderId:(NSString *)orderId {
-    Xzb_OrderDetailController *detailVC = [[Xzb_OrderDetailController alloc] init];
-    detailVC.orderRelID = orderId;
-    detailVC.orderID = orderId;
-    detailVC.view.backgroundColor = AppMainBgColor;
-    @WeakObj(self)
-    detailVC.didChange = ^() {
-        [selfWeak.tableView.mj_header beginRefreshing];
-    };
-    [self.navigationController pushViewController:detailVC animated:YES];
+//    Xzb_OrderDetailController *detailVC = [[Xzb_OrderDetailController alloc] init];
+//    detailVC.orderRelID = orderId;
+//    detailVC.orderID = orderId;
+//    detailVC.view.backgroundColor = AppMainBgColor;
+//    @WeakObj(self)
+//    detailVC.didChange = ^() {
+//        [selfWeak.tableView.mj_header beginRefreshing];
+//    };
+//    [self.navigationController pushViewController:detailVC animated:YES];
 }
 
 #pragma mark - 评价订单
@@ -303,11 +303,11 @@
 
 #pragma mark - 查看评论
 - (void)commentDetail:(NSString *)orderId {
-    Xzb_HotelDetailController *hotelDetail = [[Xzb_HotelDetailController alloc] init];
-    hotelDetail.orderID = orderId;
-    hotelDetail.view.backgroundColor = AppMainBgColor;
-    hotelDetail.isComment = YES;
-    [self.navigationController pushViewController:hotelDetail animated:YES];
+//    Xzb_HotelDetailController *hotelDetail = [[Xzb_HotelDetailController alloc] init];
+//    hotelDetail.orderID = orderId;
+//    hotelDetail.view.backgroundColor = AppMainBgColor;
+//    hotelDetail.isComment = YES;
+//    [self.navigationController pushViewController:hotelDetail animated:YES];
 }
 
 - (void)dealloc
