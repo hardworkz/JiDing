@@ -8,9 +8,10 @@
 
 #ifndef JiDingPrefixHeader_pch
 #define JiDingPrefixHeader_pch
+//第三方配置
+#define MaMapApiKey @"112a7c3ff268ce63fb915b2102f313ee"
+
 //主要控制器
-#import "HomeNavigationController.h"
-#import "HomeViewController.h"
 #import "RootNavigationController.h"
 #import "RootViewController.h"
 
@@ -36,8 +37,17 @@
 #import "UILabel+Xzb_Label.h"
 #import "UINavigationController+FDFullscreenPopGesture.h"
 
+#import <MAMapKit/MAMapKit.h>
+#import <MAMapKit/MAMapView.h>
+#import <AMapSearchKit/AMapSearchKit.h>
+#import <AMapLocationKit/AMapLocationKit.h>
+#import <AMapFoundationKit/AMapFoundationKit.h>
+#import <CoreLocation/CoreLocation.h>
+
 #import "UserAccount.h"
 #import "UserAccountTool.h"
+#import "Xzb_ApplicationData.h"
+#import "Xzb_ApplicationDataTool.h"
 
 //定义宏（限制输入内容）
 #define kAlphaNum  @"ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789"

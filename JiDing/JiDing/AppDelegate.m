@@ -23,6 +23,7 @@
 //    self.window.rootViewController = [[LoginNavigationController alloc] initWithRootViewController:[[LoginViewController alloc] init]];
     [self.window makeKeyAndVisible];
     
+    [AMapServices sharedServices].apiKey = MaMapApiKey;
     //自动处理键盘事件的第三方库
     IQKeyboardManager *manager = [IQKeyboardManager sharedManager];
     manager.enable = YES;//控制整个功能是否启用

@@ -22,7 +22,7 @@ typedef NS_ENUM(NSUInteger, SelectedHomeType) {
     SelectedHomeTypeKTV = 2,
 };
 
-@interface HomeViewController ()<UserCenterViewControllerDelegate,SettingViewControllerDelegate>
+@interface HomeViewController ()<UserCenterViewControllerDelegate,SettingViewControllerDelegate,Xzb_MapViewControllerDelegate,CLLocationManagerDelegate>
 {
     UIView *peopleNumberView;
     UIView *roomNumberView;
@@ -32,6 +32,7 @@ typedef NS_ENUM(NSUInteger, SelectedHomeType) {
     UIButton *roomAddBtn;
     UIButton *roomSubBtn;
     UILabel *roomNumberLabel;
+    UILabel *addressContentLabel;
 }
 /**
  *  当前选择的首页类型，默认为酒店
@@ -82,9 +83,44 @@ typedef NS_ENUM(NSUInteger, SelectedHomeType) {
 @property (assign, nonatomic) CGRect selectedTypeVF;
 @property (assign, nonatomic) CGRect selectedImageViewVF;
 @property (assign, nonatomic) CGRect selectedTypeLabelVF;
+#pragma mark - 定位属性
+@property (nonatomic, strong) CLGeocoder *geocoder;
+@property(nonatomic, strong) CLLocationManager *CLLocationManager;
+/**
+ *  定位获取经纬度
+ */
+@property (nonatomic,assign)  CLLocationDegrees lon;
+@property (nonatomic,assign)  CLLocationDegrees lat;
 @end
 
 @implementation HomeViewController
+#pragma mark - 懒加载定位
+/**
+ *  懒加载
+ */
+- (CLGeocoder *)geocoder
+{
+    if (!_geocoder) {
+        self.geocoder = [[CLGeocoder alloc] init];
+    }
+    return _geocoder;
+}
+/**
+ *  设置地理定位功能
+ */
+- (void)setupPositioning
+{
+    //打开定位功能
+    if ([CLLocationManager locationServicesEnabled]) {
+        self.CLLocationManager = [[CLLocationManager alloc]init];
+        _CLLocationManager.delegate = self;
+        _CLLocationManager.desiredAccuracy = kCLLocationAccuracyBest;
+        _CLLocationManager.distanceFilter = 10;
+        [_CLLocationManager requestWhenInUseAuthorization];//添加这句
+        [_CLLocationManager startUpdatingLocation];
+    }
+    
+}
 #pragma mark - 懒加载
 - (NSMutableArray *)typeArray
 {
@@ -288,7 +324,11 @@ typedef NS_ENUM(NSUInteger, SelectedHomeType) {
 #pragma mark - viewDidLoad
 - (void)viewDidLoad {
     [super viewDidLoad];
+    [AMapLocationServices sharedServices].apiKey = MaMapApiKey;
+    
     [[self windowView] addSubview:self.screenView];
+    //开始定位
+    [self setupPositioning];
     
     self.homeType = SelectedHomeTypeHotel;
     //设置首页控件
@@ -319,20 +359,7 @@ typedef NS_ENUM(NSUInteger, SelectedHomeType) {
 {
     
 }
-/*
- * 定位当前位置，不进行界面跳转
- */
-- (void)myAddressTap
-{
-//    self.addressContentLabel.text = @"定位中...";
-//    Xzb_ApplicationData *data = [Xzb_ApplicationDataTool account];
-//    data.user_x = nil;
-//    data.user_y = nil;
-//    data.userAddress = nil;
-//    [Xzb_ApplicationDataTool saveWithAccount:data];
-//    [[MyAlert make] showHUD];
-//    [_CLLocationManager startUpdatingLocation];
-}
+
 /*
  * 跳转设置动画
  */
@@ -480,6 +507,29 @@ typedef NS_ENUM(NSUInteger, SelectedHomeType) {
     }
     button.selected = YES;
 }
+/*
+ * 点击跳转地图界面
+ */
+- (void)locationTap
+{
+    Xzb_MapViewController *map = [[Xzb_MapViewController alloc] init];
+    map.delegate = self;
+    [self.navigationController pushViewController:map animated:YES];
+}
+/*
+ * 定位当前位置，不进行界面跳转
+ */
+- (void)myAddressTap
+{
+    addressContentLabel.text = @"定位中...";
+    Xzb_ApplicationData *data = [Xzb_ApplicationDataTool account];
+    data.user_x = nil;
+    data.user_y = nil;
+    data.userAddress = nil;
+    [Xzb_ApplicationDataTool saveWithAccount:data];
+    [_CLLocationManager startUpdatingLocation];
+}
+
 #pragma mark - 人数，房间数加减action
 - (void)addBtnClicked:(UIButton *)button
 {
@@ -666,14 +716,19 @@ typedef NS_ENUM(NSUInteger, SelectedHomeType) {
     deviderOne.backgroundColor = AppLightGrayLineColor;
     [locationView addSubview:deviderOne];
     
-    UILabel *addressContentLabel = [[UILabel alloc] init];
+    UITapGestureRecognizer *locationTap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(locationTap)];
+    [locationView addGestureRecognizer:locationTap];
+    
+    addressContentLabel = [[UILabel alloc] init];
     addressContentLabel.text = @"厦门市思明区，何厝下何300号";
     addressContentLabel.textColor = [UIColor blackColor];
     addressContentLabel.numberOfLines = 0;
     addressContentLabel.textColor = AppDeepGrayTextColor;
     [addressContentLabel setAppFontWithSize:15];
+    addressContentLabel.userInteractionEnabled = YES;
     addressContentLabel.frame = CGRectMake(CGRectGetMaxX(deviderOne.frame) + 5, 5, SCREEN_WIDTH - SCREEN_WIDTH * 0.2 - CGRectGetMaxX(addressIconView.frame) - 20 - 50, 50);
     [locationView addSubview:addressContentLabel];
+    [addressContentLabel addGestureRecognizer:locationTap];
     
     UIImageView *rightArrow = [[UIImageView alloc] init];
     rightArrow.image = [UIImage imageNamed:@"箭头"];
@@ -706,7 +761,7 @@ typedef NS_ENUM(NSUInteger, SelectedHomeType) {
     addressIconTwoView.frame = CGRectMake(myAddress.x, 0, 80, 40);
     addressIconTwoView.contentMode = UIViewContentModeCenter;
     [locationView addSubview:addressIconTwoView];
-    [addressIconTwoView addGestureRecognizer:addressIconTwoViewTap];
+    [addressIconTwoView addGestureRecognizer:myAddressTap];
     
     UIView *deviderThree = [[UIView alloc] initWithFrame:CGRectMake(20, 59.5, SCREEN_WIDTH - 40, 0.5)];
     deviderThree.backgroundColor = AppLightGrayLineColor;
@@ -937,5 +992,49 @@ typedef NS_ENUM(NSUInteger, SelectedHomeType) {
     [self animationClose:^{
         [self.navigationController popViewControllerAnimated:NO];
     }];
+}
+#pragma mark -- CLLocationDelegate
+- (void)locationManager:(CLLocationManager *)manager didUpdateLocations:(NSArray *)locations
+{
+    RTLog(@"%@",locations.firstObject);
+    // 数组里面存放的是CLLocation对象， 一个CLLocation就代表一个位置
+    CLLocation *location = [locations lastObject];
+    
+    RTLog(@"location---%@",location);
+    
+    //存储用户坐标
+    if (locations) {
+        //获取对应经纬度
+        self.lon = location.coordinate.longitude;
+        self.lat = location.coordinate.latitude;
+        
+        [self.geocoder reverseGeocodeLocation:location completionHandler:^(NSArray *placemarks, NSError *error) {
+            //获取地理位置信息字符串
+            CLPlacemark *firstPlacemark = [placemarks firstObject];
+            Xzb_ApplicationData *data = [Xzb_ApplicationDataTool account];
+            if (data.userAddress.length) {
+                addressContentLabel.text = data.userAddress;
+            }else{
+                addressContentLabel.text = [NSString stringWithFormat:@"%@",firstPlacemark.name];
+            }
+            
+//            self.cityName = firstPlacemark.locality;
+//            [[MyAlert make] hideHUD];
+            if (firstPlacemark.name == nil) {
+                addressContentLabel.text = @"您当前网络不好，请点击“我的位置”重新定位，获取酒店类型";
+                [[Toast makeText:@"请点击“我的位置”重新定位"] show];
+            }
+            
+        }];
+        
+    }
+    
+    // 停止更新位置(不用定位服务，应当马上停止定位，非常耗电)
+    [manager stopUpdatingLocation];
+}
+#pragma mark - mapVC delegate
+- (void)chooseLocationWithString:(NSString *)locationString
+{
+    addressContentLabel.text = locationString;
 }
 @end

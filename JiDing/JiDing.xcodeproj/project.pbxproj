@@ -104,6 +104,15 @@
 		6993820E1EDFA7F400BD2319 /* UserAccountTool.m in Sources */ = {isa = PBXBuildFile; fileRef = 6993820D1EDFA7F400BD2319 /* UserAccountTool.m */; };
 		699382111EDFA80D00BD2319 /* UserAccount.m in Sources */ = {isa = PBXBuildFile; fileRef = 699382101EDFA80D00BD2319 /* UserAccount.m */; };
 		699382151EDFAA2F00BD2319 /* MyOrderTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 699382141EDFAA2F00BD2319 /* MyOrderTableViewCell.m */; };
+		744F9FD31EE02E9C0007E53D /* Xzb_MapViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 744F9FD21EE02E9C0007E53D /* Xzb_MapViewController.m */; };
+		744F9FDB1EE02F680007E53D /* CustomTextField.m in Sources */ = {isa = PBXBuildFile; fileRef = 744F9FDA1EE02F680007E53D /* CustomTextField.m */; };
+		744F9FDE1EE02FE70007E53D /* Xzb_OpenCityModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 744F9FDD1EE02FE70007E53D /* Xzb_OpenCityModel.m */; };
+		744F9FE61EE030270007E53D /* CityModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 744F9FE11EE030270007E53D /* CityModel.m */; };
+		744F9FE71EE030270007E53D /* DistrictModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 744F9FE31EE030270007E53D /* DistrictModel.m */; };
+		744F9FE81EE030270007E53D /* ProvinceModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 744F9FE51EE030270007E53D /* ProvinceModel.m */; };
+		744F9FEB1EE030E80007E53D /* AreaTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 744F9FEA1EE030E80007E53D /* AreaTableViewCell.m */; };
+		744F9FEE1EE031FD0007E53D /* Xzb_ApplicationDataTool.m in Sources */ = {isa = PBXBuildFile; fileRef = 744F9FED1EE031FD0007E53D /* Xzb_ApplicationDataTool.m */; };
+		744F9FF11EE032350007E53D /* Xzb_ApplicationData.m in Sources */ = {isa = PBXBuildFile; fileRef = 744F9FF01EE032350007E53D /* Xzb_ApplicationData.m */; };
 		746169A41ED71B7700029B60 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 746169A31ED71B7700029B60 /* main.m */; };
 		746169A71ED71B7700029B60 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 746169A61ED71B7700029B60 /* AppDelegate.m */; };
 		746169AF1ED71B7700029B60 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 746169AE1ED71B7700029B60 /* Assets.xcassets */; };
@@ -313,6 +322,24 @@
 		699382121EDFA87F00BD2319 /* InterfaceAPIHeader.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = InterfaceAPIHeader.h; sourceTree = "<group>"; };
 		699382131EDFAA2F00BD2319 /* MyOrderTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MyOrderTableViewCell.h; sourceTree = "<group>"; };
 		699382141EDFAA2F00BD2319 /* MyOrderTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MyOrderTableViewCell.m; sourceTree = "<group>"; };
+		744F9FD11EE02E9C0007E53D /* Xzb_MapViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Xzb_MapViewController.h; sourceTree = "<group>"; };
+		744F9FD21EE02E9C0007E53D /* Xzb_MapViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Xzb_MapViewController.m; sourceTree = "<group>"; };
+		744F9FD91EE02F680007E53D /* CustomTextField.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CustomTextField.h; sourceTree = "<group>"; };
+		744F9FDA1EE02F680007E53D /* CustomTextField.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CustomTextField.m; sourceTree = "<group>"; };
+		744F9FDC1EE02FE70007E53D /* Xzb_OpenCityModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Xzb_OpenCityModel.h; sourceTree = "<group>"; };
+		744F9FDD1EE02FE70007E53D /* Xzb_OpenCityModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Xzb_OpenCityModel.m; sourceTree = "<group>"; };
+		744F9FE01EE030270007E53D /* CityModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CityModel.h; sourceTree = "<group>"; };
+		744F9FE11EE030270007E53D /* CityModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CityModel.m; sourceTree = "<group>"; };
+		744F9FE21EE030270007E53D /* DistrictModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DistrictModel.h; sourceTree = "<group>"; };
+		744F9FE31EE030270007E53D /* DistrictModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DistrictModel.m; sourceTree = "<group>"; };
+		744F9FE41EE030270007E53D /* ProvinceModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ProvinceModel.h; sourceTree = "<group>"; };
+		744F9FE51EE030270007E53D /* ProvinceModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ProvinceModel.m; sourceTree = "<group>"; };
+		744F9FE91EE030E80007E53D /* AreaTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AreaTableViewCell.h; sourceTree = "<group>"; };
+		744F9FEA1EE030E80007E53D /* AreaTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AreaTableViewCell.m; sourceTree = "<group>"; };
+		744F9FEC1EE031FD0007E53D /* Xzb_ApplicationDataTool.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Xzb_ApplicationDataTool.h; sourceTree = "<group>"; };
+		744F9FED1EE031FD0007E53D /* Xzb_ApplicationDataTool.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Xzb_ApplicationDataTool.m; sourceTree = "<group>"; };
+		744F9FEF1EE032350007E53D /* Xzb_ApplicationData.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Xzb_ApplicationData.h; sourceTree = "<group>"; };
+		744F9FF01EE032350007E53D /* Xzb_ApplicationData.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Xzb_ApplicationData.m; sourceTree = "<group>"; };
 		7461699F1ED71B7700029B60 /* JiDing.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = JiDing.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		746169A31ED71B7700029B60 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		746169A51ED71B7700029B60 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
@@ -531,8 +558,8 @@
 			isa = PBXGroup;
 			children = (
 				6988A6481ED7BE00002CABAE /* Controller */,
-				6988A6491ED7BE00002CABAE /* Model */,
-				6988A64A1ED7BE00002CABAE /* View */,
+				744F9FD71EE02F590007E53D /* Model */,
+				744F9FD81EE02F590007E53D /* View */,
 			);
 			path = Home;
 			sourceTree = "<group>";
@@ -540,26 +567,14 @@
 		6988A6481ED7BE00002CABAE /* Controller */ = {
 			isa = PBXGroup;
 			children = (
+				744F9FD11EE02E9C0007E53D /* Xzb_MapViewController.h */,
+				744F9FD21EE02E9C0007E53D /* Xzb_MapViewController.m */,
 				6988A6631ED7C207002CABAE /* HomeNavigationController.h */,
 				6988A6641ED7C207002CABAE /* HomeNavigationController.m */,
 				6988A6661ED7C21E002CABAE /* HomeViewController.h */,
 				6988A6671ED7C21E002CABAE /* HomeViewController.m */,
 			);
 			path = Controller;
-			sourceTree = "<group>";
-		};
-		6988A6491ED7BE00002CABAE /* Model */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = Model;
-			sourceTree = "<group>";
-		};
-		6988A64A1ED7BE00002CABAE /* View */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = View;
 			sourceTree = "<group>";
 		};
 		6988A64F1ED7BE00002CABAE /* NetworkTool */ = {
@@ -830,8 +845,44 @@
 			children = (
 				6993820C1EDFA7F400BD2319 /* UserAccountTool.h */,
 				6993820D1EDFA7F400BD2319 /* UserAccountTool.m */,
+				744F9FEC1EE031FD0007E53D /* Xzb_ApplicationDataTool.h */,
+				744F9FED1EE031FD0007E53D /* Xzb_ApplicationDataTool.m */,
 			);
 			path = UserLoginTool;
+			sourceTree = "<group>";
+		};
+		744F9FD71EE02F590007E53D /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				744F9FDF1EE030270007E53D /* AreaModels */,
+				744F9FDC1EE02FE70007E53D /* Xzb_OpenCityModel.h */,
+				744F9FDD1EE02FE70007E53D /* Xzb_OpenCityModel.m */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		744F9FD81EE02F590007E53D /* View */ = {
+			isa = PBXGroup;
+			children = (
+				744F9FE91EE030E80007E53D /* AreaTableViewCell.h */,
+				744F9FEA1EE030E80007E53D /* AreaTableViewCell.m */,
+				744F9FD91EE02F680007E53D /* CustomTextField.h */,
+				744F9FDA1EE02F680007E53D /* CustomTextField.m */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		744F9FDF1EE030270007E53D /* AreaModels */ = {
+			isa = PBXGroup;
+			children = (
+				744F9FE01EE030270007E53D /* CityModel.h */,
+				744F9FE11EE030270007E53D /* CityModel.m */,
+				744F9FE21EE030270007E53D /* DistrictModel.h */,
+				744F9FE31EE030270007E53D /* DistrictModel.m */,
+				744F9FE41EE030270007E53D /* ProvinceModel.h */,
+				744F9FE51EE030270007E53D /* ProvinceModel.m */,
+			);
+			path = AreaModels;
 			sourceTree = "<group>";
 		};
 		746169961ED71B7700029B60 = {
@@ -959,6 +1010,8 @@
 		749921621EDBD5C100459E5C /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				744F9FEF1EE032350007E53D /* Xzb_ApplicationData.h */,
+				744F9FF01EE032350007E53D /* Xzb_ApplicationData.m */,
 				6993820F1EDFA80D00BD2319 /* UserAccount.h */,
 				699382101EDFA80D00BD2319 /* UserAccount.m */,
 			);
@@ -1222,6 +1275,7 @@
 				6983A1A01ED967BF0032CF36 /* DQAlertView.m in Sources */,
 				699381DA1EDFA61900BD2319 /* DJCameraViewController.m in Sources */,
 				699381661EDFA3C700BD2319 /* STPhotoBrowserView.m in Sources */,
+				744F9FE71EE030270007E53D /* DistrictModel.m in Sources */,
 				749921791EDC220B00459E5C /* Toast.m in Sources */,
 				699381B21EDFA58400BD2319 /* PhotoLibraryView.m in Sources */,
 				699382151EDFAA2F00BD2319 /* MyOrderTableViewCell.m in Sources */,
@@ -1232,6 +1286,8 @@
 				6988A6871ED7D6E0002CABAE /* UIImageView+Extension.m in Sources */,
 				6993818F1EDFA44500BD2319 /* JKAssetsViewCell.m in Sources */,
 				6988A66C1ED7C52D002CABAE /* CommonCode.m in Sources */,
+				744F9FEE1EE031FD0007E53D /* Xzb_ApplicationDataTool.m in Sources */,
+				744F9FDB1EE02F680007E53D /* CustomTextField.m in Sources */,
 				699381631EDFA3C700BD2319 /* STAlertView.m in Sources */,
 				699381921EDFA44500BD2319 /* JKPhotoBrowserCell.m in Sources */,
 				699381601EDFA3C700BD2319 /* STConst.m in Sources */,
@@ -1241,10 +1297,12 @@
 				6993818D1EDFA44500BD2319 /* JKAssetsGroupsView.m in Sources */,
 				6983A1971ED963A20032CF36 /* SettingViewController.m in Sources */,
 				699381621EDFA3C700BD2319 /* UIView+ST.m in Sources */,
+				744F9FEB1EE030E80007E53D /* AreaTableViewCell.m in Sources */,
 				6993814C1EDFA32200BD2319 /* Xzb_CommentViewController.m in Sources */,
 				6993818E1EDFA44500BD2319 /* JKAssetsThumbnailView.m in Sources */,
 				6988A6651ED7C207002CABAE /* HomeNavigationController.m in Sources */,
 				699382061EDFA6F800BD2319 /* Xzb_MyOrderDetailGuestInfoListModel.m in Sources */,
+				744F9FE81EE030270007E53D /* ProvinceModel.m in Sources */,
 				6983A1A51ED96A3C0032CF36 /* XWAlerLoginView.m in Sources */,
 				749921581EDAEC7000459E5C /* UserCenterOrderCell.m in Sources */,
 				699381A91EDFA4A100BD2319 /* IWTextView.m in Sources */,
@@ -1260,17 +1318,20 @@
 				6988A65C1ED7BFC0002CABAE /* RootViewController.m in Sources */,
 				699381611EDFA3C700BD2319 /* STUI.m in Sources */,
 				699381641EDFA3C700BD2319 /* STIndicatorView.m in Sources */,
+				744F9FD31EE02E9C0007E53D /* Xzb_MapViewController.m in Sources */,
 				699381AC1EDFA4CB00BD2319 /* HMComposePhotosView.m in Sources */,
 				6988A68B1ED7FF04002CABAE /* UILabel+Xzb_Label.m in Sources */,
 				6988A6681ED7C21E002CABAE /* HomeViewController.m in Sources */,
 				6993818A1EDFA44500BD2319 /* JKAssets.m in Sources */,
 				699381911EDFA44500BD2319 /* JKPhotoBrowser.m in Sources */,
+				744F9FDE1EE02FE70007E53D /* Xzb_OpenCityModel.m in Sources */,
 				699382081EDFA6F800BD2319 /* Xzb_MyOrderInfosModel.m in Sources */,
 				699381941EDFA44500BD2319 /* JKUtil.m in Sources */,
 				699381FA1EDFA69100BD2319 /* CommentImageView.m in Sources */,
 				7499215F1EDBD37600459E5C /* CustomAlertView.m in Sources */,
 				6993820A1EDFA6F800BD2319 /* Xzb_MyOrderMetaModel.m in Sources */,
 				7499216C1EDBD8A600459E5C /* Xzb_CountDownButton.m in Sources */,
+				744F9FE61EE030270007E53D /* CityModel.m in Sources */,
 				6988A6851ED7D6E0002CABAE /* UIButton+Extension.m in Sources */,
 				699381951EDFA44500BD2319 /* PhotoAlbumManager.m in Sources */,
 				6993818B1EDFA44500BD2319 /* JKAssetsCollectionFooterView.m in Sources */,
@@ -1285,6 +1346,7 @@
 				699381651EDFA3C700BD2319 /* STPhotoBrowserController.m in Sources */,
 				749921731EDBDE3900459E5C /* LoginViewController.m in Sources */,
 				699381D91EDFA61900BD2319 /* DJCameraManager.m in Sources */,
+				744F9FF11EE032350007E53D /* Xzb_ApplicationData.m in Sources */,
 				699381931EDFA44500BD2319 /* JKPromptView.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
