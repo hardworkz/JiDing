@@ -13,6 +13,7 @@
 
 //主要控制器
 #import "RootNavigationController.h"
+#import "RootTableViewController.h"
 #import "RootViewController.h"
 
 #import "HomeHeader.h"
@@ -36,6 +37,7 @@
 #import "UIViewController+AutoBack.h"
 #import "UILabel+Xzb_Label.h"
 #import "UINavigationController+FDFullscreenPopGesture.h"
+#import "UINavigationBar+Background.h"
 
 #import <MAMapKit/MAMapKit.h>
 #import <MAMapKit/MAMapView.h>
@@ -49,6 +51,7 @@
 #import "Xzb_ApplicationData.h"
 #import "Xzb_ApplicationDataTool.h"
 
+#define PLACEHOLDERIMAGE @"头像－默认"
 //定义宏（限制输入内容）
 #define kAlphaNum  @"ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789"
 #define kAlpha      @"ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz"
@@ -59,6 +62,8 @@
 #define STHeitiSC_Light @"STHeitiSC-Light"
 //应用颜色
 #define AppMainColor HEXCOLOR(0x333333)
+#define AppMainBgColor HEXCOLOR(0xf9f9f9)
+#define AppGreenBtnColor HEXCOLOR(0x13D0AB)
 
 #define AppLightGrayLineColor HEXCOLOR(0xAAAAAA)
 #define AppLineColor HEXCOLOR(0x333333)
