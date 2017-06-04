@@ -73,5 +73,11 @@
 		<string>dinning</string>
 		<string>sinaweibo</string>
 	</array>
+	<key>MiSDKAppID</key>
+	<string></string>
+	<key>MiSDKAppKey</key>
+	<string></string>
+	<key>MiSDKRun</key>
+	<string>${MiSDKRun}</string>
 </dict>
 </plist>

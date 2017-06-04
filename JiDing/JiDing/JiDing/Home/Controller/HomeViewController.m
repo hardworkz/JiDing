@@ -286,7 +286,7 @@ typedef NS_ENUM(NSUInteger, SelectedHomeType) {
     self.isCompleteAnimation = NO;
     DefineWeakSelf;
     weakSelf.centerLineView.hidden = YES;
-    [UIView animateWithDuration:0.5 // 动画时长
+    [UIView animateWithDuration:0.75 // 动画时长
                           delay:0.0 // 动画延迟
          usingSpringWithDamping:0.9 // 弹簧振动效果 0~1
           initialSpringVelocity:1.0 // 初始速度
@@ -307,7 +307,7 @@ typedef NS_ENUM(NSUInteger, SelectedHomeType) {
     self.isCompleteAnimation = NO;
     [[self windowView] addSubview:self.screenView];
     DefineWeakSelf;
-    [UIView animateWithDuration:0.5 // 动画时长
+    [UIView animateWithDuration:0.75 // 动画时长
                           delay:0.0 // 动画延迟
          usingSpringWithDamping:1.0 // 弹簧振动效果 0~1
           initialSpringVelocity:1.0 // 初始速度
@@ -532,7 +532,31 @@ typedef NS_ENUM(NSUInteger, SelectedHomeType) {
     [Xzb_ApplicationDataTool saveWithAccount:data];
     [_CLLocationManager startUpdatingLocation];
 }
-
+/*
+ * 弹出日期选择器
+ */
+- (void)tapDateView
+{
+    NSDate *date = [NSDate date];
+//    XHDatePickerView *datepicker = [[XHDatePickerView alloc] initWithCurrentDate:date CompleteBlock:^(NSDate *startDate, NSDate *endDate) {
+//        NSLog(@"\n开始时间： %@，结束时间：%@",startDate,endDate);
+////        self.startTimeText.text = [startDate stringWithFormat:@"yyyy-MM-dd HH:mm"];
+////        self.endtimeText.text = [endDate stringWithFormat:@"yyyy-MM-dd HH:mm"];
+//    }];
+    
+    XHDatePickerView *datepicker = [[XHDatePickerView alloc] initWithCompleteBlock:^(NSDate *startDate,NSDate *endDate) {
+        NSLog(@"\n开始时间： %@，结束时间：%@",startDate,endDate);
+//        self.startTimeText.text = [startDate stringWithFormat:@"yyyy-MM-dd HH:mm"];
+//        self.endtimeText.text = [endDate stringWithFormat:@"yyyy-MM-dd HH:mm"];
+    }];
+//    NSDate *lastDay = [NSDate dateWithTimeInterval:-24*60*60 sinceDate:date];//前一天
+    NSDate *nextDay = [NSDate dateWithTimeInterval:365*24*60*60 sinceDate:date];//后一天
+    datepicker.datePickerStyle = DateStyleShowYearMonthDay;
+    datepicker.dateType = DateTypeStartDate;
+    datepicker.minLimitDate = [NSDate date];
+    datepicker.maxLimitDate = nextDay;
+    [datepicker show];
+}
 #pragma mark - 人数，房间数加减action
 - (void)addBtnClicked:(UIButton *)button
 {
@@ -604,7 +628,7 @@ typedef NS_ENUM(NSUInteger, SelectedHomeType) {
     //设置减动画
     if ([button isEqual:subBtn]) {//当前为客官人数
         if ([numberLabel.text intValue] <= 1) {
-            XWAlerLoginView *xw = [[XWAlerLoginView alloc]initWithTitle:@"已经是最少了~"];
+            XWAlerLoginView *xw = [[XWAlerLoginView alloc]initWithTitle:@"不能再减了~"];
             [xw show];
             return;
         }
@@ -777,8 +801,11 @@ typedef NS_ENUM(NSUInteger, SelectedHomeType) {
  */
 - (UIView *)setupDateView:(UIView *)locationView
 {
+    UITapGestureRecognizer *tapDate = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(tapDateView)];
     UIView *dateView = [[UIView alloc] init];
     dateView.frame = CGRectMake(0, CGRectGetMaxY(locationView.frame), SCREEN_WIDTH, 70);
+    dateView.userInteractionEnabled = YES;
+    [dateView addGestureRecognizer:tapDate];
     [self.view addSubview:dateView];
     
     UIImageView *clockImage = [[UIImageView alloc] init];

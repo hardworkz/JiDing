@@ -11,6 +11,8 @@
 
 #import "PayUtils.h"
 #import "WXApiManager.h"
+#import "XHDatePickerView.h"
+#import "NSDate+Extension.h"
 
 #import "Xzb_AddPayPasswordController.h"
 #import "Xzb_AddPayPasswordWithPhoneController.h"

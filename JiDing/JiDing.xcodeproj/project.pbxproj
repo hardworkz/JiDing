@@ -25,7 +25,6 @@
 		6988A6851ED7D6E0002CABAE /* UIButton+Extension.m in Sources */ = {isa = PBXBuildFile; fileRef = 6988A67E1ED7D6E0002CABAE /* UIButton+Extension.m */; };
 		6988A6861ED7D6E0002CABAE /* UIImage+Extension.m in Sources */ = {isa = PBXBuildFile; fileRef = 6988A6801ED7D6E0002CABAE /* UIImage+Extension.m */; };
 		6988A6871ED7D6E0002CABAE /* UIImageView+Extension.m in Sources */ = {isa = PBXBuildFile; fileRef = 6988A6821ED7D6E0002CABAE /* UIImageView+Extension.m */; };
-		6988A6881ED7D6E0002CABAE /* UIView+Extension.m in Sources */ = {isa = PBXBuildFile; fileRef = 6988A6841ED7D6E0002CABAE /* UIView+Extension.m */; };
 		6988A68B1ED7FF04002CABAE /* UILabel+Xzb_Label.m in Sources */ = {isa = PBXBuildFile; fileRef = 6988A68A1ED7FF04002CABAE /* UILabel+Xzb_Label.m */; };
 		699381431EDFA2E800BD2319 /* Xzb_MyorderHeadView.m in Sources */ = {isa = PBXBuildFile; fileRef = 699381421EDFA2E800BD2319 /* Xzb_MyorderHeadView.m */; };
 		699381471EDFA30200BD2319 /* Xzb_myOrderHandler.m in Sources */ = {isa = PBXBuildFile; fileRef = 699381461EDFA30200BD2319 /* Xzb_myOrderHandler.m */; };
@@ -104,6 +103,10 @@
 		6993820E1EDFA7F400BD2319 /* UserAccountTool.m in Sources */ = {isa = PBXBuildFile; fileRef = 6993820D1EDFA7F400BD2319 /* UserAccountTool.m */; };
 		699382111EDFA80D00BD2319 /* UserAccount.m in Sources */ = {isa = PBXBuildFile; fileRef = 699382101EDFA80D00BD2319 /* UserAccount.m */; };
 		699382151EDFAA2F00BD2319 /* MyOrderTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 699382141EDFAA2F00BD2319 /* MyOrderTableViewCell.m */; };
+		7408CC271EE44CF3004140AD /* NSDate+Extension.m in Sources */ = {isa = PBXBuildFile; fileRef = 7408CC211EE44CF3004140AD /* NSDate+Extension.m */; };
+		7408CC281EE44CF3004140AD /* UIView+Extension.m in Sources */ = {isa = PBXBuildFile; fileRef = 7408CC231EE44CF3004140AD /* UIView+Extension.m */; };
+		7408CC291EE44CF3004140AD /* XHDatePickerView.m in Sources */ = {isa = PBXBuildFile; fileRef = 7408CC251EE44CF3004140AD /* XHDatePickerView.m */; };
+		7408CC2A1EE44CF3004140AD /* XHDatePickerView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7408CC261EE44CF3004140AD /* XHDatePickerView.xib */; };
 		7412F2BE1EE2466100744C86 /* Xzb_SearchResultTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7412F2BD1EE2466100744C86 /* Xzb_SearchResultTableViewController.m */; };
 		7412F2C11EE2468F00744C86 /* Xzb_SearchResultMapController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7412F2C01EE2468F00744C86 /* Xzb_SearchResultMapController.m */; };
 		7412F2C41EE247A700744C86 /* HotelOfferModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 7412F2C31EE247A700744C86 /* HotelOfferModel.m */; };
@@ -296,8 +299,6 @@
 		6988A6801ED7D6E0002CABAE /* UIImage+Extension.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImage+Extension.m"; sourceTree = "<group>"; };
 		6988A6811ED7D6E0002CABAE /* UIImageView+Extension.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIImageView+Extension.h"; sourceTree = "<group>"; };
 		6988A6821ED7D6E0002CABAE /* UIImageView+Extension.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImageView+Extension.m"; sourceTree = "<group>"; };
-		6988A6831ED7D6E0002CABAE /* UIView+Extension.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIView+Extension.h"; sourceTree = "<group>"; };
-		6988A6841ED7D6E0002CABAE /* UIView+Extension.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIView+Extension.m"; sourceTree = "<group>"; };
 		6988A6891ED7FF04002CABAE /* UILabel+Xzb_Label.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UILabel+Xzb_Label.h"; sourceTree = "<group>"; };
 		6988A68A1ED7FF04002CABAE /* UILabel+Xzb_Label.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UILabel+Xzb_Label.m"; sourceTree = "<group>"; };
 		699381411EDFA2E800BD2319 /* Xzb_MyorderHeadView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Xzb_MyorderHeadView.h; sourceTree = "<group>"; };
@@ -423,6 +424,14 @@
 		699382121EDFA87F00BD2319 /* InterfaceAPIHeader.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = InterfaceAPIHeader.h; sourceTree = "<group>"; };
 		699382131EDFAA2F00BD2319 /* MyOrderTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MyOrderTableViewCell.h; sourceTree = "<group>"; };
 		699382141EDFAA2F00BD2319 /* MyOrderTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MyOrderTableViewCell.m; sourceTree = "<group>"; };
+		7408CC1D1EE449D3004140AD /* JiDing.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = JiDing.entitlements; sourceTree = "<group>"; };
+		7408CC201EE44CF3004140AD /* NSDate+Extension.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSDate+Extension.h"; sourceTree = "<group>"; };
+		7408CC211EE44CF3004140AD /* NSDate+Extension.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSDate+Extension.m"; sourceTree = "<group>"; };
+		7408CC221EE44CF3004140AD /* UIView+Extension.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIView+Extension.h"; sourceTree = "<group>"; };
+		7408CC231EE44CF3004140AD /* UIView+Extension.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIView+Extension.m"; sourceTree = "<group>"; };
+		7408CC241EE44CF3004140AD /* XHDatePickerView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XHDatePickerView.h; sourceTree = "<group>"; };
+		7408CC251EE44CF3004140AD /* XHDatePickerView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XHDatePickerView.m; sourceTree = "<group>"; };
+		7408CC261EE44CF3004140AD /* XHDatePickerView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = XHDatePickerView.xib; sourceTree = "<group>"; };
 		7412F2BC1EE2466100744C86 /* Xzb_SearchResultTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Xzb_SearchResultTableViewController.h; sourceTree = "<group>"; };
 		7412F2BD1EE2466100744C86 /* Xzb_SearchResultTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Xzb_SearchResultTableViewController.m; sourceTree = "<group>"; };
 		7412F2BF1EE2468F00744C86 /* Xzb_SearchResultMapController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Xzb_SearchResultMapController.h; sourceTree = "<group>"; };
@@ -850,6 +859,7 @@
 		6983A19C1ED967B50032CF36 /* Library */ = {
 			isa = PBXGroup;
 			children = (
+				7408CC1E1EE44CF3004140AD /* XHDatePicker */,
 				7412F40F1EE260C400744C86 /* CXPhotoBrowser */,
 				7412F3F31EE25AFF00744C86 /* ptotoBrowser */,
 				7412F3DB1EE25A9000744C86 /* MJPhotoBrowser */,
@@ -919,8 +929,6 @@
 				6988A6801ED7D6E0002CABAE /* UIImage+Extension.m */,
 				6988A6811ED7D6E0002CABAE /* UIImageView+Extension.h */,
 				6988A6821ED7D6E0002CABAE /* UIImageView+Extension.m */,
-				6988A6831ED7D6E0002CABAE /* UIView+Extension.h */,
-				6988A6841ED7D6E0002CABAE /* UIView+Extension.m */,
 			);
 			path = Category;
 			sourceTree = "<group>";
@@ -1249,6 +1257,28 @@
 				744F9FED1EE031FD0007E53D /* Xzb_ApplicationDataTool.m */,
 			);
 			path = UserLoginTool;
+			sourceTree = "<group>";
+		};
+		7408CC1E1EE44CF3004140AD /* XHDatePicker */ = {
+			isa = PBXGroup;
+			children = (
+				7408CC1F1EE44CF3004140AD /* Tools */,
+				7408CC241EE44CF3004140AD /* XHDatePickerView.h */,
+				7408CC251EE44CF3004140AD /* XHDatePickerView.m */,
+				7408CC261EE44CF3004140AD /* XHDatePickerView.xib */,
+			);
+			path = XHDatePicker;
+			sourceTree = "<group>";
+		};
+		7408CC1F1EE44CF3004140AD /* Tools */ = {
+			isa = PBXGroup;
+			children = (
+				7408CC201EE44CF3004140AD /* NSDate+Extension.h */,
+				7408CC211EE44CF3004140AD /* NSDate+Extension.m */,
+				7408CC221EE44CF3004140AD /* UIView+Extension.h */,
+				7408CC231EE44CF3004140AD /* UIView+Extension.m */,
+			);
+			path = Tools;
 			sourceTree = "<group>";
 		};
 		7412F2D41EE24D4400744C86 /* PayUnit */ = {
@@ -1652,6 +1682,7 @@
 		746169A11ED71B7700029B60 /* JiDing */ = {
 			isa = PBXGroup;
 			children = (
+				7408CC1D1EE449D3004140AD /* JiDing.entitlements */,
 				6988A6441ED7BE00002CABAE /* JiDing */,
 				746169A51ED71B7700029B60 /* AppDelegate.h */,
 				746169A61ED71B7700029B60 /* AppDelegate.m */,
@@ -1871,6 +1902,11 @@
 						CreatedOnToolsVersion = 8.3.2;
 						DevelopmentTeam = JA62234AND;
 						ProvisioningStyle = Automatic;
+						SystemCapabilities = {
+							com.apple.Push = {
+								enabled = 1;
+							};
+						};
 					};
 					746169B71ED71B7700029B60 = {
 						CreatedOnToolsVersion = 8.3.2;
@@ -1937,6 +1973,7 @@
 				699381F01EDFA61900BD2319 /* switch_camera_h@2x.png in Resources */,
 				699381DB1EDFA61900BD2319 /* camera_line.png in Resources */,
 				746169AF1ED71B7700029B60 /* Assets.xcassets in Resources */,
+				7408CC2A1EE44CF3004140AD /* XHDatePickerView.xib in Resources */,
 				7412F4051EE25AFF00744C86 /* whiteplaceholder.png in Resources */,
 				699381881EDFA44500BD2319 /* JKImagePickerController.strings in Resources */,
 				7412F3871EE256B800744C86 /* AlipaySDK.bundle in Resources */,
@@ -2112,6 +2149,7 @@
 				7412F3981EE257BC00744C86 /* Xzb_CheckInPeopleModel.m in Sources */,
 				7412F4011EE25AFF00744C86 /* HZPhotoBrowserView.m in Sources */,
 				6993818C1EDFA44500BD2319 /* JKAssetsGroupCell.m in Sources */,
+				7408CC281EE44CF3004140AD /* UIView+Extension.m in Sources */,
 				7412F3001EE24E9E00744C86 /* Xzb_fillOrderAddCheckManCell.m in Sources */,
 				7412F3021EE24E9E00744C86 /* Xzb_fillOrderPayTypeCell.m in Sources */,
 				7412F4251EE260C400744C86 /* CXPhotoBrowser.m in Sources */,
@@ -2124,6 +2162,7 @@
 				7412F3C21EE2588800744C86 /* Xzb_FunctionTableViewCell.m in Sources */,
 				7412F4081EE25CF300744C86 /* Xzb_PayTypeView.m in Sources */,
 				7412F2C41EE247A700744C86 /* HotelOfferModel.m in Sources */,
+				7408CC271EE44CF3004140AD /* NSDate+Extension.m in Sources */,
 				699382111EDFA80D00BD2319 /* UserAccount.m in Sources */,
 				7412F4261EE260C400744C86 /* CXPhotoLoadingView.m in Sources */,
 				746169A41ED71B7700029B60 /* main.m in Sources */,
@@ -2169,7 +2208,6 @@
 				6993818B1EDFA44500BD2319 /* JKAssetsCollectionFooterView.m in Sources */,
 				7412F3221EE2549D00744C86 /* OnlineFriendsView.m in Sources */,
 				7412F38B1EE256B800744C86 /* base64.m in Sources */,
-				6988A6881ED7D6E0002CABAE /* UIView+Extension.m in Sources */,
 				699381471EDFA30200BD2319 /* Xzb_myOrderHandler.m in Sources */,
 				7412F3D71EE2598200744C86 /* Xzb_BusinessFacilitiesModel.m in Sources */,
 				6983A19B1ED966FD0032CF36 /* SettingCell.m in Sources */,
@@ -2184,6 +2222,7 @@
 				7412F2CA1EE24AD500744C86 /* Xzb_HotelDetailController.m in Sources */,
 				7412F3991EE257BC00744C86 /* Xzb_OrderDetailsModel.m in Sources */,
 				7412F3201EE2549D00744C86 /* HotelIntroView.m in Sources */,
+				7408CC291EE44CF3004140AD /* XHDatePickerView.m in Sources */,
 				699381651EDFA3C700BD2319 /* STPhotoBrowserController.m in Sources */,
 				749921731EDBDE3900459E5C /* LoginViewController.m in Sources */,
 				7412F2E51EE24D4400744C86 /* Order.m in Sources */,
@@ -2340,6 +2379,7 @@
 			baseConfigurationReference = 62F990E8DE75AA0095392EE4 /* Pods-JiDing.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_ENTITLEMENTS = JiDing/JiDing.entitlements;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				DEVELOPMENT_TEAM = JA62234AND;
 				FRAMEWORK_SEARCH_PATHS = (
@@ -2365,6 +2405,7 @@
 					"$(inherited)",
 					"$(PROJECT_DIR)/JiDing/JiDing/Library/AliSDK",
 				);
+				MiSDKRun = debug;
 				PRODUCT_BUNDLE_IDENTIFIER = com.sameto.JiDing;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
@@ -2376,6 +2417,7 @@
 			baseConfigurationReference = 87AC6AD55B8101D2FC8EAB05 /* Pods-JiDing.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_ENTITLEMENTS = JiDing/JiDing.entitlements;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				DEVELOPMENT_TEAM = JA62234AND;
 				FRAMEWORK_SEARCH_PATHS = (
@@ -2401,6 +2443,7 @@
 					"$(inherited)",
 					"$(PROJECT_DIR)/JiDing/JiDing/Library/AliSDK",
 				);
+				MiSDKRun = online;
 				PRODUCT_BUNDLE_IDENTIFIER = com.sameto.JiDing;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
