@@ -379,13 +379,7 @@
         }else if (indexPath.row == 4){
             return CELL_NORMAL_H;
         }else if (indexPath.row == 5){
-            return CELL_NORMAL_H;
-        }else if (indexPath.row == 6){
             return 70;
-        }else if (indexPath.row == 7){
-            return 60;
-        }else if (indexPath.row == 8){
-            return 60;
         }
         return CELL_NORMAL_H;
     }else if (indexPath.section == 1){

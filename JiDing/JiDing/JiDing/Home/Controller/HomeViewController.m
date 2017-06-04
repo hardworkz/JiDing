@@ -604,7 +604,7 @@ typedef NS_ENUM(NSUInteger, SelectedHomeType) {
     //设置减动画
     if ([button isEqual:subBtn]) {//当前为客官人数
         if ([numberLabel.text intValue] <= 1) {
-            XWAlerLoginView *xw = [[XWAlerLoginView alloc]initWithTitle:@"最少为1"];
+            XWAlerLoginView *xw = [[XWAlerLoginView alloc]initWithTitle:@"已经是最少了~"];
             [xw show];
             return;
         }

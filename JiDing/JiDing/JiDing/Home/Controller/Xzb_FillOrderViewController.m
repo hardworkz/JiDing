@@ -237,7 +237,7 @@
 //        return 45;
 //    }
     if (indexPath.row == 0) {
-        return 105;
+        return 95;
     }else if (indexPath.row == 1) {
         return 45;
     }else if (indexPath.row == 2) {

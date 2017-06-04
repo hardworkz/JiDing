@@ -8,6 +8,7 @@
 
 #import "OneTableViewCell.h"
 
+#define NumDayW 100
 @interface OneTableViewCell ()
 @property (nonatomic,strong)  UIView *contentsView;
 @property (nonatomic,weak)  UILabel *hotelTypeLabel;
@@ -113,36 +114,80 @@
         _devider.backgroundColor = AppLineColor;
         [contentView addSubview:_devider];
         
-        for (int i = 0; i<2; i++) {
-            UILabel *timeLabel = [[UILabel alloc] init];
-            timeLabel.font = [UIFont systemFontOfSize:16];
-            timeLabel.frame = CGRectMake(ScreenWidth * 0.5 * i, CGRectGetMaxY(_devider.frame) + 10, ScreenWidth * 0.5 , 40);
-            timeLabel.textColor = AppMainGrayTextColor;
-            timeLabel.textAlignment = NSTextAlignmentCenter;
-            timeLabel.numberOfLines = 0;
-            [contentView addSubview:timeLabel];
-            if (i == 0) {
-                self.starTimeLabel = timeLabel;
-                //共几晚label
-                UILabel *numOfDayLabel = [[UILabel alloc] init];
-                numOfDayLabel.font = [UIFont systemFontOfSize:16];
-                numOfDayLabel.frame = CGRectMake(0, CGRectGetMaxY(timeLabel.frame) + 5, ScreenWidth, 20);
-                numOfDayLabel.textColor = AppMainColor;
-                numOfDayLabel.textAlignment = NSTextAlignmentCenter;
-                [contentView addSubview:numOfDayLabel];
-                self.numOfDayLabel = numOfDayLabel;
-                
-                UIImageView *timeIconImageView = [[UIImageView alloc] initWithFrame:CGRectMake((ScreenWidth - 30) * 0.5, timeLabel.y - 5 -3, 30, 30)];
-                timeIconImageView.image = [UIImage imageNamed:@"时钟"];
-                timeIconImageView.contentMode = UIViewContentModeCenter;
-                [contentView addSubview:timeIconImageView];
-                self.timeIconImageView = timeIconImageView;
-            }else{
-                self.endTimeLabel = timeLabel;
-            }
-        }
+        //入住日期
+        UILabel *starTimeLabel = [[UILabel alloc] init];
+        [starTimeLabel setAppFontWithSize:16.0];
+        starTimeLabel.frame = CGRectMake(0, CGRectGetMaxY(_devider.frame) + 10, (SCREEN_WIDTH - NumDayW - 25)* 0.5, 40);
+        starTimeLabel.textColor = AppMainGrayTextColor;
+        starTimeLabel.textAlignment = NSTextAlignmentCenter;
+        starTimeLabel.numberOfLines = 0;
+        [contentView addSubview:starTimeLabel];
+        self.starTimeLabel = starTimeLabel;
+        //箭头和至
+        UIImageView *rightArrow = [[UIImageView alloc] initWithFrame:CGRectMake(CGRectGetMaxX(starTimeLabel.frame), starTimeLabel.y, 25, 25)];
+        rightArrow.image = [UIImage imageNamed:@"入住箭头"];
+        rightArrow.contentMode = UIViewContentModeCenter;
+        [contentView addSubview:rightArrow];
         
+        UILabel *zhi = [[UILabel alloc] init];
+        zhi.font = [UIFont systemFontOfSize:16];
+        zhi.frame = CGRectMake(0, CGRectGetMaxY(rightArrow.frame), 25, 25);
+        zhi.text = @"至";
+        zhi.textColor = AppMainGrayTextColor;
+        zhi.textAlignment = NSTextAlignmentCenter;
+        [contentView addSubview:zhi];
+        //离店日期
+        UILabel *endTimeLabel = [[UILabel alloc] init];
+        [endTimeLabel setAppFontWithSize:16.0];
+        endTimeLabel.frame = CGRectMake(SCREEN_WIDTH - NumDayW - (SCREEN_WIDTH - NumDayW - 25)* 0.5, CGRectGetMaxY(_devider.frame) + 10, (SCREEN_WIDTH - NumDayW - 25)* 0.5, 40);
+        endTimeLabel.textColor = AppMainGrayTextColor;
+        endTimeLabel.textAlignment = NSTextAlignmentCenter;
+        endTimeLabel.numberOfLines = 0;
+        [contentView addSubview:endTimeLabel];
+        self.endTimeLabel = endTimeLabel;
+        //时钟图标
+        UIImageView *timeIconImageView = [[UIImageView alloc] initWithFrame:CGRectMake(SCREEN_WIDTH - NumDayW, starTimeLabel.y - 5 -3, NumDayW, 30)];
+        timeIconImageView.image = [UIImage imageNamed:@"时钟"];
+        timeIconImageView.contentMode = UIViewContentModeCenter;
+        [contentView addSubview:timeIconImageView];
+        self.timeIconImageView = timeIconImageView;
+        //共几晚label
+        UILabel *numOfDayLabel = [[UILabel alloc] init];
+        numOfDayLabel.font = [UIFont systemFontOfSize:16];
+        numOfDayLabel.frame = CGRectMake(SCREEN_WIDTH - NumDayW, starTimeLabel.y + 20, NumDayW, 20);
+        numOfDayLabel.textColor = AppMainColor;
+        numOfDayLabel.textAlignment = NSTextAlignmentCenter;
+        [contentView addSubview:numOfDayLabel];
+        self.numOfDayLabel = numOfDayLabel;
         
+//        for (int i = 0; i<2; i++) {
+//            UILabel *timeLabel = [[UILabel alloc] init];
+//            timeLabel.font = [UIFont systemFontOfSize:16];
+//            timeLabel.frame = CGRectMake(ScreenWidth * 0.5 * i, CGRectGetMaxY(_devider.frame) + 10, ScreenWidth * 0.5 , 40);
+//            timeLabel.textColor = AppMainGrayTextColor;
+//            timeLabel.textAlignment = NSTextAlignmentCenter;
+//            timeLabel.numberOfLines = 0;
+//            [contentView addSubview:timeLabel];
+//            if (i == 0) {
+//                self.starTimeLabel = timeLabel;
+//                //共几晚label
+//                UILabel *numOfDayLabel = [[UILabel alloc] init];
+//                numOfDayLabel.font = [UIFont systemFontOfSize:16];
+//                numOfDayLabel.frame = CGRectMake(0, CGRectGetMaxY(timeLabel.frame) + 5, ScreenWidth, 20);
+//                numOfDayLabel.textColor = AppMainColor;
+//                numOfDayLabel.textAlignment = NSTextAlignmentCenter;
+//                [contentView addSubview:numOfDayLabel];
+//                self.numOfDayLabel = numOfDayLabel;
+//                
+//                UIImageView *timeIconImageView = [[UIImageView alloc] initWithFrame:CGRectMake((ScreenWidth - 30) * 0.5, timeLabel.y - 5 -3, 30, 30)];
+//                timeIconImageView.image = [UIImage imageNamed:@"时钟"];
+//                timeIconImageView.contentMode = UIViewContentModeCenter;
+//                [contentView addSubview:timeIconImageView];
+//                self.timeIconImageView = timeIconImageView;
+//            }else{
+//                self.endTimeLabel = timeLabel;
+//            }
+//        }
     }
     return self;
 }
@@ -175,8 +220,8 @@
     }
     
     
-    self.starTimeLabel.y = CGRectGetMaxY(_devider.frame) + 10+addressSize.height * 0.5;
-    self.endTimeLabel.y = CGRectGetMaxY(_devider.frame) + 10+addressSize.height * 0.5;
+    self.starTimeLabel.y = CGRectGetMaxY(_devider.frame) + 10 +addressSize.height * 0.5;
+    self.endTimeLabel.y = CGRectGetMaxY(_devider.frame) + 10 +addressSize.height * 0.5;
     
     self.timeIconImageView.y = self.starTimeLabel.y - 5;
     self.numOfDayLabel.y = CGRectGetMaxY(self.timeIconImageView.frame) - 5;
