@@ -58,12 +58,12 @@
 #pragma mark - 创建视图
 - (void)setupView {
     _hotel = [[UIButton alloc] initWithFrame:CGRectMake(10, 10, SCREEN_Width - 20, 35)];
-    _hotel.titleLabel.font = [UIFont systemFontOfSize:14];
-    [_hotel setImage:[UIImage imageNamed:@"酒店图标"] forState:UIControlStateNormal];
+    _hotel.titleLabel.font = [UIFont systemFontOfSize:18];
+//    [_hotel setImage:[UIImage imageNamed:@"酒店图标"] forState:UIControlStateNormal];
     [_hotel setTitle:@"碧海蓝湾酒店" forState:UIControlStateNormal];
     _hotel.userInteractionEnabled = NO;
     [_hotel setTitleColor:AppMainGrayTextColor forState:UIControlStateNormal];
-    _hotel.contentHorizontalAlignment = UIControlContentHorizontalAlignmentLeft;
+    _hotel.contentHorizontalAlignment = UIControlContentHorizontalAlignmentCenter;
     [self.contentView addSubview:_hotel];
     
     _stayLabel = [[UILabel alloc] initWithFrame:CGRectMake(0, CGRectGetMaxY(_hotel.frame), SCREEN_Width / 3, 30)];

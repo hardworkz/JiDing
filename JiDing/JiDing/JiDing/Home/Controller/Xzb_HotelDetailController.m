@@ -19,8 +19,8 @@
 #define ONE_CELL_H 140
 #define TWO_CELL_H 110
 #define FOUR_CELL_H 50
-#define HOVER_H ONE_CELL_H + TWO_CELL_H
-#define HOVER_OFFSET_Y 186
+#define HOVER_H ONE_CELL_H
+#define HOVER_OFFSET_Y 76
 #define LINE_W ScreenWidth /3
 
 #define RoomTypeIntro @"房型介绍"
@@ -674,39 +674,42 @@
     bottomBar.frame = CGRectMake(0, SCREEN_Height - 49, SCREEN_Width, 49);
     [self.view addSubview:bottomBar];
     //区别全日房和钟点房
-    NSString *hourTime = @"";
-    if ([self.hotelModel.orderType intValue] == 1) {
-        hourTime = @"晚";
-    }else if ([self.hotelModel.orderType intValue] == 2)
-    {
-        //钟点房显示时间
-        if ([self.hotelModel.timePeriod intValue] == 1) {
-            hourTime = @"3小时";
-        }else if ([self.hotelModel.timePeriod intValue] == 2){
-            hourTime = @"4小时";
-        }else if ([self.hotelModel.timePeriod intValue] == 3){
-            hourTime = @"5小时";
-        }
-        
-    }
-    //酒店报价
-    NSString *text = [NSString stringWithFormat:@"¥%@/%@",self.hotelModel.price,hourTime];
-    
-    UILabel *unitPriceLabel = [[UILabel alloc] init];
-    unitPriceLabel.text = text;
-    unitPriceLabel.backgroundColor = [UIColor blackColor];
-    unitPriceLabel.textColor = [UIColor whiteColor];
-    unitPriceLabel.textAlignment = NSTextAlignmentCenter;
-    unitPriceLabel.font = [UIFont systemFontOfSize:17];
-    unitPriceLabel.frame = CGRectMake(0, 0, SCREEN_Width * 0.5, 49);
-    [bottomBar addSubview:unitPriceLabel];
-    
+//    NSString *hourTime = @"";
+//    if ([self.hotelModel.orderType intValue] == 1) {
+//        hourTime = @"晚";
+//    }else if ([self.hotelModel.orderType intValue] == 2)
+//    {
+//        //钟点房显示时间
+//        if ([self.hotelModel.timePeriod intValue] == 1) {
+//            hourTime = @"3小时";
+//        }else if ([self.hotelModel.timePeriod intValue] == 2){
+//            hourTime = @"4小时";
+//        }else if ([self.hotelModel.timePeriod intValue] == 3){
+//            hourTime = @"5小时";
+//        }
+//        
+//    }
+//    //酒店报价
+//    NSString *text = [NSString stringWithFormat:@"¥%@/%@",self.hotelModel.price,hourTime];
+//    
+//    UILabel *unitPriceLabel = [[UILabel alloc] init];
+//    unitPriceLabel.text = text;
+//    unitPriceLabel.backgroundColor = [UIColor blackColor];
+//    unitPriceLabel.textColor = [UIColor whiteColor];
+//    unitPriceLabel.textAlignment = NSTextAlignmentCenter;
+//    unitPriceLabel.font = [UIFont systemFontOfSize:17];
+//    unitPriceLabel.frame = CGRectMake(0, 0, SCREEN_Width * 0.5, 49);
+//    [bottomBar addSubview:unitPriceLabel];
+    //分割线
+    UIView *devider = [[UIView alloc] initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, 0.5)];
+    devider.backgroundColor = AppLightLineColor;
     //预订按钮
     UIButton *scheduledButton = [[UIButton alloc] init];
-    scheduledButton.frame = CGRectMake(SCREEN_Width * 0.5, 0, ScreenWidth * 0.5, 49);
-    scheduledButton.backgroundColor = AppMainColor;
-    [scheduledButton setTitle:@"预订" forState:UIControlStateNormal];
+    scheduledButton.frame = CGRectMake(0, 0, ScreenWidth * 0.5, 49);
+    [scheduledButton setTitleColor:AppGreenTextColor forState:UIControlStateNormal];
+    [scheduledButton setTitle:@"马上入住" forState:UIControlStateNormal];
     [scheduledButton addTarget:self action:@selector(scheduledClicked) forControlEvents:UIControlEventTouchUpInside];
+    [scheduledButton addSubview:devider];
     [bottomBar addSubview:scheduledButton];
 }
 /**
@@ -843,11 +846,13 @@
         }else{
             return ONE_CELL_H;
         }
-    }else if (indexPath.row == 1){
-        return TWO_CELL_H;
-    }else if (indexPath.row == 2){
+    }else
+//        if (indexPath.row == 1){
+//        return TWO_CELL_H;
+//    }else
+        if (indexPath.row == 1){
         return FOUR_CELL_H;
-    }else if (indexPath.row == 3){//分页导航条下面的cell对应不同页面
+    }else if (indexPath.row == 2){//分页导航条下面的cell对应不同页面
         if (self.selectedPageBtn.tag == 0) {
             return self.fourCellHeight + 30;
         }else if (self.selectedPageBtn.tag == 1) {
@@ -891,11 +896,13 @@
         OneTableViewCell *cell = [OneTableViewCell cellWithTableView:tableView];
         cell.model = self.hotelModel;
         return cell;
-    }else if (indexPath.row == 1)
-    {
-        TwoTableViewCell *cell = [TwoTableViewCell cellWithTableView:tableView];
-        return cell;
-    }else if (indexPath.row == 3){
+    }else
+//        if (indexPath.row == 1)
+//    {
+//        TwoTableViewCell *cell = [TwoTableViewCell cellWithTableView:tableView];
+//        return cell;
+//    }else
+        if (indexPath.row == 2){
         if (self.selectedPageBtn.tag == 0) {
             PageTypeTableViewCell *cell = [PageTypeTableViewCell cellWithTableView:tableView];
             self.fourCellHeight = cell.cellHeight;
@@ -914,7 +921,7 @@
             cell.rateLabel.text = [NSString stringWithFormat:@"好评率%@%%",self.hotelModel.rank];
             return cell;
         }
-    }else if (indexPath.row > 3){
+    }else if (indexPath.row > 2){
         if (self.selectedPageBtn.tag == 0) {//房型介绍
             
             HotelIntroTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:[HotelIntroTableViewCell ID] forIndexPath:indexPath];

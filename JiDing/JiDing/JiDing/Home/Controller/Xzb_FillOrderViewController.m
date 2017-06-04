@@ -100,39 +100,44 @@
     [self.view addSubview:bottomBar];
     
     //区别全日房和钟点房
-    NSString *hourTime = @"";
-    if ([self.hotelModel.orderType intValue] == 1) {
-        hourTime = @"晚";
-    }else if ([self.hotelModel.orderType intValue] == 2)
-    {
-        //钟点房显示时间
-        if ([self.hotelModel.timePeriod intValue] == 1) {
-            hourTime = @"3小时";
-        }else if ([self.hotelModel.timePeriod intValue] == 2){
-            hourTime = @"4小时";
-        }else if ([self.hotelModel.timePeriod intValue] == 3){
-            hourTime = @"5小时";
-        }
-        
-    }
+//    NSString *hourTime = @"";
+//    if ([self.hotelModel.orderType intValue] == 1) {
+//        hourTime = @"晚";
+//    }else if ([self.hotelModel.orderType intValue] == 2)
+//    {
+//        //钟点房显示时间
+//        if ([self.hotelModel.timePeriod intValue] == 1) {
+//            hourTime = @"3小时";
+//        }else if ([self.hotelModel.timePeriod intValue] == 2){
+//            hourTime = @"4小时";
+//        }else if ([self.hotelModel.timePeriod intValue] == 3){
+//            hourTime = @"5小时";
+//        }
+//        
+//    }
     //酒店报价
     //    NSString *text = [NSString stringWithFormat:@"订单总额：¥%@",self.hotelModel.price];
     
-    _unitPriceLabel = [[UILabel alloc] init];
-    _unitPriceLabel.text = [NSString stringWithFormat:@"订单总额：¥%@",self.hotelModel.roomPrice];
-    _unitPriceLabel.backgroundColor = [UIColor blackColor];
-    _unitPriceLabel.textColor = [UIColor whiteColor];
-    _unitPriceLabel.textAlignment = NSTextAlignmentCenter;
-    _unitPriceLabel.font = [UIFont systemFontOfSize:17];
-    _unitPriceLabel.frame = CGRectMake(0, 0, SCREEN_Width * 0.5, 49);
-    [bottomBar addSubview:_unitPriceLabel];
+//    _unitPriceLabel = [[UILabel alloc] init];
+//    _unitPriceLabel.text = [NSString stringWithFormat:@"订单总额：¥%@",self.hotelModel.roomPrice];
+//    _unitPriceLabel.backgroundColor = [UIColor blackColor];
+//    _unitPriceLabel.textColor = [UIColor whiteColor];
+//    _unitPriceLabel.textAlignment = NSTextAlignmentCenter;
+//    _unitPriceLabel.font = [UIFont systemFontOfSize:17];
+//    _unitPriceLabel.frame = CGRectMake(0, 0, SCREEN_Width * 0.5, 49);
+//    [bottomBar addSubview:_unitPriceLabel];
     
+    //分割线
+    UIView *devider = [[UIView alloc] initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, 0.5)];
+    devider.backgroundColor = AppLightLineColor;
+
     //预订按钮
     UIButton *submitButton = [[UIButton alloc] init];
-    submitButton.frame = CGRectMake(SCREEN_Width * 0.5, 0, ScreenWidth * 0.5, 49);
-    submitButton.backgroundColor = AppMainColor;
+    submitButton.frame = CGRectMake(0, 0, ScreenWidth * 0.5, 49);
     [submitButton setTitle:@"提交订单" forState:UIControlStateNormal];
+    [submitButton setTitleColor:AppGreenTextColor forState:UIControlStateNormal];
     [submitButton addTarget:self action:@selector(submitOrder:) forControlEvents:UIControlEventTouchUpInside];
+    [submitButton addSubview:devider];
     [bottomBar addSubview:submitButton];
 }
 
@@ -144,7 +149,7 @@
 #pragma mark - UITableViewDelegate && UITableViewDataSource
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-    return 6;
+    return 5;
 }
 
 -(UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
@@ -154,7 +159,8 @@
         cell.selectionStyle = UITableViewCellSelectionStyleNone;
         cell.hotelModel = _hotelModel;
         return cell;
-    }else if (indexPath.row == 1) {
+    }else
+        if (indexPath.row == 1) {
         Xzb_fillOrderPayTypeCell *cell = [Xzb_fillOrderPayTypeCell cellWithTableView:tableView];
         cell.hotelModel = _hotelModel;
         cell.selectionStyle = UITableViewCellSelectionStyleNone;
@@ -173,30 +179,32 @@
             }
         };
         return cell;
-    }else if (indexPath.row == 2) {
-        Xzb_fillOrderTicketCell *cell = [Xzb_fillOrderTicketCell cellWithTableView:tableView];
-        if (self.couponArray.count && !self.couponMony.length) {
-//            VouchersListModel *model = self.couponArray.firstObject;
-//            self.couponMony = model.coupon_money;
-//            self.couponId = [NSString stringWithFormat:@"%@",model.voucherID];
-        }
-        if ([self.couponMony integerValue] == -1 ) {
-            cell.couponMony = NULL;
-        }else {
-            cell.couponMony = self.couponMony;
-        }
-        return cell;
-    }else if (indexPath.row == 3) {
+    }else
+//        if (indexPath.row == 2) {
+//        Xzb_fillOrderTicketCell *cell = [Xzb_fillOrderTicketCell cellWithTableView:tableView];
+//        if (self.couponArray.count && !self.couponMony.length) {
+////            VouchersListModel *model = self.couponArray.firstObject;
+////            self.couponMony = model.coupon_money;
+////            self.couponId = [NSString stringWithFormat:@"%@",model.voucherID];
+//        }
+//        if ([self.couponMony integerValue] == -1 ) {
+//            cell.couponMony = NULL;
+//        }else {
+//            cell.couponMony = self.couponMony;
+//        }
+//        return cell;
+//    }else
+        if (indexPath.row == 2) {
         Xzb_fillOrderPhoneCell *cell = [Xzb_fillOrderPhoneCell cellWithTableView:tableView];
         cell.selectionStyle = UITableViewCellSelectionStyleNone;
         cell.model = _hotelModel;
         return cell;
-    }else if (indexPath.row == 4) {
+    }else if (indexPath.row == 3) {
         Xzb_fillOrderRemarkCell *cell = [Xzb_fillOrderRemarkCell cellWithTableView:tableView];
         //        _remarkStr = cell.remarkField.text;
         _remarkField = cell.remarkField;
         return cell;
-    }else if (indexPath.row == 5) {
+    }else if (indexPath.row == 4) {
         Xzb_fillOrderCheckManCell *cell = [Xzb_fillOrderCheckManCell cellWithTableView:tableView];
         cell.selectionStyle = UITableViewCellSelectionStyleNone;
         if (self.phoneStr.length) {
@@ -216,16 +224,29 @@
 
 -(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
+//    if (indexPath.row == 0) {
+//        return 105;
+//    }else if (indexPath.row == 1 || indexPath.row == 3) {
+//        return 90;
+//    }else if (indexPath.row >= 5 ) {
+//        return 90;
+//    }
+//    else if (indexPath.row == 2 || indexPath.row == 4) {
+//        return 54;
+//    }else {
+//        return 45;
+//    }
     if (indexPath.row == 0) {
         return 105;
-    }else if (indexPath.row == 1 || indexPath.row == 3) {
+    }else if (indexPath.row == 1) {
+        return 45;
+    }else if (indexPath.row == 2) {
         return 90;
-    }else if (indexPath.row >= 5 ) {
-        return 90;
-    }
-    else if (indexPath.row == 2 || indexPath.row == 4) {
+    }else if (indexPath.row == 3) {
         return 54;
-    }else {
+    }else if (indexPath.row == 4) {
+        return 90;
+    }else{
         return 45;
     }
 }
@@ -233,23 +254,6 @@
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
-    if (indexPath.row == 2) {
-//        Xzb_VouchersTableViewController *vc = [[Xzb_VouchersTableViewController alloc] init];
-//        vc.state = @"0";
-//        vc.orderID = _hotelModel.orderId;
-//        vc.orderRelId = _offerModel.orderRelId;
-//        @WeakObj(self);
-//        vc.ticket = ^(NSNumber *couponId, NSString *mony) {
-//            selfWeak.couponMony = mony;
-//            if (couponId) {
-//                selfWeak.couponId = [NSString stringWithFormat:@"%@",couponId];
-//            }else {
-//                selfWeak.couponId = @"";
-//            }
-//            [selfWeak.tableView reloadData];
-//        };
-//        [self.navigationController pushViewController:vc animated:YES];
-    }
 }
 
 #pragma mark - 提交订单

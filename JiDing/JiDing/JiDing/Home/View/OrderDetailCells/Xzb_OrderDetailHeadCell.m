@@ -99,8 +99,8 @@
     //二维码
     if (model.orderId && model.orderCode && model.businessId) {
         
-        NSString *str = [NSString stringWithFormat:@"{id:%@,orderCode:%@,businessId:%@}",model.orderId,model.orderCode,model.businessId];
-        @WeakObj(self)
+//        NSString *str = [NSString stringWithFormat:@"{id:%@,orderCode:%@,businessId:%@}",model.orderId,model.orderCode,model.businessId];
+//        @WeakObj(self)
 //        [HMScannerController cardImageWithCardName:str avatar:nil scale:0.2 completion:^(UIImage *image) {
 //            selfWeak.qrCode.image = image;
 //        }];

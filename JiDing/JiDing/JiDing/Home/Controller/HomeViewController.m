@@ -41,6 +41,7 @@ typedef NS_ENUM(NSUInteger, SelectedHomeType) {
 @property (strong, nonatomic) UIView *screenView;
 
 @property (strong, nonatomic) UIView *topView;
+@property (strong, nonatomic) UIView *centerLineView;
 @property (strong, nonatomic) UIView *bottomView;
 
 @property (strong, nonatomic) UIButton *hotelBtn;
@@ -160,6 +161,7 @@ typedef NS_ENUM(NSUInteger, SelectedHomeType) {
         _screenView.backgroundColor = [UIColor clearColor];
         
         [_screenView addSubview:self.topView];
+        [_screenView addSubview:self.centerLineView];
         [_screenView addSubview:self.bottomView];
     }
     return _screenView;
@@ -167,12 +169,8 @@ typedef NS_ENUM(NSUInteger, SelectedHomeType) {
 - (UIView *)topView
 {
     if (_topView == nil) {
-        _topView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, IPHONE_W, IPHONE_H * 0.5)];
+        _topView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, IPHONE_W, IPHONE_H * 0.5 - 0.5)];
         _topView.backgroundColor = [UIColor whiteColor];
-        
-        UIView *devider = [[UIView alloc] initWithFrame:CGRectMake(0, IPHONE_H *0.5 - 0.5, IPHONE_W, 0.5)];
-        devider.backgroundColor = [UIColor grayColor];
-        [_topView addSubview:devider];
         
         [_topView addSubview:self.hotelBtn];
         
@@ -185,15 +183,19 @@ typedef NS_ENUM(NSUInteger, SelectedHomeType) {
     }
     return _topView;
 }
+- (UIView *)centerLineView
+{
+    if (_centerLineView == nil) {
+        _centerLineView = [[UIView alloc] initWithFrame:CGRectMake(30, SCREEN_HEIGHT * 0.5 - 0.5, SCREEN_WIDTH - 60, 1)];
+        _centerLineView.backgroundColor = AppLineColor;
+    }
+    return _centerLineView;
+}
 - (UIView *)bottomView
 {
     if (_bottomView == nil) {
-        _bottomView = [[UIView alloc] initWithFrame:CGRectMake(0, IPHONE_H *0.5, IPHONE_W, IPHONE_H * 0.5)];
+        _bottomView = [[UIView alloc] initWithFrame:CGRectMake(0, IPHONE_H *0.5 + 0.5, IPHONE_W, IPHONE_H * 0.5 - 0.5)];
         _bottomView.backgroundColor = [UIColor whiteColor];
-        
-        UIView *devider = [[UIView alloc] initWithFrame:CGRectMake(0, 0, IPHONE_W, 0.5)];
-        devider.backgroundColor = [UIColor grayColor];
-        [_bottomView addSubview:devider];
         
         UIButton *setting = [[UIButton alloc] initWithFrame:CGRectMake(15, SCREEN_HEIGHT * 0.5 - 70, 50, 50)];
         [setting addTarget:self action:@selector(setting)];
@@ -283,14 +285,15 @@ typedef NS_ENUM(NSUInteger, SelectedHomeType) {
 {
     self.isCompleteAnimation = NO;
     DefineWeakSelf;
-    [UIView animateWithDuration:1.0 // 动画时长
+    weakSelf.centerLineView.hidden = YES;
+    [UIView animateWithDuration:0.5 // 动画时长
                           delay:0.0 // 动画延迟
          usingSpringWithDamping:0.9 // 弹簧振动效果 0~1
           initialSpringVelocity:1.0 // 初始速度
                         options:UIViewAnimationOptionCurveEaseIn // 动画过渡效果
                      animations:^{
-                         weakSelf.topView.frame = CGRectMake(0, -IPHONE_H * 0.5, IPHONE_W, IPHONE_H * 0.5);
-                         weakSelf.bottomView.frame = CGRectMake(0, IPHONE_H, IPHONE_W, IPHONE_H * 0.5);
+                         weakSelf.topView.frame = CGRectMake(0, -IPHONE_H * 0.5, IPHONE_W, IPHONE_H * 0.5 - 0.5);
+                         weakSelf.bottomView.frame = CGRectMake(0, IPHONE_H, IPHONE_W, IPHONE_H * 0.5 - 0.5);
                      } completion:^(BOOL finished) {
                          [weakSelf.screenView removeFromSuperview];
                          self.isCompleteAnimation = YES;
@@ -304,17 +307,17 @@ typedef NS_ENUM(NSUInteger, SelectedHomeType) {
     self.isCompleteAnimation = NO;
     [[self windowView] addSubview:self.screenView];
     DefineWeakSelf;
-    [UIView animateWithDuration:1.0 // 动画时长
+    [UIView animateWithDuration:0.5 // 动画时长
                           delay:0.0 // 动画延迟
          usingSpringWithDamping:1.0 // 弹簧振动效果 0~1
           initialSpringVelocity:1.0 // 初始速度
                         options:UIViewAnimationOptionCurveEaseIn // 动画过渡效果
                      animations:^{
-                         weakSelf.topView.frame = CGRectMake(0, 0, IPHONE_W, IPHONE_H * 0.5);
-                         weakSelf.bottomView.frame = CGRectMake(0, IPHONE_H *0.5, IPHONE_W, IPHONE_H * 0.5);
+                         weakSelf.topView.frame = CGRectMake(0, 0, IPHONE_W, IPHONE_H * 0.5 - 0.5);
+                         weakSelf.bottomView.frame = CGRectMake(0, IPHONE_H *0.5 + 0.5, IPHONE_W, IPHONE_H * 0.5 - 0.5);
                      } completion:^(BOOL finished) {
                          // 动画完成后执行
-                         // code...
+                         weakSelf.centerLineView.hidden = NO;
                          self.isCompleteAnimation = YES;
                          if (completionAnimation) {
                              completionAnimation();

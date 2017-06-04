@@ -70,35 +70,35 @@
     _monyLabel.text = @"¥200";
     [self.contentView addSubview:_monyLabel];
     
-    _payType = [[UIButton alloc] initWithFrame:CGRectMake(10, CGRectGetMaxY(_room.frame), (SCREEN_Width - 20) / 2, 45)];
-    [_payType setTitle:@" 付款方式" forState:UIControlStateNormal];
-    [_payType setTitleColor:AppMainGrayTextColor forState:UIControlStateNormal];
-    [_payType setImage:[UIImage imageNamed:@"付款方式"] forState:UIControlStateNormal];
-    _payType.titleLabel.font = [UIFont systemFontOfSize:14];
-    _payType.userInteractionEnabled = NO;
-    _payType.contentHorizontalAlignment = UIControlContentHorizontalAlignmentLeft;
-    [self.contentView addSubview:_payType];
+//    _payType = [[UIButton alloc] initWithFrame:CGRectMake(10, CGRectGetMaxY(_room.frame), (SCREEN_Width - 20) / 2, 45)];
+//    [_payType setTitle:@" 付款方式" forState:UIControlStateNormal];
+//    [_payType setTitleColor:AppMainGrayTextColor forState:UIControlStateNormal];
+//    [_payType setImage:[UIImage imageNamed:@"付款方式"] forState:UIControlStateNormal];
+//    _payType.titleLabel.font = [UIFont systemFontOfSize:14];
+//    _payType.userInteractionEnabled = NO;
+//    _payType.contentHorizontalAlignment = UIControlContentHorizontalAlignmentLeft;
+//    [self.contentView addSubview:_payType];
+//    
+//    _prepaidButton = [[UIButton alloc] initWithFrame:CGRectMake(CGRectGetMaxX(_payType.frame), CGRectGetMaxY(_monyLabel.frame), _payType.frame.size.width / 2 - 10, 45)];
+//    [_prepaidButton setTitle:@"预付" forState:UIControlStateNormal];
+//    [_prepaidButton setImage:[UIImage imageNamed:@"未选中支付类型"] forState:UIControlStateNormal];
+//    [_prepaidButton setImage:[UIImage imageNamed:@"选中支付类型"] forState:UIControlStateSelected];
+//    _prepaidButton.selected = YES;
+//    _prepaidButton.titleLabel.font = [UIFont systemFontOfSize:14];
+//    [_prepaidButton setTitleColor:[UIColor grayColor] forState:UIControlStateNormal];
+//    _prepaidButton.contentHorizontalAlignment = UIControlContentHorizontalAlignmentRight;
+//    [self.contentView addSubview:_prepaidButton];
+//    
+//    _securedButton = [[UIButton alloc] initWithFrame:CGRectMake(CGRectGetMaxX(_prepaidButton.frame), CGRectGetMaxY(_monyLabel.frame), _payType.frame.size.width / 2 + 10, 45)];
+//    [_securedButton setTitle:@"担保交易" forState:UIControlStateNormal];
+//    [_securedButton setImage:[UIImage imageNamed:@"选中支付类型"] forState:UIControlStateSelected];
+//    [_securedButton setImage:[UIImage imageNamed:@"未选中支付类型"] forState:UIControlStateNormal];
+//    _securedButton.titleLabel.font = [UIFont systemFontOfSize:14];
+//   [_securedButton setTitleColor:[UIColor grayColor] forState:UIControlStateNormal];
+//    _securedButton.contentHorizontalAlignment = UIControlContentHorizontalAlignmentRight;
+//    [self.contentView addSubview:_securedButton];
     
-    _prepaidButton = [[UIButton alloc] initWithFrame:CGRectMake(CGRectGetMaxX(_payType.frame), CGRectGetMaxY(_monyLabel.frame), _payType.frame.size.width / 2 - 10, 45)];
-    [_prepaidButton setTitle:@"预付" forState:UIControlStateNormal];
-    [_prepaidButton setImage:[UIImage imageNamed:@"未选中支付类型"] forState:UIControlStateNormal];
-    [_prepaidButton setImage:[UIImage imageNamed:@"选中支付类型"] forState:UIControlStateSelected];
-    _prepaidButton.selected = YES;
-    _prepaidButton.titleLabel.font = [UIFont systemFontOfSize:14];
-    [_prepaidButton setTitleColor:[UIColor grayColor] forState:UIControlStateNormal];
-    _prepaidButton.contentHorizontalAlignment = UIControlContentHorizontalAlignmentRight;
-    [self.contentView addSubview:_prepaidButton];
-    
-    _securedButton = [[UIButton alloc] initWithFrame:CGRectMake(CGRectGetMaxX(_prepaidButton.frame), CGRectGetMaxY(_monyLabel.frame), _payType.frame.size.width / 2 + 10, 45)];
-    [_securedButton setTitle:@"担保交易" forState:UIControlStateNormal];
-    [_securedButton setImage:[UIImage imageNamed:@"选中支付类型"] forState:UIControlStateSelected];
-    [_securedButton setImage:[UIImage imageNamed:@"未选中支付类型"] forState:UIControlStateNormal];
-    _securedButton.titleLabel.font = [UIFont systemFontOfSize:14];
-   [_securedButton setTitleColor:[UIColor grayColor] forState:UIControlStateNormal];
-    _securedButton.contentHorizontalAlignment = UIControlContentHorizontalAlignmentRight;
-    [self.contentView addSubview:_securedButton];
-    
-    UIView *line = [[UIView alloc] initWithFrame:CGRectMake(10, CGRectGetMaxY(_securedButton.frame) - 0.5, SCREEN_Width - 10, 0.5)];
+    UIView *line = [[UIView alloc] initWithFrame:CGRectMake(10, CGRectGetMaxY(_room.frame) - 0.5, SCREEN_Width - 10, 0.5)];
     line.backgroundColor = AppLineColor;
     [self.contentView addSubview:line];
 }

@@ -25,12 +25,6 @@
         self.timer = nil;
     }
 }
-//- (instancetype)init
-//{
-//    if (self == [super init]) {
-//    }
-//    return self;
-//}
 - (NSString *)distanceStr
 {
     float distanceM = [_distance floatValue] * 1000;

@@ -13,6 +13,9 @@
 
 #define CELL_NORMAL_H 48;
 @interface Xzb_OrderDetailController ()<PayDelegate, UITableViewDelegate, UITableViewDataSource,DQAlertViewDelegate>
+{
+    CustomAlertView *alert;
+}
 @property (nonatomic,weak)  UIWebView *webView;
 @property (nonatomic,weak)  Xzb_PayInputPasswordView *inputView;
 @property (nonatomic,assign)  CGFloat headCellHeight;
@@ -80,7 +83,7 @@
     self.wxmanager = manager;
     
     //设置导航栏标题
-    self.title = @"订单详情";
+    self.title = @"确认订单";
     _tableView = [[UITableView alloc] initWithFrame:CGRectMake(0, 0, SCREEN_Width, SCREEN_Height - 64)];
     _tableView.delegate = self;
     _tableView.dataSource = self;
@@ -233,7 +236,7 @@
 }
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
     if (section == 0) {
-        return 9;
+        return 6;
     }else if (section == 1){
         return 1;
     }else{
@@ -248,19 +251,19 @@
     cell.selectionStyle = UITableViewCellSelectionStyleNone;
     
     if (indexPath.section == 0) {
-        
-        if (indexPath.row == 0) {
-            Xzb_OrderDetailHeadCell *cell = [Xzb_OrderDetailHeadCell cellWithTableView:tableView];
-            cell.selectionStyle = UITableViewCellSelectionStyleNone;
-            cell.model = self.model;
-            self.headCellHeight = cell.cellHeight;
-            return cell;
-        }else if (indexPath.row == 1){
+//        if (indexPath.row == 0) {
+//            Xzb_OrderDetailHeadCell *cell = [Xzb_OrderDetailHeadCell cellWithTableView:tableView];
+//            cell.selectionStyle = UITableViewCellSelectionStyleNone;
+//            cell.model = self.model;
+//            self.headCellHeight = cell.cellHeight;
+//            return cell;
+//        }else
+            if (indexPath.row == 0){
             Xzb_HotelNameCell *cell = [Xzb_HotelNameCell cellWithTableView:tableView];
             cell.hotelNameLabel.text = self.model.businessName;
             cell.selectionStyle = UITableViewCellSelectionStyleNone;
             return cell;
-        }else if (indexPath.row == 2){
+        }else if (indexPath.row == 1){
             cell.contentLabel.text = @"付款方式";
             cell.iconImageView.image = [UIImage imageNamed:@"付款方式"];
             if ([self.model.payType intValue] == 1) {
@@ -272,45 +275,49 @@
             }
             cell.accessoryLabel.textColor = AppGreenBtnColor;
             return cell;
-        }else if (indexPath.row == 3){
+        }else if (indexPath.row == 2){
             cell.contentLabel.text = self.model.roomName;
             cell.iconImageView.image = [UIImage imageNamed:@"豪华大床房1"];
             cell.accessoryLabel.text = [NSString stringWithFormat:@"¥%@",self.model.price?self.model.price:@"0.00"];
             cell.accessoryLabel.textColor = AppMainColor;
             return cell;
-        }else if (indexPath.row == 4){
+        }else
+            if(indexPath.row == 3){
             NSString *string;
-            if ([self.model.couponMoney isEqualToString:@""]||[self.model.couponMoney floatValue] == 0) {
-                string = @"暂无返现券";
-                cell.accessoryLabel.textColor = [UIColor lightGrayColor];
-            }else {
-                string = [NSString stringWithFormat:@"-¥%@", self.model.couponMoney];
-                cell.accessoryLabel.textColor = AppMainColor;
-            }
+//            if ([self.model.couponMoney isEqualToString:@""]||[self.model.couponMoney floatValue] == 0) {
+                string = @"2017-05-08";
+                cell.accessoryLabel.textColor = AppGrayTextColor;
+//            }else {
+//                string = [NSString stringWithFormat:@"-¥%@", self.model.couponMoney];
+//                cell.accessoryLabel.textColor = AppMainColor;
+//            }
             
-            cell.contentLabel.text = @"返现券";
+            cell.contentLabel.text = @"订单号：6666666666666666666";
             cell.iconImageView.image = [UIImage imageNamed:@"返现券1"];
             cell.accessoryLabel.text = string;
             
             return cell;
-        }else if (indexPath.row == 5){
-            
-            cell.contentLabel.text = @"实付款";
-            cell.iconImageView.image = [UIImage imageNamed:@"实付款"];
-            cell.accessoryLabel.text = [NSString stringWithFormat:@"¥%@",self.model.realPrice?self.model.realPrice:@"0.00"];
-            cell.accessoryLabel.textColor = AppMainColor;
-            
-            return cell;
-        }else if (indexPath.row == 6){
-            Xzb_PayIntroTableViewCell *cell = [Xzb_PayIntroTableViewCell cellWithTableView:tableView];
-            cell.selectionStyle = UITableViewCellSelectionStyleNone;
-            return cell;
-        }else if (indexPath.row == 7){
+        }else
+//            if (indexPath.row == 3){
+//            
+//            cell.contentLabel.text = @"实付款";
+//            cell.iconImageView.image = [UIImage imageNamed:@"实付款"];
+//            cell.accessoryLabel.text = [NSString stringWithFormat:@"¥%@",self.model.realPrice?self.model.realPrice:@"0.00"];
+//            cell.accessoryLabel.textColor = AppMainColor;
+//            
+//            return cell;
+//        }else
+//            if (indexPath.row == 6){
+//            Xzb_PayIntroTableViewCell *cell = [Xzb_PayIntroTableViewCell cellWithTableView:tableView];
+//            cell.selectionStyle = UITableViewCellSelectionStyleNone;
+//            return cell;
+//        }else
+            if (indexPath.row == 4){
             Xzb_TimeTableViewCell *cell = [Xzb_TimeTableViewCell cellWithTableView:tableView];
             cell.model = self.model;
             cell.selectionStyle = UITableViewCellSelectionStyleNone;
             return cell;
-        }else if (indexPath.row == 8){
+        }else if (indexPath.row == 5){
             Xzb_FunctionTableViewCell *cell = [Xzb_FunctionTableViewCell cellWithTableView:tableView];
             cell.selectionStyle = UITableViewCellSelectionStyleNone;
             return cell;
@@ -412,84 +419,151 @@
     [self.view addSubview:bottomBar];
     
     //取消订单
-    UIButton *cancleOrderButton = [[UIButton alloc] init];
-    cancleOrderButton.frame = CGRectMake(0, 0, ScreenWidth * 0.5, 49);
-    cancleOrderButton.backgroundColor = [UIColor blackColor];
-    [cancleOrderButton setTitle:@"取消订单" forState:UIControlStateNormal];
-    [cancleOrderButton addTarget:self action:@selector(cancleNotification) forControlEvents:UIControlEventTouchUpInside];
-    [bottomBar addSubview:cancleOrderButton];
+//    UIButton *cancleOrderButton = [[UIButton alloc] init];
+//    cancleOrderButton.frame = CGRectMake(0, 0, ScreenWidth * 0.5, 49);
+//    cancleOrderButton.backgroundColor = [UIColor blackColor];
+//    [cancleOrderButton setTitle:@"取消订单" forState:UIControlStateNormal];
+//    [cancleOrderButton addTarget:self action:@selector(cancleNotification) forControlEvents:UIControlEventTouchUpInside];
+//    [bottomBar addSubview:cancleOrderButton];
+    
+    //分割线
+    UIView *devider = [[UIView alloc] initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, 0.5)];
+    devider.backgroundColor = AppLightLineColor;
     
     //确认支付按钮
     UIButton *payButton = [[UIButton alloc] init];
-    payButton.frame = CGRectMake(SCREEN_Width * 0.5, 0, ScreenWidth * 0.5, 49);
-    payButton.backgroundColor = AppMainColor;
-    [payButton setTitle:@"确认支付" forState:UIControlStateNormal];
+    payButton.frame = CGRectMake(0, 0, ScreenWidth * 0.5, 49);
+//    payButton.backgroundColor = AppMainColor;
+    [payButton setTitle:@"立即付款" forState:UIControlStateNormal];
+    [payButton setTitleColor:AppGreenTextColor forState:UIControlStateNormal];
     [payButton addTarget:self action:@selector(payButtonClicked) forControlEvents:UIControlEventTouchUpInside];
+    [payButton addSubview:devider];
     [bottomBar addSubview:payButton];
 }
 
 #pragma mark - 支付弹窗
 - (void)payButtonClicked
 {
-    Xzb_PayTypeView *view = [[Xzb_PayTypeView alloc] init];
-    UserAccount *account = [UserAccountTool account];
-    view.buttonZero.hidden = NO;
-    [view.buttonZero setTitle:[NSString stringWithFormat:@"余额（¥%.2f）",[_balance floatValue]] forState:UIControlStateNormal];
-    [RTHttpTool get:GET_ACCOUNT_MONEY addHUD:NO param:@{USERID:account.userId,TOKEN:account.loginToken} success:^(id responseObj) {
-        id json = [RTHttpTool jsonWithResponseObj:responseObj];
-        if ([json[SUCCESS] intValue] == 1) {
-            _balance = json[ENTITIES][@"map"][@"available_money"];
-            
-            if ([_balance doubleValue] >= [_model.realPrice doubleValue]) {
-                [view.buttonZero setTitle:[NSString stringWithFormat:@"余额（¥%.2f）",[_balance floatValue]] forState:UIControlStateNormal];
-                [view.buttonZero setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
-                view.buttonZero.userInteractionEnabled = YES;
-            }else {
-                [view.buttonZero setTitle:[NSString stringWithFormat:@"余额（¥%.2f）",[_balance floatValue]] forState:UIControlStateNormal];
-                [view.buttonZero setTitleColor:[UIColor lightGrayColor] forState:UIControlStateNormal];
-                view.buttonZero.userInteractionEnabled = NO;
-            }
-        }
-    } failure:^(NSError *error) {
-        
-    }];
+//    Xzb_PayTypeView *view = [[Xzb_PayTypeView alloc] init];
+//    UserAccount *account = [UserAccountTool account];
+//    view.buttonZero.hidden = NO;
+//    [view.buttonZero setTitle:[NSString stringWithFormat:@"余额（¥%.2f）",[_balance floatValue]] forState:UIControlStateNormal];
+//    [RTHttpTool get:GET_ACCOUNT_MONEY addHUD:NO param:@{USERID:account.userId,TOKEN:account.loginToken} success:^(id responseObj) {
+//        id json = [RTHttpTool jsonWithResponseObj:responseObj];
+//        if ([json[SUCCESS] intValue] == 1) {
+//            _balance = json[ENTITIES][@"map"][@"available_money"];
+//            
+//            if ([_balance doubleValue] >= [_model.realPrice doubleValue]) {
+//                [view.buttonZero setTitle:[NSString stringWithFormat:@"余额（¥%.2f）",[_balance floatValue]] forState:UIControlStateNormal];
+//                [view.buttonZero setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
+//                view.buttonZero.userInteractionEnabled = YES;
+//            }else {
+//                [view.buttonZero setTitle:[NSString stringWithFormat:@"余额（¥%.2f）",[_balance floatValue]] forState:UIControlStateNormal];
+//                [view.buttonZero setTitleColor:[UIColor lightGrayColor] forState:UIControlStateNormal];
+//                view.buttonZero.userInteractionEnabled = NO;
+//            }
+//        }
+//    } failure:^(NSError *error) {
+//        
+//    }];
+//    
+//    [view.buttonZero setTitleColor:Color(68, 68, 68) forState:UIControlStateNormal];
+//    [view.buttonOne setTitle:@"支付宝支付" forState:UIControlStateNormal];
+//    [view.buttonOne setTitleColor:Color(68, 68, 68) forState:UIControlStateNormal];
+//    [view.buttonTwo setTitle:@"微信支付" forState:UIControlStateNormal];
+//    [view.buttonTwo setTitleColor:Color(68, 68, 68) forState:UIControlStateNormal];
+//    [view.cancle setTitleColor:Color(68, 68, 68) forState:UIControlStateNormal];
+//    __weak typeof(view) weakView = view;
+//    @WeakObj(self)
+//    view.balancePay = ^{ // 余额支付
+//        [weakView coverClick];
+//        if (selfWeak.orderInfo) {
+//            [selfWeak Notification];
+//        }
+//        
+//    };
+//    
+//    view.PhotoOption = ^{//支付宝
+//        [weakView coverClick];
+//        if (selfWeak.orderInfo) {
+//            [selfWeak setupAlipayWithOrderInfo:self.orderInfo];
+//        }
+//    };
+//    view.LibraryOption = ^{//微信
+//        [weakView coverClick];
+//        if ([WXApi isWXAppInstalled]) {
+//            if (selfWeak.orderInfo) {
+//                [selfWeak setupWXpayWithOrderInfo:self.orderInfo];
+//            }
+//        }else{
+//            //弹窗提示
+//            [self setupWXGoToDownload];
+//        }
+//        
+//    };
+//    
+//    [view show];
     
-    [view.buttonZero setTitleColor:Color(68, 68, 68) forState:UIControlStateNormal];
-    [view.buttonOne setTitle:@"支付宝支付" forState:UIControlStateNormal];
-    [view.buttonOne setTitleColor:Color(68, 68, 68) forState:UIControlStateNormal];
-    [view.buttonTwo setTitle:@"微信支付" forState:UIControlStateNormal];
-    [view.buttonTwo setTitleColor:Color(68, 68, 68) forState:UIControlStateNormal];
-    [view.cancle setTitleColor:Color(68, 68, 68) forState:UIControlStateNormal];
-    __weak typeof(view) weakView = view;
-    @WeakObj(self)
-    view.balancePay = ^{ // 余额支付
-        [weakView coverClick];
-        if (selfWeak.orderInfo) {
-            [selfWeak Notification];
-        }
-        
-    };
+    alert = [[CustomAlertView alloc] initWithCustomView:[self payAlertView]];
+    alert.height = 200;
+    alert.alertDuration = 0.5;
+    alert.coverAlpha = 0.5;
+    [alert show];
+}
+- (UIView *)payAlertView
+{
+    UIView *payView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, 200)];
+    payView.backgroundColor = [UIColor whiteColor];
     
-    view.PhotoOption = ^{//支付宝
-        [weakView coverClick];
-        if (selfWeak.orderInfo) {
-            [selfWeak setupAlipayWithOrderInfo:self.orderInfo];
-        }
-    };
-    view.LibraryOption = ^{//微信
-        [weakView coverClick];
-        if ([WXApi isWXAppInstalled]) {
-            if (selfWeak.orderInfo) {
-                [selfWeak setupWXpayWithOrderInfo:self.orderInfo];
-            }
-        }else{
-            //弹窗提示
-            [self setupWXGoToDownload];
-        }
-        
-    };
+    //取消按钮
+    UIButton *cancel = [[UIButton alloc] initWithFrame:CGRectMake((SCREEN_WIDTH - 50)*0.5, 0, 50, 30)];
+    [cancel addTarget:self action:@selector(cancelClicked)];
+    [cancel setImage:@"向下箭头"];
+    cancel.imageView.contentMode = UIViewContentModeCenter;
+    [payView addSubview:cancel];
     
-    [view show];
+    //文字说明
+    UILabel *tip = [[UILabel alloc] initWithFrame:CGRectMake(0, 30, SCREEN_WIDTH, 20)];
+    tip.text = @"选择付款方式";
+    tip.textAlignment = NSTextAlignmentCenter;
+    [tip setAppFontWithSize:15.0];
+    [payView addSubview:tip];
+    
+    for (int i = 0; i<3; i++) {
+        UIButton *button = [[UIButton alloc] initWithFrame:CGRectMake(SCREEN_WIDTH/3 * i, (150 - SCREEN_WIDTH/3) * 0.5, SCREEN_WIDTH/3, SCREEN_WIDTH/3 - 20)];
+        [button addTarget:self action:@selector(payClicked)];
+        button.imageView.contentMode = UIViewContentModeCenter;
+        [payView addSubview:button];
+        
+        UILabel *label = [[UILabel alloc] initWithFrame:CGRectMake(CGRectGetMaxX(button.frame), CGRectGetMaxY(button.frame), SCREEN_WIDTH/3, 20)];
+        label.textAlignment = NSTextAlignmentCenter;
+        [tip setAppFontWithSize:16.0];
+        if (i == 0) {
+            [button setImage:@"银联支付"];
+            label.text = @"银联支付";
+            //分割线
+            UIView *devider = [[UIView alloc] initWithFrame:CGRectMake(SCREEN_WIDTH/3 - 1, 0, 1, SCREEN_WIDTH/3)];
+            devider.backgroundColor = AppLightLineColor;
+            [button addSubview:devider];
+        }else if (i == 1) {
+            [button setImage:@"微信支付"];
+            label.text = @"微信";
+        }else if (i == 2) {
+            [button setImage:@"支付宝支付"];
+            label.text = @"支付宝";
+        }
+    }
+    
+    return payView;
+}
+//取消支付弹窗
+- (void)cancelClicked
+{
+    [alert coverClick];
+}
+//选择支付方式调用
+- (void)payClicked
+{
 }
 - (void)setupWXGoToDownload
 {
