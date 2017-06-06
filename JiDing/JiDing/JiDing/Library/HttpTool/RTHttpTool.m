@@ -193,140 +193,145 @@
 }
 + (id)jsonWithResponseObj:(id)response
 {
-//    NSData *data = response;
-//    id json =  [NSJSONSerialization JSONObjectWithData:data options:NSJSONReadingMutableContainers error:nil];
-    return response;
+    NSData *data = response;
+    id json =  [NSJSONSerialization JSONObjectWithData:data options:NSJSONReadingMutableContainers error:nil];
+    return json;
 }
-//+ (void)get:(NSString *)url addHUD:(BOOL)addHUD param:(NSDictionary *)param success:(void(^)(id responseObj))success failure:(void(^)(NSError *error))failure
-//{
++ (void)get:(NSString *)url addHUD:(BOOL)addHUD param:(NSDictionary *)param success:(void(^)(id responseObj))success failure:(void(^)(NSError *error))failure
+{
 //    if (addHUD) {
 //        [AppHelper showHUD:@""];
 //    }
-//    AFHTTPSessionManager *mgr = [AFHTTPSessionManager manager];
-//    mgr.requestSerializer.timeoutInterval = 30.0f;
-//    mgr.responseSerializer = [AFJSONResponseSerializer serializer];
-//    [mgr GET:url parameters:param progress:nil success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
+    AFHTTPSessionManager *mgr = [AFHTTPSessionManager manager];
+    mgr.requestSerializer.timeoutInterval = 30.0f;
+    mgr.responseSerializer = [AFJSONResponseSerializer serializer];
+//    [mgr GET:url parameters:param success:^(NSURLSessionDataTask * _Nonnull task, id  _Nonnull responseObject) {
+//        
+//    } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
+//        
+//    }];
+    [mgr GET:url parameters:param success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
 //        if(addHUD) [AppHelper removeHUD];
 //        id json = [self jsonWithResponseObj:responseObject];
 //        NSString *msg = json[MESSAGE];
 //        [self JudgeOfflineIfNeed:msg];
-//        
-//        //成功的回调
-//        if(success){
-//            success(responseObject);
-//        }
-//    } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
+        
+        //成功的回调
+        if(success){
+            success(responseObject);
+        }
+    } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
 //        if(addHUD) [AppHelper removeHUD];
-//        //失败的回调
-//        if(failure){
-//            failure(error);
-//        }
-//        [[Toast makeText:@"访问服务器出错了~~"] show];
-//    }];
-//}
-//+ (void)post:(NSString *)url addHUD:(BOOL)addHUD param:(NSDictionary *)param success:(void(^)(id responseObj))success failure:(void(^)(NSError *error))failure
-//{
+        //失败的回调
+        if(failure){
+            failure(error);
+        }
+        [[Toast makeText:@"访问服务器出错了~~"] show];
+    }];
+}
++ (void)post:(NSString *)url addHUD:(BOOL)addHUD param:(NSDictionary *)param success:(void(^)(id responseObj))success failure:(void(^)(NSError *error))failure
+{
 //    if (addHUD) {
 //        [AppHelper showHUD:@""];
 //    }
-//    AFHTTPSessionManager *mgr = [AFHTTPSessionManager manager];
-//    //申明返回的结果是json类型
-//    mgr.responseSerializer = [AFJSONResponseSerializer serializer];
-//    mgr.requestSerializer.timeoutInterval = 30.0f;
-////    mgr.requestSerializer = [AFJSONRequestSerializer serializer];
-//    
-//    [mgr POST:url parameters:param progress:nil success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
-//        if(addHUD) [AppHelper removeHUD];
-//        NSString *msg = responseObject[MESSAGE];
-//        [self JudgeOfflineIfNeed:msg];
-//        
-//        //成功的回调
-//        if(success){
-//            success(responseObject);
-//        }
-//    } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
-//        if(addHUD) [AppHelper removeHUD];
-//        //失败的回调
-//        if(failure){
-//            failure(error);
-//        }
-//        [[Toast makeText:@"访问服务器出错了~~"] show];
-//    }];
-//}
-//+ (void)post:(NSString *)url addHUD:(BOOL)addHUD param:(NSDictionary *)param dataBlock:(UIImage *)image fileName:(NSString *)fileName success:(void (^)(id responseObject))success failure:(void (^)(NSError *error))failure
-//{
-//    if (addHUD) {
-//        [AppHelper showHUD:@""];
-//    }
-//    AFHTTPSessionManager *mgr = [AFHTTPSessionManager manager];
+    AFHTTPSessionManager *mgr = [AFHTTPSessionManager manager];
+    //申明返回的结果是json类型
+    mgr.responseSerializer = [AFJSONResponseSerializer serializer];
+    mgr.requestSerializer.timeoutInterval = 30.0f;
 //    mgr.requestSerializer = [AFJSONRequestSerializer serializer];
-//    mgr.requestSerializer.timeoutInterval = 30.0f;
-//    mgr.responseSerializer = [AFJSONResponseSerializer serializer];
-//    [mgr POST:url parameters:param constructingBodyWithBlock:^(id<AFMultipartFormData>  _Nonnull formData) {
-//        for(NSString *key in param.mj_keyValues)
-//        {
-//            NSString *value = [param objectForKey:key];
-//            NSData* userIdData = [value dataUsingEncoding:NSUTF8StringEncoding];
-//            [formData appendPartWithFormData:userIdData name:key];
-//        }
-//        NSData *data = UIImageJPEGRepresentation(image, 0.5);
-//        [formData appendPartWithFileData:data name:@"photo.jpg" fileName:fileName mimeType:@"binary/octet-stream"];
-//    } progress:nil success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
+    
+    [mgr POST:url parameters:param success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
 //        if(addHUD) [AppHelper removeHUD];
 //        NSString *msg = responseObject[MESSAGE];
 //        [self JudgeOfflineIfNeed:msg];
-//        
-//        if (success) {
-//            success(responseObject);
-//        }
-//    } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
+        
+        //成功的回调
+        if(success){
+            success(responseObject);
+        }
+    } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
 //        if(addHUD) [AppHelper removeHUD];
-//        if (failure) {
-//            failure(error);
-//        }
-//        [[Toast makeText:@"访问服务器出错了~~"] show];
-//    }];
-//}
-//+ (void)post:(NSString *)url addHUD:(BOOL)addHUD param:(NSDictionary *)param dataArray:(NSArray *)array fileName:(NSString *)fileName success:(void (^)(id))success failure:(void (^)(NSError *))failure
-//{
+        //失败的回调
+        if(failure){
+            failure(error);
+        }
+        [[Toast makeText:@"访问服务器出错了~~"] show];
+    }];
+}
++ (void)post:(NSString *)url addHUD:(BOOL)addHUD param:(NSDictionary *)param dataBlock:(UIImage *)image fileName:(NSString *)fileName success:(void (^)(id responseObject))success failure:(void (^)(NSError *error))failure
+{
 //    if (addHUD) {
 //        [AppHelper showHUD:@""];
 //    }
-//    AFHTTPSessionManager *mgr = [AFHTTPSessionManager manager];
-//    mgr.requestSerializer = [AFJSONRequestSerializer serializer];
-//    mgr.requestSerializer.timeoutInterval = 30.0f;
-//    mgr.responseSerializer = [AFJSONResponseSerializer serializer];
-//    
-//    [mgr POST:url parameters:param constructingBodyWithBlock:^(id<AFMultipartFormData>  _Nonnull formData) {
-//        for (int i = 0; i < array.count; i++)
-//        {
-//            //UIimage对象=》NSData数据（进行图片压缩）
-//            UIImage *img = array[i];
-//            NSData *data = UIImageJPEGRepresentation(img, 0.5);
-//            
-//            //给上传的每一张图片定义不同文件名
-//            NSString *fileNames = [NSString stringWithFormat:@"%@_%d.png",fileName,i+1];
-//            
-//            //将当前图片的NSData数据添加formData
-//            [formData appendPartWithFileData:data name:[NSString stringWithFormat:@"photo_%d.jpg",i] fileName:fileNames mimeType:@"binary/octet-stream"];
-//            //image/png   binary/octet-stream
-//        }
-//    } progress:nil success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
+    AFHTTPSessionManager *mgr = [AFHTTPSessionManager manager];
+    mgr.requestSerializer = [AFJSONRequestSerializer serializer];
+    mgr.requestSerializer.timeoutInterval = 30.0f;
+    mgr.responseSerializer = [AFJSONResponseSerializer serializer];
+    [mgr POST:url parameters:param constructingBodyWithBlock:^(id<AFMultipartFormData>  _Nonnull formData) {
+        for(NSString *key in param.mj_keyValues)
+        {
+            NSString *value = [param objectForKey:key];
+            NSData* userIdData = [value dataUsingEncoding:NSUTF8StringEncoding];
+            [formData appendPartWithFormData:userIdData name:key];
+        }
+        NSData *data = UIImageJPEGRepresentation(image, 0.5);
+        [formData appendPartWithFileData:data name:@"photo.jpg" fileName:fileName mimeType:@"binary/octet-stream"];
+    } success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
 //        if(addHUD) [AppHelper removeHUD];
 //        NSString *msg = responseObject[MESSAGE];
 //        [self JudgeOfflineIfNeed:msg];
-//        
-//        if (success) {
-//            success(responseObject);
-//        }
-//    } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
+        
+        if (success) {
+            success(responseObject);
+        }
+    } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
 //        if(addHUD) [AppHelper removeHUD];
-//        if (failure) {
-//            failure(error);
-//        }
-//        [[Toast makeText:@"访问服务器出错了~~"] show];
-//    }];
-//}
+        if (failure) {
+            failure(error);
+        }
+        [[Toast makeText:@"访问服务器出错了~~"] show];
+    }];
+}
++ (void)post:(NSString *)url addHUD:(BOOL)addHUD param:(NSDictionary *)param dataArray:(NSArray *)array fileName:(NSString *)fileName success:(void (^)(id))success failure:(void (^)(NSError *))failure
+{
+//    if (addHUD) {
+//        [AppHelper showHUD:@""];
+//    }
+    AFHTTPSessionManager *mgr = [AFHTTPSessionManager manager];
+    mgr.requestSerializer = [AFJSONRequestSerializer serializer];
+    mgr.requestSerializer.timeoutInterval = 30.0f;
+    mgr.responseSerializer = [AFJSONResponseSerializer serializer];
+    
+    [mgr POST:url parameters:param constructingBodyWithBlock:^(id<AFMultipartFormData>  _Nonnull formData) {
+        for (int i = 0; i < array.count; i++)
+        {
+            //UIimage对象=》NSData数据（进行图片压缩）
+            UIImage *img = array[i];
+            NSData *data = UIImageJPEGRepresentation(img, 0.5);
+            
+            //给上传的每一张图片定义不同文件名
+            NSString *fileNames = [NSString stringWithFormat:@"%@_%d.png",fileName,i+1];
+            
+            //将当前图片的NSData数据添加formData
+            [formData appendPartWithFileData:data name:[NSString stringWithFormat:@"photo_%d.jpg",i] fileName:fileNames mimeType:@"binary/octet-stream"];
+            //image/png   binary/octet-stream
+        }
+    } success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
+//        if(addHUD) [AppHelper removeHUD];
+//        NSString *msg = responseObject[MESSAGE];
+//        [self JudgeOfflineIfNeed:msg];
+        
+        if (success) {
+            success(responseObject);
+        }
+    } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
+//        if(addHUD) [AppHelper removeHUD];
+        if (failure) {
+            failure(error);
+        }
+        [[Toast makeText:@"访问服务器出错了~~"] show];
+    }];
+}
 + (void)JudgeOfflineIfNeed:(NSString *)msg
 {
     if ([msg isEqualToString:@"无效token"]) {

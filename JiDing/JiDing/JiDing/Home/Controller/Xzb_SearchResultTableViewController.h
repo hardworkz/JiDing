@@ -8,7 +8,7 @@
 
 #import <UIKit/UIKit.h>
 
-@interface Xzb_SearchResultTableViewController : RootTableViewController
+@interface Xzb_SearchResultTableViewController : RootViewController
 @property (nonatomic,strong) NSString *orderID;
 @property (nonatomic,strong) NSMutableArray *dataArray;
 @property (nonatomic,strong) NSString *addressTimeTypeString;

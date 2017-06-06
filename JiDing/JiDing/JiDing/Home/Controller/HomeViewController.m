@@ -68,9 +68,14 @@ typedef NS_ENUM(NSUInteger, SelectedHomeType) {
 @property (assign, nonatomic) BOOL isCompleteTypeAnimation;
 
 @property (strong, nonatomic) NSMutableArray *typeArray;
+@property (strong, nonatomic) NSMutableArray *typeImageViewArray;
+@property (strong, nonatomic) NSMutableArray *typeLabelArray;
 @property (strong, nonatomic) NSMutableArray *roomTypeArray;
+
 @property (strong, nonatomic) NSMutableArray *typeDataArray;
 @property (strong, nonatomic) NSMutableArray *roomTypeDataArray;
+@property (strong, nonatomic) NSMutableArray *ktvDataArray;
+@property (strong, nonatomic) NSMutableArray *ktvTypeDataArray;
 /*
  * 选中的类型
  */
@@ -92,6 +97,12 @@ typedef NS_ENUM(NSUInteger, SelectedHomeType) {
  */
 @property (nonatomic,assign)  CLLocationDegrees lon;
 @property (nonatomic,assign)  CLLocationDegrees lat;
+/**
+ *  酒店类型图标名称
+ */
+/**
+ *  KTV类型图标名称
+ */
 @end
 
 @implementation HomeViewController
@@ -130,6 +141,20 @@ typedef NS_ENUM(NSUInteger, SelectedHomeType) {
     }
     return _typeArray;
 }
+- (NSMutableArray *)typeImageViewArray
+{
+    if (_typeImageViewArray == nil) {
+        _typeImageViewArray = [NSMutableArray array];
+    }
+    return _typeImageViewArray;
+}
+- (NSMutableArray *)typeLabelArray
+{
+    if (_typeLabelArray == nil) {
+        _typeLabelArray = [NSMutableArray array];
+    }
+    return _typeLabelArray;
+}
 - (NSMutableArray *)roomTypeArray
 {
     if (_roomTypeArray == nil) {
@@ -152,6 +177,22 @@ typedef NS_ENUM(NSUInteger, SelectedHomeType) {
         _roomTypeDataArray = (NSMutableArray *)@[@"标准房",@"大床房",@"双人房"];
     }
     return _roomTypeDataArray;
+}
+- (NSMutableArray *)ktvDataArray
+{
+    if (_ktvDataArray == nil) {
+        _ktvDataArray = [NSMutableArray array];
+        _ktvDataArray = (NSMutableArray *)@[@"小包",@"中包",@"大包"];
+    }
+    return _ktvDataArray;
+}
+- (NSMutableArray *)ktvTypeDataArray
+{
+    if (_ktvTypeDataArray == nil) {
+        _ktvTypeDataArray = [NSMutableArray array];
+        _ktvTypeDataArray = (NSMutableArray *)@[@"小包厢",@"中包厢",@"大包厢"];
+    }
+    return _ktvTypeDataArray;
 }
 #pragma mark - 首页开合控件
 - (UIView *)screenView
@@ -342,17 +383,36 @@ typedef NS_ENUM(NSUInteger, SelectedHomeType) {
 {
     if (self.isCompleteAnimation) {
         [self animationClose:nil];
+        [self back];
     }
 }
 #pragma mark - action
 - (void)select_hotel
 {
+    //更新为酒店数据
     self.title = @"酒店";
+    for (int i = 0;i<self.typeImageViewArray.count;i++) {
+        UIImageView *imageView = self.typeImageViewArray[i];
+        imageView.image = [UIImage imageNamed:self.typeDataArray[i]];
+        UILabel *typeLabel = self.typeLabelArray[i];
+        typeLabel.text = self.typeDataArray[i];
+        UIButton *roomBtn = self.roomTypeArray[i];
+        [roomBtn setTitle:self.roomTypeDataArray[i]];
+    }
     [self animationOpen:nil];
 }
 - (void)select_ktv
 {
+    //更新为KTV数据
     self.title = @"KTV";
+    for (int i = 0;i<self.typeImageViewArray.count;i++) {
+        UIImageView *imageView = self.typeImageViewArray[i];
+        imageView.image = [UIImage imageNamed:self.ktvDataArray[i]];
+        UILabel *typeLabel = self.typeLabelArray[i];
+        typeLabel.text = self.ktvDataArray[i];
+        UIButton *roomBtn = self.roomTypeArray[i];
+        [roomBtn setTitle:self.ktvTypeDataArray[i]];
+    }
     [self animationOpen:nil];
 }
 /*
@@ -360,7 +420,30 @@ typedef NS_ENUM(NSUInteger, SelectedHomeType) {
  */
 - (void)next
 {
+    Xzb_SearchResultTableViewController *result = [[Xzb_SearchResultTableViewController alloc] init];
     
+    
+    HotelOfferModel *model = [HotelOfferModel mj_objectWithKeyValues:@{@"ylocation":@"118.181564"
+                                                                       ,@"timePeriod":@0
+                                                                       ,@"orderType":@"1"
+                                                                       ,@"countDown":@5
+                                                                       ,@"image":@"user5-128x128.png"
+                                                                       ,@"roomId":@136
+                                                                       ,@"hotelId":@80
+                                                                       ,@"distance":@1.13
+                                                                       ,@"level":@"4"
+                                                                       ,@"price":@"0.02"
+                                                                       ,@"xlocation":@"24.488284"
+                                                                       ,@"roomType":@"2"
+                                                                       ,@"orderRelId":@28468
+                                                                       ,@"name":@"%E4%BD%B0%E7%BF%94%E8%BD%AF%E4%BB%B6%E5%9B%AD%E9%85%92%E5%BA%97"
+                                                                       ,@"payType":@"1"
+                                                                       ,@"appraise":@90
+                                                                       }];
+    NSMutableArray *array = [NSMutableArray array];
+    [array addObject:model];
+    result.dataArray = array;
+    [self.navigationController pushViewController:result animated:YES];
 }
 
 /*
@@ -443,15 +526,19 @@ typedef NS_ENUM(NSUInteger, SelectedHomeType) {
         self.selectedImageViewVF = imageView.frame;
         self.selectedTypeLabelVF = typeLabel.frame;
         
-        for (UIView *typeView in self.typeArray) {
-            if ([typeView isEqual:typeV]) {//如果为当前选中uiview则不隐藏
-                typeView.hidden = NO;
-            }else{
-                typeView.hidden = YES;
+        
+        [UIView animateWithDuration:0.35 animations:^{
+            for (UIView *typeView in self.typeArray) {
+                if ([typeView isEqual:typeV]) {//如果为当前选中uiview则不隐藏
+                    typeView.alpha = 1.0;
+                }else{
+                    typeView.alpha = 0;
+                }
             }
-        }
-        [UIView animateWithDuration:0.75 animations:^{
-            
+            self.devider.alpha = 1.0;
+            for (UIButton *button in self.roomTypeArray) {
+                button.alpha = 1.0;
+            }
             _backBtn.alpha = 1.0;
             
             typeV.frame = CGRectMake(10, 0, SCREEN_WIDTH - 20, 200);
@@ -462,11 +549,6 @@ typedef NS_ENUM(NSUInteger, SelectedHomeType) {
             self.isCompleteTypeAnimation = NO;
             typeV.userInteractionEnabled = NO;
             
-            self.devider.hidden = NO;
-            for (UIButton *button in self.roomTypeArray) {
-                button.hidden = NO;
-            }
-
         }];
     }
 }
@@ -477,15 +559,20 @@ typedef NS_ENUM(NSUInteger, SelectedHomeType) {
 {
     if (!self.isCompleteTypeAnimation) {
         
-        self.devider.hidden = YES;
         
-        for (UIButton *button in self.roomTypeArray) {
-            button.hidden = YES;
-        }
+        
         self.selectedTypeV.layer.borderColor = AppLightGrayLineColor.CGColor;
-        [UIView animateWithDuration:0.75 animations:^{
+        [UIView animateWithDuration:0.35 animations:^{
             
+            self.devider.alpha = 0;
+            for (UIButton *button in self.roomTypeArray) {
+                button.alpha = 0;
+            }
             _backBtn.alpha = 0.0;
+            
+            for (UIView *typeV in self.typeArray) {
+                typeV.alpha = 1.0;
+            }
             self.selectedTypeV.frame = self.selectedTypeVF;
             self.selectedImageViewV.frame = self.selectedImageViewVF;
             self.selectedTypeLabelV.frame = self.selectedTypeLabelVF;
@@ -494,9 +581,7 @@ typedef NS_ENUM(NSUInteger, SelectedHomeType) {
             self.isCompleteTypeAnimation = YES;
             self.selectedTypeV.userInteractionEnabled = YES;
             
-            for (UIView *typeV in self.typeArray) {
-                typeV.hidden = NO;
-            }
+            
         }];
     }
 }
@@ -533,9 +618,9 @@ typedef NS_ENUM(NSUInteger, SelectedHomeType) {
     [_CLLocationManager startUpdatingLocation];
 }
 /*
- * 弹出日期选择器
+ * 弹出开始日期选择器
  */
-- (void)tapDateView
+- (void)tapStarDate
 {
     NSDate *date = [NSDate date];
 //    XHDatePickerView *datepicker = [[XHDatePickerView alloc] initWithCurrentDate:date CompleteBlock:^(NSDate *startDate, NSDate *endDate) {
@@ -550,11 +635,37 @@ typedef NS_ENUM(NSUInteger, SelectedHomeType) {
 //        self.endtimeText.text = [endDate stringWithFormat:@"yyyy-MM-dd HH:mm"];
     }];
 //    NSDate *lastDay = [NSDate dateWithTimeInterval:-24*60*60 sinceDate:date];//前一天
-    NSDate *nextDay = [NSDate dateWithTimeInterval:365*24*60*60 sinceDate:date];//后一天
+    NSDate *nextDay = [NSDate dateWithTimeInterval:365*24*60*60 sinceDate:date];//后一年
     datepicker.datePickerStyle = DateStyleShowYearMonthDay;
     datepicker.dateType = DateTypeStartDate;
     datepicker.minLimitDate = [NSDate date];
     datepicker.maxLimitDate = nextDay;
+    [datepicker show];
+}
+/*
+ * 弹出开始日期选择器
+ */
+- (void)tapEndDate
+{
+    NSDate *date = [NSDate date];
+    //    XHDatePickerView *datepicker = [[XHDatePickerView alloc] initWithCurrentDate:date CompleteBlock:^(NSDate *startDate, NSDate *endDate) {
+    //        NSLog(@"\n开始时间： %@，结束时间：%@",startDate,endDate);
+    ////        self.startTimeText.text = [startDate stringWithFormat:@"yyyy-MM-dd HH:mm"];
+    ////        self.endtimeText.text = [endDate stringWithFormat:@"yyyy-MM-dd HH:mm"];
+    //    }];
+    
+    XHDatePickerView *datepicker = [[XHDatePickerView alloc] initWithCompleteBlock:^(NSDate *startDate,NSDate *endDate) {
+        NSLog(@"\n开始时间： %@，结束时间：%@",startDate,endDate);
+        //        self.startTimeText.text = [startDate stringWithFormat:@"yyyy-MM-dd HH:mm"];
+        //        self.endtimeText.text = [endDate stringWithFormat:@"yyyy-MM-dd HH:mm"];
+    }];
+    //    NSDate *lastDay = [NSDate dateWithTimeInterval:-24*60*60 sinceDate:date];//前一天
+    NSDate *nextDay = [NSDate dateWithTimeInterval:24*60*60 sinceDate:date];//后一天
+    NSDate *nextYear = [NSDate dateWithTimeInterval:365*24*60*60 sinceDate:date];//后一年
+    datepicker.datePickerStyle = DateStyleShowYearMonthDay;
+    datepicker.dateType = DateTypeEndDate;
+    datepicker.minLimitDate = nextDay;
+    datepicker.maxLimitDate = nextYear;
     [datepicker show];
 }
 #pragma mark - 人数，房间数加减action
@@ -665,7 +776,7 @@ typedef NS_ENUM(NSUInteger, SelectedHomeType) {
         
     }else{//当前为房间人数
         if ([roomNumberLabel.text intValue] <= 1) {
-            XWAlerLoginView *xw = [[XWAlerLoginView alloc]initWithTitle:@"最少为1"];
+            XWAlerLoginView *xw = [[XWAlerLoginView alloc]initWithTitle:@"不能再减了~"];
             [xw show];
             return;
         }
@@ -716,8 +827,7 @@ typedef NS_ENUM(NSUInteger, SelectedHomeType) {
     
     _backBtn = [[UIButton alloc] initWithFrame:CGRectMake((SCREEN_WIDTH - 50) * 0.5 - 100, SCREEN_HEIGHT - 50 - 10 - 64, 50, 50)];
     _backBtn.alpha = 0.0;
-    _backBtn.backgroundColor = [UIColor redColor];
-    [_backBtn setImage:@""];
+    [_backBtn setImage:@"上一步"];
     [_backBtn addTarget:self action:@selector(back)];
     [self.view addSubview:_backBtn];
 }
@@ -770,7 +880,7 @@ typedef NS_ENUM(NSUInteger, SelectedHomeType) {
     
     UITapGestureRecognizer *myAddressTap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(myAddressTap)];
     
-    UITapGestureRecognizer *addressIconTwoViewTap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(myAddressTap)];
+//    UITapGestureRecognizer *addressIconTwoViewTap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(myAddressTap)];
     
     UILabel *myAddress = [[UILabel alloc] init];
     myAddress.text = @"我的位置";
@@ -801,11 +911,10 @@ typedef NS_ENUM(NSUInteger, SelectedHomeType) {
  */
 - (UIView *)setupDateView:(UIView *)locationView
 {
-    UITapGestureRecognizer *tapDate = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(tapDateView)];
+    UITapGestureRecognizer *tapStarDate = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(tapStarDate)];
+    UITapGestureRecognizer *tapEndDate = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(tapEndDate)];
     UIView *dateView = [[UIView alloc] init];
     dateView.frame = CGRectMake(0, CGRectGetMaxY(locationView.frame), SCREEN_WIDTH, 70);
-    dateView.userInteractionEnabled = YES;
-    [dateView addGestureRecognizer:tapDate];
     [self.view addSubview:dateView];
     
     UIImageView *clockImage = [[UIImageView alloc] init];
@@ -815,6 +924,8 @@ typedef NS_ENUM(NSUInteger, SelectedHomeType) {
     [dateView addSubview:clockImage];
     
     UILabel *starDate = [[UILabel alloc] init];
+    starDate.userInteractionEnabled = YES;
+    [starDate addGestureRecognizer:tapStarDate];
     starDate.text = @"入住\n2016年8月16日";
     starDate.textAlignment = NSTextAlignmentCenter;
     starDate.userInteractionEnabled = YES;
@@ -831,6 +942,8 @@ typedef NS_ENUM(NSUInteger, SelectedHomeType) {
     [dateView addSubview:slash];
 
     UILabel *endDate = [[UILabel alloc] init];
+    endDate.userInteractionEnabled = YES;
+    [endDate addGestureRecognizer:tapEndDate];
     endDate.text = @"入住\n2016年8月16日";
     endDate.textAlignment = NSTextAlignmentCenter;
     endDate.userInteractionEnabled = YES;
@@ -960,17 +1073,18 @@ typedef NS_ENUM(NSUInteger, SelectedHomeType) {
         
         UIView *typeV = [[UIButton alloc] initWithFrame:CGRectMake(10 + i*((SCREEN_WIDTH - 40)/3 + 10), 0, (SCREEN_WIDTH - 40)/3, 90)];
         typeV.layer.cornerRadius = 5;
-        typeV.layer.borderWidth = 1;
+        typeV.layer.borderWidth = 0.5;
         typeV.layer.borderColor = AppLightGrayLineColor.CGColor;
         [typeView addSubview:typeV];
         typeV.userInteractionEnabled = YES;
         [typeV addGestureRecognizer:typeTap];
         [self.typeArray addObject:typeV];
         
-        UIImageView * imageView = [[UIImageView alloc] initWithFrame:CGRectMake(((SCREEN_WIDTH - 40)/3 - 30)*0.5, 10, 30, 30)];
+        UIImageView * imageView = [[UIImageView alloc] initWithFrame:CGRectMake(((SCREEN_WIDTH - 40)/3 - 40)*0.5, 10, 40, 40)];
         imageView.contentMode = UIViewContentModeCenter;
-        imageView.backgroundColor = [UIColor redColor];
+        imageView.image = [UIImage imageNamed:self.typeDataArray[i]];
         [typeV addSubview:imageView];
+        [self.typeImageViewArray addObject:imageView];
         
         UILabel *typeLabel = [[UILabel alloc] initWithFrame:CGRectMake(0, 45, (SCREEN_WIDTH - 40)/3, 30)];
         typeLabel.textAlignment = NSTextAlignmentCenter;
@@ -979,12 +1093,12 @@ typedef NS_ENUM(NSUInteger, SelectedHomeType) {
         typeLabel.textColor = AppDeepGrayTextColor;
         [typeLabel setAppFontWithSize:16];
         [typeV addSubview:typeLabel];
-        
+        [self.typeLabelArray addObject:typeLabel];
         
     }
     
     UIView *devider = [[UIView alloc] initWithFrame:CGRectMake(20, 90, SCREEN_WIDTH - 60, 0.5)];
-    devider.hidden = YES;
+    devider.alpha = 0.0;
     devider.backgroundColor = AppLightGrayLineColor;
     [typeView addSubview:devider];
     self.devider = devider;
@@ -996,7 +1110,7 @@ typedef NS_ENUM(NSUInteger, SelectedHomeType) {
         [button addTarget:self action:@selector(roomTypeSelected:)];
         [button.titleLabel setAppFontWithSize:15];
         [button setTitleColor:AppDeepGrayTextColor forState:UIControlStateSelected];
-        button.hidden = YES;
+        button.alpha = 0.0;
         if (i == 0) {
             button.selected = YES;
         }

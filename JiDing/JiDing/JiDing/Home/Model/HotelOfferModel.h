@@ -28,7 +28,7 @@
  }
  */
 @interface HotelOfferModel : NSObject
-@property (nonatomic,strong) NSNumber *hotelId;/**<酒店ID*/
+@property (nonatomic,strong) NSString *hotelId;/**<酒店ID*/
 @property (nonatomic,strong) NSString *name;/**<酒店名称*/
 @property (nonatomic,strong) NSString *image;/**<酒店图片*/
 @property (nonatomic,strong) NSString *appraise;/**<酒店好评率*/

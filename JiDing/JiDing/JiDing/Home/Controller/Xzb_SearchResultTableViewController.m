@@ -9,16 +9,17 @@
 #import "Xzb_SearchResultTableViewController.h"
 
 #define pageSize 5
-@interface Xzb_SearchResultTableViewController ()<DQAlertViewDelegate>
+@interface Xzb_SearchResultTableViewController ()<DQAlertViewDelegate,UITableViewDelegate,UITableViewDataSource>
 //@property (nonatomic,weak)  ADView *adView;
 @property (nonatomic,strong) NSMutableArray *allCellArray;
 @property (nonatomic,strong) NSMutableArray *indexPathArray;
 @property (nonatomic,strong) NSMutableArray *showDataArray;
 @property (nonatomic,assign)  NSInteger page;
+@property (strong, nonatomic) UITableView *tableView;
 @end
 
 @implementation Xzb_SearchResultTableViewController
-- (NSArray *)showDataArray
+- (NSMutableArray *)showDataArray
 {
     if (_showDataArray == nil) {
         _showDataArray = [NSMutableArray array];
@@ -87,13 +88,17 @@
     
     @WeakObj(self);
     
+    self.tableView = [[UITableView alloc] initWithFrame:self.view.bounds];
     self.tableView.mj_footer = [MJRefreshBackNormalFooter footerWithRefreshingBlock:^{
         [selfWeak refreshDataWithPage:selfWeak.page];
     }];
     self.tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
-    self.tableView.contentInset = UIEdgeInsetsMake(0, 0, 10, 0);
+//    self.tableView.contentInset = UIEdgeInsetsMake(0, 0, 10, 0);
     self.tableView.backgroundColor = AppLightLineColor;
     self.tableView.scrollsToTop = YES;
+    self.tableView.delegate = self;
+    self.tableView.dataSource = self;
+    [self.view addSubview:self.tableView];
     //设置广告头部
 //    [self setupHeaderView];
     //设置广告数据
@@ -167,7 +172,7 @@
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    return 320;
+    return SCREEN_WIDTH * 3/5;
 }
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {

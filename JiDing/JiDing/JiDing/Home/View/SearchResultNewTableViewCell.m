@@ -42,7 +42,7 @@
     if (self = [super initWithStyle:style reuseIdentifier:reuseIdentifier]) {
         //酒店图片
         UIImageView *hotelImageView = [[UIImageView alloc] init];
-        hotelImageView.frame = CGRectMake(0, 0, SCREEN_Width,225);
+        hotelImageView.frame = CGRectMake(0, 0, SCREEN_Width,SCREEN_WIDTH * 3/5);
         hotelImageView.contentMode = UIViewContentModeScaleAspectFill;
         hotelImageView.clipsToBounds = YES;
         [self.contentView addSubview:hotelImageView];
@@ -54,26 +54,27 @@
         [hotelImageView addSubview:imageCover];
         //付款倒计时
         UIButton *payCountDownBtn = [[UIButton alloc] init];
-        [payCountDownBtn setImage:[UIImage imageNamed:@"报价列表时钟"] forState:UIControlStateNormal];
+        [payCountDownBtn setImage:[UIImage imageNamed:@"酒店列表时间图标"] forState:UIControlStateNormal];
         payCountDownBtn.titleEdgeInsets = UIEdgeInsetsMake(0, 10, 0, 0);
         [payCountDownBtn setTitle:@"00:00" forState:UIControlStateNormal];
         payCountDownBtn.titleLabel.font = [UIFont systemFontOfSize:14];
         [payCountDownBtn setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
-        payCountDownBtn.frame = CGRectMake(SCREEN_WIDTH - 80 - 10, 40, 80, 40);
+        payCountDownBtn.frame = CGRectMake(SCREEN_WIDTH - 80 - 5, 40, 80, 40);
         [imageCover addSubview:payCountDownBtn];
         self.payCountDownBtn = payCountDownBtn;
         //价格
         UILabel *priceLabel = [[UILabel alloc] init];
         priceLabel.textColor = [UIColor whiteColor];
-        priceLabel.font = [UIFont systemFontOfSize:20];
+        priceLabel.font = [UIFont systemFontOfSize:25];
         priceLabel.textAlignment = NSTextAlignmentRight;
-        priceLabel.frame = CGRectMake(SCREEN_Width - (SCREEN_Width * 0.5) - 10, 0, SCREEN_Width * 0.5, 40);
+        priceLabel.frame = CGRectMake(SCREEN_Width - (SCREEN_Width * 0.5) - 10, 5, SCREEN_Width * 0.5, 40);
         priceLabel.textAlignment = NSTextAlignmentRight;
         [imageCover addSubview:priceLabel];
         self.priceLabel = priceLabel;
         //酒店名称
         UILabel *hotelNameLabel = [[UILabel alloc] init];
         hotelNameLabel.frame = CGRectMake(10, 40, SCREEN_Width * 0.5, 40);
+        hotelNameLabel.textColor = [UIColor whiteColor];
         hotelNameLabel.textAlignment = NSTextAlignmentLeft;
         hotelNameLabel.font = [UIFont systemFontOfSize:20];
         [imageCover addSubview:hotelNameLabel];

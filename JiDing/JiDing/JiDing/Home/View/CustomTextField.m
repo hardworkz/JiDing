@@ -24,7 +24,7 @@
     //CGContextSetFillColorWithColor(context, [UIColor yellowColor].CGColor);
     [AppMainColor setFill];
     
-    [[self placeholder] drawInRect:rect withAttributes:@{NSFontAttributeName:[UIFont systemFontOfSize:14],NSForegroundColorAttributeName:[UIColor lightGrayColor]}];
+    [[self placeholder] drawInRect:rect withAttributes:@{NSFontAttributeName:[UIFont systemFontOfSize:14],NSForegroundColorAttributeName:[UIColor whiteColor]}];
 }
 
 @end
