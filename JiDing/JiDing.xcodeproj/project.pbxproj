@@ -208,6 +208,7 @@
 		7412F43E1EE296EF00744C86 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7412F43D1EE296EF00744C86 /* Foundation.framework */; };
 		7412F4401EE296FB00744C86 /* CFNetwork.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7412F43F1EE296FB00744C86 /* CFNetwork.framework */; };
 		7412F4421EE2970300744C86 /* CoreMotion.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7412F4411EE2970300744C86 /* CoreMotion.framework */; };
+		7414CFED1EE6F90200AB096C /* CustomRadioView.m in Sources */ = {isa = PBXBuildFile; fileRef = 7414CFEC1EE6F90200AB096C /* CustomRadioView.m */; };
 		744F9FD31EE02E9C0007E53D /* Xzb_MapViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 744F9FD21EE02E9C0007E53D /* Xzb_MapViewController.m */; };
 		744F9FDB1EE02F680007E53D /* CustomTextField.m in Sources */ = {isa = PBXBuildFile; fileRef = 744F9FDA1EE02F680007E53D /* CustomTextField.m */; };
 		744F9FDE1EE02FE70007E53D /* Xzb_OpenCityModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 744F9FDD1EE02FE70007E53D /* Xzb_OpenCityModel.m */; };
@@ -696,6 +697,8 @@
 		7412F43D1EE296EF00744C86 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		7412F43F1EE296FB00744C86 /* CFNetwork.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CFNetwork.framework; path = System/Library/Frameworks/CFNetwork.framework; sourceTree = SDKROOT; };
 		7412F4411EE2970300744C86 /* CoreMotion.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreMotion.framework; path = System/Library/Frameworks/CoreMotion.framework; sourceTree = SDKROOT; };
+		7414CFEB1EE6F90200AB096C /* CustomRadioView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CustomRadioView.h; sourceTree = "<group>"; };
+		7414CFEC1EE6F90200AB096C /* CustomRadioView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CustomRadioView.m; sourceTree = "<group>"; };
 		744F9FD11EE02E9C0007E53D /* Xzb_MapViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Xzb_MapViewController.h; sourceTree = "<group>"; };
 		744F9FD21EE02E9C0007E53D /* Xzb_MapViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Xzb_MapViewController.m; sourceTree = "<group>"; };
 		744F9FD91EE02F680007E53D /* CustomTextField.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CustomTextField.h; sourceTree = "<group>"; };
@@ -1613,6 +1616,8 @@
 		744F9FD81EE02F590007E53D /* View */ = {
 			isa = PBXGroup;
 			children = (
+				7414CFEB1EE6F90200AB096C /* CustomRadioView.h */,
+				7414CFEC1EE6F90200AB096C /* CustomRadioView.m */,
 				7412F39A1EE2588800744C86 /* HotelDetailCells */,
 				7412F3AC1EE2588800744C86 /* OrderDetailCells */,
 				7412F2F01EE24E9E00744C86 /* fillOrderCells */,
@@ -2077,6 +2082,7 @@
 				749921701EDBDAF700459E5C /* RTHttpTool.m in Sources */,
 				6983A1A01ED967BF0032CF36 /* DQAlertView.m in Sources */,
 				699381DA1EDFA61900BD2319 /* DJCameraViewController.m in Sources */,
+				7414CFED1EE6F90200AB096C /* CustomRadioView.m in Sources */,
 				699381661EDFA3C700BD2319 /* STPhotoBrowserView.m in Sources */,
 				7412F3BE1EE2588800744C86 /* PageTypeTwoTableViewCell.m in Sources */,
 				7412F3C41EE2588800744C86 /* Xzb_OrderDetailCell.m in Sources */,
