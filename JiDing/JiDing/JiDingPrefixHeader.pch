@@ -67,6 +67,7 @@
 
 #define AppLightGrayLineColor HEXCOLOR(0xAAAAAA)
 #define AppLineColor HEXCOLOR(0x333333)
+#define AppLineTwoColor HEXCOLOR(0xe3e3e3)
 #define AppLightLineColor HEXCOLOR(0xf9f9f9)
 
 #define AppGreenTextColor HEXCOLOR(0x13D0AB)

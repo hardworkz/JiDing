@@ -12,6 +12,7 @@
 		6983A19B1ED966FD0032CF36 /* SettingCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 6983A19A1ED966FD0032CF36 /* SettingCell.m */; };
 		6983A1A01ED967BF0032CF36 /* DQAlertView.m in Sources */ = {isa = PBXBuildFile; fileRef = 6983A19F1ED967BF0032CF36 /* DQAlertView.m */; };
 		6983A1A51ED96A3C0032CF36 /* XWAlerLoginView.m in Sources */ = {isa = PBXBuildFile; fileRef = 6983A1A41ED96A3C0032CF36 /* XWAlerLoginView.m */; };
+		698754231EE7972A00AE8B72 /* CustomRadioViewTwo.m in Sources */ = {isa = PBXBuildFile; fileRef = 698754221EE7972A00AE8B72 /* CustomRadioViewTwo.m */; };
 		6988A65C1ED7BFC0002CABAE /* RootViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6988A65B1ED7BFC0002CABAE /* RootViewController.m */; };
 		6988A65F1ED7BFD5002CABAE /* RootNavigationController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6988A65E1ED7BFD5002CABAE /* RootNavigationController.m */; };
 		6988A6651ED7C207002CABAE /* HomeNavigationController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6988A6641ED7C207002CABAE /* HomeNavigationController.m */; };
@@ -270,6 +271,8 @@
 		6983A1A11ED967D70032CF36 /* LibraryHeader.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LibraryHeader.h; sourceTree = "<group>"; };
 		6983A1A31ED96A3C0032CF36 /* XWAlerLoginView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XWAlerLoginView.h; sourceTree = "<group>"; };
 		6983A1A41ED96A3C0032CF36 /* XWAlerLoginView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XWAlerLoginView.m; sourceTree = "<group>"; };
+		698754211EE7972A00AE8B72 /* CustomRadioViewTwo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CustomRadioViewTwo.h; sourceTree = "<group>"; };
+		698754221EE7972A00AE8B72 /* CustomRadioViewTwo.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CustomRadioViewTwo.m; sourceTree = "<group>"; };
 		6988A6401ED7BC07002CABAE /* JiDingPrefixHeader.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JiDingPrefixHeader.pch; sourceTree = "<group>"; };
 		6988A65A1ED7BFC0002CABAE /* RootViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RootViewController.h; sourceTree = "<group>"; };
 		6988A65B1ED7BFC0002CABAE /* RootViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RootViewController.m; sourceTree = "<group>"; };
@@ -1618,6 +1621,8 @@
 			children = (
 				7414CFEB1EE6F90200AB096C /* CustomRadioView.h */,
 				7414CFEC1EE6F90200AB096C /* CustomRadioView.m */,
+				698754211EE7972A00AE8B72 /* CustomRadioViewTwo.h */,
+				698754221EE7972A00AE8B72 /* CustomRadioViewTwo.m */,
 				7412F39A1EE2588800744C86 /* HotelDetailCells */,
 				7412F3AC1EE2588800744C86 /* OrderDetailCells */,
 				7412F2F01EE24E9E00744C86 /* fillOrderCells */,
@@ -2158,6 +2163,7 @@
 				7408CC281EE44CF3004140AD /* UIView+Extension.m in Sources */,
 				7412F3001EE24E9E00744C86 /* Xzb_fillOrderAddCheckManCell.m in Sources */,
 				7412F3021EE24E9E00744C86 /* Xzb_fillOrderPayTypeCell.m in Sources */,
+				698754231EE7972A00AE8B72 /* CustomRadioViewTwo.m in Sources */,
 				7412F4251EE260C400744C86 /* CXPhotoBrowser.m in Sources */,
 				7412F3231EE2549D00744C86 /* Xzb_PayInputPasswordView.m in Sources */,
 				699381961EDFA44500BD2319 /* UIView+JKPicker.m in Sources */,

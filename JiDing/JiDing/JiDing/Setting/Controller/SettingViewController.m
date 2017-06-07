@@ -62,10 +62,10 @@
     UIButton *logoutBtn = [[UIButton alloc] init];
     logoutBtn.title = @"退出";
     logoutBtn.frame = CGRectMake(-1, SCREEN_Height - 49 - 64, SCREEN_Width + 2, 49);
-    [logoutBtn setTitleColor:[UIColor redColor] forState:UIControlStateNormal];
-    logoutBtn.backgroundColor = [UIColor whiteColor];
-    logoutBtn.layer.borderColor = AppLineColor.CGColor;
-    logoutBtn.layer.borderWidth = 1;
+//    [logoutBtn setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
+    logoutBtn.backgroundColor = AppDeepGrayTextColor;
+//    logoutBtn.layer.borderColor = AppLineColor.CGColor;
+//    logoutBtn.layer.borderWidth = 1;
     [logoutBtn addTarget:self action:@selector(logoutBtnClick) forControlEvents:UIControlEventTouchUpInside];
     [self.view addSubview:logoutBtn];
 }

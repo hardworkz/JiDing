@@ -38,7 +38,7 @@
         self.titleLabel = titleLabel;
         
         UIView *devider = [[UIView alloc] init];
-        devider.backgroundColor = AppLineColor;
+        devider.backgroundColor = AppLineTwoColor;
         devider.frame = CGRectMake(10, 49.5, SCREEN_Width, 0.5);
         [self.contentView addSubview:devider];
         self.devider = devider;

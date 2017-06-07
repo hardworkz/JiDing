@@ -21,7 +21,8 @@ typedef NS_ENUM(NSUInteger, SelectedHomeType) {
      */
     SelectedHomeTypeKTV = 2,
 };
-
+#define RadioLineW sqrt(2*SCREEN_HEIGHT*SCREEN_HEIGHT)
+#define Radius (3 * SCREEN_HEIGHT + RadioLineW/2)
 @interface HomeViewController ()<UserCenterViewControllerDelegate,SettingViewControllerDelegate,Xzb_MapViewControllerDelegate,CLLocationManagerDelegate>
 {
     UIView *peopleNumberView;
@@ -51,8 +52,8 @@ typedef NS_ENUM(NSUInteger, SelectedHomeType) {
 /*
  * 点击用户中心遮盖view
  */
-@property (strong, nonatomic) UIView *bigRoundCoverView;
-@property (strong, nonatomic) UIView *bigRoundCoverViewSetting;
+@property (strong, nonatomic) CustomRadioView *bigRoundCoverView;
+@property (strong, nonatomic) CustomRadioView *bigRoundCoverViewSetting;
 /*
  * 加减动画控件
  */
@@ -284,20 +285,20 @@ typedef NS_ENUM(NSUInteger, SelectedHomeType) {
 - (UIView *)bigRoundCoverView
 {
     if (_bigRoundCoverView == nil) {
-        _bigRoundCoverView = [[UIView alloc] init];
-        _bigRoundCoverView.backgroundColor = [UIColor greenColor];
-        _bigRoundCoverView.layer.cornerRadius = SCREEN_HEIGHT;
-        _bigRoundCoverView.frame = CGRectMake(SCREEN_WIDTH, SCREEN_HEIGHT, SCREEN_HEIGHT * 2, SCREEN_HEIGHT * 2);
+        _bigRoundCoverView = [[CustomRadioView alloc] init];
+        _bigRoundCoverView.backgroundColor = [UIColor clearColor];
+        _bigRoundCoverView.frame = CGRectMake(SCREEN_WIDTH, SCREEN_HEIGHT, Radius * 2, Radius * 2);
+        RTLog(@"x:%f-----y:%f --- width:%f ----height:%f",_bigRoundCoverView.x,_bigRoundCoverView.y,_bigRoundCoverView.width,_bigRoundCoverView.height);
     }
     return _bigRoundCoverView;
 }
 - (UIView *)bigRoundCoverViewSetting
 {
     if (_bigRoundCoverViewSetting == nil) {
-        _bigRoundCoverViewSetting = [[UIView alloc] init];
-        _bigRoundCoverViewSetting.backgroundColor = [UIColor redColor];
-        _bigRoundCoverViewSetting.layer.cornerRadius = SCREEN_HEIGHT;
-        _bigRoundCoverViewSetting.frame = CGRectMake(-SCREEN_WIDTH - SCREEN_HEIGHT * 2, SCREEN_HEIGHT, SCREEN_HEIGHT * 2, SCREEN_HEIGHT * 2);
+        _bigRoundCoverViewSetting = [[CustomRadioView alloc] init];
+        _bigRoundCoverViewSetting.backgroundColor = [UIColor clearColor];
+        _bigRoundCoverViewSetting.frame = CGRectMake(-(Radius * 2), SCREEN_HEIGHT, Radius * 2, Radius * 2);
+        RTLog(@"x:%f-----y:%f --- width:%f ----height:%f",_bigRoundCoverViewSetting.x,_bigRoundCoverViewSetting.y,_bigRoundCoverViewSetting.width,_bigRoundCoverViewSetting.height);
     }
     return _bigRoundCoverViewSetting;
 }
@@ -453,24 +454,28 @@ typedef NS_ENUM(NSUInteger, SelectedHomeType) {
 {
     [[self windowView] addSubview:self.bigRoundCoverViewSetting];
     [UIView animateWithDuration:0.75 animations:^{
-        self.bigRoundCoverViewSetting.center = self.view.center;
+//        self.bigRoundCoverViewSetting.center = self.view.center;
+        self.bigRoundCoverViewSetting.centerX += SCREEN_HEIGHT * 2.2;
+        self.bigRoundCoverViewSetting.centerY -= SCREEN_HEIGHT * 2.2;
     }completion:^(BOOL finished) {
-        [UIView animateWithDuration:0.5 animations:^{
-            self.bigRoundCoverViewSetting.alpha = 0.0;
+        SettingViewController *settingVC = [[SettingViewController alloc] init];
+        settingVC.delegate = self;
+        [self.navigationController pushViewController:settingVC animated:NO];
+        
+        [self.screenView removeFromSuperview];
+        self.topView.frame = CGRectMake(0, -IPHONE_H * 0.5, IPHONE_W, IPHONE_H * 0.5 - 0.5);
+        self.bottomView.frame = CGRectMake(0, IPHONE_H, IPHONE_W, IPHONE_H * 0.5 - 0.5);
+        self.centerLineView.hidden = YES;
+        
+        [UIView animateWithDuration:0.75 animations:^{
+            self.bigRoundCoverViewSetting.centerX += SCREEN_HEIGHT;
+            self.bigRoundCoverViewSetting.centerY -= SCREEN_HEIGHT;
         } completion:^(BOOL finished) {
             [self.bigRoundCoverViewSetting removeFromSuperview];
             self.bigRoundCoverViewSetting = nil;
-            //跳转到用户中心
-            if (self.homeType == SelectedHomeTypeHotel) {
-                [self select_hotel];
-            }else{
-                [self select_ktv];
-            }
-            SettingViewController *settingVC = [[SettingViewController alloc] init];
-            settingVC.delegate = self;
-            [self.navigationController pushViewController:settingVC animated:NO];
         }];
     }];
+
 }
 /*
  * 跳转用户中心动画
@@ -479,22 +484,23 @@ typedef NS_ENUM(NSUInteger, SelectedHomeType) {
 {
     [[self windowView] addSubview:self.bigRoundCoverView];
     [UIView animateWithDuration:0.75 animations:^{
-        self.bigRoundCoverView.center = self.view.center;
+        self.bigRoundCoverView.centerX -= SCREEN_HEIGHT * 1.2;
+        self.bigRoundCoverView.centerY -= SCREEN_HEIGHT * 1.2;
     }completion:^(BOOL finished) {
-        [UIView animateWithDuration:0.5 animations:^{
-            self.bigRoundCoverView.alpha = 0.0;
+        UserCenterViewController *userCenterVC = [[UserCenterViewController alloc] init];
+        userCenterVC.delegate = self;
+        [self.navigationController pushViewController:userCenterVC animated:NO];
+        [self.screenView removeFromSuperview];
+        self.topView.frame = CGRectMake(0, -IPHONE_H * 0.5, IPHONE_W, IPHONE_H * 0.5 - 0.5);
+        self.bottomView.frame = CGRectMake(0, IPHONE_H, IPHONE_W, IPHONE_H * 0.5 - 0.5);
+        self.centerLineView.hidden = YES;
+        
+        [UIView animateWithDuration:0.75 animations:^{
+            self.bigRoundCoverView.centerX -= SCREEN_HEIGHT;
+            self.bigRoundCoverView.centerY -= SCREEN_HEIGHT;
         } completion:^(BOOL finished) {
             [self.bigRoundCoverView removeFromSuperview];
             self.bigRoundCoverView = nil;
-            //跳转到用户中心
-            if (self.homeType == SelectedHomeTypeHotel) {
-                [self select_hotel];
-            }else{
-                [self select_ktv];
-            }
-            UserCenterViewController *userCenterVC = [[UserCenterViewController alloc] init];
-            userCenterVC.delegate = self;
-            [self.navigationController pushViewController:userCenterVC animated:NO];
         }];
     }];
 }
