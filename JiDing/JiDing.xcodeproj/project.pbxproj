@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		691B00781EEE7F8400B28B5F /* OpenUDID.m in Sources */ = {isa = PBXBuildFile; fileRef = 691B00761EEE7F8300B28B5F /* OpenUDID.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
+		691B00791EEE7F8400B28B5F /* README.md in Sources */ = {isa = PBXBuildFile; fileRef = 691B00771EEE7F8300B28B5F /* README.md */; };
 		6983A18F1ED943B10032CF36 /* UserCenterViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6983A18E1ED943B10032CF36 /* UserCenterViewController.m */; };
 		6983A1971ED963A20032CF36 /* SettingViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6983A1961ED963A20032CF36 /* SettingViewController.m */; };
 		6983A19B1ED966FD0032CF36 /* SettingCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 6983A19A1ED966FD0032CF36 /* SettingCell.m */; };
@@ -258,6 +260,10 @@
 
 /* Begin PBXFileReference section */
 		62F990E8DE75AA0095392EE4 /* Pods-JiDing.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-JiDing.debug.xcconfig"; path = "Pods/Target Support Files/Pods-JiDing/Pods-JiDing.debug.xcconfig"; sourceTree = "<group>"; };
+		691B00751EEE7F8300B28B5F /* OpenUDID.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OpenUDID.h; sourceTree = "<group>"; };
+		691B00761EEE7F8300B28B5F /* OpenUDID.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OpenUDID.m; sourceTree = "<group>"; };
+		691B00771EEE7F8300B28B5F /* README.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
+		691B007A1EEE8A5500B28B5F /* AppSDKConfigHeader.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AppSDKConfigHeader.h; sourceTree = "<group>"; };
 		6983A18D1ED943B10032CF36 /* UserCenterViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UserCenterViewController.h; sourceTree = "<group>"; };
 		6983A18E1ED943B10032CF36 /* UserCenterViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UserCenterViewController.m; sourceTree = "<group>"; };
 		6983A1901ED943DC0032CF36 /* UserCenterHeader.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UserCenterHeader.h; sourceTree = "<group>"; };
@@ -808,6 +814,16 @@
 			name = Pods;
 			sourceTree = "<group>";
 		};
+		691B00741EEE7F8300B28B5F /* OpenUDID-master */ = {
+			isa = PBXGroup;
+			children = (
+				691B00751EEE7F8300B28B5F /* OpenUDID.h */,
+				691B00761EEE7F8300B28B5F /* OpenUDID.m */,
+				691B00771EEE7F8300B28B5F /* README.md */,
+			);
+			path = "OpenUDID-master";
+			sourceTree = "<group>";
+		};
 		6983A1891ED9439F0032CF36 /* UserCenter */ = {
 			isa = PBXGroup;
 			children = (
@@ -865,6 +881,9 @@
 		6983A19C1ED967B50032CF36 /* Library */ = {
 			isa = PBXGroup;
 			children = (
+				691B00741EEE7F8300B28B5F /* OpenUDID-master */,
+				749921771EDC220B00459E5C /* Toast.h */,
+				749921781EDC220B00459E5C /* Toast.m */,
 				7408CC1E1EE44CF3004140AD /* XHDatePicker */,
 				7412F40F1EE260C400744C86 /* CXPhotoBrowser */,
 				7412F3F31EE25AFF00744C86 /* ptotoBrowser */,
@@ -874,8 +893,6 @@
 				699381971EDFA46F00BD2319 /* RatingBar */,
 				699381671EDFA44500BD2319 /* ImagePicker */,
 				6993814E1EDFA3C700BD2319 /* STPhotoBrowser */,
-				749921771EDC220B00459E5C /* Toast.h */,
-				749921781EDC220B00459E5C /* Toast.m */,
 				7499216D1EDBDAF700459E5C /* HttpTool */,
 				7499215C1EDBD37600459E5C /* CustomAlertView */,
 				6983A1A21ED96A3C0032CF36 /* XWAlertView */,
@@ -949,6 +966,7 @@
 				6983A1981ED963B50032CF36 /* SettingHeader.h */,
 				6983A1A11ED967D70032CF36 /* LibraryHeader.h */,
 				699382121EDFA87F00BD2319 /* InterfaceAPIHeader.h */,
+				691B007A1EEE8A5500B28B5F /* AppSDKConfigHeader.h */,
 			);
 			path = Config;
 			sourceTree = "<group>";
@@ -2111,6 +2129,7 @@
 				7412F4271EE260C400744C86 /* CXTapDetectingImageView.m in Sources */,
 				6988A6871ED7D6E0002CABAE /* UIImageView+Extension.m in Sources */,
 				6993818F1EDFA44500BD2319 /* JKAssetsViewCell.m in Sources */,
+				691B00791EEE7F8400B28B5F /* README.md in Sources */,
 				6988A66C1ED7C52D002CABAE /* CommonCode.m in Sources */,
 				7412F4241EE260C400744C86 /* CXPhoto.m in Sources */,
 				744F9FEE1EE031FD0007E53D /* Xzb_ApplicationDataTool.m in Sources */,
@@ -2199,6 +2218,7 @@
 				699381911EDFA44500BD2319 /* JKPhotoBrowser.m in Sources */,
 				7412F3C51EE2588800744C86 /* Xzb_OrderDetailHeadCell.m in Sources */,
 				7412F42C1EE261B700744C86 /* UINavigationBar+Background.m in Sources */,
+				691B00781EEE7F8400B28B5F /* OpenUDID.m in Sources */,
 				7412F3EF1EE25A9000744C86 /* MJPhotoProgressView.m in Sources */,
 				7412F3EE1EE25A9000744C86 /* MJPhotoLoadingView.m in Sources */,
 				744F9FDE1EE02FE70007E53D /* Xzb_OpenCityModel.m in Sources */,

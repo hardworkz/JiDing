@@ -23,12 +23,14 @@
 #import "SettingHeader.h"
 #import "LibraryHeader.h"
 #import "InterfaceAPIHeader.h"
+#import "AppSDKConfigHeader.h"
 
 #import "AFNetworking.h"
 #import "MJExtension.h"
 #import "MJRefresh.h"
 #import "IQKeyboardManager.h"
 #import "UIImageView+WebCache.h"
+#import "OpenUDID.h"
 
 #import "UIView+Extension.h"
 #import "UIImage+Extension.h"
@@ -179,5 +181,8 @@ static NSString *const ApplicationDidEnterBackgroundNotification = @"application
 static NSString *const checkinNotification = @"receiveCheckinNotification";
 static NSString *const OrderPaySuccessNotification = @"orderPaySuccessNotification";
 static NSString *const DynamicNeedRefreshNotification = @"dynamicNeedRefreshNotification";
+//微信支付，支付宝支付通知
+static NSString *const AliPayResult = @"AliPayResult";
+static NSString *const WechatPayResult = @"WechatPayResult";
 
 #endif /* JiDingPrefixHeader_pch */

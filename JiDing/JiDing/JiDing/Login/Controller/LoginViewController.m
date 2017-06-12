@@ -7,6 +7,8 @@
 //
 
 #import "LoginViewController.h"
+// 导入shareSDK头文件
+#import <ShareSDKExtension/SSEThirdPartyLoginHelper.h>
 
 @interface LoginViewController ()<UITextFieldDelegate>
 {
@@ -114,6 +116,7 @@
     for (int i = 0; i<3; i++) {
         UIButton *button = [[UIButton alloc] init];
         button.frame = CGRectMake((SCREEN_WIDTH - 150)/4 + (50 + (SCREEN_WIDTH - 150)/4)*i,SCREEN_HEIGHT - 50 - 50 - 64, 50, 50);
+        button.tag = i;
         if (i == 0) {
             [button setBgImage:@"QQ"];
         }else if(i == 1){
@@ -147,27 +150,10 @@
         return;
     }
     button.enabled = NO;
-    
-    //        NSString *identifier = [[NSBundle mainBundle] bundleIdentifier];
-    /** 初始化一个保存用户帐号的KeychainItemWrapper */
-    //        KeychainItemWrapper *wrapper = [[KeychainItemWrapper alloc] initWithIdentifier:identifier accessGroup:nil];
-//    NSString *openUDID;
-    //        NSString *openudid = [wrapper objectForKey:(id)kSecAttrAccount];
-    //        if (openudid.length) {
-    //            openUDID = openudid;
-    //        }else
-    //        {
-//    openUDID = [OpenUDID value];
-    //        }
-    //保存数据
-    //        [wrapper setObject:openUDID forKey:(id)kSecAttrAccount];
-    
-//    RTLog(@"openUDID---------------%@",openUDID);
-//    @"equipmentCode":openUDID,
     //获取当前版本号
     NSString *currentVersion = [NSBundle mainBundle].infoDictionary[@"CFBundleShortVersionString"];
     
-    NSDictionary *param = @{@"username":phoneTextField.text,@"password":pwdTextField.text,USERID:@"0",@"equipmentType":@"2",@"channelId":@"",@"appVersion":currentVersion};
+    NSDictionary *param = @{@"username":phoneTextField.text,@"password":pwdTextField.text,USERID:@"0",@"equipmentType":@"2",@"equipmentCode":[OpenUDID value],@"channelId":@"",@"appVersion":currentVersion};
     RTLog(@"%@",param);
     [RTHttpTool post:PwdLogin addHUD:YES param:param success:^(id responseObj) {
         button.enabled = YES;
@@ -190,9 +176,76 @@
     }];
 
 }
+
+/**
+ 第三方SDK登录
+
+ @param button 登录按钮
+ */
 - (void)SDKLogin:(UIButton *)button
 {
-    
+    if (button.tag == 0) {//QQ
+        [SSEThirdPartyLoginHelper loginByPlatform:SSDKPlatformTypeQQ onUserSync:^(SSDKUser *user, SSEUserAssociateHandler associateHandler) {
+            //在此回调中可以将社交平台用户信息与自身用户系统进行绑定，最后使用一个唯一用户标识来关联此用户信息。
+            //在此示例中没有跟用户系统关联，则使用一个社交用户对应一个系统用户的方式。将社交用户的uid作为关联ID传入associateHandler。
+            NSString *currentVersion = [NSBundle mainBundle].infoDictionary[@"CFBundleShortVersionString"];
+            [RTHttpTool post:POST_QQ_LOGIN addHUD:YES param:@{@"webchatid":user.uid,@"equipmentType":@"2",@"equipmentCode":[OpenUDID value],@"channelId":@"",@"appVersion":currentVersion} success:^(id responseObj) {
+                RTLog(@"微信登录返回数据为：%@",responseObj);
+                if ([responseObj[SUCCESS] integerValue] == 1) {
+                    //保存登录用户数据
+                    UserAccount *account = [UserAccount mj_objectWithKeyValues:responseObj[ENTITIES][CUSTOMER_INFO] context:nil];
+                    [UserAccountTool saveWithAccount:account];
+                    
+                }
+            } failure:^(NSError *error) {
+                
+            }];
+            NSLog(@"dd%@",user.rawData);
+            NSLog(@"dd%@",user.credential);
+        } onLoginResult:^(SSDKResponseState state, SSEBaseUser *user, NSError *error) {
+            if (state == SSDKResponseStateSuccess)
+            {
+                
+            }
+        }];
+    }else if (button.tag == 1){//微信
+        [SSEThirdPartyLoginHelper loginByPlatform:SSDKPlatformTypeWechat onUserSync:^(SSDKUser *user, SSEUserAssociateHandler associateHandler) {
+            //在此回调中可以将社交平台用户信息与自身用户系统进行绑定，最后使用一个唯一用户标识来关联此用户信息。
+            //在此示例中没有跟用户系统关联，则使用一个社交用户对应一个系统用户的方式。将社交用户的uid作为关联ID传入associateHandler。
+            NSString *currentVersion = [NSBundle mainBundle].infoDictionary[@"CFBundleShortVersionString"];
+            [RTHttpTool post:POST_WX_LOGIN addHUD:YES param:@{@"webchatid":user.uid,@"equipmentType":@"2",@"equipmentCode":[OpenUDID value],@"channelId":@"",@"appVersion":currentVersion} success:^(id responseObj) {
+                RTLog(@"微信登录返回数据为：%@",responseObj);
+                if ([responseObj[SUCCESS] integerValue] == 1) {
+                    //保存登录用户数据
+                    UserAccount *account = [UserAccount mj_objectWithKeyValues:responseObj[ENTITIES][CUSTOMER_INFO] context:nil];
+                    [UserAccountTool saveWithAccount:account];
+                    
+                }
+            } failure:^(NSError *error) {
+                
+            }];
+
+            NSLog(@"dd%@",user.rawData);
+            NSLog(@"dd%@",user.credential);
+        } onLoginResult:^(SSDKResponseState state, SSEBaseUser *user, NSError *error) {
+            if (state == SSDKResponseStateSuccess)
+            {
+                
+            }
+        }];
+    }else{//微博
+        [SSEThirdPartyLoginHelper loginByPlatform:SSDKPlatformTypeSinaWeibo onUserSync:^(SSDKUser *user, SSEUserAssociateHandler associateHandler) {
+            //在此回调中可以将社交平台用户信息与自身用户系统进行绑定，最后使用一个唯一用户标识来关联此用户信息。
+            //在此示例中没有跟用户系统关联，则使用一个社交用户对应一个系统用户的方式。将社交用户的uid作为关联ID传入associateHandler。
+            NSLog(@"dd%@",user.rawData);
+            NSLog(@"dd%@",user.credential);
+        } onLoginResult:^(SSDKResponseState state, SSEBaseUser *user, NSError *error) {
+            if (state == SSDKResponseStateSuccess)
+            {
+                
+            }
+        }];
+    }
 }
 - (void)registerBtnClicked:(UIButton *)button
 {

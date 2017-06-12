@@ -9,7 +9,7 @@
 #ifndef InterfaceAPIHeader_h
 #define InterfaceAPIHeader_h
 
-#define BaseURL @"http://m.chinaxzb.com:8084/builderServer3"
+#define BaseURL @"http://39.108.7.252:8080/xzbApi"
 
 //获取短信验证码 参数 phoneCode 请求方式GET
 #define GET_CODE [NSString stringWithFormat:@"%@/login/verifyPhone35.do",BaseURL]
