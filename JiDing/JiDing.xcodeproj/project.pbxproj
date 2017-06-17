@@ -108,8 +108,6 @@
 		699382151EDFAA2F00BD2319 /* MyOrderTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 699382141EDFAA2F00BD2319 /* MyOrderTableViewCell.m */; };
 		7408CC271EE44CF3004140AD /* NSDate+Extension.m in Sources */ = {isa = PBXBuildFile; fileRef = 7408CC211EE44CF3004140AD /* NSDate+Extension.m */; };
 		7408CC281EE44CF3004140AD /* UIView+Extension.m in Sources */ = {isa = PBXBuildFile; fileRef = 7408CC231EE44CF3004140AD /* UIView+Extension.m */; };
-		7408CC291EE44CF3004140AD /* XHDatePickerView.m in Sources */ = {isa = PBXBuildFile; fileRef = 7408CC251EE44CF3004140AD /* XHDatePickerView.m */; };
-		7408CC2A1EE44CF3004140AD /* XHDatePickerView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7408CC261EE44CF3004140AD /* XHDatePickerView.xib */; };
 		7412F2BE1EE2466100744C86 /* Xzb_SearchResultTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7412F2BD1EE2466100744C86 /* Xzb_SearchResultTableViewController.m */; };
 		7412F2C11EE2468F00744C86 /* Xzb_SearchResultMapController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7412F2C01EE2468F00744C86 /* Xzb_SearchResultMapController.m */; };
 		7412F2C41EE247A700744C86 /* HotelOfferModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 7412F2C31EE247A700744C86 /* HotelOfferModel.m */; };
@@ -227,6 +225,8 @@
 		746169B21ED71B7700029B60 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 746169B01ED71B7700029B60 /* LaunchScreen.storyboard */; };
 		746169BD1ED71B7700029B60 /* JiDingTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 746169BC1ED71B7700029B60 /* JiDingTests.m */; };
 		746169C81ED71B7700029B60 /* JiDingUITests.m in Sources */ = {isa = PBXBuildFile; fileRef = 746169C71ED71B7700029B60 /* JiDingUITests.m */; };
+		7485A9F61EF4AA3D008DB3E7 /* XHDatePickerView.m in Sources */ = {isa = PBXBuildFile; fileRef = 7485A9F41EF4AA3D008DB3E7 /* XHDatePickerView.m */; };
+		7485A9F71EF4AA3D008DB3E7 /* XHDatePickerView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7485A9F51EF4AA3D008DB3E7 /* XHDatePickerView.xib */; };
 		749921551EDAEAA500459E5C /* UserDataTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 749921541EDAEAA500459E5C /* UserDataTableViewCell.m */; };
 		749921581EDAEC7000459E5C /* UserCenterOrderCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 749921571EDAEC7000459E5C /* UserCenterOrderCell.m */; };
 		7499215B1EDAEC8A00459E5C /* UserCenterMessageCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 7499215A1EDAEC8A00459E5C /* UserCenterMessageCell.m */; };
@@ -439,9 +439,6 @@
 		7408CC211EE44CF3004140AD /* NSDate+Extension.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSDate+Extension.m"; sourceTree = "<group>"; };
 		7408CC221EE44CF3004140AD /* UIView+Extension.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIView+Extension.h"; sourceTree = "<group>"; };
 		7408CC231EE44CF3004140AD /* UIView+Extension.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIView+Extension.m"; sourceTree = "<group>"; };
-		7408CC241EE44CF3004140AD /* XHDatePickerView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XHDatePickerView.h; sourceTree = "<group>"; };
-		7408CC251EE44CF3004140AD /* XHDatePickerView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XHDatePickerView.m; sourceTree = "<group>"; };
-		7408CC261EE44CF3004140AD /* XHDatePickerView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = XHDatePickerView.xib; sourceTree = "<group>"; };
 		7412F2BC1EE2466100744C86 /* Xzb_SearchResultTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Xzb_SearchResultTableViewController.h; sourceTree = "<group>"; };
 		7412F2BD1EE2466100744C86 /* Xzb_SearchResultTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Xzb_SearchResultTableViewController.m; sourceTree = "<group>"; };
 		7412F2BF1EE2468F00744C86 /* Xzb_SearchResultMapController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Xzb_SearchResultMapController.h; sourceTree = "<group>"; };
@@ -739,6 +736,9 @@
 		746169C31ED71B7700029B60 /* JiDingUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = JiDingUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		746169C71ED71B7700029B60 /* JiDingUITests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = JiDingUITests.m; sourceTree = "<group>"; };
 		746169C91ED71B7700029B60 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		7485A9F31EF4AA3D008DB3E7 /* XHDatePickerView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XHDatePickerView.h; sourceTree = "<group>"; };
+		7485A9F41EF4AA3D008DB3E7 /* XHDatePickerView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XHDatePickerView.m; sourceTree = "<group>"; };
+		7485A9F51EF4AA3D008DB3E7 /* XHDatePickerView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = XHDatePickerView.xib; sourceTree = "<group>"; };
 		749921531EDAEAA500459E5C /* UserDataTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UserDataTableViewCell.h; sourceTree = "<group>"; };
 		749921541EDAEAA500459E5C /* UserDataTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UserDataTableViewCell.m; sourceTree = "<group>"; };
 		749921561EDAEC7000459E5C /* UserCenterOrderCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UserCenterOrderCell.h; sourceTree = "<group>"; };
@@ -1286,10 +1286,10 @@
 		7408CC1E1EE44CF3004140AD /* XHDatePicker */ = {
 			isa = PBXGroup;
 			children = (
+				7485A9F31EF4AA3D008DB3E7 /* XHDatePickerView.h */,
+				7485A9F41EF4AA3D008DB3E7 /* XHDatePickerView.m */,
+				7485A9F51EF4AA3D008DB3E7 /* XHDatePickerView.xib */,
 				7408CC1F1EE44CF3004140AD /* Tools */,
-				7408CC241EE44CF3004140AD /* XHDatePickerView.h */,
-				7408CC251EE44CF3004140AD /* XHDatePickerView.m */,
-				7408CC261EE44CF3004140AD /* XHDatePickerView.xib */,
 			);
 			path = XHDatePicker;
 			sourceTree = "<group>";
@@ -2001,7 +2001,7 @@
 				699381F01EDFA61900BD2319 /* switch_camera_h@2x.png in Resources */,
 				699381DB1EDFA61900BD2319 /* camera_line.png in Resources */,
 				746169AF1ED71B7700029B60 /* Assets.xcassets in Resources */,
-				7408CC2A1EE44CF3004140AD /* XHDatePickerView.xib in Resources */,
+				7485A9F71EF4AA3D008DB3E7 /* XHDatePickerView.xib in Resources */,
 				7412F4051EE25AFF00744C86 /* whiteplaceholder.png in Resources */,
 				699381881EDFA44500BD2319 /* JKImagePickerController.strings in Resources */,
 				7412F3871EE256B800744C86 /* AlipaySDK.bundle in Resources */,
@@ -2233,6 +2233,7 @@
 				7499216C1EDBD8A600459E5C /* Xzb_CountDownButton.m in Sources */,
 				744F9FE61EE030270007E53D /* CityModel.m in Sources */,
 				6988A6851ED7D6E0002CABAE /* UIButton+Extension.m in Sources */,
+				7485A9F61EF4AA3D008DB3E7 /* XHDatePickerView.m in Sources */,
 				699381951EDFA44500BD2319 /* PhotoAlbumManager.m in Sources */,
 				7412F3BD1EE2588800744C86 /* PageTypeThreeTableViewCell.m in Sources */,
 				7412F4041EE25AFF00744C86 /* HZWaitingView.m in Sources */,
@@ -2254,7 +2255,6 @@
 				7412F2CA1EE24AD500744C86 /* Xzb_HotelDetailController.m in Sources */,
 				7412F3991EE257BC00744C86 /* Xzb_OrderDetailsModel.m in Sources */,
 				7412F3201EE2549D00744C86 /* HotelIntroView.m in Sources */,
-				7408CC291EE44CF3004140AD /* XHDatePickerView.m in Sources */,
 				699381651EDFA3C700BD2319 /* STPhotoBrowserController.m in Sources */,
 				749921731EDBDE3900459E5C /* LoginViewController.m in Sources */,
 				7412F2E51EE24D4400744C86 /* Order.m in Sources */,

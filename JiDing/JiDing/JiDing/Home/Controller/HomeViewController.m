@@ -629,12 +629,6 @@ typedef NS_ENUM(NSUInteger, SelectedHomeType) {
 - (void)tapStarDate
 {
     NSDate *date = [NSDate date];
-//    XHDatePickerView *datepicker = [[XHDatePickerView alloc] initWithCurrentDate:date CompleteBlock:^(NSDate *startDate, NSDate *endDate) {
-//        NSLog(@"\n开始时间： %@，结束时间：%@",startDate,endDate);
-////        self.startTimeText.text = [startDate stringWithFormat:@"yyyy-MM-dd HH:mm"];
-////        self.endtimeText.text = [endDate stringWithFormat:@"yyyy-MM-dd HH:mm"];
-//    }];
-    
     XHDatePickerView *datepicker = [[XHDatePickerView alloc] initWithCompleteBlock:^(NSDate *startDate,NSDate *endDate) {
         NSLog(@"\n开始时间： %@，结束时间：%@",startDate,endDate);
 //        self.startTimeText.text = [startDate stringWithFormat:@"yyyy-MM-dd HH:mm"];
@@ -654,11 +648,6 @@ typedef NS_ENUM(NSUInteger, SelectedHomeType) {
 - (void)tapEndDate
 {
     NSDate *date = [NSDate date];
-    //    XHDatePickerView *datepicker = [[XHDatePickerView alloc] initWithCurrentDate:date CompleteBlock:^(NSDate *startDate, NSDate *endDate) {
-    //        NSLog(@"\n开始时间： %@，结束时间：%@",startDate,endDate);
-    ////        self.startTimeText.text = [startDate stringWithFormat:@"yyyy-MM-dd HH:mm"];
-    ////        self.endtimeText.text = [endDate stringWithFormat:@"yyyy-MM-dd HH:mm"];
-    //    }];
     
     XHDatePickerView *datepicker = [[XHDatePickerView alloc] initWithCompleteBlock:^(NSDate *startDate,NSDate *endDate) {
         NSLog(@"\n开始时间： %@，结束时间：%@",startDate,endDate);

@@ -30,6 +30,7 @@ typedef void(^doneBlock)(NSDate *,NSDate *);
     NSMutableArray *_hourArray;
     NSMutableArray *_minuteArray;
     NSString *_dateFormatter;
+    NSString *_dateFormatterYearMonthDay;
     //记录位置
     NSInteger yearIndex;
     NSInteger monthIndex;
@@ -47,6 +48,8 @@ typedef void(^doneBlock)(NSDate *,NSDate *);
 @property (weak, nonatomic) IBOutlet UILabel *showYearView;
 @property (weak, nonatomic) IBOutlet UIButton *doneBtn;
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *bottomConstraint;
+@property (weak, nonatomic) IBOutlet UILabel *starTime;
+@property (weak, nonatomic) IBOutlet UILabel *endTime;
 
 - (IBAction)doneAction:(UIButton *)btn;
 
@@ -73,6 +76,9 @@ typedef void(^doneBlock)(NSDate *,NSDate *);
         self.currentDate = currentDate;
         
         _dateFormatter = @"yyyy-MM-dd HH:mm";
+        _dateFormatterYearMonthDay = @"yyy-MM-dd";
+        
+        
         [self setupUI];
         [self defaultConfig];
         
@@ -89,10 +95,10 @@ typedef void(^doneBlock)(NSDate *,NSDate *);
     self.segmentView.selectedSegmentIndex = 0;
     [self.segmentView addTarget:self action:@selector(segmentAction:) forControlEvents:UIControlEventValueChanged];
     
-    self.buttomView.layer.cornerRadius = 10;
-    self.buttomView.layer.masksToBounds = YES;
+//    self.buttomView.layer.cornerRadius = 10;
+//    self.buttomView.layer.masksToBounds = YES;
     //self.themeColor = [UIColor colorFromHexRGB:@"#f7b639"];
-    self.themeColor = RGB(247, 133, 51);
+    self.themeColor = AppGrayTextColor;
     self.frame=CGRectMake(0, 0, kScreenWidth, kScreenHeight);
     
     //点击背景是否影藏
@@ -456,10 +462,12 @@ typedef void(^doneBlock)(NSDate *,NSDate *);
     switch (self.dateType) {
         case DateTypeStartDate:
             _startDate = self.scrollToDate;
+            self.starTime.text = [dateStr substringToIndex:10];
             break;
             
         default:
             _endDate = self.scrollToDate;
+            self.endTime.text = [dateStr substringToIndex:10];
             break;
     }
     
@@ -503,7 +511,7 @@ typedef void(^doneBlock)(NSDate *,NSDate *);
     
     [[UIApplication sharedApplication].keyWindow addSubview:self];
     [UIView animateWithDuration:.3 animations:^{
-        self.bottomConstraint.constant = 10;
+        self.bottomConstraint.constant = 0;
         self.backgroundColor = RGBA(0, 0, 0, 0.4);
         [self layoutIfNeeded];
     }];
@@ -626,6 +634,16 @@ typedef void(^doneBlock)(NSDate *,NSDate *);
         }
         
     }
+    
+    switch (self.dateType) {
+        case DateTypeStartDate:
+            self.starTime.text = [date stringWithFormat:_dateFormatterYearMonthDay];
+            break;
+            
+        default:
+            self.endTime.text = [date stringWithFormat:_dateFormatterYearMonthDay];
+            break;
+    }
 }
 
 
@@ -647,6 +665,8 @@ typedef void(^doneBlock)(NSDate *,NSDate *);
         _scrollToDate = self.minLimitDate;
     }
     [self getNowDate:self.scrollToDate animated:NO];
+    
+    self.starTime.text = [self.minLimitDate stringWithFormat:_dateFormatterYearMonthDay];
 }
 
 -(void)setMaxLimitDate:(NSDate *)maxLimitDate {
@@ -655,12 +675,14 @@ typedef void(^doneBlock)(NSDate *,NSDate *);
         _scrollToDate = self.minLimitDate;
     }
     [self getNowDate:self.scrollToDate animated:NO];
+    
+    self.endTime.text = [self.maxLimitDate stringWithFormat:_dateFormatterYearMonthDay];
 }
 
 -(void)setThemeColor:(UIColor *)themeColor {
     _themeColor = themeColor;
     self.segmentView.tintColor = themeColor;
-    self.doneBtn.backgroundColor = themeColor;
+//    self.doneBtn.backgroundColor = themeColor;
 }
 
 -(void)setDateType:(XHDateType)dateType {
