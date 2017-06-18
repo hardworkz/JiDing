@@ -106,6 +106,9 @@
 		6993820E1EDFA7F400BD2319 /* UserAccountTool.m in Sources */ = {isa = PBXBuildFile; fileRef = 6993820D1EDFA7F400BD2319 /* UserAccountTool.m */; };
 		699382111EDFA80D00BD2319 /* UserAccount.m in Sources */ = {isa = PBXBuildFile; fileRef = 699382101EDFA80D00BD2319 /* UserAccount.m */; };
 		699382151EDFAA2F00BD2319 /* MyOrderTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 699382141EDFAA2F00BD2319 /* MyOrderTableViewCell.m */; };
+		74023B711EF561EC001782A2 /* AutoImageViewHeightFrameModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 74023B701EF561EC001782A2 /* AutoImageViewHeightFrameModel.m */; };
+		74023B741EF56219001782A2 /* AutoImageTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 74023B731EF56219001782A2 /* AutoImageTableViewCell.m */; };
+		74023B771EF56C31001782A2 /* YJImageBrowserView.m in Sources */ = {isa = PBXBuildFile; fileRef = 74023B761EF56C31001782A2 /* YJImageBrowserView.m */; };
 		7408CC271EE44CF3004140AD /* NSDate+Extension.m in Sources */ = {isa = PBXBuildFile; fileRef = 7408CC211EE44CF3004140AD /* NSDate+Extension.m */; };
 		7408CC281EE44CF3004140AD /* UIView+Extension.m in Sources */ = {isa = PBXBuildFile; fileRef = 7408CC231EE44CF3004140AD /* UIView+Extension.m */; };
 		7412F2BE1EE2466100744C86 /* Xzb_SearchResultTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7412F2BD1EE2466100744C86 /* Xzb_SearchResultTableViewController.m */; };
@@ -434,6 +437,12 @@
 		699382121EDFA87F00BD2319 /* InterfaceAPIHeader.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = InterfaceAPIHeader.h; sourceTree = "<group>"; };
 		699382131EDFAA2F00BD2319 /* MyOrderTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MyOrderTableViewCell.h; sourceTree = "<group>"; };
 		699382141EDFAA2F00BD2319 /* MyOrderTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MyOrderTableViewCell.m; sourceTree = "<group>"; };
+		74023B6F1EF561EC001782A2 /* AutoImageViewHeightFrameModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AutoImageViewHeightFrameModel.h; sourceTree = "<group>"; };
+		74023B701EF561EC001782A2 /* AutoImageViewHeightFrameModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AutoImageViewHeightFrameModel.m; sourceTree = "<group>"; };
+		74023B721EF56219001782A2 /* AutoImageTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AutoImageTableViewCell.h; sourceTree = "<group>"; };
+		74023B731EF56219001782A2 /* AutoImageTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AutoImageTableViewCell.m; sourceTree = "<group>"; };
+		74023B751EF56C31001782A2 /* YJImageBrowserView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YJImageBrowserView.h; sourceTree = "<group>"; };
+		74023B761EF56C31001782A2 /* YJImageBrowserView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YJImageBrowserView.m; sourceTree = "<group>"; };
 		7408CC1D1EE449D3004140AD /* JiDing.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = JiDing.entitlements; sourceTree = "<group>"; };
 		7408CC201EE44CF3004140AD /* NSDate+Extension.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSDate+Extension.h"; sourceTree = "<group>"; };
 		7408CC211EE44CF3004140AD /* NSDate+Extension.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSDate+Extension.m"; sourceTree = "<group>"; };
@@ -974,6 +983,7 @@
 		6988A6471ED7BE00002CABAE /* Home */ = {
 			isa = PBXGroup;
 			children = (
+				74023B6E1EF561BA001782A2 /* AutoImageHeightCell */,
 				7412F2D41EE24D4400744C86 /* PayUnit */,
 				6988A6481ED7BE00002CABAE /* Controller */,
 				744F9FD71EE02F590007E53D /* Model */,
@@ -1281,6 +1291,19 @@
 				744F9FED1EE031FD0007E53D /* Xzb_ApplicationDataTool.m */,
 			);
 			path = UserLoginTool;
+			sourceTree = "<group>";
+		};
+		74023B6E1EF561BA001782A2 /* AutoImageHeightCell */ = {
+			isa = PBXGroup;
+			children = (
+				74023B6F1EF561EC001782A2 /* AutoImageViewHeightFrameModel.h */,
+				74023B701EF561EC001782A2 /* AutoImageViewHeightFrameModel.m */,
+				74023B721EF56219001782A2 /* AutoImageTableViewCell.h */,
+				74023B731EF56219001782A2 /* AutoImageTableViewCell.m */,
+				74023B751EF56C31001782A2 /* YJImageBrowserView.h */,
+				74023B761EF56C31001782A2 /* YJImageBrowserView.m */,
+			);
+			path = AutoImageHeightCell;
 			sourceTree = "<group>";
 		};
 		7408CC1E1EE44CF3004140AD /* XHDatePicker */ = {
@@ -2094,6 +2117,7 @@
 				7412F4221EE260C400744C86 /* CXBrowserNavBarView.m in Sources */,
 				7412F3BF1EE2588800744C86 /* StayInFriendsTableViewCell.m in Sources */,
 				7412F2C71EE2485200744C86 /* SearchResultNewTableViewCell.m in Sources */,
+				74023B711EF561EC001782A2 /* AutoImageViewHeightFrameModel.m in Sources */,
 				699382091EDFA6F800BD2319 /* Xzb_MyOrderListModel.m in Sources */,
 				699381AF1EDFA4E700BD2319 /* ImageBtn.m in Sources */,
 				6988A67A1ED7C8AA002CABAE /* UIViewController+AutoBack.m in Sources */,
@@ -2179,6 +2203,7 @@
 				7412F3981EE257BC00744C86 /* Xzb_CheckInPeopleModel.m in Sources */,
 				7412F4011EE25AFF00744C86 /* HZPhotoBrowserView.m in Sources */,
 				6993818C1EDFA44500BD2319 /* JKAssetsGroupCell.m in Sources */,
+				74023B771EF56C31001782A2 /* YJImageBrowserView.m in Sources */,
 				7408CC281EE44CF3004140AD /* UIView+Extension.m in Sources */,
 				7412F3001EE24E9E00744C86 /* Xzb_fillOrderAddCheckManCell.m in Sources */,
 				7412F3021EE24E9E00744C86 /* Xzb_fillOrderPayTypeCell.m in Sources */,
@@ -2248,6 +2273,7 @@
 				6988A67C1ED7D6C2002CABAE /* Foundation+Log.m in Sources */,
 				7412F3F01EE25A9000744C86 /* MJPhotoToolbar.m in Sources */,
 				7499215B1EDAEC8A00459E5C /* UserCenterMessageCell.m in Sources */,
+				74023B741EF56219001782A2 /* AutoImageTableViewCell.m in Sources */,
 				699381431EDFA2E800BD2319 /* Xzb_MyorderHeadView.m in Sources */,
 				699381F51EDFA61900BD2319 /* PhotoViewController.m in Sources */,
 				7412F3C71EE2588800744C86 /* Xzb_TimeTableViewCell.m in Sources */,

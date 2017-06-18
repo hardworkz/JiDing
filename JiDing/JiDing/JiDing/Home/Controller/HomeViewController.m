@@ -34,6 +34,8 @@ typedef NS_ENUM(NSUInteger, SelectedHomeType) {
     UIButton *roomSubBtn;
     UILabel *roomNumberLabel;
     UILabel *addressContentLabel;
+    UILabel *starDate;
+    UILabel *endDate;
 }
 /**
  *  当前选择的首页类型，默认为酒店
@@ -629,10 +631,16 @@ typedef NS_ENUM(NSUInteger, SelectedHomeType) {
 - (void)tapStarDate
 {
     NSDate *date = [NSDate date];
-    XHDatePickerView *datepicker = [[XHDatePickerView alloc] initWithCompleteBlock:^(NSDate *startDate,NSDate *endDate) {
-        NSLog(@"\n开始时间： %@，结束时间：%@",startDate,endDate);
-//        self.startTimeText.text = [startDate stringWithFormat:@"yyyy-MM-dd HH:mm"];
-//        self.endtimeText.text = [endDate stringWithFormat:@"yyyy-MM-dd HH:mm"];
+    XHDatePickerView *datepicker = [[XHDatePickerView alloc] initWithCompleteBlock:^(NSDate *startDates,NSDate *endDates,XHDateType dateType) {
+//        NSLog(@"\n开始时间： %@，结束时间：%@",startDates,endDates);入住\n2016年8月16日
+        switch (dateType) {
+            case DateTypeStartDate:
+                starDate.text = [NSString stringWithFormat:@"入住\n%@",[startDates stringWithFormat:@"yyyy年MM月dd日"] == nil?@"未选择":[startDates stringWithFormat:@"yyyy年MM月dd日"]];
+                break;
+            default:
+                endDate.text = [NSString stringWithFormat:@"离店\n%@",[endDates stringWithFormat:@"yyyy年MM月dd日"] == nil?@"未选择":[endDates stringWithFormat:@"yyyy年MM月dd日"]];
+                break;
+        }
     }];
 //    NSDate *lastDay = [NSDate dateWithTimeInterval:-24*60*60 sinceDate:date];//前一天
     NSDate *nextDay = [NSDate dateWithTimeInterval:365*24*60*60 sinceDate:date];//后一年
@@ -649,10 +657,16 @@ typedef NS_ENUM(NSUInteger, SelectedHomeType) {
 {
     NSDate *date = [NSDate date];
     
-    XHDatePickerView *datepicker = [[XHDatePickerView alloc] initWithCompleteBlock:^(NSDate *startDate,NSDate *endDate) {
-        NSLog(@"\n开始时间： %@，结束时间：%@",startDate,endDate);
-        //        self.startTimeText.text = [startDate stringWithFormat:@"yyyy-MM-dd HH:mm"];
-        //        self.endtimeText.text = [endDate stringWithFormat:@"yyyy-MM-dd HH:mm"];
+    XHDatePickerView *datepicker = [[XHDatePickerView alloc] initWithCompleteBlock:^(NSDate *startDates,NSDate *endDates,XHDateType dateType) {
+        switch (dateType) {
+            case DateTypeStartDate:
+                starDate.text = [NSString stringWithFormat:@"入住\n%@",[startDates stringWithFormat:@"yyyy年MM月dd日"] == nil?@"未选择":[startDates stringWithFormat:@"yyyy年MM月dd日"]];
+                break;
+                
+            default:
+                endDate.text = [NSString stringWithFormat:@"离店\n%@",[endDates stringWithFormat:@"yyyy年MM月dd日"] == nil?@"未选择":[endDates stringWithFormat:@"yyyy年MM月dd日"]];
+                break;
+        }
     }];
     //    NSDate *lastDay = [NSDate dateWithTimeInterval:-24*60*60 sinceDate:date];//前一天
     NSDate *nextDay = [NSDate dateWithTimeInterval:24*60*60 sinceDate:date];//后一天
@@ -918,10 +932,13 @@ typedef NS_ENUM(NSUInteger, SelectedHomeType) {
     clockImage.contentMode = UIViewContentModeCenter;
     [dateView addSubview:clockImage];
     
-    UILabel *starDate = [[UILabel alloc] init];
+    NSDate *date = [NSDate date];
+    NSDate *nextDay = [NSDate dateWithTimeInterval:24*60*60 sinceDate:date];//下一天
+    
+    starDate = [[UILabel alloc] init];
     starDate.userInteractionEnabled = YES;
     [starDate addGestureRecognizer:tapStarDate];
-    starDate.text = @"入住\n2016年8月16日";
+    starDate.text = [NSString stringWithFormat:@"入住\n%@",[date stringWithFormat:@"yyy年MM月dd日"]];
     starDate.textAlignment = NSTextAlignmentCenter;
     starDate.userInteractionEnabled = YES;
     starDate.numberOfLines = 0;
@@ -936,10 +953,10 @@ typedef NS_ENUM(NSUInteger, SelectedHomeType) {
     slash.contentMode = UIViewContentModeCenter;
     [dateView addSubview:slash];
 
-    UILabel *endDate = [[UILabel alloc] init];
+    endDate = [[UILabel alloc] init];
     endDate.userInteractionEnabled = YES;
     [endDate addGestureRecognizer:tapEndDate];
-    endDate.text = @"入住\n2016年8月16日";
+    endDate.text = [NSString stringWithFormat:@"离店\n%@",[nextDay stringWithFormat:@"yyy年MM月dd日"]];
     endDate.textAlignment = NSTextAlignmentCenter;
     endDate.userInteractionEnabled = YES;
     endDate.numberOfLines = 0;

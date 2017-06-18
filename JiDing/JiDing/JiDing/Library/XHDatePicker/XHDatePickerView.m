@@ -64,11 +64,11 @@ typedef void(^doneBlock)(NSDate *,NSDate *);
 
 @implementation XHDatePickerView
 
--(instancetype)initWithCompleteBlock:(void(^)(NSDate *,NSDate *))completeBlock {
+-(instancetype)initWithCompleteBlock:(void(^)(NSDate *,NSDate *,XHDateType))completeBlock {
     return [self initWithCurrentDate:nil CompleteBlock:completeBlock];
 }
 
--(instancetype)initWithCurrentDate:(NSDate *)currentDate CompleteBlock:(void (^)(NSDate *, NSDate *))completeBlock {
+-(instancetype)initWithCurrentDate:(NSDate *)currentDate CompleteBlock:(void (^)(NSDate *, NSDate *,XHDateType))completeBlock {
     self = [super init];
     if (self) {
         self = [[[NSBundle mainBundle] loadNibNamed:NSStringFromClass([self class]) owner:self options:nil] lastObject];
@@ -83,8 +83,9 @@ typedef void(^doneBlock)(NSDate *,NSDate *);
         [self defaultConfig];
         
         if (completeBlock) {
+            DefineWeakSelf;
             self.doneBlock = ^(NSDate *startDate,NSDate *endDate) {
-                completeBlock(startDate,endDate);
+                completeBlock(startDate,endDate,weakSelf.dateType);
             };
         }
     }

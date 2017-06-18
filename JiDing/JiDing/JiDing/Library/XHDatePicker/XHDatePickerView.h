@@ -32,14 +32,14 @@ typedef enum{
 @property (nonatomic, retain) NSDate *maxLimitDate;//限制最大时间（没有设置默认2049）
 @property (nonatomic, retain) NSDate *minLimitDate;//限制最小时间（没有设置默认1970）
 
--(instancetype)initWithCompleteBlock:(void(^)(NSDate *,NSDate *))completeBlock;
+-(instancetype)initWithCompleteBlock:(void(^)(NSDate *,NSDate *,XHDateType))completeBlock;
 
 /**
  *   设置打开选择器时的默认时间，
  *   minLimitDate < currentDate < maxLimitDate  显示 currentDate;
  *   currentDate < minLimitDate ||  currentDate > maxLimitDate   显示minLimitDate;
  */
--(instancetype)initWithCurrentDate:(NSDate *)currentDate CompleteBlock:(void(^)(NSDate *,NSDate *))completeBlock;
+-(instancetype)initWithCurrentDate:(NSDate *)currentDate CompleteBlock:(void(^)(NSDate *,NSDate *,XHDateType))completeBlock;
 
 -(void)show;
 
