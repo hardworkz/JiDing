@@ -36,6 +36,8 @@ typedef NS_ENUM(NSUInteger, SelectedHomeType) {
     UILabel *addressContentLabel;
     UILabel *starDate;
     UILabel *endDate;
+    UILabel *peopleTitleLabel;
+    UILabel *roomTitleLabel;
 }
 /**
  *  当前选择的首页类型，默认为酒店
@@ -402,6 +404,8 @@ typedef NS_ENUM(NSUInteger, SelectedHomeType) {
         UIButton *roomBtn = self.roomTypeArray[i];
         [roomBtn setTitle:self.roomTypeDataArray[i]];
     }
+    peopleTitleLabel.text = @"客官人数";
+    roomTitleLabel.text = @"房间数量";
     [self animationOpen:nil];
 }
 - (void)select_ktv
@@ -416,6 +420,8 @@ typedef NS_ENUM(NSUInteger, SelectedHomeType) {
         UIButton *roomBtn = self.roomTypeArray[i];
         [roomBtn setTitle:self.ktvTypeDataArray[i]];
     }
+    peopleTitleLabel.text = @"唱客人数";
+    roomTitleLabel.text = @"包厢数量";
     [self animationOpen:nil];
 }
 /*
@@ -991,8 +997,7 @@ typedef NS_ENUM(NSUInteger, SelectedHomeType) {
     peopleNumberView.frame = CGRectMake(0, 0, SCREEN_WIDTH * 0.5, 100);
     [numView addSubview:peopleNumberView];
     
-    UILabel *peopleTitleLabel = [[UILabel alloc] init];
-    peopleTitleLabel.text = @"客官人数";
+    peopleTitleLabel = [[UILabel alloc] init];
     peopleTitleLabel.textAlignment = NSTextAlignmentCenter;
     peopleTitleLabel.textColor = [UIColor blackColor];
     peopleTitleLabel.font = [UIFont systemFontOfSize:15];
@@ -1036,8 +1041,7 @@ typedef NS_ENUM(NSUInteger, SelectedHomeType) {
     roomNumberView.frame = CGRectMake(SCREEN_WIDTH * 0.5, 0, SCREEN_WIDTH * 0.5, 100);
     [numView addSubview:roomNumberView];
     
-    UILabel *roomTitleLabel = [[UILabel alloc] init];
-    roomTitleLabel.text = @"房间数量";
+    roomTitleLabel = [[UILabel alloc] init];
     roomTitleLabel.textAlignment = NSTextAlignmentCenter;
     roomTitleLabel.textColor = [UIColor blackColor];
     roomTitleLabel.font = [UIFont systemFontOfSize:15];

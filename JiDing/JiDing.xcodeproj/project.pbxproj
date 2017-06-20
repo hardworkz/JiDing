@@ -9,6 +9,9 @@
 /* Begin PBXBuildFile section */
 		691B00781EEE7F8400B28B5F /* OpenUDID.m in Sources */ = {isa = PBXBuildFile; fileRef = 691B00761EEE7F8300B28B5F /* OpenUDID.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		691B00791EEE7F8400B28B5F /* README.md in Sources */ = {isa = PBXBuildFile; fileRef = 691B00771EEE7F8300B28B5F /* README.md */; };
+		697E3B421EF921CF00D5151D /* KTV_PackageListFrameModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 697E3B411EF921CF00D5151D /* KTV_PackageListFrameModel.m */; };
+		697E3B451EF921F600D5151D /* KTV_PackageListTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 697E3B441EF921F600D5151D /* KTV_PackageListTableViewCell.m */; };
+		697E3B481EF9223E00D5151D /* KTV_PackageListModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 697E3B471EF9223E00D5151D /* KTV_PackageListModel.m */; };
 		6983A18F1ED943B10032CF36 /* UserCenterViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6983A18E1ED943B10032CF36 /* UserCenterViewController.m */; };
 		6983A1971ED963A20032CF36 /* SettingViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6983A1961ED963A20032CF36 /* SettingViewController.m */; };
 		6983A19B1ED966FD0032CF36 /* SettingCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 6983A19A1ED966FD0032CF36 /* SettingCell.m */; };
@@ -267,6 +270,12 @@
 		691B00761EEE7F8300B28B5F /* OpenUDID.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OpenUDID.m; sourceTree = "<group>"; };
 		691B00771EEE7F8300B28B5F /* README.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
 		691B007A1EEE8A5500B28B5F /* AppSDKConfigHeader.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AppSDKConfigHeader.h; sourceTree = "<group>"; };
+		697E3B401EF921CF00D5151D /* KTV_PackageListFrameModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KTV_PackageListFrameModel.h; sourceTree = "<group>"; };
+		697E3B411EF921CF00D5151D /* KTV_PackageListFrameModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = KTV_PackageListFrameModel.m; sourceTree = "<group>"; };
+		697E3B431EF921F600D5151D /* KTV_PackageListTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KTV_PackageListTableViewCell.h; sourceTree = "<group>"; };
+		697E3B441EF921F600D5151D /* KTV_PackageListTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = KTV_PackageListTableViewCell.m; sourceTree = "<group>"; };
+		697E3B461EF9223E00D5151D /* KTV_PackageListModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KTV_PackageListModel.h; sourceTree = "<group>"; };
+		697E3B471EF9223E00D5151D /* KTV_PackageListModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = KTV_PackageListModel.m; sourceTree = "<group>"; };
 		6983A18D1ED943B10032CF36 /* UserCenterViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UserCenterViewController.h; sourceTree = "<group>"; };
 		6983A18E1ED943B10032CF36 /* UserCenterViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UserCenterViewController.m; sourceTree = "<group>"; };
 		6983A1901ED943DC0032CF36 /* UserCenterHeader.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UserCenterHeader.h; sourceTree = "<group>"; };
@@ -1518,6 +1527,8 @@
 		7412F39A1EE2588800744C86 /* HotelDetailCells */ = {
 			isa = PBXGroup;
 			children = (
+				697E3B431EF921F600D5151D /* KTV_PackageListTableViewCell.h */,
+				697E3B441EF921F600D5151D /* KTV_PackageListTableViewCell.m */,
 				7412F39B1EE2588800744C86 /* HotelIntroTableViewCell.h */,
 				7412F39C1EE2588800744C86 /* HotelIntroTableViewCell.m */,
 				7412F39D1EE2588800744C86 /* HotelIntroTableViewCell.xib */,
@@ -1573,6 +1584,10 @@
 				7412F3D21EE2598100744C86 /* Xzb_PhotoModel.m */,
 				7412F3D31EE2598100744C86 /* Xzb_UserCommentFrameModel.h */,
 				7412F3D41EE2598100744C86 /* Xzb_UserCommentFrameModel.m */,
+				697E3B401EF921CF00D5151D /* KTV_PackageListFrameModel.h */,
+				697E3B411EF921CF00D5151D /* KTV_PackageListFrameModel.m */,
+				697E3B461EF9223E00D5151D /* KTV_PackageListModel.h */,
+				697E3B471EF9223E00D5151D /* KTV_PackageListModel.m */,
 			);
 			path = HotelDetailModels;
 			sourceTree = "<group>";
@@ -1660,13 +1675,13 @@
 		744F9FD81EE02F590007E53D /* View */ = {
 			isa = PBXGroup;
 			children = (
+				7412F39A1EE2588800744C86 /* HotelDetailCells */,
+				7412F2F01EE24E9E00744C86 /* fillOrderCells */,
+				7412F3AC1EE2588800744C86 /* OrderDetailCells */,
 				7414CFEB1EE6F90200AB096C /* CustomRadioView.h */,
 				7414CFEC1EE6F90200AB096C /* CustomRadioView.m */,
 				698754211EE7972A00AE8B72 /* CustomRadioViewTwo.h */,
 				698754221EE7972A00AE8B72 /* CustomRadioViewTwo.m */,
-				7412F39A1EE2588800744C86 /* HotelDetailCells */,
-				7412F3AC1EE2588800744C86 /* OrderDetailCells */,
-				7412F2F01EE24E9E00744C86 /* fillOrderCells */,
 				7412F2ED1EE24E6B00744C86 /* Xzb_FillOrderFooterView.h */,
 				7412F2EE1EE24E6B00744C86 /* Xzb_FillOrderFooterView.m */,
 				7412F2C51EE2485200744C86 /* SearchResultNewTableViewCell.h */,
@@ -2134,6 +2149,7 @@
 				7412F3BE1EE2588800744C86 /* PageTypeTwoTableViewCell.m in Sources */,
 				7412F3C41EE2588800744C86 /* Xzb_OrderDetailCell.m in Sources */,
 				744F9FE71EE030270007E53D /* DistrictModel.m in Sources */,
+				697E3B421EF921CF00D5151D /* KTV_PackageListFrameModel.m in Sources */,
 				749921791EDC220B00459E5C /* Toast.m in Sources */,
 				699381B21EDFA58400BD2319 /* PhotoLibraryView.m in Sources */,
 				7412F3BB1EE2588800744C86 /* OneTableViewCell.m in Sources */,
@@ -2259,6 +2275,7 @@
 				744F9FE61EE030270007E53D /* CityModel.m in Sources */,
 				6988A6851ED7D6E0002CABAE /* UIButton+Extension.m in Sources */,
 				7485A9F61EF4AA3D008DB3E7 /* XHDatePickerView.m in Sources */,
+				697E3B481EF9223E00D5151D /* KTV_PackageListModel.m in Sources */,
 				699381951EDFA44500BD2319 /* PhotoAlbumManager.m in Sources */,
 				7412F3BD1EE2588800744C86 /* PageTypeThreeTableViewCell.m in Sources */,
 				7412F4041EE25AFF00744C86 /* HZWaitingView.m in Sources */,
@@ -2275,6 +2292,7 @@
 				7499215B1EDAEC8A00459E5C /* UserCenterMessageCell.m in Sources */,
 				74023B741EF56219001782A2 /* AutoImageTableViewCell.m in Sources */,
 				699381431EDFA2E800BD2319 /* Xzb_MyorderHeadView.m in Sources */,
+				697E3B451EF921F600D5151D /* KTV_PackageListTableViewCell.m in Sources */,
 				699381F51EDFA61900BD2319 /* PhotoViewController.m in Sources */,
 				7412F3C71EE2588800744C86 /* Xzb_TimeTableViewCell.m in Sources */,
 				699381901EDFA44500BD2319 /* JKImagePickerController.m in Sources */,

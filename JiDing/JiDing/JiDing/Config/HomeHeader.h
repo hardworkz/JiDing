@@ -59,7 +59,10 @@
 #import "Xzb_fillOrderTicketCell.h"
 #import "Xzb_fillOrderPayTypeCell.h"
 #import "Xzb_fillOrderCheckManCell.h"
+#import "KTV_PackageListTableViewCell.h"
 
+#import "KTV_PackageListFrameModel.h"
+#import "KTV_PackageListModel.h"
 #import "StayInFriendsModel.h"
 #import "UserCommentModel.h"
 #import "Xzb_BusinessFacilitiesModel.h"

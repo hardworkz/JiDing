@@ -160,7 +160,8 @@ static UIWindow  *win;
 {
     if (self.nowImageView.image == nil)
     {
-        [SVProgressHUD showErrorWithStatus:@"当前没有图片！"];
+        XWAlerLoginView *alert = [[XWAlerLoginView alloc] initWithTitle:@"当前没有图片！"];
+        [alert show];
         return;
     }
     
