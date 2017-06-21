@@ -110,40 +110,44 @@
  */
 - (void)commitBtnClicked:(UIButton *)button
 {
-//    if ([self.phoneTextField.text isEqualToString:@""]) {
-//        [[Toast makeText:@"手机号不能为空"] show];
-//        return;
-//    }
-//    if ([self.verifyCodeTextField.text isEqualToString:@""]) {
-//        [[Toast makeText:@"短信验证码不能为空"] show];
-//        return;
-//    }
-//    if ([self.newsPasswordTextField.text isEqualToString:@""]) {
-//        [[Toast makeText:@"新密码不能为空"] show];
-//        return;
-//    }
-//    if (self.newsPasswordTextField.text.length <6) {
-//        [[Toast makeText:@"新密码不能为小于6位"] show];
-//        return;
-//    }
-//    if (self.newsPasswordTextField.text.length >20) {
-//        [[Toast makeText:@"新密码不能为大于20位"] show];
-//        return;
-//    }
+    if ([phoneTextField.text isEqualToString:@""]) {
+        [[Toast makeText:@"手机号不能为空"] show];
+        return;
+    }
+    if ([verifyCodeTextField.text isEqualToString:@""]) {
+        [[Toast makeText:@"短信验证码不能为空"] show];
+        return;
+    }
+    if (![newPasswordTextField.text isEqualToString:confirmPasswordTextField.text]) {
+        [[Toast makeText:@"两次密码输入不一致"] show];
+        return;
+    }
+    if ([newPasswordTextField.text isEqualToString:@""]) {
+        [[Toast makeText:@"新密码不能为空"] show];
+        return;
+    }
+    if (newPasswordTextField.text.length <6) {
+        [[Toast makeText:@"新密码不能为小于6位"] show];
+        return;
+    }
+    if (newPasswordTextField.text.length >20) {
+        [[Toast makeText:@"新密码不能为大于20位"] show];
+        return;
+    }
 }
 /**
  *  重新获取验证码
  */
 - (void)reGetCodeBtnClicked
 {
-//    if ([self.phoneTextField.text isEqualToString:@""]) {
-//        [[Toast makeText:@"手机号不能为空"] show];
-//        return;
-//    }
-//    if (self.phoneTextField.text.length != 11) {
-//        [[Toast makeText:@"请输入正确的手机号码"] show];
-//        return;
-//    }
+    if ([phoneTextField.text isEqualToString:@""]) {
+        [[Toast makeText:@"手机号不能为空"] show];
+        return;
+    }
+    if (phoneTextField.text.length != 11) {
+        [[Toast makeText:@"请输入正确的手机号码"] show];
+        return;
+    }
 }
 #pragma mark - uitextfielddelegate
 - (BOOL)textField:(UITextField *)textField shouldChangeCharactersInRange:(NSRange)range replacementString:(NSString *)string

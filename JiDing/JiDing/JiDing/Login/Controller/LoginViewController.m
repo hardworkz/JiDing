@@ -115,15 +115,16 @@
     //第三方登录按钮
     for (int i = 0; i<3; i++) {
         UIButton *button = [[UIButton alloc] init];
-        button.frame = CGRectMake((SCREEN_WIDTH - 150)/4 + (50 + (SCREEN_WIDTH - 150)/4)*i,SCREEN_HEIGHT - 50 - 50 - 64, 50, 50);
+        button.frame = CGRectMake((SCREEN_WIDTH - 100)/4 + (50 + (SCREEN_WIDTH - 100)/4)*i,SCREEN_HEIGHT - 50 - 50 - 64, 50, 50);
         button.tag = i;
         if (i == 0) {
             [button setBgImage:@"QQ"];
         }else if(i == 1){
             [button setBgImage:@"微信"];
-        }else{
-            [button setBgImage:@"微博"];
         }
+//        else{
+//            [button setBgImage:@"微博"];
+//        }
         [button addTarget:self action:@selector(SDKLogin:) forControlEvents:UIControlEventTouchUpInside];
         [self.view addSubview:button];
 

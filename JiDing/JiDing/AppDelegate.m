@@ -35,8 +35,13 @@
     
     self.window = [[UIWindow alloc] initWithFrame:[UIScreen mainScreen].bounds];
     self.window.backgroundColor = [UIColor whiteColor];
-    self.window.rootViewController = [[HomeNavigationController alloc] initWithRootViewController:[[HomeViewController alloc] init]];
-//    self.window.rootViewController = [[LoginNavigationController alloc] initWithRootViewController:[[LoginViewController alloc] init]];
+    
+    UserAccount *account = [UserAccountTool account];
+    if (account.userId) {
+        self.window.rootViewController = [[HomeNavigationController alloc] initWithRootViewController:[[HomeViewController alloc] init]];
+    }else{
+        self.window.rootViewController = [[LoginNavigationController alloc] initWithRootViewController:[[LoginViewController alloc] init]];
+    }
     [self.window makeKeyAndVisible];
     
     [AMapServices sharedServices].apiKey = MaMapApiKey;
