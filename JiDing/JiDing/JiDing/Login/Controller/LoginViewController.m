@@ -62,7 +62,7 @@
     phoneTextField.backgroundColor = [UIColor clearColor];
     phoneTextField.tintColor = AppMainColor;
     phoneTextField.delegate = self;
-    phoneTextField.keyboardType = UIKeyboardTypePhonePad;
+    phoneTextField.keyboardType = UIKeyboardTypeDefault;
     [phoneView addSubview:phoneTextField];
 
     //用户密码
@@ -84,7 +84,7 @@
     pwdTextField.backgroundColor = [UIColor clearColor];
     pwdTextField.tintColor = AppMainColor;
     pwdTextField.delegate = self;
-    pwdTextField.keyboardType = UIKeyboardTypePhonePad;
+    pwdTextField.keyboardType = UIKeyboardTypeDefault;
     [pwdView addSubview:pwdTextField];
 
     //登录按钮

@@ -8,11 +8,17 @@
 
 #import "UserCenterViewController.h"
 
-@interface UserCenterViewController ()<UITableViewDelegate,UITableViewDataSource>
+@interface UserCenterViewController ()<UITableViewDelegate,UITableViewDataSource,UIViewControllerTransitioningDelegate>
 @property (strong, nonatomic) UITableView *tableView;
 @end
 
 @implementation UserCenterViewController
+-(instancetype)init{
+    if(self = [super init]){
+        self.transitioningDelegate = self;
+    }
+    return self;
+}
 - (UITableView *)tableView
 {
     if (_tableView == nil) {
@@ -22,6 +28,11 @@
         _tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
     }
     return _tableView;
+}
+- (void)viewWillAppear:(BOOL)animated
+{
+    [super viewWillAppear:animated];
+    self.navigationController.navigationBar.hidden = NO;
 }
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -80,5 +91,12 @@
         
     }
 }
+#pragma -mark UIViewControllerTransitioningDelegate
+-(id<UIViewControllerAnimatedTransitioning>)animationControllerForPresentedController:(UIViewController *)presented presentingController:(UIViewController *)presenting sourceController:(UIViewController *)source{
+    return [FourPingTransition transitionWithTransitionType:XWPresentOneTransitionTypePresent];
+}
 
+-(id<UIViewControllerAnimatedTransitioning>)animationControllerForDismissedController:(UIViewController *)dismissed{
+    return [FourPingTransition transitionWithTransitionType:XWPresentOneTransitionTypeDismiss];
+}
 @end

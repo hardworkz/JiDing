@@ -13,6 +13,7 @@
 #import "WXApiManager.h"
 #import "XHDatePickerView.h"
 #import "NSDate+Extension.h"
+#import "FourPingTransition.h"
 
 #import "Xzb_AddPayPasswordController.h"
 #import "Xzb_AddPayPasswordWithPhoneController.h"
@@ -24,7 +25,9 @@
 #import "Xzb_MapViewController.h"
 #import "HomeNavigationController.h"
 #import "HomeViewController.h"
+#import "AnimationViewController.h"
 
+#import "CircleLoaderView.h"
 #import "CustomRadioView.h"
 #import "CustomRadioViewTwo.h"
 #import "Xzb_AnnnotationRightBtn.h"

@@ -37,8 +37,8 @@
     self.window.backgroundColor = [UIColor whiteColor];
     
     UserAccount *account = [UserAccountTool account];
-    if (account.userId) {
-        self.window.rootViewController = [[HomeNavigationController alloc] initWithRootViewController:[[HomeViewController alloc] init]];
+    if (![account.userId isEqualToString:@"进入登录"]) {
+        self.window.rootViewController = [[HomeNavigationController alloc] initWithRootViewController:[[AnimationViewController alloc] init]];
     }else{
         self.window.rootViewController = [[LoginNavigationController alloc] initWithRootViewController:[[LoginViewController alloc] init]];
     }

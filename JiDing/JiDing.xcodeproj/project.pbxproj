@@ -7,6 +7,9 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		6906BE421F1C91E100DEF08B /* CircleLoaderView.m in Sources */ = {isa = PBXBuildFile; fileRef = 6906BE411F1C91E000DEF08B /* CircleLoaderView.m */; };
+		6906BE451F1CA39900DEF08B /* AnimationViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6906BE441F1CA39900DEF08B /* AnimationViewController.m */; };
+		6906BE491F1CA79C00DEF08B /* FourPingTransition.m in Sources */ = {isa = PBXBuildFile; fileRef = 6906BE481F1CA79C00DEF08B /* FourPingTransition.m */; };
 		691B00781EEE7F8400B28B5F /* OpenUDID.m in Sources */ = {isa = PBXBuildFile; fileRef = 691B00761EEE7F8300B28B5F /* OpenUDID.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		691B00791EEE7F8400B28B5F /* README.md in Sources */ = {isa = PBXBuildFile; fileRef = 691B00771EEE7F8300B28B5F /* README.md */; };
 		697E3B421EF921CF00D5151D /* KTV_PackageListFrameModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 697E3B411EF921CF00D5151D /* KTV_PackageListFrameModel.m */; };
@@ -266,6 +269,12 @@
 
 /* Begin PBXFileReference section */
 		62F990E8DE75AA0095392EE4 /* Pods-JiDing.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-JiDing.debug.xcconfig"; path = "Pods/Target Support Files/Pods-JiDing/Pods-JiDing.debug.xcconfig"; sourceTree = "<group>"; };
+		6906BE401F1C91E000DEF08B /* CircleLoaderView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CircleLoaderView.h; sourceTree = "<group>"; };
+		6906BE411F1C91E000DEF08B /* CircleLoaderView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CircleLoaderView.m; sourceTree = "<group>"; };
+		6906BE431F1CA39900DEF08B /* AnimationViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AnimationViewController.h; sourceTree = "<group>"; };
+		6906BE441F1CA39900DEF08B /* AnimationViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AnimationViewController.m; sourceTree = "<group>"; };
+		6906BE471F1CA79C00DEF08B /* FourPingTransition.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FourPingTransition.h; sourceTree = "<group>"; };
+		6906BE481F1CA79C00DEF08B /* FourPingTransition.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FourPingTransition.m; sourceTree = "<group>"; };
 		691B00751EEE7F8300B28B5F /* OpenUDID.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OpenUDID.h; sourceTree = "<group>"; };
 		691B00761EEE7F8300B28B5F /* OpenUDID.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OpenUDID.m; sourceTree = "<group>"; };
 		691B00771EEE7F8300B28B5F /* README.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
@@ -788,13 +797,13 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				7412F4361EE296CA00744C86 /* QuartzCore.framework in Frameworks */,
 				7412F4421EE2970300744C86 /* CoreMotion.framework in Frameworks */,
 				7412F4401EE296FB00744C86 /* CFNetwork.framework in Frameworks */,
 				7412F43E1EE296EF00744C86 /* Foundation.framework in Frameworks */,
 				7412F43C1EE296E700744C86 /* UIKit.framework in Frameworks */,
 				7412F43A1EE296DF00744C86 /* CoreGraphics.framework in Frameworks */,
 				7412F4381EE296D300744C86 /* CoreText.framework in Frameworks */,
-				7412F4361EE296CA00744C86 /* QuartzCore.framework in Frameworks */,
 				7412F4341EE296C000744C86 /* CoreTelephony.framework in Frameworks */,
 				7412F4321EE296B500744C86 /* SystemConfiguration.framework in Frameworks */,
 				7412F4301EE296AD00744C86 /* libz.tbd in Frameworks */,
@@ -830,6 +839,15 @@
 				87AC6AD55B8101D2FC8EAB05 /* Pods-JiDing.release.xcconfig */,
 			);
 			name = Pods;
+			sourceTree = "<group>";
+		};
+		6906BE461F1CA79C00DEF08B /* CATransitionAnimation */ = {
+			isa = PBXGroup;
+			children = (
+				6906BE471F1CA79C00DEF08B /* FourPingTransition.h */,
+				6906BE481F1CA79C00DEF08B /* FourPingTransition.m */,
+			);
+			path = CATransitionAnimation;
 			sourceTree = "<group>";
 		};
 		691B00741EEE7F8300B28B5F /* OpenUDID-master */ = {
@@ -899,6 +917,7 @@
 		6983A19C1ED967B50032CF36 /* Library */ = {
 			isa = PBXGroup;
 			children = (
+				6906BE461F1CA79C00DEF08B /* CATransitionAnimation */,
 				749921771EDC220B00459E5C /* Toast.h */,
 				749921781EDC220B00459E5C /* Toast.m */,
 				691B00741EEE7F8300B28B5F /* OpenUDID-master */,
@@ -1024,6 +1043,8 @@
 				6988A6641ED7C207002CABAE /* HomeNavigationController.m */,
 				6988A6661ED7C21E002CABAE /* HomeViewController.h */,
 				6988A6671ED7C21E002CABAE /* HomeViewController.m */,
+				6906BE431F1CA39900DEF08B /* AnimationViewController.h */,
+				6906BE441F1CA39900DEF08B /* AnimationViewController.m */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -1706,6 +1727,8 @@
 				7412F31D1EE2549D00744C86 /* Xzb_PayInputPasswordView.m */,
 				7412F4061EE25CF300744C86 /* Xzb_PayTypeView.h */,
 				7412F4071EE25CF300744C86 /* Xzb_PayTypeView.m */,
+				6906BE401F1C91E000DEF08B /* CircleLoaderView.h */,
+				6906BE411F1C91E000DEF08B /* CircleLoaderView.m */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -2204,6 +2227,7 @@
 				7412F3211EE2549D00744C86 /* ImageAnnotationView.m in Sources */,
 				6993818E1EDFA44500BD2319 /* JKAssetsThumbnailView.m in Sources */,
 				7412F2BE1EE2466100744C86 /* Xzb_SearchResultTableViewController.m in Sources */,
+				6906BE451F1CA39900DEF08B /* AnimationViewController.m in Sources */,
 				6988A6651ED7C207002CABAE /* HomeNavigationController.m in Sources */,
 				7412F38C1EE256B800744C86 /* DataSigner.m in Sources */,
 				699382061EDFA6F800BD2319 /* Xzb_MyOrderDetailGuestInfoListModel.m in Sources */,
@@ -2246,6 +2270,7 @@
 				699381641EDFA3C700BD2319 /* STIndicatorView.m in Sources */,
 				7412F4291EE260C400744C86 /* CXZoomingScrollView.m in Sources */,
 				7412F4231EE260C400744C86 /* CXBrowserToolBarView.m in Sources */,
+				6906BE491F1CA79C00DEF08B /* FourPingTransition.m in Sources */,
 				7412F38E1EE256B800744C86 /* MD5DataSigner.m in Sources */,
 				744F9FD31EE02E9C0007E53D /* Xzb_MapViewController.m in Sources */,
 				7412F3901EE256B800744C86 /* openssl_wrapper.m in Sources */,
@@ -2260,6 +2285,7 @@
 				7412F3C51EE2588800744C86 /* Xzb_OrderDetailHeadCell.m in Sources */,
 				7412F42C1EE261B700744C86 /* UINavigationBar+Background.m in Sources */,
 				691B00781EEE7F8400B28B5F /* OpenUDID.m in Sources */,
+				6906BE421F1C91E100DEF08B /* CircleLoaderView.m in Sources */,
 				7412F3EF1EE25A9000744C86 /* MJPhotoProgressView.m in Sources */,
 				7412F3EE1EE25A9000744C86 /* MJPhotoLoadingView.m in Sources */,
 				744F9FDE1EE02FE70007E53D /* Xzb_OpenCityModel.m in Sources */,
@@ -2485,6 +2511,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = com.sameto.JiDing;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
+				SCAN_ALL_SOURCE_FILES_FOR_INCLUDES = YES;
 			};
 			name = Debug;
 		};
@@ -2523,6 +2550,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = com.sameto.JiDing;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
+				SCAN_ALL_SOURCE_FILES_FOR_INCLUDES = YES;
 			};
 			name = Release;
 		};

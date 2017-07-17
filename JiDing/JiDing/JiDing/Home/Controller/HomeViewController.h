@@ -7,7 +7,11 @@
 //
 
 #import "RootViewController.h"
+#import "AnimationViewController.h"
 
 @interface HomeViewController : RootViewController
-
+/**
+ *  当前选择的首页类型，默认为酒店
+ */
+@property (assign, nonatomic) SelectedHomeType homeType;
 @end

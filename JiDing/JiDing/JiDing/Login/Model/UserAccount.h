@@ -9,7 +9,7 @@
 #import <Foundation/Foundation.h>
 
 @interface UserAccount : NSObject
-@property (nonatomic, copy) NSNumber *userId;/**<用户id*/
+@property (nonatomic, copy) NSString *userId;/**<用户id*/
 @property (nonatomic, copy) NSString *username;/**<用户名*/
 @property (nonatomic, copy) NSString *email;/**<用户邮箱*/
 @property (nonatomic, copy) NSString *nickName;/**<用户昵称*/

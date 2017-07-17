@@ -7,13 +7,20 @@
 //
 
 #import "SettingViewController.h"
+#import <UserNotifications/UserNotifications.h>
 
-@interface SettingViewController ()<UITableViewDelegate,UITableViewDataSource,DQAlertViewDelegate>
+@interface SettingViewController ()<UITableViewDelegate,UITableViewDataSource,DQAlertViewDelegate,UIViewControllerTransitioningDelegate>
 @property (nonatomic,weak)  UITableView *tableView;
 @property (nonatomic,assign)  BOOL isOpenPush;//是否打开消息推送
 @end
 
 @implementation SettingViewController
+-(instancetype)init{
+    if(self = [super init]){
+        self.transitioningDelegate = self;
+    }
+    return self;
+}
 - (void)viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:animated];
@@ -53,7 +60,7 @@
     tableView.delegate = self;
     tableView.dataSource = self;
     tableView.frame = CGRectMake(0, 0, SCREEN_WIDTH, SCREEN_HEIGHT - 49);
-    tableView.scrollEnabled = NO;
+//    tableView.scrollEnabled = NO;
     [self.view addSubview:tableView];
     self.tableView = tableView;
     
@@ -222,5 +229,13 @@
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     return 50;
+}
+#pragma -mark UIViewControllerTransitioningDelegate
+-(id<UIViewControllerAnimatedTransitioning>)animationControllerForPresentedController:(UIViewController *)presented presentingController:(UIViewController *)presenting sourceController:(UIViewController *)source{
+    return [FourPingTransition transitionWithTransitionType:XWPresentOneTransitionTypePresent];
+}
+
+-(id<UIViewControllerAnimatedTransitioning>)animationControllerForDismissedController:(UIViewController *)dismissed{
+    return [FourPingTransition transitionWithTransitionType:XWPresentOneTransitionTypeDismiss];
 }
 @end

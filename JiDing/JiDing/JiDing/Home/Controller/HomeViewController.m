@@ -8,22 +8,10 @@
 
 #import "HomeViewController.h"
 
-/**
- *  性别
- */
-typedef NS_ENUM(NSUInteger, SelectedHomeType) {
-    /**
-     *  酒店
-     */
-    SelectedHomeTypeHotel = 1,
-    /**
-     *  KTV
-     */
-    SelectedHomeTypeKTV = 2,
-};
+
 #define RadioLineW sqrt(2*SCREEN_HEIGHT*SCREEN_HEIGHT)
 #define Radius (3 * SCREEN_HEIGHT + RadioLineW/2)
-@interface HomeViewController ()<UserCenterViewControllerDelegate,SettingViewControllerDelegate,Xzb_MapViewControllerDelegate,CLLocationManagerDelegate>
+@interface HomeViewController ()<Xzb_MapViewControllerDelegate,CLLocationManagerDelegate,UINavigationControllerDelegate>
 {
     UIView *peopleNumberView;
     UIView *roomNumberView;
@@ -39,18 +27,7 @@ typedef NS_ENUM(NSUInteger, SelectedHomeType) {
     UILabel *peopleTitleLabel;
     UILabel *roomTitleLabel;
 }
-/**
- *  当前选择的首页类型，默认为酒店
- */
-@property (assign, nonatomic) SelectedHomeType homeType;
-@property (strong, nonatomic) UIView *screenView;
 
-@property (strong, nonatomic) UIView *topView;
-@property (strong, nonatomic) UIView *centerLineView;
-@property (strong, nonatomic) UIView *bottomView;
-
-@property (strong, nonatomic) UIButton *hotelBtn;
-@property (strong, nonatomic) UIButton *KTVBtn;
 @property (strong, nonatomic) UIButton *backBtn;
 @property (strong, nonatomic) UIButton *nextBtn;
 /*
@@ -63,10 +40,6 @@ typedef NS_ENUM(NSUInteger, SelectedHomeType) {
  */
 @property (strong, nonatomic) UILabel *addAndSubLabel;
 @property (strong, nonatomic) UILabel *addAndSubLabelTwo;
-/*
- * 开合动画完成
- */
-@property (assign, nonatomic) BOOL isCompleteAnimation;
 /*
  * 展开类型动画完成
  */
@@ -111,6 +84,22 @@ typedef NS_ENUM(NSUInteger, SelectedHomeType) {
 @end
 
 @implementation HomeViewController
+
+#pragma mark - set方法
+- (void)setHomeType:(SelectedHomeType)homeType
+{
+    switch (homeType) {
+        case SelectedHomeTypeHotel:
+            [self select_hotel];
+            break;
+            
+        case SelectedHomeTypeKTV:
+            [self select_ktv];
+            break;
+        default:
+            break;
+    }
+}
 #pragma mark - 懒加载定位
 /**
  *  懒加载
@@ -199,93 +188,8 @@ typedef NS_ENUM(NSUInteger, SelectedHomeType) {
     }
     return _ktvTypeDataArray;
 }
-#pragma mark - 首页开合控件
-- (UIView *)screenView
-{
-    if (_screenView == nil) {
-        _screenView = [[UIView alloc] initWithFrame:[self windowView].bounds];
-        _screenView.backgroundColor = [UIColor clearColor];
-        
-        [_screenView addSubview:self.topView];
-        [_screenView addSubview:self.centerLineView];
-        [_screenView addSubview:self.bottomView];
-    }
-    return _screenView;
-}
-- (UIView *)topView
-{
-    if (_topView == nil) {
-        _topView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, IPHONE_W, IPHONE_H * 0.5 - 0.5)];
-        _topView.backgroundColor = [UIColor whiteColor];
-        
-        [_topView addSubview:self.hotelBtn];
-        
-        UILabel *hotelLabel = [[UILabel alloc] initWithFrame:CGRectMake(self.hotelBtn.x, CGRectGetMaxY(self.hotelBtn.frame) - 10, self.hotelBtn.width, 20)];
-        hotelLabel.text = @"酒店";
-        hotelLabel.textAlignment = NSTextAlignmentCenter;
-        hotelLabel.textColor = AppDeepGrayTextColor;
-        [hotelLabel setAppFontWithSize:16.0f];
-        [_topView addSubview:hotelLabel];
-    }
-    return _topView;
-}
-- (UIView *)centerLineView
-{
-    if (_centerLineView == nil) {
-        _centerLineView = [[UIView alloc] initWithFrame:CGRectMake(30, SCREEN_HEIGHT * 0.5 - 0.5, SCREEN_WIDTH - 60, 1)];
-        _centerLineView.backgroundColor = AppLineColor;
-    }
-    return _centerLineView;
-}
-- (UIView *)bottomView
-{
-    if (_bottomView == nil) {
-        _bottomView = [[UIView alloc] initWithFrame:CGRectMake(0, IPHONE_H *0.5 + 0.5, IPHONE_W, IPHONE_H * 0.5 - 0.5)];
-        _bottomView.backgroundColor = [UIColor whiteColor];
-        
-        UIButton *setting = [[UIButton alloc] initWithFrame:CGRectMake(15, SCREEN_HEIGHT * 0.5 - 70, 50, 50)];
-        [setting addTarget:self action:@selector(setting)];
-        [setting setImage:@"设置"];
-        [_bottomView addSubview:setting];
-        
-        UIButton *userCenter = [[UIButton alloc] initWithFrame:CGRectMake(SCREEN_WIDTH - 65, SCREEN_HEIGHT * 0.5 - 70, 50, 50)];
-        [userCenter addTarget:self action:@selector(userCenter)];
-        [userCenter setImage:@"个人"];
-        [_bottomView addSubview:userCenter];
-        
-        [_bottomView addSubview:self.KTVBtn];
-        
-        UILabel *ktvLabel = [[UILabel alloc] initWithFrame:CGRectMake(self.KTVBtn.x, CGRectGetMaxY(self.KTVBtn.frame) - 10, self.KTVBtn.width, 20)];
-        ktvLabel.text = @"KTV";
-        ktvLabel.textAlignment = NSTextAlignmentCenter;
-        ktvLabel.textColor = AppDeepGrayTextColor;
-        [ktvLabel setAppFontWithSize:16.0f];
-        [_bottomView addSubview:ktvLabel];
-    }
-    return _bottomView;
-}
-- (UIButton *)hotelBtn
-{
-    if (_hotelBtn == nil) {
-        _hotelBtn = [[UIButton alloc] initWithFrame:CGRectMake((SCREEN_WIDTH - 100) * 0.5, (SCREEN_HEIGHT *0.5 - 100) * 0.5 + 20, 100, 100)];
-        [_hotelBtn setImage:@"首页"];
-        [_hotelBtn addTarget:self action:@selector(select_hotel)];
-    }
-    return _hotelBtn;
-}
-- (UIButton *)KTVBtn
-{
-    if (_KTVBtn == nil) {
-        _KTVBtn = [[UIButton alloc] initWithFrame:CGRectMake((SCREEN_WIDTH - 100) * 0.5, (SCREEN_HEIGHT *0.5 - 100) * 0.5 - 20, 100, 100)];
-        [_KTVBtn setImage:@"KTV"];
-        [_KTVBtn addTarget:self action:@selector(select_ktv)];
-    }
-    return _KTVBtn;
-}
--(UIView *)windowView
-{
-    return [[[UIApplication sharedApplication] delegate] window];
-}
+
+
 - (UIView *)bigRoundCoverView
 {
     if (_bigRoundCoverView == nil) {
@@ -326,103 +230,26 @@ typedef NS_ENUM(NSUInteger, SelectedHomeType) {
     }
     return _addAndSubLabelTwo;
 }
-#pragma mark - 首页开合动画
-- (void)animationOpen:(void(^)())completionAnimation
-{
-    self.isCompleteAnimation = NO;
-    DefineWeakSelf;
-    weakSelf.centerLineView.hidden = YES;
-    [UIView animateWithDuration:0.75 // 动画时长
-                          delay:0.0 // 动画延迟
-         usingSpringWithDamping:0.9 // 弹簧振动效果 0~1
-          initialSpringVelocity:1.0 // 初始速度
-                        options:UIViewAnimationOptionCurveEaseIn // 动画过渡效果
-                     animations:^{
-                         weakSelf.topView.frame = CGRectMake(0, -IPHONE_H * 0.5, IPHONE_W, IPHONE_H * 0.5 - 0.5);
-                         weakSelf.bottomView.frame = CGRectMake(0, IPHONE_H, IPHONE_W, IPHONE_H * 0.5 - 0.5);
-                     } completion:^(BOOL finished) {
-                         [weakSelf.screenView removeFromSuperview];
-                         self.isCompleteAnimation = YES;
-                         if (completionAnimation) {
-                             completionAnimation();
-                         }
-                     }];
-}
-- (void)animationClose:(void(^)())completionAnimation
-{
-    self.isCompleteAnimation = NO;
-    [[self windowView] addSubview:self.screenView];
-    DefineWeakSelf;
-    [UIView animateWithDuration:0.75 // 动画时长
-                          delay:0.0 // 动画延迟
-         usingSpringWithDamping:1.0 // 弹簧振动效果 0~1
-          initialSpringVelocity:1.0 // 初始速度
-                        options:UIViewAnimationOptionCurveEaseIn // 动画过渡效果
-                     animations:^{
-                         weakSelf.topView.frame = CGRectMake(0, 0, IPHONE_W, IPHONE_H * 0.5 - 0.5);
-                         weakSelf.bottomView.frame = CGRectMake(0, IPHONE_H *0.5 + 0.5, IPHONE_W, IPHONE_H * 0.5 - 0.5);
-                     } completion:^(BOOL finished) {
-                         // 动画完成后执行
-                         weakSelf.centerLineView.hidden = NO;
-                         self.isCompleteAnimation = YES;
-                         if (completionAnimation) {
-                             completionAnimation();
-                         }
-                     }];
-}
+
 #pragma mark - viewDidLoad
 - (void)viewDidLoad {
     [super viewDidLoad];
     [AMapLocationServices sharedServices].apiKey = MaMapApiKey;
     
-    [[self windowView] addSubview:self.screenView];
     //开始定位
     [self setupPositioning];
     
-    self.homeType = SelectedHomeTypeHotel;
     //设置首页控件
     [self setupHomeView];
     self.isCompleteTypeAnimation = YES;
 }
 - (void)actionAutoBack:(UIBarButtonItem *)barItem
 {
-    if (self.isCompleteAnimation) {
-        [self animationClose:nil];
-        [self back];
-    }
-}
-#pragma mark - action
-- (void)select_hotel
-{
-    //更新为酒店数据
-    self.title = @"酒店";
-    for (int i = 0;i<self.typeImageViewArray.count;i++) {
-        UIImageView *imageView = self.typeImageViewArray[i];
-        imageView.image = [UIImage imageNamed:self.typeDataArray[i]];
-        UILabel *typeLabel = self.typeLabelArray[i];
-        typeLabel.text = self.typeDataArray[i];
-        UIButton *roomBtn = self.roomTypeArray[i];
-        [roomBtn setTitle:self.roomTypeDataArray[i]];
-    }
-    peopleTitleLabel.text = @"客官人数";
-    roomTitleLabel.text = @"房间数量";
-    [self animationOpen:nil];
-}
-- (void)select_ktv
-{
-    //更新为KTV数据
-    self.title = @"KTV";
-    for (int i = 0;i<self.typeImageViewArray.count;i++) {
-        UIImageView *imageView = self.typeImageViewArray[i];
-        imageView.image = [UIImage imageNamed:self.ktvDataArray[i]];
-        UILabel *typeLabel = self.typeLabelArray[i];
-        typeLabel.text = self.ktvDataArray[i];
-        UIButton *roomBtn = self.roomTypeArray[i];
-        [roomBtn setTitle:self.ktvTypeDataArray[i]];
-    }
-    peopleTitleLabel.text = @"唱客人数";
-    roomTitleLabel.text = @"包厢数量";
-    [self animationOpen:nil];
+    [self dismissViewControllerAnimated:YES completion:nil];
+//    if (self.isCompleteAnimation) {
+//        [self animationClose:nil];
+//        [self back];
+//    }
 }
 /*
  * 选择条件完成，进入下一步
@@ -454,64 +281,37 @@ typedef NS_ENUM(NSUInteger, SelectedHomeType) {
     result.dataArray = array;
     [self.navigationController pushViewController:result animated:YES];
 }
-
-/*
- * 跳转设置动画
- */
-- (void)setting
+- (void)select_hotel
 {
-    [[self windowView] addSubview:self.bigRoundCoverViewSetting];
-    [UIView animateWithDuration:0.75 animations:^{
-//        self.bigRoundCoverViewSetting.center = self.view.center;
-        self.bigRoundCoverViewSetting.centerX += SCREEN_HEIGHT * 2.2;
-        self.bigRoundCoverViewSetting.centerY -= SCREEN_HEIGHT * 2.2;
-    }completion:^(BOOL finished) {
-        SettingViewController *settingVC = [[SettingViewController alloc] init];
-        settingVC.delegate = self;
-        [self.navigationController pushViewController:settingVC animated:NO];
-        
-        [self.screenView removeFromSuperview];
-        self.topView.frame = CGRectMake(0, -IPHONE_H * 0.5, IPHONE_W, IPHONE_H * 0.5 - 0.5);
-        self.bottomView.frame = CGRectMake(0, IPHONE_H, IPHONE_W, IPHONE_H * 0.5 - 0.5);
-        self.centerLineView.hidden = YES;
-        
-        [UIView animateWithDuration:0.75 animations:^{
-            self.bigRoundCoverViewSetting.centerX += SCREEN_HEIGHT;
-            self.bigRoundCoverViewSetting.centerY -= SCREEN_HEIGHT;
-        } completion:^(BOOL finished) {
-            [self.bigRoundCoverViewSetting removeFromSuperview];
-            self.bigRoundCoverViewSetting = nil;
-        }];
-    }];
-
+    //更新为酒店数据
+    self.title = @"酒店";
+    for (int i = 0;i<self.typeImageViewArray.count;i++) {
+        UIImageView *imageView = self.typeImageViewArray[i];
+        imageView.image = [UIImage imageNamed:self.typeDataArray[i]];
+        UILabel *typeLabel = self.typeLabelArray[i];
+        typeLabel.text = self.typeDataArray[i];
+        UIButton *roomBtn = self.roomTypeArray[i];
+        [roomBtn setTitle:self.roomTypeDataArray[i]];
+    }
+    peopleTitleLabel.text = @"客官人数";
+    roomTitleLabel.text = @"房间数量";
 }
-/*
- * 跳转用户中心动画
- */
-- (void)userCenter
+- (void)select_ktv
 {
-    [[self windowView] addSubview:self.bigRoundCoverView];
-    [UIView animateWithDuration:0.75 animations:^{
-        self.bigRoundCoverView.centerX -= SCREEN_HEIGHT * 1.2;
-        self.bigRoundCoverView.centerY -= SCREEN_HEIGHT * 1.2;
-    }completion:^(BOOL finished) {
-        UserCenterViewController *userCenterVC = [[UserCenterViewController alloc] init];
-        userCenterVC.delegate = self;
-        [self.navigationController pushViewController:userCenterVC animated:NO];
-        [self.screenView removeFromSuperview];
-        self.topView.frame = CGRectMake(0, -IPHONE_H * 0.5, IPHONE_W, IPHONE_H * 0.5 - 0.5);
-        self.bottomView.frame = CGRectMake(0, IPHONE_H, IPHONE_W, IPHONE_H * 0.5 - 0.5);
-        self.centerLineView.hidden = YES;
-        
-        [UIView animateWithDuration:0.75 animations:^{
-            self.bigRoundCoverView.centerX -= SCREEN_HEIGHT;
-            self.bigRoundCoverView.centerY -= SCREEN_HEIGHT;
-        } completion:^(BOOL finished) {
-            [self.bigRoundCoverView removeFromSuperview];
-            self.bigRoundCoverView = nil;
-        }];
-    }];
+    //更新为KTV数据
+    self.title = @"KTV";
+    for (int i = 0;i<self.typeImageViewArray.count;i++) {
+        UIImageView *imageView = self.typeImageViewArray[i];
+        imageView.image = [UIImage imageNamed:self.ktvDataArray[i]];
+        UILabel *typeLabel = self.typeLabelArray[i];
+        typeLabel.text = self.ktvDataArray[i];
+        UIButton *roomBtn = self.roomTypeArray[i];
+        [roomBtn setTitle:self.ktvTypeDataArray[i]];
+    }
+    peopleTitleLabel.text = @"唱客人数";
+    roomTitleLabel.text = @"包厢数量";
 }
+
 /*
  * 选中类型动画
  */
@@ -1140,19 +940,6 @@ typedef NS_ENUM(NSUInteger, SelectedHomeType) {
     }
     return typeView;
 }
-#pragma mark - userCenterVC,settingVC delegate
-- (void)userCenterVCDidPop:(UserCenterViewController *)userCenterVC
-{
-    [self animationClose:^{
-        [self.navigationController popViewControllerAnimated:NO];
-    }];
-}
-- (void)settingVCDidPop:(SettingViewController *)settingVC
-{
-    [self animationClose:^{
-        [self.navigationController popViewControllerAnimated:NO];
-    }];
-}
 #pragma mark -- CLLocationDelegate
 - (void)locationManager:(CLLocationManager *)manager didUpdateLocations:(NSArray *)locations
 {
@@ -1197,4 +984,6 @@ typedef NS_ENUM(NSUInteger, SelectedHomeType) {
 {
     addressContentLabel.text = locationString;
 }
+
+
 @end
