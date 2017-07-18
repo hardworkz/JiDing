@@ -15,6 +15,8 @@
 #import "RootNavigationController.h"
 #import "RootTableViewController.h"
 #import "RootViewController.h"
+#import "TransitionsNavigationController.h"
+#import "TransitionsNavigationControllerDelegate.h"
 
 #import "HomeHeader.h"
 #import "LoginHeader.h"

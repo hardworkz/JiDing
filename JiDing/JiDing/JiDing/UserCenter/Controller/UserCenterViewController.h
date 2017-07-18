@@ -8,13 +8,6 @@
 
 #import "RootViewController.h"
 
-@class UserCenterViewController;
-@protocol UserCenterViewControllerDelegate <NSObject>
-
-- (void)userCenterVCDidPop:(UserCenterViewController *)userCenterVC;
-
-@end
 @interface UserCenterViewController : RootViewController
 
-@property (weak, nonatomic) id<UserCenterViewControllerDelegate> delegate;
 @end

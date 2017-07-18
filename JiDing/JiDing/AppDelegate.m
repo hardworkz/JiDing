@@ -38,7 +38,7 @@
     
     UserAccount *account = [UserAccountTool account];
     if (![account.userId isEqualToString:@"进入登录"]) {
-        self.window.rootViewController = [[HomeNavigationController alloc] initWithRootViewController:[[AnimationViewController alloc] init]];
+        self.window.rootViewController = [[RootNavigationController alloc] initWithRootViewController:[[AnimationViewController alloc] init]];
     }else{
         self.window.rootViewController = [[LoginNavigationController alloc] initWithRootViewController:[[LoginViewController alloc] init]];
     }

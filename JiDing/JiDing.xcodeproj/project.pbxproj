@@ -15,6 +15,8 @@
 		697E3B421EF921CF00D5151D /* KTV_PackageListFrameModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 697E3B411EF921CF00D5151D /* KTV_PackageListFrameModel.m */; };
 		697E3B451EF921F600D5151D /* KTV_PackageListTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 697E3B441EF921F600D5151D /* KTV_PackageListTableViewCell.m */; };
 		697E3B481EF9223E00D5151D /* KTV_PackageListModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 697E3B471EF9223E00D5151D /* KTV_PackageListModel.m */; };
+		698119D01F1D9EA600A9BEF3 /* TransitionsNavigationController.m in Sources */ = {isa = PBXBuildFile; fileRef = 698119CF1F1D9EA600A9BEF3 /* TransitionsNavigationController.m */; };
+		698119D61F1DA82800A9BEF3 /* TransitionsNavigationControllerDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 698119D51F1DA82800A9BEF3 /* TransitionsNavigationControllerDelegate.m */; };
 		6983A18F1ED943B10032CF36 /* UserCenterViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6983A18E1ED943B10032CF36 /* UserCenterViewController.m */; };
 		6983A1971ED963A20032CF36 /* SettingViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6983A1961ED963A20032CF36 /* SettingViewController.m */; };
 		6983A19B1ED966FD0032CF36 /* SettingCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 6983A19A1ED966FD0032CF36 /* SettingCell.m */; };
@@ -285,6 +287,10 @@
 		697E3B441EF921F600D5151D /* KTV_PackageListTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = KTV_PackageListTableViewCell.m; sourceTree = "<group>"; };
 		697E3B461EF9223E00D5151D /* KTV_PackageListModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KTV_PackageListModel.h; sourceTree = "<group>"; };
 		697E3B471EF9223E00D5151D /* KTV_PackageListModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = KTV_PackageListModel.m; sourceTree = "<group>"; };
+		698119CE1F1D9EA600A9BEF3 /* TransitionsNavigationController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TransitionsNavigationController.h; sourceTree = "<group>"; };
+		698119CF1F1D9EA600A9BEF3 /* TransitionsNavigationController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TransitionsNavigationController.m; sourceTree = "<group>"; };
+		698119D41F1DA82800A9BEF3 /* TransitionsNavigationControllerDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TransitionsNavigationControllerDelegate.h; sourceTree = "<group>"; };
+		698119D51F1DA82800A9BEF3 /* TransitionsNavigationControllerDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TransitionsNavigationControllerDelegate.m; sourceTree = "<group>"; };
 		6983A18D1ED943B10032CF36 /* UserCenterViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UserCenterViewController.h; sourceTree = "<group>"; };
 		6983A18E1ED943B10032CF36 /* UserCenterViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UserCenterViewController.m; sourceTree = "<group>"; };
 		6983A1901ED943DC0032CF36 /* UserCenterHeader.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UserCenterHeader.h; sourceTree = "<group>"; };
@@ -1775,6 +1781,10 @@
 				6988A6441ED7BE00002CABAE /* JiDing */,
 				746169A51ED71B7700029B60 /* AppDelegate.h */,
 				746169A61ED71B7700029B60 /* AppDelegate.m */,
+				698119CE1F1D9EA600A9BEF3 /* TransitionsNavigationController.h */,
+				698119CF1F1D9EA600A9BEF3 /* TransitionsNavigationController.m */,
+				698119D41F1DA82800A9BEF3 /* TransitionsNavigationControllerDelegate.h */,
+				698119D51F1DA82800A9BEF3 /* TransitionsNavigationControllerDelegate.m */,
 				6988A65D1ED7BFD5002CABAE /* RootNavigationController.h */,
 				6988A65E1ED7BFD5002CABAE /* RootNavigationController.m */,
 				7412F2D11EE24B8700744C86 /* RootTableViewController.h */,
@@ -2196,6 +2206,7 @@
 				6988A66C1ED7C52D002CABAE /* CommonCode.m in Sources */,
 				7412F4241EE260C400744C86 /* CXPhoto.m in Sources */,
 				744F9FEE1EE031FD0007E53D /* Xzb_ApplicationDataTool.m in Sources */,
+				698119D61F1DA82800A9BEF3 /* TransitionsNavigationControllerDelegate.m in Sources */,
 				744F9FDB1EE02F680007E53D /* CustomTextField.m in Sources */,
 				699381631EDFA3C700BD2319 /* STAlertView.m in Sources */,
 				7412F3C31EE2588800744C86 /* Xzb_HotelNameCell.m in Sources */,
@@ -2298,6 +2309,7 @@
 				7499215F1EDBD37600459E5C /* CustomAlertView.m in Sources */,
 				6993820A1EDFA6F800BD2319 /* Xzb_MyOrderMetaModel.m in Sources */,
 				7499216C1EDBD8A600459E5C /* Xzb_CountDownButton.m in Sources */,
+				698119D01F1D9EA600A9BEF3 /* TransitionsNavigationController.m in Sources */,
 				744F9FE61EE030270007E53D /* CityModel.m in Sources */,
 				6988A6851ED7D6E0002CABAE /* UIButton+Extension.m in Sources */,
 				7485A9F61EF4AA3D008DB3E7 /* XHDatePickerView.m in Sources */,

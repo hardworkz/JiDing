@@ -243,13 +243,17 @@
     [self setupHomeView];
     self.isCompleteTypeAnimation = YES;
 }
+- (void)viewWillAppear:(BOOL)animated
+{
+    [super viewWillAppear:animated];
+    
+    [self.navigationController setNavigationBarHidden:NO animated:animated];
+}
 - (void)actionAutoBack:(UIBarButtonItem *)barItem
 {
-    [self dismissViewControllerAnimated:YES completion:nil];
-//    if (self.isCompleteAnimation) {
-//        [self animationClose:nil];
-//        [self back];
-//    }
+    [self.animationVC animationClose:^{
+        [self.navigationController popViewControllerAnimated:NO];
+    }];
 }
 /*
  * 选择条件完成，进入下一步

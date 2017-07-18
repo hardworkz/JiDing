@@ -14,4 +14,8 @@
  *  当前选择的首页类型，默认为酒店
  */
 @property (assign, nonatomic) SelectedHomeType homeType;
+/**
+ 动画控制器
+ */
+@property (strong, nonatomic) AnimationViewController *animationVC;
 @end

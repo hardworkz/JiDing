@@ -47,20 +47,14 @@
 }
 - (void)viewDidLoad {
     [super viewDidLoad];
-    //设置导航栏标题
-    UILabel *titleLabel = [[UILabel alloc] init];
-    titleLabel.frame = CGRectMake(0, 0, 100, 30);
-    titleLabel.textColor = [UIColor blackColor];
-    titleLabel.textAlignment = NSTextAlignmentCenter;
-    titleLabel.font = [UIFont systemFontOfSize:20];
-    titleLabel.text = @"设置";
-    self.navigationItem.titleView = titleLabel;
+    self.fd_interactivePopDisabled = YES;
+    
+    self.title = @"设置";
     
     UITableView *tableView = [[UITableView alloc] init];
     tableView.delegate = self;
     tableView.dataSource = self;
     tableView.frame = CGRectMake(0, 0, SCREEN_WIDTH, SCREEN_HEIGHT - 49);
-//    tableView.scrollEnabled = NO;
     [self.view addSubview:tableView];
     self.tableView = tableView;
     
@@ -68,19 +62,14 @@
     
     UIButton *logoutBtn = [[UIButton alloc] init];
     logoutBtn.title = @"退出";
-    logoutBtn.frame = CGRectMake(-1, SCREEN_Height - 49 - 64, SCREEN_Width + 2, 49);
-//    [logoutBtn setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
+    logoutBtn.frame = CGRectMake(0, SCREEN_Height - 49 - 64, SCREEN_Width, 49);
     logoutBtn.backgroundColor = AppDeepGrayTextColor;
-//    logoutBtn.layer.borderColor = AppLineColor.CGColor;
-//    logoutBtn.layer.borderWidth = 1;
     [logoutBtn addTarget:self action:@selector(logoutBtnClick) forControlEvents:UIControlEventTouchUpInside];
     [self.view addSubview:logoutBtn];
 }
 - (void)actionAutoBack:(UIBarButtonItem *)barItem
 {
-    if ([self.delegate respondsToSelector:@selector(settingVCDidPop:)]) {
-        [self.delegate settingVCDidPop:self];
-    }
+    [self dismissViewControllerAnimated:YES completion:nil];
 }
 //退出登录
 - (void)logoutBtnClick

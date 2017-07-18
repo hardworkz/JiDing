@@ -8,12 +8,7 @@
 
 #import "RootViewController.h"
 
-@class SettingViewController;
-@protocol SettingViewControllerDelegate <NSObject>
 
-- (void)settingVCDidPop:(SettingViewController *)settingVC;
-
-@end
 @interface SettingViewController : RootViewController
-@property (weak, nonatomic) id<SettingViewControllerDelegate> delegate;
+
 @end

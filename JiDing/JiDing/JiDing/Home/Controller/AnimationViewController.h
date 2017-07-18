@@ -21,5 +21,6 @@ typedef NS_ENUM(NSUInteger, SelectedHomeType) {
     SelectedHomeTypeKTV = 2,
 };
 @interface AnimationViewController : RootViewController
-
+- (void)animationClose:(void(^)())completionAnimation;
+- (void)animationOpen:(void(^)())completionAnimation;
 @end

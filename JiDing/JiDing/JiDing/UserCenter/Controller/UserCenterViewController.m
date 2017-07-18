@@ -22,31 +22,27 @@
 - (UITableView *)tableView
 {
     if (_tableView == nil) {
-        _tableView = [[UITableView alloc] initWithFrame:self.view.bounds style:UITableViewStylePlain];
+        _tableView = [[UITableView alloc] initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, SCREEN_HEIGHT) style:UITableViewStylePlain];
         _tableView.delegate = self;
         _tableView.dataSource = self;
         _tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
     }
     return _tableView;
 }
-- (void)viewWillAppear:(BOOL)animated
-{
-    [super viewWillAppear:animated];
-    self.navigationController.navigationBar.hidden = NO;
-}
+
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-    self.title = @"我的";
+    self.fd_interactivePopDisabled = YES;
     
+    self.title = @"我的";
     
     [self.view addSubview:self.tableView];
 }
 - (void)actionAutoBack:(UIBarButtonItem *)barItem
 {
-    if ([self.delegate respondsToSelector:@selector(userCenterVCDidPop:)]) {
-        [self.delegate userCenterVCDidPop:self];
-    }
+//    [self.navigationController popViewControllerAnimated:YES];
+    [self dismissViewControllerAnimated:YES completion:nil];
 }
 #pragma mark - table dataSource
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section

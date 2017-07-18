@@ -11,7 +11,9 @@
 
 typedef NS_ENUM(NSUInteger, XWPresentOneTransitionType) {
     XWPresentOneTransitionTypePresent = 0,//管理present动画
-    XWPresentOneTransitionTypeDismiss//管理dismiss动画
+    XWPresentOneTransitionTypeDismiss,//管理dismiss动画
+    XWPresentOneTransitionTypePush,//管理push动画
+    XWPresentOneTransitionTypePop//管理pop动画
 };
 
 @interface FourPingTransition : NSObject<UIViewControllerAnimatedTransitioning,CAAnimationDelegate>

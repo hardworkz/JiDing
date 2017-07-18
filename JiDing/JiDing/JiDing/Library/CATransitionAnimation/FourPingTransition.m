@@ -25,7 +25,7 @@
 
 #pragma - mark UIViewControllerAnimatedTransitioning
 -(NSTimeInterval)transitionDuration:(id<UIViewControllerContextTransitioning>)transitionContext{
-    return 1.;
+    return 0.75;
 }
 
 -(void)animateTransition:(id<UIViewControllerContextTransitioning>)transitionContext
@@ -42,27 +42,15 @@
     }
 }
 
-//
 - (void)presentAnimation:(id<UIViewControllerContextTransitioning>)transitionContext{
     
     //我们可以利用viewControllerForKey: 方法知道是从哪个controller变换到哪个controller
-    UINavigationController *fromVC = (UINavigationController *)[transitionContext viewControllerForKey:UITransitionContextFromViewControllerKey];
-    UIViewController *temp = fromVC.viewControllers.lastObject;
+//    UINavigationController *fromVC = (UINavigationController *)[transitionContext viewControllerForKey:UITransitionContextFromViewControllerKey];
+    
+//    [fromVC.navigationController setNavigationBarHidden:NO animated:YES];
+//    UIViewController *temp = fromVC.viewControllers.lastObject;
     
     UIViewController *toVC = [transitionContext viewControllerForKey:UITransitionContextToViewControllerKey];
-    //拿到button
-//    UIButton *button;
-//    NSArray *subArray = [[[[temp.view.window.subviews objectAtIndex:1] subviews] objectAtIndex:2] subviews];
-//    for (UIView *view in subArray) {
-//        if ([view.accessibilityLabel isEqualToString:@"设置"]) {
-//            button = (UIButton *)view;
-//            break;
-//        }
-//        if ([view.accessibilityLabel isEqualToString:@"个人"]) {
-//            button = (UIButton *)view;
-//            break;
-//        }
-//    }
     
     UIView *containerView = [transitionContext containerView]; //这个UIView就是执行动画的地方
     //我们还要确保controller的view都必须是这个containerView的subview
@@ -70,22 +58,19 @@
     
     //画圆
     UIBezierPath *startCycle;
-    CGFloat x;
-    CGFloat y;
-    if ([toVC isKindOfClass:[UserCenterViewController class]]) {
-        startCycle = [UIBezierPath bezierPathWithOvalInRect:CGRectMake(SCREEN_WIDTH, SCREEN_HEIGHT, 0, 0)];
-        x = SCREEN_WIDTH;
-        y = SCREEN_HEIGHT;
-    }else{
-        startCycle = [UIBezierPath bezierPathWithOvalInRect:CGRectMake(0, SCREEN_HEIGHT, 0, 0)];
-        x = SCREEN_WIDTH;
-        y = SCREEN_HEIGHT;
-    }
-
+    UIBezierPath *endCycle;
+    CGFloat x = SCREEN_WIDTH;
+    CGFloat y = SCREEN_HEIGHT;
     //求出半径
     CGFloat radius = sqrtf(pow(x, 2) + pow(y, 2));
-    
-    UIBezierPath *endCycle = [UIBezierPath bezierPathWithArcCenter:containerView.center radius:radius startAngle:0 endAngle:M_PI * 2 clockwise:YES];
+    if ([[toVC.childViewControllers lastObject] isKindOfClass:[UserCenterViewController class]]) {
+        startCycle = [UIBezierPath bezierPathWithOvalInRect:CGRectMake(SCREEN_WIDTH, SCREEN_HEIGHT, 0, 0)];
+        endCycle = [UIBezierPath bezierPathWithOvalInRect:CGRectMake(- radius + SCREEN_WIDTH, - radius + SCREEN_HEIGHT, 2 * radius,  2 * radius)];
+    }else{
+        startCycle = [UIBezierPath bezierPathWithOvalInRect:CGRectMake(0, SCREEN_HEIGHT, 0, 0)];
+        endCycle = [UIBezierPath bezierPathWithOvalInRect:CGRectMake(- radius, - radius + SCREEN_HEIGHT, 2 * radius,  2 * radius)];
+    }
+
     CAShapeLayer *maskLayer = [CAShapeLayer layer];
     maskLayer.path = endCycle.CGPath;
     toVC.view.layer.mask = maskLayer;
@@ -101,8 +86,89 @@
     [maskLayerAnimation setValue:transitionContext forKey:@"transitionContext"];
     [maskLayer addAnimation:maskLayerAnimation forKey:@"path"];
 }
-
 - (void)dismissAnimation:(id<UIViewControllerContextTransitioning>)transitionContext
+{
+    UIViewController *fromVC = [transitionContext viewControllerForKey:UITransitionContextFromViewControllerKey];
+    UINavigationController *toVC = (UINavigationController *)[transitionContext viewControllerForKey:UITransitionContextToViewControllerKey];
+    
+    UIView *containerView = [transitionContext containerView];
+    [containerView insertSubview:toVC.view atIndex:0];
+    //画两个圆路径
+    //画圆
+    UIBezierPath *endCycle;
+    UIBezierPath *startCycle;
+    CGFloat x = SCREEN_WIDTH;
+    CGFloat y = SCREEN_HEIGHT;
+    //求出半径
+    CGFloat radius = sqrtf(pow(x, 2) + pow(y, 2));
+    if ([[fromVC.childViewControllers lastObject] isKindOfClass:[UserCenterViewController class]]) {
+        startCycle = [UIBezierPath bezierPathWithOvalInRect:CGRectMake(- radius + SCREEN_WIDTH, - radius + SCREEN_HEIGHT, 2 * radius,  2 * radius)];
+        endCycle = [UIBezierPath bezierPathWithOvalInRect:CGRectMake(SCREEN_WIDTH, SCREEN_HEIGHT, 0, 0)];
+    }else{
+        startCycle = [UIBezierPath bezierPathWithOvalInRect:CGRectMake(- radius, - radius + SCREEN_HEIGHT, 2 * radius,  2 * radius)];
+        endCycle = [UIBezierPath bezierPathWithOvalInRect:CGRectMake(0, SCREEN_HEIGHT, 0, 0)];
+    }
+    
+    //创建CAShapeLayer进行遮盖
+    CAShapeLayer *maskLayer = [CAShapeLayer layer];
+    maskLayer.fillColor = [UIColor greenColor].CGColor;
+    maskLayer.path = endCycle.CGPath;
+    fromVC.view.layer.mask = maskLayer;
+    //创建路径动画
+    CABasicAnimation *maskLayerAnimation = [CABasicAnimation animationWithKeyPath:@"path"];
+    maskLayerAnimation.delegate = self;
+    maskLayerAnimation.fromValue = (__bridge id)(startCycle.CGPath);
+    maskLayerAnimation.toValue = (__bridge id)((endCycle.CGPath));
+    maskLayerAnimation.duration = [self transitionDuration:transitionContext];
+    maskLayerAnimation.timingFunction = [CAMediaTimingFunction  functionWithName:kCAMediaTimingFunctionEaseInEaseOut];
+    [maskLayerAnimation setValue:transitionContext forKey:@"transitionContext"];
+    [maskLayer addAnimation:maskLayerAnimation forKey:@"path"];
+}
+- (void)pushAnimation:(id<UIViewControllerContextTransitioning>)transitionContext{
+    
+    //我们可以利用viewControllerForKey: 方法知道是从哪个controller变换到哪个controller
+    
+    UIViewController *toVC = [transitionContext viewControllerForKey:UITransitionContextToViewControllerKey];
+    
+    UIView *containerView = [transitionContext containerView]; //这个UIView就是执行动画的地方
+    //我们还要确保controller的view都必须是这个containerView的subview
+    [containerView addSubview:toVC.view];
+    
+    //画圆
+    UIBezierPath *startCycle;
+    CGFloat x = SCREEN_WIDTH;
+    CGFloat y = SCREEN_HEIGHT;
+    if ([toVC isKindOfClass:[UserCenterViewController class]]) {
+        startCycle = [UIBezierPath bezierPathWithOvalInRect:CGRectMake(SCREEN_WIDTH, SCREEN_HEIGHT, 0, 0)];
+        x = SCREEN_WIDTH;
+        y = SCREEN_HEIGHT;
+    }else{
+        startCycle = [UIBezierPath bezierPathWithOvalInRect:CGRectMake(0, SCREEN_HEIGHT, 0, 0)];
+        x = SCREEN_WIDTH;
+        y = SCREEN_HEIGHT;
+    }
+    
+    //求出半径
+    CGFloat radius = sqrtf(pow(x, 2) + pow(y, 2));
+    
+    UIBezierPath *endCycle = [UIBezierPath bezierPathWithArcCenter:containerView.center radius:radius startAngle:0 endAngle:M_PI * 2 clockwise:YES];
+    
+    CAShapeLayer *maskLayer = [CAShapeLayer layer];
+    maskLayer.path = endCycle.CGPath;
+    toVC.view.layer.mask = maskLayer;
+    
+    //
+    CABasicAnimation *maskLayerAnimation = [CABasicAnimation animation];
+    maskLayerAnimation.delegate = self;
+    maskLayerAnimation.fromValue = (__bridge id _Nullable)(startCycle.CGPath);
+    maskLayerAnimation.toValue = (__bridge id _Nullable)(endCycle.CGPath);
+    maskLayerAnimation.duration = [self transitionDuration:transitionContext];
+    maskLayerAnimation.timingFunction = [CAMediaTimingFunction functionWithName:kCAMediaTimingFunctionEaseOut];
+    
+    [maskLayerAnimation setValue:transitionContext forKey:@"transitionContext"];
+    [maskLayer addAnimation:maskLayerAnimation forKey:@"path"];
+}
+- (void)popAnimation:(id<UIViewControllerContextTransitioning>)transitionContext
 {
     UIViewController *fromVC = [transitionContext viewControllerForKey:UITransitionContextFromViewControllerKey];
     UINavigationController *toVC = (UINavigationController *)[transitionContext viewControllerForKey:UITransitionContextToViewControllerKey];
