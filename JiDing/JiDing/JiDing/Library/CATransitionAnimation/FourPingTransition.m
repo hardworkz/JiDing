@@ -25,7 +25,7 @@
 
 #pragma - mark UIViewControllerAnimatedTransitioning
 -(NSTimeInterval)transitionDuration:(id<UIViewControllerContextTransitioning>)transitionContext{
-    return 5;
+    return 1.;
 }
 
 -(void)animateTransition:(id<UIViewControllerContextTransitioning>)transitionContext
