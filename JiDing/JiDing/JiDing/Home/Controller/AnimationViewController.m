@@ -129,7 +129,7 @@
 {
     if (_screenView == nil) {
         _screenView = [[UIView alloc] initWithFrame:[self windowView].bounds];
-        _screenView.backgroundColor = [UIColor whiteColor];
+        _screenView.backgroundColor = [UIColor redColor];
         
         [_screenView addSubview:self.topView];
         [_screenView addSubview:self.centerLineView];
@@ -233,11 +233,11 @@
     self.isCompleteAnimation = NO;
     DefineWeakSelf;
     weakSelf.centerLineView_window.hidden = YES;
-    [UIView animateWithDuration:1.25 // 动画时长
+    [UIView animateWithDuration:1.0 // 动画时长
                           delay:0.0 // 动画延迟
          usingSpringWithDamping:0.9 // 弹簧振动效果 0~1
           initialSpringVelocity:1.0 // 初始速度
-                        options:UIViewAnimationOptionCurveEaseIn // 动画过渡效果
+                        options:UIViewAnimationOptionCurveEaseOut // 动画过渡效果
                      animations:^{
                          weakSelf.topView_window.frame = CGRectMake(0, -IPHONE_H * 0.5, IPHONE_W, IPHONE_H * 0.5 - 0.5);
                          weakSelf.bottomView_window.frame = CGRectMake(0, IPHONE_H, IPHONE_W, IPHONE_H * 0.5 - 0.5);
@@ -258,7 +258,7 @@
     
     self.isCompleteAnimation = NO;
     DefineWeakSelf;
-    [UIView animateWithDuration:1.25 // 动画时长
+    [UIView animateWithDuration:0.75 // 动画时长
                           delay:0.0 // 动画延迟
          usingSpringWithDamping:1.0 // 弹簧振动效果 0~1
           initialSpringVelocity:1.0 // 初始速度
@@ -281,7 +281,7 @@
 {
     [[self windowView] addSubview:self.screenView_window];
     
-    HomeViewController *homeVC = [[HomeViewController alloc] init];
+    HomeViewController *homeVC = [HomeViewController shareInstance];
     homeVC.animationVC = self;
     homeVC.homeType = SelectedHomeTypeHotel;
     [self.navigationController pushViewController:homeVC animated:NO];
@@ -291,9 +291,9 @@
 {
     [[self windowView] addSubview:self.screenView_window];
     
-    HomeViewController *homeVC = [[HomeViewController alloc] init];
+    HomeViewController *homeVC = [HomeViewController shareInstance];
     homeVC.animationVC = self;
-    homeVC.homeType = SelectedHomeTypeHotel;
+    homeVC.homeType = SelectedHomeTypeKTV;
     [self.navigationController pushViewController:homeVC animated:NO];
     [self animationOpen:nil];
 }

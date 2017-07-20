@@ -83,8 +83,20 @@
  */
 @end
 
+static HomeViewController *_instance = nil;
 @implementation HomeViewController
 
++ (instancetype)shareInstance {
+    static dispatch_once_t onceToken ;
+    dispatch_once(&onceToken, ^{
+        _instance = [[self alloc] init];
+    }) ;
+    return _instance ;
+}
+- (void)dealloc
+{
+    RTLog(@"dealloc---HomeViewController");
+}
 #pragma mark - set方法
 - (void)setHomeType:(SelectedHomeType)homeType
 {
@@ -234,6 +246,9 @@
 #pragma mark - viewDidLoad
 - (void)viewDidLoad {
     [super viewDidLoad];
+    
+    self.fd_interactivePopDisabled = YES;
+    
     [AMapLocationServices sharedServices].apiKey = MaMapApiKey;
     
     //开始定位
@@ -242,6 +257,11 @@
     //设置首页控件
     [self setupHomeView];
     self.isCompleteTypeAnimation = YES;
+    
+    //侧滑手势
+    UISwipeGestureRecognizer *rightSwipe = [[UISwipeGestureRecognizer alloc]initWithTarget:self action:@selector(actionAutoBack:)];
+    [rightSwipe setDirection:UISwipeGestureRecognizerDirectionRight];
+    [self.view addGestureRecognizer:rightSwipe];
 }
 - (void)viewWillAppear:(BOOL)animated
 {
@@ -251,8 +271,10 @@
 }
 - (void)actionAutoBack:(UIBarButtonItem *)barItem
 {
+    DefineWeakSelf
     [self.animationVC animationClose:^{
-        [self.navigationController popViewControllerAnimated:NO];
+        [weakSelf.navigationController popViewControllerAnimated:NO];
+        [weakSelf back];
     }];
 }
 /*
@@ -376,8 +398,6 @@
 - (void)back
 {
     if (!self.isCompleteTypeAnimation) {
-        
-        
         
         self.selectedTypeV.layer.borderColor = AppLightGrayLineColor.CGColor;
         [UIView animateWithDuration:0.35 animations:^{
@@ -803,8 +823,8 @@
     
     peopleTitleLabel = [[UILabel alloc] init];
     peopleTitleLabel.textAlignment = NSTextAlignmentCenter;
-    peopleTitleLabel.textColor = [UIColor blackColor];
-    peopleTitleLabel.font = [UIFont systemFontOfSize:15];
+    peopleTitleLabel.textColor = HEXCOLOR(0x323232);
+    peopleTitleLabel.font = [UIFont systemFontOfSize:16];
     peopleTitleLabel.frame = CGRectMake(0, 5, SCREEN_WIDTH * 0.5, 30);
     [peopleNumberView addSubview:peopleTitleLabel];
     
@@ -847,8 +867,8 @@
     
     roomTitleLabel = [[UILabel alloc] init];
     roomTitleLabel.textAlignment = NSTextAlignmentCenter;
-    roomTitleLabel.textColor = [UIColor blackColor];
-    roomTitleLabel.font = [UIFont systemFontOfSize:15];
+    roomTitleLabel.textColor = HEXCOLOR(0x323232);
+    roomTitleLabel.font = [UIFont systemFontOfSize:16];
     roomTitleLabel.frame = CGRectMake(0, 5, SCREEN_WIDTH * 0.5, 30);
     [roomNumberView addSubview:roomTitleLabel];
     
@@ -877,6 +897,14 @@
     [roomSubBtn setBackgroundImage:[UIImage imageNamed:@"－点击状态"] forState:UIControlStateHighlighted];
     [roomSubBtn addTarget:self action:@selector(subBtnClicked:) forControlEvents:UIControlEventTouchUpInside];
     [roomNumberView addSubview:roomSubBtn];
+    
+    if (self.homeType == SelectedHomeTypeHotel) {
+        peopleTitleLabel.text = @"客官人数";
+        roomTitleLabel.text = @"房间数量";
+    }else{
+        peopleTitleLabel.text = @"唱客人数";
+        roomTitleLabel.text = @"包厢数量";
+    }
     
     return numView;
 }

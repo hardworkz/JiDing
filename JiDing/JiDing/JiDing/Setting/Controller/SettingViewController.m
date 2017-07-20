@@ -66,6 +66,11 @@
     logoutBtn.backgroundColor = AppDeepGrayTextColor;
     [logoutBtn addTarget:self action:@selector(logoutBtnClick) forControlEvents:UIControlEventTouchUpInside];
     [self.view addSubview:logoutBtn];
+    
+    //侧滑手势
+    UISwipeGestureRecognizer *rightSwipe = [[UISwipeGestureRecognizer alloc]initWithTarget:self action:@selector(actionAutoBack:)];
+    [rightSwipe setDirection:UISwipeGestureRecognizerDirectionRight];
+    [self.view addGestureRecognizer:rightSwipe];
 }
 - (void)actionAutoBack:(UIBarButtonItem *)barItem
 {

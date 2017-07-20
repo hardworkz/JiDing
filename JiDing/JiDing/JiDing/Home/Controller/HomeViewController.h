@@ -11,6 +11,12 @@
 
 @interface HomeViewController : RootViewController
 /**
+ 单例
+
+ @return 返回单例对象
+ */
++ (instancetype)shareInstance;
+/**
  *  当前选择的首页类型，默认为酒店
  */
 @property (assign, nonatomic) SelectedHomeType homeType;

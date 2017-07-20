@@ -38,10 +38,14 @@
     self.title = @"我的";
     
     [self.view addSubview:self.tableView];
+    
+    //侧滑手势
+    UISwipeGestureRecognizer *rightSwipe = [[UISwipeGestureRecognizer alloc]initWithTarget:self action:@selector(actionAutoBack:)];
+    [rightSwipe setDirection:UISwipeGestureRecognizerDirectionRight];
+    [self.view addGestureRecognizer:rightSwipe];
 }
 - (void)actionAutoBack:(UIBarButtonItem *)barItem
 {
-//    [self.navigationController popViewControllerAnimated:YES];
     [self dismissViewControllerAnimated:YES completion:nil];
 }
 #pragma mark - table dataSource
