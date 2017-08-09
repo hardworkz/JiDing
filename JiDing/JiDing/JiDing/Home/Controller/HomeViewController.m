@@ -312,10 +312,14 @@ static HomeViewController *_instance = nil;
     [param setObject:roomNumberLabel.text forKey:@"num"];
     //设置人数
     [param setObject:numberLabel.text forKey:@"userNum"];
+    //酒店星级
+    [param setObject:@"0" forKey:@"businessLevel"];
+    //钟点房和全日房区别（现在只有全日房）
+    [param setObject:@"1" forKey:@"orderType"];
     
     RTLog(@"%@",param);
     
-    [RTHttpTool post:[NSString stringWithFormat:@"%@?userId=%@&token=%@",ADD_NEW_ORDER,account.userId,account.loginToken] addHUD:NO param:nil success:^(id responseObj) {
+    [RTHttpTool post:ADD_NEW_ORDER addHUD:NO param:param success:^(id responseObj) {
         RTLog(@"%@",responseObj);
         if ([responseObj[SUCCESS] intValue] == 1) {
             
@@ -324,7 +328,6 @@ static HomeViewController *_instance = nil;
                 [[Toast makeText:@"~暂无酒店报价，请重新更改需求~"] show];
                 
                 //恢复酒店订单状态
-                UserAccount *account = [UserAccountTool account];
                 [RTHttpTool post:CANCLE_ORDER addHUD:NO param:@{ID:responseObj[ENTITIES][ORDERID],USERID:account.userId,TOKEN:account.loginToken} success:^(id responseObj) {
                     if ([responseObj[SUCCESS] intValue] == 1) {
                         
@@ -347,28 +350,6 @@ static HomeViewController *_instance = nil;
     } failure:^(NSError *error) {
         RTLog(@"error :%@",error);
     }];
-
-//
-//
-//    HotelOfferModel *model = [HotelOfferModel mj_objectWithKeyValues:@{@"ylocation":@"118.181564"
-//                                                                       ,@"timePeriod":@0
-//                                                                       ,@"orderType":@"1"
-//                                                                       ,@"countDown":@5
-//                                                                       ,@"image":@"user5-128x128.png"
-//                                                                       ,@"roomId":@136
-//                                                                       ,@"hotelId":@80
-//                                                                       ,@"distance":@1.13
-//                                                                       ,@"level":@"4"
-//                                                                       ,@"price":@"0.02"
-//                                                                       ,@"xlocation":@"24.488284"
-//                                                                       ,@"roomType":@"2"
-//                                                                       ,@"orderRelId":@28468
-//                                                                       ,@"name":@"%E4%BD%B0%E7%BF%94%E8%BD%AF%E4%BB%B6%E5%9B%AD%E9%85%92%E5%BA%97"
-//                                                                       ,@"payType":@"1"
-//                                                                       ,@"appraise":@90
-//                                                                       }];
-//    NSMutableArray *array = [NSMutableArray array];
-//    [array addObject:model];
 }
 - (void)select_hotel
 {
