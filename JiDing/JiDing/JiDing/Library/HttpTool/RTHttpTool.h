@@ -8,13 +8,26 @@
 
 #import <Foundation/Foundation.h>
 
+/**
+ *  日期格式
+ */
+typedef NS_ENUM(NSUInteger, FormatType) {
+    /**
+     *  中文格式日期
+     */
+    FormatTypeChineseFormat = 0,
+    /**
+     *  横杆格式日期
+     */
+    FormatTypeRung
+};
 @interface RTHttpTool : NSObject
 //判断用户是否已经下线，请求接口
-+ (void)isLogoutHttpWithSuccess:(void (^)(BOOL isLogout))result;
+//+ (void)isLogoutHttpWithSuccess:(void (^)(BOOL isLogout))result;
 //判断内容是否全部为空格  yes 全部为空格  no 不是
 + (BOOL) isEmpty:(NSString *) str;
 //用户没有登录提示
-+ (BOOL)userLogoutToast;
+//+ (BOOL)userLogoutToast;
 /**
  *  转换图片url路径
  */
@@ -22,7 +35,7 @@
 /**
  *  数组排序升序
  */
-- (NSArray *)sortArray:(NSArray *)array;
+//- (NSArray *)sortArray:(NSArray *)array;
 /*
  * 获取当前日期数字字符串
  */
@@ -30,11 +43,11 @@
 /*
  * 获取今天日期的格式化字符串
  */
-+(NSString *)GetTodayDay:(NSDate *)aDate isRung:(BOOL)isRung;
++(NSString *)GetTodayDay:(NSDate *)aDate formatType:(FormatType)formatType;
 /*
  * 获取明天日期的格式化字符串
  */
-+(NSString *)GetTomorrowDay:(NSDate *)aDate isRung:(BOOL)isRung;
++(NSString *)GetTomorrowDay:(NSDate *)aDate formatType:(FormatType)formatType;
 /*
  * 将data转成json
  */
@@ -71,7 +84,7 @@
  *
  *  @param url      请求路径
  *  @param param    请求参数
- *  @param array    上传数据
+ *  @param image    上传数据
  *  @param fileName 文件名
  *  @param success  成功block
  *  @param failure  失败block

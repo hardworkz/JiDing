@@ -29,7 +29,7 @@
 - (void)timeAction:(NSTimer *)timer
 {
     _index--;
-    NSLog(@"_index = %ld",(long)_index);
+//    NSLog(@"_index = %ld",(long)_index);
     NSString *again_str = [NSString stringWithFormat:@"获取中(%ld)",(long)_index];
     [self setTitle:again_str forState:UIControlStateNormal];
     self.enabled = NO;

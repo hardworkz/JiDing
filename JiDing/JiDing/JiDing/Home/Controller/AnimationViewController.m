@@ -129,7 +129,7 @@
 {
     if (_screenView == nil) {
         _screenView = [[UIView alloc] initWithFrame:[self windowView].bounds];
-        _screenView.backgroundColor = [UIColor redColor];
+        _screenView.backgroundColor = [UIColor whiteColor];
         
         [_screenView addSubview:self.topView];
         [_screenView addSubview:self.centerLineView];

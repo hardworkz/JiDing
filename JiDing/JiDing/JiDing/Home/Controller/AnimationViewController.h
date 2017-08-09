@@ -14,11 +14,11 @@ typedef NS_ENUM(NSUInteger, SelectedHomeType) {
     /**
      *  酒店
      */
-    SelectedHomeTypeHotel = 1,
+    SelectedHomeTypeHotel = 0,
     /**
      *  KTV
      */
-    SelectedHomeTypeKTV = 2,
+    SelectedHomeTypeKTV
 };
 @interface AnimationViewController : RootViewController
 - (void)animationClose:(void(^)())completionAnimation;

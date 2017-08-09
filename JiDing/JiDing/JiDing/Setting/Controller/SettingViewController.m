@@ -80,10 +80,9 @@
 - (void)logoutBtnClick
 {
     //弹窗提示
-//    DQAlertView * alertView = [[DQAlertView alloc] initWithTitle:@"提示" message:@"确认退出当前的账号？" delegate:self cancelButtonTitle:@"取消" otherButtonTitles:@"确认", nil];
-//    [alertView.otherButton setTitleColor:AppMainColor forState:UIControlStateNormal];
-//    [alertView show];
-    
+    DQAlertView *alertView = [[DQAlertView alloc] initWithTitle:@"提示" message:@"确认退出当前的账号？" delegate:self cancelButtonTitle:@"取消" otherButtonTitles:@"确认", nil];
+    [alertView.otherButton setTitleColor:AppMainColor forState:UIControlStateNormal];
+    [alertView show];
 }
 
 
@@ -182,7 +181,17 @@
 #pragma mark - DQAlertViewDelegate
 - (void)otherButtonClickedOnAlertView:(DQAlertView *)alertView
 {
-    if ([alertView.titleLabel.text isEqualToString:@"缓存清理"]) {
+    if ([alertView.titleLabel.text isEqualToString:@"提示"]) {
+        //删除账号
+        [UserAccountTool deleteAccountSuccess:^{
+            [[NSNotificationCenter defaultCenter] postNotificationName:UserUpdateMessageNotification object:nil];
+            [[NSNotificationCenter defaultCenter] postNotificationName:LogoutBySelfNotification object:nil];
+            [[Toast makeText:@"退出登录成功~"] show];
+            APPDELEGATE.window.rootViewController = [[LoginNavigationController alloc] initWithRootViewController:[[LoginViewController alloc] init]];
+        } failuer:^{
+            [[Toast makeText:@"退出登录失败~"] show];
+        }];
+    }else if ([alertView.titleLabel.text isEqualToString:@"缓存清理"]) {
         dispatch_async(
                        dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0)
                        , ^{

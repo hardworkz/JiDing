@@ -18,6 +18,7 @@
     UIButton *loginBtn;
     UIButton *registerBtn;
     UIButton *forgetPwdBtn;
+    Xzb_CountDownButton *reGetCodeBtn;
 }
 @end
 
@@ -38,7 +39,7 @@
 {
     //设置登录应用图标
     iconView = [[UIImageView alloc] init];
-    iconView.image = [UIImage imageNamed:@"输入账号"];
+    iconView.image = [UIImage imageNamed:@"LOGO"];
     iconView.frame = CGRectMake(0, 30, SCREEN_WIDTH, 100);
     iconView.contentMode = UIViewContentModeCenter;
     [self.view addSubview:iconView];
@@ -56,7 +57,7 @@
     [phoneView addSubview:phoneIconView];
     
     phoneTextField = [[UITextField alloc] initWithFrame:CGRectMake(CGRectGetMaxX(phoneIconView.frame), 0, SCREEN_WIDTH - 125, 50)];
-    NSMutableAttributedString *str = [[NSMutableAttributedString alloc] initWithString:@"输入账号"];
+    NSMutableAttributedString *str = [[NSMutableAttributedString alloc] initWithString:@"请输入手机号"];
     [str addAttribute:NSForegroundColorAttributeName value:HEXCOLOR(0x929292) range:NSMakeRange(0,str.length)];
     phoneTextField.attributedPlaceholder = str;
     phoneTextField.backgroundColor = [UIColor clearColor];
@@ -78,7 +79,7 @@
     [pwdView addSubview:pwdIconView];
     
     pwdTextField = [[UITextField alloc] initWithFrame:CGRectMake(CGRectGetMaxX(phoneIconView.frame), 0, SCREEN_WIDTH - 125, 50)];
-    NSMutableAttributedString *str2 = [[NSMutableAttributedString alloc] initWithString:@"输入密码"];
+    NSMutableAttributedString *str2 = [[NSMutableAttributedString alloc] initWithString:@"请输入验证码"];
     [str2 addAttribute:NSForegroundColorAttributeName value:HEXCOLOR(0x929292) range:NSMakeRange(0,str2.length)];
     pwdTextField.attributedPlaceholder = str2;
     pwdTextField.backgroundColor = [UIColor clearColor];
@@ -86,6 +87,18 @@
     pwdTextField.delegate = self;
     pwdTextField.keyboardType = UIKeyboardTypeDefault;
     [pwdView addSubview:pwdTextField];
+    
+    //获取验证码
+    reGetCodeBtn = [[Xzb_CountDownButton alloc] init];
+    reGetCodeBtn.frame = CGRectMake(SCREEN_Width - 140, pwdView.y + 8,100, 34);
+    reGetCodeBtn.backgroundColor = [UIColor clearColor];
+    [reGetCodeBtn setTitle:@"获取验证码" forState:UIControlStateNormal];
+    [reGetCodeBtn setTitleColor:AppGrayTextColor forState:UIControlStateNormal];
+    reGetCodeBtn.titleLabel.font = [UIFont systemFontOfSize:15];
+    [reGetCodeBtn addTarget:self action:@selector(reGetCodeBtnClicked) forControlEvents:UIControlEventTouchUpInside];
+    reGetCodeBtn.index = 60;
+    reGetCodeBtn.layer.cornerRadius = 5;
+    [self.view addSubview:reGetCodeBtn];
 
     //登录按钮
     loginBtn = [[UIButton alloc] init];
@@ -101,6 +114,7 @@
     [registerBtn.titleLabel setAppFontWithSize:14];
     [registerBtn setTitle:@"注册账号" forState:UIControlStateNormal];
     registerBtn.frame = CGRectMake(40, CGRectGetMaxY(loginBtn.frame) + 10, 100, 20);
+    registerBtn.hidden = YES;/**<隐藏该控件*/
     [registerBtn addTarget:self action:@selector(registerBtnClicked:) forControlEvents:UIControlEventTouchUpInside];
     [self.view addSubview:registerBtn];
     //忘记密码
@@ -113,9 +127,9 @@
     [self.view addSubview:forgetPwdBtn];
     
     //第三方登录按钮
-    for (int i = 0; i<3; i++) {
+    for (int i = 0; i<2; i++) {
         UIButton *button = [[UIButton alloc] init];
-        button.frame = CGRectMake((SCREEN_WIDTH - 100)/4 + (50 + (SCREEN_WIDTH - 100)/4)*i,SCREEN_HEIGHT - 50 - 50 - 64, 50, 50);
+        button.frame = CGRectMake((SCREEN_WIDTH - 100)/3 + (50 + (SCREEN_WIDTH - 100)/3)*i,SCREEN_HEIGHT - 50 - 50 - 64, 50, 50);
         button.tag = i;
         if (i == 0) {
             [button setBgImage:@"QQ"];
@@ -130,6 +144,38 @@
 
     }
 }
+/**
+ *  重新获取验证码
+ */
+- (void)reGetCodeBtnClicked
+{
+    if ([phoneTextField.text isEqualToString:@""]) {
+        [[Toast makeText:@"手机号不能为空"] show];
+        return;
+    }
+    if (phoneTextField.text.length != 11) {
+        [[Toast makeText:@"请输入正确的手机号码"] show];
+        return;
+    }
+    
+    [reGetCodeBtn attAction];
+    
+    [RTHttpTool get:GET_CODE addHUD:YES param:@{PHONE_CODE:phoneTextField.text,@"equipmentCode":[OpenUDID value]} success:^(id responseObj) {
+        if ([responseObj[SUCCESS] intValue] == 1) {
+            [pwdTextField becomeFirstResponder];
+//            [[Toast makeText:responseObj[MESSAGE]] show];
+            DQAlertView *alert = [[DQAlertView alloc] initWithTitle:@"短信验证码" message:responseObj[MESSAGE] delegate:nil cancelButtonTitle:nil otherButtonTitles:@"确定"];
+            [alert show];
+        }else
+        {
+            [[Toast makeText:responseObj[MESSAGE]] show];
+        }
+    } failure:^(NSError *error) {
+        NSLog(@"%@",error);
+    }];
+
+}
+
 #pragma mark - action
 - (void)loginBtnClicked:(UIButton *)button
 {
@@ -141,32 +187,35 @@
         [[Toast makeText:@"请输入正确手机号码"] show];
         return;
     }
-    if ([pwdTextField.text isEqualToString:@""]) {
-        [[Toast makeText:@"请先输入密码"] show];
-        return;
-    }if (pwdTextField.text.length >= 6 && pwdTextField.text.length <= 20) {
-        
-    }else {
-        [[Toast makeText:@"密码长度不正确！（6~20位之间）"] show];
-        return;
-    }
+//    if ([pwdTextField.text isEqualToString:@""]) {
+//        [[Toast makeText:@"请先输入密码"] show];
+//        return;
+//    }if (pwdTextField.text.length >= 6 && pwdTextField.text.length <= 20) {
+//        
+//    }else {
+//        [[Toast makeText:@"密码长度不正确！（6~20位之间）"] show];
+//        return;
+//    }
     button.enabled = NO;
     //获取当前版本号
     NSString *currentVersion = [NSBundle mainBundle].infoDictionary[@"CFBundleShortVersionString"];
     
-    NSDictionary *param = @{@"username":phoneTextField.text,@"password":pwdTextField.text,USERID:@"0",@"equipmentType":@"2",@"equipmentCode":[OpenUDID value],@"channelId":@"",@"appVersion":currentVersion};
+//    NSDictionary *param = @{@"username":phoneTextField.text,@"password":pwdTextField.text,USERID:@"0",@"equipmentType":@"2",@"equipmentCode":[OpenUDID value],@"channelId":@"iOS",@"appVersion":currentVersion};
+    
+    NSDictionary *param = @{USERID:@"0",PHONE_CODE:phoneTextField.text,VERIFY_CODE:pwdTextField.text,@"referralCode":@"",@"equipmentType":@"2",@"equipmentCode":[OpenUDID value],@"channelId":@"",@"appVersion":currentVersion};
     RTLog(@"%@",param);
-    [RTHttpTool post:PwdLogin addHUD:YES param:param success:^(id responseObj) {
+    [RTHttpTool post:LOGIN addHUD:YES param:param success:^(id responseObj) {
         button.enabled = YES;
         RTLog(@"登录返回信息为：%@",responseObj);
         if ([responseObj[SUCCESS] intValue] == 1) {
             //保存登录用户数据
             UserAccount *account = [UserAccount mj_objectWithKeyValues:responseObj[ENTITIES][CUSTOMER_INFO] context:nil];
             [UserAccountTool saveWithAccount:account];
-            
+            //登录成功发送通知
             [[NSNotificationCenter defaultCenter] postNotificationName:UserUpdateMessageNotification object:nil];
             [[NSNotificationCenter defaultCenter] postNotificationName:LoginNotification object:nil];
-            
+            //切换主窗口控制器
+            APPDELEGATE.window.rootViewController = [[RootNavigationController alloc] initWithRootViewController:[[AnimationViewController alloc] init]];
         }else
         {
             [[Toast makeText:responseObj[MESSAGE]] show];
@@ -190,13 +239,15 @@
             //在此回调中可以将社交平台用户信息与自身用户系统进行绑定，最后使用一个唯一用户标识来关联此用户信息。
             //在此示例中没有跟用户系统关联，则使用一个社交用户对应一个系统用户的方式。将社交用户的uid作为关联ID传入associateHandler。
             NSString *currentVersion = [NSBundle mainBundle].infoDictionary[@"CFBundleShortVersionString"];
-            [RTHttpTool post:POST_QQ_LOGIN addHUD:YES param:@{@"webchatid":user.uid,@"equipmentType":@"2",@"equipmentCode":[OpenUDID value],@"channelId":@"",@"appVersion":currentVersion} success:^(id responseObj) {
+            [RTHttpTool post:POST_QQ_LOGIN addHUD:YES param:@{@"webchatid":user.uid,@"equipmentType":@"2",@"equipmentCode":[OpenUDID value],@"channelId":@"iOS",@"appVersion":currentVersion} success:^(id responseObj) {
                 RTLog(@"微信登录返回数据为：%@",responseObj);
                 if ([responseObj[SUCCESS] integerValue] == 1) {
                     //保存登录用户数据
                     UserAccount *account = [UserAccount mj_objectWithKeyValues:responseObj[ENTITIES][CUSTOMER_INFO] context:nil];
                     [UserAccountTool saveWithAccount:account];
                     
+                    //切换主窗口控制器
+                    APPDELEGATE.window.rootViewController = [[RootNavigationController alloc] initWithRootViewController:[[AnimationViewController alloc] init]];
                 }
             } failure:^(NSError *error) {
                 
@@ -214,13 +265,15 @@
             //在此回调中可以将社交平台用户信息与自身用户系统进行绑定，最后使用一个唯一用户标识来关联此用户信息。
             //在此示例中没有跟用户系统关联，则使用一个社交用户对应一个系统用户的方式。将社交用户的uid作为关联ID传入associateHandler。
             NSString *currentVersion = [NSBundle mainBundle].infoDictionary[@"CFBundleShortVersionString"];
-            [RTHttpTool post:POST_WX_LOGIN addHUD:YES param:@{@"webchatid":user.uid,@"equipmentType":@"2",@"equipmentCode":[OpenUDID value],@"channelId":@"",@"appVersion":currentVersion} success:^(id responseObj) {
+            [RTHttpTool post:POST_WX_LOGIN addHUD:YES param:@{@"webchatid":user.uid,@"equipmentType":@"2",@"equipmentCode":[OpenUDID value],@"channelId":@"iOS",@"appVersion":currentVersion} success:^(id responseObj) {
                 RTLog(@"微信登录返回数据为：%@",responseObj);
                 if ([responseObj[SUCCESS] integerValue] == 1) {
                     //保存登录用户数据
                     UserAccount *account = [UserAccount mj_objectWithKeyValues:responseObj[ENTITIES][CUSTOMER_INFO] context:nil];
                     [UserAccountTool saveWithAccount:account];
                     
+                    //切换主窗口控制器
+                    APPDELEGATE.window.rootViewController = [[RootNavigationController alloc] initWithRootViewController:[[AnimationViewController alloc] init]];
                 }
             } failure:^(NSError *error) {
                 

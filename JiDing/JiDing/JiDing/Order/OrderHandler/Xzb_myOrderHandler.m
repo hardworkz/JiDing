@@ -97,10 +97,10 @@
     }
     @WeakObj(self);
     [RTHttpTool get:SELECT_D_TO_LIST_FOR_MOBILE_ID addHUD:NO param:dic success:^(id responseObj) {
-        id json = [RTHttpTool jsonWithResponseObj:responseObj];
-        NSLog(@"订单列表数据:%@",json);
-        if ([json[SUCCESS] intValue] == 1) {
-            Xzb_MyOrderListModel *model = [Xzb_MyOrderListModel mj_objectWithKeyValues:json];
+//        id json = [RTHttpTool jsonWithResponseObj:responseObj];
+        NSLog(@"订单列表数据:%@",responseObj);
+        if ([responseObj[SUCCESS] intValue] == 1) {
+            Xzb_MyOrderListModel *model = [Xzb_MyOrderListModel mj_objectWithKeyValues:responseObj];
             if (selfWeak.dataArray.count) {
                 [selfWeak.dataArray removeAllObjects];
             }
@@ -171,10 +171,10 @@
     }
     @WeakObj(self);
     [RTHttpTool get:SELECT_D_TO_LIST_FOR_MOBILE_ID addHUD:NO param:dic success:^(id responseObj) {
-        id json = [RTHttpTool jsonWithResponseObj:responseObj];
-        NSLog(@"%@",json);
-        if ([json[SUCCESS] intValue] == 1) {
-            Xzb_MyOrderListModel *model = [Xzb_MyOrderListModel mj_objectWithKeyValues:json];
+//        id json = [RTHttpTool jsonWithResponseObj:responseObj];
+        NSLog(@"%@",responseObj);
+        if ([responseObj[SUCCESS] intValue] == 1) {
+            Xzb_MyOrderListModel *model = [Xzb_MyOrderListModel mj_objectWithKeyValues:responseObj];
             [selfWeak.dataArray addObjectsFromArray:model.entities.orderInfos];
             [selfWeak.tableView reloadData];
             [selfWeak.tableView.mj_header endRefreshing];

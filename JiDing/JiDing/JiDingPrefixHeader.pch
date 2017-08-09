@@ -12,6 +12,7 @@
 #define MaMapApiKey @"112a7c3ff268ce63fb915b2102f313ee"
 
 //主要控制器
+#import "AppDelegate.h"
 #import "RootNavigationController.h"
 #import "RootTableViewController.h"
 #import "RootViewController.h"

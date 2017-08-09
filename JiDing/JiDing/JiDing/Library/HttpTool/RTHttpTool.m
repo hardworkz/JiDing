@@ -118,35 +118,45 @@
     return res;
 }
 
-+(NSString *)GetTomorrowDay:(NSDate *)aDate isRung:(BOOL)isRung
++(NSString *)GetTomorrowDay:(NSDate *)aDate formatType:(FormatType)formatType
 {
-    NSCalendar *gregorian = [[NSCalendar alloc] initWithCalendarIdentifier:NSGregorianCalendar];
-    NSDateComponents *components = [gregorian components:NSWeekdayCalendarUnit | NSYearCalendarUnit | NSMonthCalendarUnit | NSDayCalendarUnit fromDate:aDate];
+    NSCalendar *gregorian = [[NSCalendar alloc] initWithCalendarIdentifier:NSCalendarIdentifierGregorian];
+    NSDateComponents *components = [gregorian components:NSCalendarUnitWeekday | NSCalendarUnitYear | NSCalendarUnitMonth | NSCalendarUnitDay fromDate:aDate];
     [components setDay:([components day]+1)];
     
     NSDate *beginningOfWeek = [gregorian dateFromComponents:components];
     NSDateFormatter *dateday = [[NSDateFormatter alloc] init];
-    if (isRung) {
-        [dateday setDateFormat:@"yyyy-MM-dd"];
-    }else
-    {
-        [dateday setDateFormat:@"yyyy年MM月dd日"];
+    switch (formatType) {
+        case FormatTypeChineseFormat:
+            [dateday setDateFormat:@"yyyy年MM月dd日"];
+            break;
+        case FormatTypeRung:
+            [dateday setDateFormat:@"yyyy-MM-dd"];
+            break;
+            
+        default:
+            break;
     }
     return [dateday stringFromDate:beginningOfWeek];
 }
-+(NSString *)GetTodayDay:(NSDate *)aDate isRung:(BOOL)isRung
++(NSString *)GetTodayDay:(NSDate *)aDate formatType:(FormatType)formatType
 {
-    NSCalendar *gregorian = [[NSCalendar alloc] initWithCalendarIdentifier:NSGregorianCalendar];
-    NSDateComponents *components = [gregorian components:NSWeekdayCalendarUnit | NSYearCalendarUnit | NSMonthCalendarUnit | NSDayCalendarUnit fromDate:aDate];
+    NSCalendar *gregorian = [[NSCalendar alloc] initWithCalendarIdentifier:NSCalendarIdentifierGregorian];
+    NSDateComponents *components = [gregorian components:NSCalendarUnitWeekday | NSCalendarUnitYear | NSCalendarUnitMonth | NSCalendarUnitDay fromDate:aDate];
     [components setDay:([components day])];
     
     NSDate *beginningOfWeek = [gregorian dateFromComponents:components];
     NSDateFormatter *dateday = [[NSDateFormatter alloc] init];
-    if (isRung) {
-        [dateday setDateFormat:@"yyyy-MM-dd"];
-    }else
-    {
-        [dateday setDateFormat:@"yyyy年MM月dd日"];
+    switch (formatType) {
+        case FormatTypeChineseFormat:
+            [dateday setDateFormat:@"yyyy年MM月dd日"];
+            break;
+        case FormatTypeRung:
+            [dateday setDateFormat:@"yyyy-MM-dd"];
+            break;
+            
+        default:
+            break;
     }
     return [dateday stringFromDate:beginningOfWeek];
 }
@@ -199,29 +209,16 @@
 }
 + (void)get:(NSString *)url addHUD:(BOOL)addHUD param:(NSDictionary *)param success:(void(^)(id responseObj))success failure:(void(^)(NSError *error))failure
 {
-//    if (addHUD) {
-//        [AppHelper showHUD:@""];
-//    }
     AFHTTPSessionManager *mgr = [AFHTTPSessionManager manager];
-    mgr.requestSerializer.timeoutInterval = 30.0f;
+    mgr.requestSerializer.timeoutInterval = 10.0f;
     mgr.responseSerializer = [AFJSONResponseSerializer serializer];
-//    [mgr GET:url parameters:param success:^(NSURLSessionDataTask * _Nonnull task, id  _Nonnull responseObject) {
-//        
-//    } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
-//        
-//    }];
     [mgr GET:url parameters:param success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
-//        if(addHUD) [AppHelper removeHUD];
-//        id json = [self jsonWithResponseObj:responseObject];
-//        NSString *msg = json[MESSAGE];
-//        [self JudgeOfflineIfNeed:msg];
         
         //成功的回调
         if(success){
             success(responseObject);
         }
     } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
-//        if(addHUD) [AppHelper removeHUD];
         //失败的回调
         if(failure){
             failure(error);
@@ -231,26 +228,18 @@
 }
 + (void)post:(NSString *)url addHUD:(BOOL)addHUD param:(NSDictionary *)param success:(void(^)(id responseObj))success failure:(void(^)(NSError *error))failure
 {
-//    if (addHUD) {
-//        [AppHelper showHUD:@""];
-//    }
     AFHTTPSessionManager *mgr = [AFHTTPSessionManager manager];
     //申明返回的结果是json类型
     mgr.responseSerializer = [AFJSONResponseSerializer serializer];
-    mgr.requestSerializer.timeoutInterval = 30.0f;
-//    mgr.requestSerializer = [AFJSONRequestSerializer serializer];
+    mgr.requestSerializer.timeoutInterval = 10.0f;
     
     [mgr POST:url parameters:param success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
-//        if(addHUD) [AppHelper removeHUD];
-//        NSString *msg = responseObject[MESSAGE];
-//        [self JudgeOfflineIfNeed:msg];
         
         //成功的回调
         if(success){
             success(responseObject);
         }
     } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
-//        if(addHUD) [AppHelper removeHUD];
         //失败的回调
         if(failure){
             failure(error);
@@ -260,12 +249,9 @@
 }
 + (void)post:(NSString *)url addHUD:(BOOL)addHUD param:(NSDictionary *)param dataBlock:(UIImage *)image fileName:(NSString *)fileName success:(void (^)(id responseObject))success failure:(void (^)(NSError *error))failure
 {
-//    if (addHUD) {
-//        [AppHelper showHUD:@""];
-//    }
     AFHTTPSessionManager *mgr = [AFHTTPSessionManager manager];
     mgr.requestSerializer = [AFJSONRequestSerializer serializer];
-    mgr.requestSerializer.timeoutInterval = 30.0f;
+    mgr.requestSerializer.timeoutInterval = 10.0f;
     mgr.responseSerializer = [AFJSONResponseSerializer serializer];
     [mgr POST:url parameters:param constructingBodyWithBlock:^(id<AFMultipartFormData>  _Nonnull formData) {
         for(NSString *key in param.mj_keyValues)
@@ -277,15 +263,11 @@
         NSData *data = UIImageJPEGRepresentation(image, 0.5);
         [formData appendPartWithFileData:data name:@"photo.jpg" fileName:fileName mimeType:@"binary/octet-stream"];
     } success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
-//        if(addHUD) [AppHelper removeHUD];
-//        NSString *msg = responseObject[MESSAGE];
-//        [self JudgeOfflineIfNeed:msg];
         
         if (success) {
             success(responseObject);
         }
     } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
-//        if(addHUD) [AppHelper removeHUD];
         if (failure) {
             failure(error);
         }
@@ -294,12 +276,9 @@
 }
 + (void)post:(NSString *)url addHUD:(BOOL)addHUD param:(NSDictionary *)param dataArray:(NSArray *)array fileName:(NSString *)fileName success:(void (^)(id))success failure:(void (^)(NSError *))failure
 {
-//    if (addHUD) {
-//        [AppHelper showHUD:@""];
-//    }
     AFHTTPSessionManager *mgr = [AFHTTPSessionManager manager];
     mgr.requestSerializer = [AFJSONRequestSerializer serializer];
-    mgr.requestSerializer.timeoutInterval = 30.0f;
+    mgr.requestSerializer.timeoutInterval = 10.0f;
     mgr.responseSerializer = [AFJSONResponseSerializer serializer];
     
     [mgr POST:url parameters:param constructingBodyWithBlock:^(id<AFMultipartFormData>  _Nonnull formData) {
@@ -317,15 +296,11 @@
             //image/png   binary/octet-stream
         }
     } success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
-//        if(addHUD) [AppHelper removeHUD];
-//        NSString *msg = responseObject[MESSAGE];
-//        [self JudgeOfflineIfNeed:msg];
         
         if (success) {
             success(responseObject);
         }
     } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
-//        if(addHUD) [AppHelper removeHUD];
         if (failure) {
             failure(error);
         }

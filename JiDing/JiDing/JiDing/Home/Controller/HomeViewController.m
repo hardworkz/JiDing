@@ -76,6 +76,11 @@
 @property (nonatomic,assign)  CLLocationDegrees lon;
 @property (nonatomic,assign)  CLLocationDegrees lat;
 /**
+ 入住日期和离店日期
+ */
+@property (nonatomic,strong)  NSString *startDateString;
+@property (nonatomic,strong)  NSString *endDateString;
+/**
  *  酒店类型图标名称
  */
 /**
@@ -282,30 +287,88 @@ static HomeViewController *_instance = nil;
  */
 - (void)next
 {
-    Xzb_SearchResultTableViewController *result = [[Xzb_SearchResultTableViewController alloc] init];
+    UserAccount *account = [UserAccountTool account];
+    Xzb_ApplicationData *data = [Xzb_ApplicationDataTool account];
+    NSMutableDictionary *param = [NSMutableDictionary dictionary];
+    if (self.lon == 0.0 || self.lat == 0.0) {
+        [[Toast makeText:@"请重新定位"] show];
+        return;
+    }
+    //设置经纬度和用户ID参数
+    [param setObject:data.user_y?data.user_y:[NSString stringWithFormat:@"%.8f",self.lat] forKey:@"xLocation"];
+    [param setObject:data.user_x?data.user_x:[NSString stringWithFormat:@"%.8f",self.lon] forKey:@"yLocation"];
+    //设置用户ID
+    [param setObject:account.userId forKey:@"userId"];
+    //设置用户token
+    [param setObject:account.loginToken forKey:@"token"];
+    //渠道
+    [param setObject:@"iOS" forKey:@"channelId"];
+    //设置入住日期和离店日期
+    [param setObject:self.startDateString forKey:@"checkinDate"];
+    [param setObject:self.endDateString forKey:@"leaveDate"];
+    //设置房间类型
+    [param setObject:@"1" forKey:@"roomType"];
+    //设置房间数量
+    [param setObject:roomNumberLabel.text forKey:@"num"];
+    //设置人数
+    [param setObject:numberLabel.text forKey:@"userNum"];
     
+    RTLog(@"%@",param);
     
-    HotelOfferModel *model = [HotelOfferModel mj_objectWithKeyValues:@{@"ylocation":@"118.181564"
-                                                                       ,@"timePeriod":@0
-                                                                       ,@"orderType":@"1"
-                                                                       ,@"countDown":@5
-                                                                       ,@"image":@"user5-128x128.png"
-                                                                       ,@"roomId":@136
-                                                                       ,@"hotelId":@80
-                                                                       ,@"distance":@1.13
-                                                                       ,@"level":@"4"
-                                                                       ,@"price":@"0.02"
-                                                                       ,@"xlocation":@"24.488284"
-                                                                       ,@"roomType":@"2"
-                                                                       ,@"orderRelId":@28468
-                                                                       ,@"name":@"%E4%BD%B0%E7%BF%94%E8%BD%AF%E4%BB%B6%E5%9B%AD%E9%85%92%E5%BA%97"
-                                                                       ,@"payType":@"1"
-                                                                       ,@"appraise":@90
-                                                                       }];
-    NSMutableArray *array = [NSMutableArray array];
-    [array addObject:model];
-    result.dataArray = array;
-    [self.navigationController pushViewController:result animated:YES];
+    [RTHttpTool post:[NSString stringWithFormat:@"%@?userId=%@&token=%@",ADD_NEW_ORDER,account.userId,account.loginToken] addHUD:NO param:nil success:^(id responseObj) {
+        RTLog(@"%@",responseObj);
+        if ([responseObj[SUCCESS] intValue] == 1) {
+            
+            NSMutableArray *dataArray = [HotelOfferModel mj_objectArrayWithKeyValuesArray:responseObj[ENTITIES][LIST]];
+            if (dataArray.count == 0) {
+                [[Toast makeText:@"~暂无酒店报价，请重新更改需求~"] show];
+                
+                //恢复酒店订单状态
+                UserAccount *account = [UserAccountTool account];
+                [RTHttpTool post:CANCLE_ORDER addHUD:NO param:@{ID:responseObj[ENTITIES][ORDERID],USERID:account.userId,TOKEN:account.loginToken} success:^(id responseObj) {
+                    if ([responseObj[SUCCESS] intValue] == 1) {
+                        
+                    }
+                } failure:^(NSError *error) {
+                    
+                }];
+                return;
+            }
+            //启动定时器
+            for (HotelOfferModel *model in dataArray) {
+                model.starAction = YES;
+            }
+            
+            //跳转搜索结果列表控制器
+            Xzb_SearchResultTableViewController *result = [[Xzb_SearchResultTableViewController alloc] init];
+            result.dataArray = dataArray;
+            [self.navigationController pushViewController:result animated:YES];
+        }
+    } failure:^(NSError *error) {
+        RTLog(@"error :%@",error);
+    }];
+
+//
+//
+//    HotelOfferModel *model = [HotelOfferModel mj_objectWithKeyValues:@{@"ylocation":@"118.181564"
+//                                                                       ,@"timePeriod":@0
+//                                                                       ,@"orderType":@"1"
+//                                                                       ,@"countDown":@5
+//                                                                       ,@"image":@"user5-128x128.png"
+//                                                                       ,@"roomId":@136
+//                                                                       ,@"hotelId":@80
+//                                                                       ,@"distance":@1.13
+//                                                                       ,@"level":@"4"
+//                                                                       ,@"price":@"0.02"
+//                                                                       ,@"xlocation":@"24.488284"
+//                                                                       ,@"roomType":@"2"
+//                                                                       ,@"orderRelId":@28468
+//                                                                       ,@"name":@"%E4%BD%B0%E7%BF%94%E8%BD%AF%E4%BB%B6%E5%9B%AD%E9%85%92%E5%BA%97"
+//                                                                       ,@"payType":@"1"
+//                                                                       ,@"appraise":@90
+//                                                                       }];
+//    NSMutableArray *array = [NSMutableArray array];
+//    [array addObject:model];
 }
 - (void)select_hotel
 {
@@ -466,9 +529,11 @@ static HomeViewController *_instance = nil;
         switch (dateType) {
             case DateTypeStartDate:
                 starDate.text = [NSString stringWithFormat:@"入住\n%@",[startDates stringWithFormat:@"yyyy年MM月dd日"] == nil?@"未选择":[startDates stringWithFormat:@"yyyy年MM月dd日"]];
+                self.startDateString = [startDates stringWithFormat:@"yyyy-MM-dd"];
                 break;
             default:
                 endDate.text = [NSString stringWithFormat:@"离店\n%@",[endDates stringWithFormat:@"yyyy年MM月dd日"] == nil?@"未选择":[endDates stringWithFormat:@"yyyy年MM月dd日"]];
+                self.endDateString = [endDates stringWithFormat:@"yyyy-MM-dd"];
                 break;
         }
     }];
@@ -491,10 +556,12 @@ static HomeViewController *_instance = nil;
         switch (dateType) {
             case DateTypeStartDate:
                 starDate.text = [NSString stringWithFormat:@"入住\n%@",[startDates stringWithFormat:@"yyyy年MM月dd日"] == nil?@"未选择":[startDates stringWithFormat:@"yyyy年MM月dd日"]];
+                self.startDateString = [startDates stringWithFormat:@"yyyy-MM-dd"];
                 break;
                 
             default:
                 endDate.text = [NSString stringWithFormat:@"离店\n%@",[endDates stringWithFormat:@"yyyy年MM月dd日"] == nil?@"未选择":[endDates stringWithFormat:@"yyyy年MM月dd日"]];
+                self.endDateString = [endDates stringWithFormat:@"yyyy-MM-dd"];
                 break;
         }
     }];
@@ -764,6 +831,8 @@ static HomeViewController *_instance = nil;
     
     NSDate *date = [NSDate date];
     NSDate *nextDay = [NSDate dateWithTimeInterval:24*60*60 sinceDate:date];//下一天
+    self.startDateString = [RTHttpTool GetTodayDay:[NSDate date] formatType:FormatTypeRung];
+    self.endDateString = [RTHttpTool GetTomorrowDay:[NSDate date] formatType:FormatTypeRung];
     
     starDate = [[UILabel alloc] init];
     starDate.userInteractionEnabled = YES;
@@ -898,7 +967,7 @@ static HomeViewController *_instance = nil;
     [roomSubBtn addTarget:self action:@selector(subBtnClicked:) forControlEvents:UIControlEventTouchUpInside];
     [roomNumberView addSubview:roomSubBtn];
     
-    if (self.homeType == SelectedHomeTypeHotel) {
+    if (_homeType == SelectedHomeTypeHotel) {
         peopleTitleLabel.text = @"客官人数";
         roomTitleLabel.text = @"房间数量";
     }else{
