@@ -133,7 +133,7 @@
 
     //预订按钮
     UIButton *submitButton = [[UIButton alloc] init];
-    submitButton.frame = CGRectMake(0, 0, ScreenWidth * 0.5, 49);
+    submitButton.frame = CGRectMake(0, 0, ScreenWidth, 49);
     [submitButton setTitle:@"提交订单" forState:UIControlStateNormal];
     [submitButton setTitleColor:AppGreenTextColor forState:UIControlStateNormal];
     [submitButton addTarget:self action:@selector(submitOrder:) forControlEvents:UIControlEventTouchUpInside];
@@ -321,8 +321,9 @@
 }
 - (NSString *)guestInfo {
     
-    NSIndexPath *index = [NSIndexPath indexPathForRow:(5) inSection:0];
+    NSIndexPath *index = [NSIndexPath indexPathForRow:(4) inSection:0];
     Xzb_fillOrderCheckManCell *cell = [self.tableView cellForRowAtIndexPath:index];
+    RTLog(@"%@---%@",cell.name.text,cell.phone.text);
     if (cell.name.text.length && cell.phone.text.length == 11) {
         if (self.phoneStr.length && self.phoneStr.length == 11) {
             return [NSString stringWithFormat:@"%@,%@",cell.name.text,self.phoneStr];
@@ -368,14 +369,14 @@
     UserAccount *account = [UserAccountTool account];
     NSDictionary *dic = @{USERID:account.userId,TOKEN:account.loginToken, @"state":@"0",@"orderId":self.hotelModel.orderId,@"orderRelId":_offerModel.orderRelId};
     [RTHttpTool get:GET_CUSOTEMER_COUPON addHUD:YES param:dic success:^(id responseObj) {
-        id json = [RTHttpTool jsonWithResponseObj:responseObj];
-        if ([json[SUCCESS] intValue] == 1) {
+//        id json = [RTHttpTool jsonWithResponseObj:responseObj];
+        if ([responseObj[SUCCESS] intValue] == 1) {
 //            NSArray *vocherListArray = [VouchersListModel mj_objectArrayWithKeyValuesArray:json[ENTITIES][@"list"]];
 //            self.couponArray = (NSMutableArray *)vocherListArray;
             [self.tableView reloadData];
         }
-        if ([json[SUCCESS] intValue] == 0) {
-            [[Toast makeText:json[MESSAGE]] show];
+        if ([responseObj[SUCCESS] intValue] == 0) {
+            [[Toast makeText:responseObj[MESSAGE]] show];
         }
         self.NoCoupon = NO;
     } failure:^(NSError *error) {
@@ -387,9 +388,9 @@
     UserAccount *account = [UserAccountTool account];
     NSDictionary *dic = @{USERID:account.userId,TOKEN:account.loginToken, @"state":@"0",@"orderId":self.hotelModel.orderId,@"orderRelId":_offerModel.orderRelId};
     [RTHttpTool get:GET_CUSOTEMER_COUPON addHUD:YES param:dic success:^(id responseObj) {
-        id json = [RTHttpTool jsonWithResponseObj:responseObj];
-        NSLog(@"%@",json);
-        if ([json[SUCCESS] intValue] == 1) {
+//        id json = [RTHttpTool jsonWithResponseObj:responseObj];
+        NSLog(@"%@",responseObj);
+        if ([responseObj[SUCCESS] intValue] == 1) {
 //            NSArray *vocherListArray = [VouchersListModel mj_objectArrayWithKeyValuesArray:json[ENTITIES][@"list"]];
 //            self.couponArray = (NSMutableArray *)vocherListArray;
             if (self.couponArray.count) {
@@ -398,8 +399,8 @@
                 }
             }
         }
-        if ([json[SUCCESS] intValue] == 0) {
-            [[Toast makeText:json[MESSAGE]] show];
+        if ([responseObj[SUCCESS] intValue] == 0) {
+            [[Toast makeText:responseObj[MESSAGE]] show];
         }
     } failure:^(NSError *error) {
         

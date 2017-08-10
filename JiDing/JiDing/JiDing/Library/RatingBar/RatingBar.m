@@ -48,11 +48,11 @@
         for(int i = 0;i<5;i++){
             UIImageView *img = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, width*ZOOM, width*ZOOM)];
             img.center = CGPointMake((i+1.5)*width, frame.size.height/2);
-            img.image = [UIImage imageNamed:@"星星1"];
+            img.image = [UIImage imageNamed:@"评论-星星-未显示"];
             [self.bottomView addSubview:img];
             UIImageView *img2 = [[UIImageView alloc] initWithFrame:img.frame];
             img2.center = img.center;
-            img2.image = [UIImage imageNamed:@"星星2"];
+            img2.image = [UIImage imageNamed:@"评论-星星"];
             [self.topView addSubview:img2];
         }
         self.enable = YES;

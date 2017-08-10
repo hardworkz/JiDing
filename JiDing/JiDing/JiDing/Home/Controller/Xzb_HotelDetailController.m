@@ -322,7 +322,7 @@
 - (void)setupNavBar
 {
     UIView *navBGV = [[UIView alloc] initWithFrame:CGRectMake(0, 0, ScreenWidth, 64)];
-    navBGV.backgroundColor = AppMainColor;
+    navBGV.backgroundColor = [UIColor whiteColor];
     [self.view addSubview:navBGV];
     self.navBGV = navBGV;
     
@@ -482,13 +482,13 @@
     RTLog(@"%@",param);
     @WeakObj(self)
     [RTHttpTool get:GET_SELECTLIST_FOR_MOBILE addHUD:NO param:param success:^(id responseObj) {
-        id json = [RTHttpTool jsonWithResponseObj:responseObj];
-        NSLog(@"酒店详情数据:%@",json);
-        if ([json[SUCCESS] intValue] == 1) {
+//        id json = [RTHttpTool jsonWithResponseObj:responseObj];
+        NSLog(@"酒店详情数据:%@",responseObj);
+        if ([responseObj[SUCCESS] intValue] == 1) {
             if (selfWeak.commentPage == 0) {
                 NSArray *array = [UserCommentModel mj_objectArrayWithKeyValuesArray:responseObj[ENTITIES][@"commentInfos"]];
                 selfWeak.userCommentDataArray = [selfWeak userCommentFrameModelArrayWithUserCommentModelArray:array];
-                if (selfWeak.userCommentDataArray.count < selfWeak.commentLimit || [json[@"totalPage"] intValue] == 1) {
+                if (selfWeak.userCommentDataArray.count < selfWeak.commentLimit || [responseObj[@"totalPage"] intValue] == 1) {
                     [selfWeak.tableView.mj_footer endRefreshingWithNoMoreData];
                 }else{
                     [selfWeak.tableView.mj_footer resetNoMoreData];
@@ -705,8 +705,9 @@
     devider.backgroundColor = AppLightLineColor;
     //预订按钮
     UIButton *scheduledButton = [[UIButton alloc] init];
-    scheduledButton.frame = CGRectMake(0, 0, ScreenWidth * 0.5, 49);
+    scheduledButton.frame = CGRectMake(0, 0, ScreenWidth, 49);
     [scheduledButton setTitleColor:AppGreenTextColor forState:UIControlStateNormal];
+    scheduledButton.titleLabel.textAlignment = NSTextAlignmentCenter;
     [scheduledButton setTitle:@"马上入住" forState:UIControlStateNormal];
     [scheduledButton addTarget:self action:@selector(scheduledClicked) forControlEvents:UIControlEventTouchUpInside];
     [scheduledButton addSubview:devider];
@@ -1032,13 +1033,10 @@
         self.index = x/ScreenWidth;
     }
     
-    RTLog(@"scrollViewy  %f",y);
-    
     if ([scrollView isEqual:self.tableView]) {
         if (y == self.hoverOffsetH || y == self.onePageOffsetY || self.tempY == y) {
             //设置导航栏的背景颜色，透明状态值
-            UIColor *color = [UIColor colorWithRed:247/255.0 green:36/255.0 blue:96/255.0 alpha:1];
-            [self.navigationController.navigationBar cnSetBackgroundColor:[color colorWithAlphaComponent:1]];
+            [self.navigationController.navigationBar cnSetBackgroundColor:[[UIColor whiteColor] colorWithAlphaComponent:1]];
             self.navBGV.alpha = 1.0;
         }
         

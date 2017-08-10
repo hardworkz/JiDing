@@ -426,8 +426,8 @@
     
     //确认支付按钮
     UIButton *payButton = [[UIButton alloc] init];
-    payButton.frame = CGRectMake(0, 0, ScreenWidth * 0.5, 49);
-//    payButton.backgroundColor = AppMainColor;
+    payButton.frame = CGRectMake(0, 0, ScreenWidth, 49);
+    payButton.backgroundColor = [UIColor whiteColor];
     [payButton setTitle:@"立即付款" forState:UIControlStateNormal];
     [payButton setTitleColor:AppGreenTextColor forState:UIControlStateNormal];
     [payButton addTarget:self action:@selector(payButtonClicked) forControlEvents:UIControlEventTouchUpInside];
@@ -733,9 +733,9 @@
 {
     UserAccount *account = [UserAccountTool account];
     [RTHttpTool get:GET_ACCOUNT_MONEY addHUD:NO param:@{USERID:account.userId,TOKEN:account.loginToken} success:^(id responseObj) {
-        id json = [RTHttpTool jsonWithResponseObj:responseObj];
-        if ([json[SUCCESS] intValue] == 1) {
-            _balance = json[ENTITIES][@"map"][@"available_money"];
+//        id json = [RTHttpTool jsonWithResponseObj:responseObj];
+        if ([responseObj[SUCCESS] intValue] == 1) {
+            _balance = responseObj[ENTITIES][@"map"][@"available_money"];
         }
     } failure:^(NSError *error) {
         
