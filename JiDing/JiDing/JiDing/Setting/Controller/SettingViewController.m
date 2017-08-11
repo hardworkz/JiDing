@@ -137,7 +137,13 @@
 }
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    if (indexPath.row == 1) {
+    if (indexPath.row == 0) {
+        //账号中心
+        Xzb_AccountCenterController *accountCenterVC = [[Xzb_AccountCenterController alloc] init];
+        accountCenterVC.title = @"账户中心";
+        [self.navigationController pushViewController:accountCenterVC animated:YES];
+    }else if (indexPath.row == 1) {
+        //消息推送
         if ([[UIDevice currentDevice].systemVersion floatValue] >= 10.0) {
             [[UIApplication sharedApplication] openURL:[NSURL URLWithString:UIApplicationOpenSettingsURLString]];
         }else
@@ -145,37 +151,26 @@
             [[UIApplication sharedApplication] openURL:[NSURL URLWithString:@"prefs:root=NOTIFICATIONS_ID&path=org.china.xzb"]];
         }
     }else if (indexPath.row == 2) {
-//        Xzb_FeedBackViewController *feedBack = [[Xzb_FeedBackViewController alloc] init];
-//        feedBack.view.backgroundColor = AppMainBgColor;
-//        [self.navigationController pushViewController:feedBack animated:YES];
+        Xzb_FeedBackViewController *feedBack = [[Xzb_FeedBackViewController alloc] init];
+        [self.navigationController pushViewController:feedBack animated:YES];
     }else if(indexPath.row == 3){
+        //关于我们
 //        Xzb_AboutUsViewController *aboutUs = [[Xzb_AboutUsViewController alloc] init];
 //        aboutUs.path = [NSString stringWithFormat:@"http://www.chinaxzb.com/static/aboutus.html"];
 //        NSLog(@"%@",aboutUs.path);
 //        aboutUs.view.backgroundColor = AppMainBgColor;
 //        [self.navigationController pushViewController:aboutUs animated:YES];
     }else if(indexPath.row == 4){
+        //服务协议
 //        Xzb_ServiceAgreementViewController *serviceAgreement = [[Xzb_ServiceAgreementViewController alloc] init];
 //        serviceAgreement.path = [NSString stringWithFormat:@"http://www.chinaxzb.com/static/server.html"];
 //        serviceAgreement.view.backgroundColor = AppMainBgColor;
 //        [self.navigationController pushViewController:serviceAgreement animated:YES];
-    }else if(indexPath.row == 6){
-        [self clearBuffer];
-    }else if(indexPath.row == 7){
-        //检查可用更新
-    }else if(indexPath.row == 0){
-        //账户中心
-//        Xzb_AccountCenterController *accountCenterVC = [[Xzb_AccountCenterController alloc] init];
-//        accountCenterVC.title = @"账户中心";
-//        accountCenterVC.view.backgroundColor = AppMainTwoBgColor;
-//        [self.navigationController pushViewController:accountCenterVC animated:YES];
     }else if(indexPath.row == 5){
         //帮助中心
-//        Xzb_ADViewController *problem = [[Xzb_ADViewController alloc] init];
-//        problem.titleStr = @"帮助中心";
-//        problem.path = @"http://www.chinaxzb.com/static/question.htm";
-//        problem.view.backgroundColor = AppMainBgColor;
-//        [self.navigationController pushViewController:problem animated:YES];
+    }else if(indexPath.row == 6){
+        //清理缓存
+        [self clearBuffer];
     }
 }
 #pragma mark - DQAlertViewDelegate
@@ -187,7 +182,10 @@
             [[NSNotificationCenter defaultCenter] postNotificationName:UserUpdateMessageNotification object:nil];
             [[NSNotificationCenter defaultCenter] postNotificationName:LogoutBySelfNotification object:nil];
             [[Toast makeText:@"退出登录成功~"] show];
-            APPDELEGATE.window.rootViewController = [[LoginNavigationController alloc] initWithRootViewController:[[LoginViewController alloc] init]];
+            
+            LoginViewController *loginVC = [[LoginViewController alloc] init];
+            loginVC.view.backgroundColor = [UIColor whiteColor];
+            APPDELEGATE.window.rootViewController = [[LoginNavigationController alloc] initWithRootViewController:loginVC];
         } failuer:^{
             [[Toast makeText:@"退出登录失败~"] show];
         }];

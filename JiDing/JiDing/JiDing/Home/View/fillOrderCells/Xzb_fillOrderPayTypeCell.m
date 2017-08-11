@@ -55,9 +55,8 @@
 
 - (void)setupView {
     _room = [[UIButton alloc] initWithFrame:CGRectMake(10, 0, (SCREEN_Width - 20) / 2, 45)];
-    [_room setTitle:@"豪华大床房" forState:UIControlStateNormal];
     [_room setTitleColor:AppMainGrayTextColor forState:UIControlStateNormal];
-    [_room setImage:[UIImage imageNamed:@"豪华大床房1"] forState:UIControlStateNormal];
+    [_room setImage:[UIImage imageNamed:@"大床房"] forState:UIControlStateNormal];
     _room.titleLabel.font = [UIFont systemFontOfSize:14];
     _room.userInteractionEnabled = NO;
     _room.contentHorizontalAlignment = UIControlContentHorizontalAlignmentLeft;
@@ -65,41 +64,13 @@
     
     _monyLabel = [[UILabel alloc] initWithFrame:CGRectMake(CGRectGetMaxX(_room.frame), 0, (SCREEN_Width - 20) / 2, 45)];
     _monyLabel.font = [UIFont systemFontOfSize:14];
-    _monyLabel.textColor = AppMainColor;
+    _monyLabel.textColor = AppGreenTextColor;
     _monyLabel.textAlignment = NSTextAlignmentRight;
     _monyLabel.text = @"¥200";
     [self.contentView addSubview:_monyLabel];
     
-//    _payType = [[UIButton alloc] initWithFrame:CGRectMake(10, CGRectGetMaxY(_room.frame), (SCREEN_Width - 20) / 2, 45)];
-//    [_payType setTitle:@" 付款方式" forState:UIControlStateNormal];
-//    [_payType setTitleColor:AppMainGrayTextColor forState:UIControlStateNormal];
-//    [_payType setImage:[UIImage imageNamed:@"付款方式"] forState:UIControlStateNormal];
-//    _payType.titleLabel.font = [UIFont systemFontOfSize:14];
-//    _payType.userInteractionEnabled = NO;
-//    _payType.contentHorizontalAlignment = UIControlContentHorizontalAlignmentLeft;
-//    [self.contentView addSubview:_payType];
-//    
-//    _prepaidButton = [[UIButton alloc] initWithFrame:CGRectMake(CGRectGetMaxX(_payType.frame), CGRectGetMaxY(_monyLabel.frame), _payType.frame.size.width / 2 - 10, 45)];
-//    [_prepaidButton setTitle:@"预付" forState:UIControlStateNormal];
-//    [_prepaidButton setImage:[UIImage imageNamed:@"未选中支付类型"] forState:UIControlStateNormal];
-//    [_prepaidButton setImage:[UIImage imageNamed:@"选中支付类型"] forState:UIControlStateSelected];
-//    _prepaidButton.selected = YES;
-//    _prepaidButton.titleLabel.font = [UIFont systemFontOfSize:14];
-//    [_prepaidButton setTitleColor:[UIColor grayColor] forState:UIControlStateNormal];
-//    _prepaidButton.contentHorizontalAlignment = UIControlContentHorizontalAlignmentRight;
-//    [self.contentView addSubview:_prepaidButton];
-//    
-//    _securedButton = [[UIButton alloc] initWithFrame:CGRectMake(CGRectGetMaxX(_prepaidButton.frame), CGRectGetMaxY(_monyLabel.frame), _payType.frame.size.width / 2 + 10, 45)];
-//    [_securedButton setTitle:@"担保交易" forState:UIControlStateNormal];
-//    [_securedButton setImage:[UIImage imageNamed:@"选中支付类型"] forState:UIControlStateSelected];
-//    [_securedButton setImage:[UIImage imageNamed:@"未选中支付类型"] forState:UIControlStateNormal];
-//    _securedButton.titleLabel.font = [UIFont systemFontOfSize:14];
-//   [_securedButton setTitleColor:[UIColor grayColor] forState:UIControlStateNormal];
-//    _securedButton.contentHorizontalAlignment = UIControlContentHorizontalAlignmentRight;
-//    [self.contentView addSubview:_securedButton];
-    
     UIView *line = [[UIView alloc] initWithFrame:CGRectMake(10, CGRectGetMaxY(_room.frame) - 0.5, SCREEN_Width - 10, 0.5)];
-    line.backgroundColor = AppLineColor;
+    line.backgroundColor = AppLightLineColor;
     [self.contentView addSubview:line];
 }
 

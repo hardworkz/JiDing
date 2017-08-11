@@ -58,9 +58,8 @@
 
 #pragma mark - 创建视图
 - (void)setupView {
-    _hotel = [[UIButton alloc] initWithFrame:CGRectMake(10, 10, SCREEN_Width - 20, 35)];
+    _hotel = [[UIButton alloc] initWithFrame:CGRectMake(10, 5, SCREEN_Width - 20, 35)];
     _hotel.titleLabel.font = [UIFont systemFontOfSize:18];
-//    [_hotel setImage:[UIImage imageNamed:@"酒店图标"] forState:UIControlStateNormal];
     [_hotel setTitle:@"碧海蓝湾酒店" forState:UIControlStateNormal];
     _hotel.userInteractionEnabled = NO;
     [_hotel setTitleColor:AppMainGrayTextColor forState:UIControlStateNormal];
@@ -70,21 +69,21 @@
     //入住日期
     UILabel *starTimeLabel = [[UILabel alloc] init];
     [starTimeLabel setAppFontWithSize:16.0];
-    starTimeLabel.frame = CGRectMake(0, CGRectGetMaxY(_hotel.frame), (SCREEN_WIDTH - NumDayW - 25)* 0.5, 40);
+    starTimeLabel.frame = CGRectMake(0, CGRectGetMaxY(_hotel.frame), (SCREEN_WIDTH - NumDayW - 25)* 0.5, 60);
     starTimeLabel.textColor = AppMainGrayTextColor;
     starTimeLabel.textAlignment = NSTextAlignmentCenter;
     starTimeLabel.numberOfLines = 0;
     [self.contentView addSubview:starTimeLabel];
     self.stayTime = starTimeLabel;
     //箭头和至
-    UIImageView *rightArrow = [[UIImageView alloc] initWithFrame:CGRectMake(CGRectGetMaxX(starTimeLabel.frame), starTimeLabel.y, 25, 25)];
+    UIImageView *rightArrow = [[UIImageView alloc] initWithFrame:CGRectMake(CGRectGetMaxX(starTimeLabel.frame), starTimeLabel.y + 3, 25, 25)];
     rightArrow.image = [UIImage imageNamed:@"入住箭头"];
     rightArrow.contentMode = UIViewContentModeCenter;
     [self.contentView addSubview:rightArrow];
     
     UILabel *zhi = [[UILabel alloc] init];
     zhi.font = [UIFont systemFontOfSize:16];
-    zhi.frame = CGRectMake(0, CGRectGetMaxY(rightArrow.frame), 25, 25);
+    zhi.frame = CGRectMake(rightArrow.x, CGRectGetMaxY(rightArrow.frame), 25, 25);
     zhi.text = @"至";
     zhi.textColor = AppMainGrayTextColor;
     zhi.textAlignment = NSTextAlignmentCenter;
@@ -92,86 +91,47 @@
     //离店日期
     UILabel *endTimeLabel = [[UILabel alloc] init];
     [endTimeLabel setAppFontWithSize:16.0];
-    endTimeLabel.frame = CGRectMake(SCREEN_WIDTH - NumDayW - (SCREEN_WIDTH - NumDayW - 25)* 0.5, starTimeLabel.y, (SCREEN_WIDTH - NumDayW - 25)* 0.5, 40);
+    endTimeLabel.frame = CGRectMake(SCREEN_WIDTH - NumDayW - (SCREEN_WIDTH - NumDayW - 25)* 0.5, starTimeLabel.y, (SCREEN_WIDTH - NumDayW - 25)* 0.5, 60);
     endTimeLabel.textColor = AppMainGrayTextColor;
     endTimeLabel.textAlignment = NSTextAlignmentCenter;
     endTimeLabel.numberOfLines = 0;
     [self.contentView addSubview:endTimeLabel];
     self.leaveTime = endTimeLabel;
     //时钟图标
-    UIImageView *timeIconImageView = [[UIImageView alloc] initWithFrame:CGRectMake(SCREEN_WIDTH - NumDayW, starTimeLabel.y - 5 -3, NumDayW, 30)];
-    timeIconImageView.image = [UIImage imageNamed:@"时钟"];
+    UIImageView *timeIconImageView = [[UIImageView alloc] initWithFrame:CGRectMake(SCREEN_WIDTH - NumDayW, starTimeLabel.y, NumDayW, 30)];
+    timeIconImageView.image = [UIImage imageNamed:@"入住时间"];
     timeIconImageView.contentMode = UIViewContentModeCenter;
     [self.contentView addSubview:timeIconImageView];
     //共几晚label
     UILabel *numOfDayLabel = [[UILabel alloc] init];
     numOfDayLabel.font = [UIFont systemFontOfSize:16];
-    numOfDayLabel.frame = CGRectMake(SCREEN_WIDTH - NumDayW, starTimeLabel.y + 20, NumDayW, 20);
-    numOfDayLabel.textColor = AppMainColor;
+    numOfDayLabel.frame = CGRectMake(SCREEN_WIDTH - NumDayW, CGRectGetMaxY(timeIconImageView.frame) + 2, NumDayW, 20);
+    numOfDayLabel.textColor = AppGreenTextColor;
     numOfDayLabel.textAlignment = NSTextAlignmentCenter;
     [self.contentView addSubview:numOfDayLabel];
     self.timeLabel = numOfDayLabel;
     
-//    _stayLabel = [[UILabel alloc] initWithFrame:CGRectMake(0, CGRectGetMaxY(_hotel.frame), SCREEN_Width / 3, 30)];
-//    _stayLabel.text = @"入住";
-//    _stayLabel.textAlignment = NSTextAlignmentCenter;
-//    _stayLabel.textColor = [UIColor grayColor];
-//    _stayLabel.font = [UIFont systemFontOfSize:13];
-//    [self.contentView addSubview:_stayLabel];
-//    
-//    _timeLogo = [[UIImageView alloc] initWithFrame:CGRectMake(SCREEN_Width / 3, CGRectGetMinY(_stayLabel.frame), SCREEN_Width / 3, 30)];
-//    _timeLogo.image = [UIImage imageNamed:@"时钟"];
-//    _timeLogo.contentMode = UIViewContentModeCenter;
-//    [self. contentView addSubview:_timeLogo];
-//    
-//    _leaveLabel = [[UILabel alloc] initWithFrame:CGRectMake(SCREEN_Width * 2 / 3,CGRectGetMinY(_stayLabel.frame), SCREEN_Width / 3, 30)];
-//    _leaveLabel.textColor = [UIColor grayColor];
-//    _leaveLabel.textAlignment = NSTextAlignmentCenter;
-//    _leaveLabel.font = [UIFont systemFontOfSize:13];
-//    _leaveLabel.text = @"离开";
-//    [self.contentView addSubview:_leaveLabel];
-//    
-//    _stayTime = [[UILabel alloc] initWithFrame:CGRectMake(0, CGRectGetMaxY(_stayLabel.frame), SCREEN_Width / 3, 30)];
-//    _stayTime.textAlignment = NSTextAlignmentCenter;
-//    _stayTime.font = [UIFont systemFontOfSize:13];
-//    _stayTime.text = @"2016年7月15日";
-//    _stayTime.textColor = AppMainGrayTextColor;
-//    [self.contentView addSubview:_stayTime];
-//    
-//    _leaveTime = [[UILabel alloc] initWithFrame:CGRectMake(SCREEN_Width * 2 / 3, CGRectGetMaxY(_leaveLabel.frame), SCREEN_Width / 3, 30)];
-//    _leaveTime.textAlignment = NSTextAlignmentCenter;
-//    _leaveTime.font = [UIFont systemFontOfSize:13];
-//    _leaveTime.text = @"2016年7月16日";
-//    _leaveTime.textColor = AppMainGrayTextColor;
-//    [self.contentView addSubview:_leaveTime];
-//    
-//    _timeLabel = [[UILabel alloc] initWithFrame:CGRectMake(SCREEN_Width / 3, CGRectGetMaxY(_leaveLabel.frame), SCREEN_Width / 3, 30)];
-//    _timeLabel.textAlignment = NSTextAlignmentCenter;
-//    _timeLabel.font = [UIFont systemFontOfSize:13];
-//    _timeLabel.textColor = AppMainColor;
-//    _timeLabel.text = @"共 1 间 1 晚";
-//    [self.contentView addSubview:_timeLabel];
-    
-    UIView *line = [[UIView alloc] initWithFrame:CGRectMake(0, CGRectGetMaxY(_timeLabel.frame) - 0.5, SCREEN_Width, 0.5)];
-    line.backgroundColor = AppLineColor;
+    UIView *line = [[UIView alloc] initWithFrame:CGRectMake(0, CGRectGetMaxY(starTimeLabel.frame) - 0.5, SCREEN_Width, 0.5)];
+    line.backgroundColor = AppLightLineColor;
     [self.contentView addSubview:line];
-    
 }
 
 - (void)setHotelModel:(Xzb_HotelDetailModel *)hotelModel
 {
+    _hotelModel = hotelModel;
+    
     [_hotel setTitle:[NSString stringWithFormat:@" %@",hotelModel.businessName] forState:UIControlStateNormal];
     _hotelModel = hotelModel;
     _timeLabel.text = hotelModel.roomDays;
     if (hotelModel.checkinDate.length >= 10) {
-        _stayTime.text = [hotelModel.checkinDate substringToIndex:10];
+        _stayTime.text = [NSString stringWithFormat:@"入住\n%@",[hotelModel.checkinDate substringToIndex:10]];
     }else {
-        _stayTime.text = hotelModel.checkinDate;
+        _stayTime.text = [NSString stringWithFormat:@"入住\n%@",hotelModel.checkinDate];
     }
     if (hotelModel.leaveDate.length >= 10) {
-        _leaveTime.text = [hotelModel.leaveDate substringToIndex:10];
+        _leaveTime.text = [NSString stringWithFormat:@"离店\n%@",[hotelModel.leaveDate substringToIndex:10]];
     }else {
-        _leaveTime.text = hotelModel.leaveDate;
+        _leaveTime.text = [NSString stringWithFormat:@"离店\n%@",hotelModel.leaveDate];
     }
 }
 

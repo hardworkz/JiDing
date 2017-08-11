@@ -38,7 +38,7 @@
     self.iconImageView = iconImageView;
     
     UILabel *contentLabel = [[UILabel alloc] init];
-    contentLabel.frame = CGRectMake(CGRectGetMaxX(iconImageView.frame) - 10, 0, ScreenWidth * 0.5, 50);
+    contentLabel.frame = CGRectMake(CGRectGetMaxX(iconImageView.frame) - 10, 0, ScreenWidth * 0.6, 50);
     contentLabel.textColor = AppMainGrayTextColor;
     contentLabel.font = [UIFont systemFontOfSize:15];
     [self.contentView addSubview:contentLabel];

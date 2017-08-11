@@ -8,7 +8,7 @@
 
 #import <UIKit/UIKit.h>
 
-@interface Xzb_OrderDetailController : RootViewController
+@interface Xzb_OrderDetailController : UIViewController
 @property (nonatomic,strong) NSString *orderRelID;
 @property (nonatomic,strong) NSString *orderID;
 @property (nonatomic,assign)  BOOL isPopRootVC;

@@ -350,7 +350,11 @@
         if (self.mapView.userTrackingMode != MAUserTrackingModeFollow) {
             [self clearTips];
         }
+        CGSize formattedAddressSize = [response.regeocode.formattedAddress boundingRectWithSize:CGSizeMake(SCREEN_WIDTH, MAXFLOAT) options:NSStringDrawingUsesLineFragmentOrigin attributes:@{NSFontAttributeName:self.moveAddressLabel.font} context:nil].size;
         self.moveAddressLabel.text = response.regeocode.formattedAddress;
+        [UIView animateWithDuration:0.5 animations:^{
+            self.moveAddressLabel.height = 17 + formattedAddressSize.height;
+        }];
     }
 }
 #pragma mark - 数据数组初始化
@@ -457,6 +461,7 @@
     
     UILabel *moveAddressLabel = [[UILabel alloc] init];
     moveAddressLabel.alpha = 0.65;
+    moveAddressLabel.numberOfLines = 0;
     moveAddressLabel.backgroundColor = [UIColor whiteColor];
     moveAddressLabel.frame = CGRectMake(0, 0, SCREEN_Width, 30);
     moveAddressLabel.font = [UIFont systemFontOfSize:13];
@@ -585,7 +590,14 @@
     [btn removeFromSuperview];
 }
 #pragma mark - MapViewDelegate
-
+- (void)mapView:(MAMapView *)mapView mapDidMoveByUser:(BOOL)wasUserAction
+{
+    [self searchReGeocodeWithCoordinate:self.mapView.centerCoordinate];
+    if (self.mapView.userTrackingMode == MAUserTrackingModeNone)
+    {
+        [self redWaterAnimimate];
+    }
+}
 - (void)mapView:(MAMapView *)mapView regionDidChangeAnimated:(BOOL)animated
 {
     

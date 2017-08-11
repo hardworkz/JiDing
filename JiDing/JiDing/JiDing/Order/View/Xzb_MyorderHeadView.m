@@ -32,9 +32,9 @@
             UIButton *button = [UIButton new];
             [button setTitle:buttonTitle forState:UIControlStateNormal];
             button.titleLabel.font = [UIFont systemFontOfSize:14];
-            [button setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
-            [button setTitleColor:[UIColor blackColor] forState:UIControlStateHighlighted];
-            [button setTitleColor:Color(247, 36, 96) forState:UIControlStateSelected];
+            [button setTitleColor:AppGrayTextColor forState:UIControlStateNormal];
+            [button setTitleColor:AppGreenTextColor forState:UIControlStateHighlighted];
+            [button setTitleColor:AppGreenTextColor forState:UIControlStateSelected];
             button.frame = CGRectMake(index * buttonW, 0, buttonW, self.height);
 //            button.titleLabel.font = [UIFont systemFontOfSize:R_H(16)];
             button.tag = index;
@@ -60,7 +60,7 @@
 {
     if (!_bottomLine) {
         _bottomLine  = [UIView new];
-        _bottomLine.backgroundColor = Color(247, 36, 96);
+        _bottomLine.backgroundColor = AppGreenTextColor;
     }
     return _bottomLine;
 }
@@ -69,7 +69,7 @@
 {
     if (!_line) {
         _line  = [UIView new];
-        _line.backgroundColor = AppLineColor;
+        _line.backgroundColor = AppLightLineColor;
     }
     return _line;
 }
@@ -130,8 +130,6 @@
     self.bottomLine.size = CGSizeMake(ScreenWidth / self.buttons.count, 2);
     self.bottomLine.bottom = self.bottom;
     self.bottomLine.centerX = _currentButton.centerX;
-    
-    
 }
 
 @end

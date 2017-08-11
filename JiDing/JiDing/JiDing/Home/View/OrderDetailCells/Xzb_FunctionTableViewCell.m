@@ -36,7 +36,7 @@
 {
     for (int i = 0; i<3; i++) {
         UIButton *functionBtn = [[UIButton alloc] init];
-        functionBtn.frame = CGRectMake((ScreenWidth /3) * i, 5, (ScreenWidth /3), 60);
+        functionBtn.frame = CGRectMake((ScreenWidth /3) * i, 20, (ScreenWidth /3), 50);
         functionBtn.tag = 10+i;
         [functionBtn setTitleColor:AppMainGrayTextColor forState:UIControlStateNormal];
         functionBtn.titleLabel.font = [UIFont systemFontOfSize:14];
@@ -45,10 +45,11 @@
         [self.contentView addSubview:functionBtn];
         
         UIView *devider = [[UIView alloc] initWithFrame:CGRectMake((SCREEN_Width/3) * i, 20, 1, 30)];
-        devider.backgroundColor = AppLineColor;
+        devider.backgroundColor = AppLightLineColor;
         [self.contentView addSubview:devider];
         
         if (i == 0) {
+            devider.hidden = YES;
             [functionBtn setImage:[UIImage imageNamed:@"酒店图标"] forState:UIControlStateNormal];
             [functionBtn setTitle:@" 详情" forState:UIControlStateNormal];
         }else if (i == 1)

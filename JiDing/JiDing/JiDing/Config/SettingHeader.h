@@ -10,6 +10,10 @@
 #define SettingHeader_h
 
 #import "SettingViewController.h"
+#import "Xzb_FeedBackViewController.h"
+#import "Xzb_AccountCenterController.h"
+#import "Xzb_AccountSetNewPwdController.h"
+#import "Xzb_AccountSetNewPhoneController.h"
 
 #import "SettingCell.h"
 

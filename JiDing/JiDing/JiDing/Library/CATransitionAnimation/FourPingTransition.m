@@ -25,7 +25,7 @@
 
 #pragma - mark UIViewControllerAnimatedTransitioning
 -(NSTimeInterval)transitionDuration:(id<UIViewControllerContextTransitioning>)transitionContext{
-    return 1.;
+    return 0.5;
 }
 
 -(void)animateTransition:(id<UIViewControllerContextTransitioning>)transitionContext
@@ -119,7 +119,7 @@
     maskLayerAnimation.fromValue = (__bridge id)(startCycle.CGPath);
     maskLayerAnimation.toValue = (__bridge id)((endCycle.CGPath));
     maskLayerAnimation.duration = [self transitionDuration:transitionContext];
-    maskLayerAnimation.timingFunction = [CAMediaTimingFunction  functionWithName:kCAMediaTimingFunctionEaseInEaseOut];
+    maskLayerAnimation.timingFunction = [CAMediaTimingFunction  functionWithName:kCAMediaTimingFunctionEaseOut];
     [maskLayerAnimation setValue:transitionContext forKey:@"transitionContext"];
     [maskLayer addAnimation:maskLayerAnimation forKey:@"path"];
 }

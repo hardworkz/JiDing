@@ -70,7 +70,7 @@
     [self.contentView addSubview:_phoneLabel];
     
     UIView *midLine = [[UIView alloc] initWithFrame:CGRectMake(10, CGRectGetMaxY(_phoneLabel.frame) - 0.5, SCREEN_Width - 10, 0.5)];
-    midLine.backgroundColor = AppLineColor;
+    midLine.backgroundColor = AppLightLineColor;
     [self.contentView addSubview:midLine];
     
     _arriveButton = [[UIButton alloc] initWithFrame:CGRectMake(10, 45, (SCREEN_Width - 20)/ 2, 45)];
@@ -89,7 +89,7 @@
     [self.contentView addSubview:_arriveLabel];
     
     UIView *line = [[UIView alloc] initWithFrame:CGRectMake(10, CGRectGetMaxY(_arriveButton.frame) - 0.5, SCREEN_Width - 10, 0.5)];
-    line.backgroundColor = AppLineColor;
+    line.backgroundColor = AppLightLineColor;
     [self.contentView addSubview:line];
     
 }

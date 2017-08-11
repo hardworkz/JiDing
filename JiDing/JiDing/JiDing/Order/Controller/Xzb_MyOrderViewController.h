@@ -8,6 +8,6 @@
 
 #import <UIKit/UIKit.h>
 
-@interface Xzb_MyOrderViewController : UIViewController
+@interface Xzb_MyOrderViewController : RootViewController
 
 @end

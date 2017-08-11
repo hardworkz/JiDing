@@ -68,7 +68,7 @@
     [self.contentView addSubview:_name];
     
     _line = [[UIView alloc] initWithFrame:CGRectMake(10, 45, SCREEN_Width - 10, 0.5)];
-    _line.backgroundColor = AppLineColor;
+    _line.backgroundColor = AppLightLineColor;
     [self.contentView addSubview:_line];
     
     _phoneLabel = [[UILabel alloc] initWithFrame:CGRectMake(10, 45, (SCREEN_Width - 20) / 2, 45)];
@@ -87,7 +87,7 @@
     [self.contentView addSubview:_phone];
     
     UIView *bottomline = [[UIView alloc] initWithFrame:CGRectMake(0, CGRectGetMaxY(_phoneLabel.frame) - 0.5, SCREEN_Width, 0.5)];
-    bottomline.backgroundColor = AppLineColor;
+    bottomline.backgroundColor = AppLightLineColor;
     [self.contentView addSubview:bottomline];
 }
 - (BOOL)textFieldShouldReturn:(UITextField *)textField

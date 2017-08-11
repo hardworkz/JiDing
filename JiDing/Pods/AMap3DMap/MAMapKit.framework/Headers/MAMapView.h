@@ -673,14 +673,14 @@ extern NSString * const kMAMapLayerCameraDegreeKey;
 
 /**
  * @brief 地图区域即将改变时会调用此接口
- * @param mapview 地图View
+ * @param mapView 地图View
  * @param animated 是否动画
  */
 - (void)mapView:(MAMapView *)mapView regionWillChangeAnimated:(BOOL)animated;
 
 /**
  * @brief 地图区域改变完成后会调用此接口
- * @param mapview 地图View
+ * @param mapView 地图View
  * @param animated 是否动画
  */
 - (void)mapView:(MAMapView *)mapView regionDidChangeAnimated:(BOOL)animated;
@@ -719,7 +719,7 @@ extern NSString * const kMAMapLayerCameraDegreeKey;
 
 /**
  * @brief 地图开始加载
- * @param mapview 地图View
+ * @param mapView 地图View
  */
 - (void)mapViewWillStartLoadingMap:(MAMapView *)mapView;
 

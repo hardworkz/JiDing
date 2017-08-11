@@ -33,17 +33,21 @@
 {
     if (self = [super initWithStyle:style reuseIdentifier:reuseIdentifier]) {
         
+        UserAccount *account = [UserAccountTool account];
         //用户头像
         header = [[UIImageView alloc] initWithFrame:CGRectMake((SCREEN_WIDTH - 80)*0.5, 30, 80, 80)];
         header.contentMode = UIViewContentModeScaleAspectFill;
         header.layer.cornerRadius = header.width*0.5;
         header.clipsToBounds = YES;
-        header.backgroundColor = [UIColor redColor];
+        header.userInteractionEnabled = YES;
+        UITapGestureRecognizer *tapHeader = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(changeHeader)];
+        [header addGestureRecognizer:tapHeader];
         [self.contentView addSubview:header];
+        [header sd_setImageWithURL:[NSURL URLWithString:account.userPhoto] placeholderImage:[UIImage imageNamed:PLACEHOLDERIMAGE]];
         //用户昵称
         name = [[UILabel alloc] initWithFrame:CGRectMake(0, CGRectGetMaxY(header.frame), SCREEN_WIDTH, 30)];
         [name setAppFontWithSize:17];
-        name.text = @"来生";
+        name.text = account.nickName;
         name.textAlignment = NSTextAlignmentCenter;
         name.textColor = AppDeepGrayTextColor;
         [self.contentView addSubview:name];
@@ -51,7 +55,7 @@
         sign = [[UILabel alloc] initWithFrame:CGRectMake(10, CGRectGetMaxY(name.frame), SCREEN_WIDTH - 20, 20)];
         [sign setAppFontWithSize:14];
         sign.numberOfLines = 0;
-        sign.text = @"这个人很懒，什么都没留下";
+        sign.text = account.remark;
         sign.textAlignment = NSTextAlignmentCenter;
         sign.textColor = AppLightGrayTextColor;
         [self.contentView addSubview:sign];
@@ -62,5 +66,10 @@
     }
     return self;
 }
-
+- (void)changeHeader:(UIGestureRecognizer *)gesture
+{
+    if (self.changeHeader) {
+        self.changeHeader((UIImageView *)gesture.view);
+    }
+}
 @end

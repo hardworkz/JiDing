@@ -46,8 +46,8 @@
 {
     [super viewWillAppear:animated];
     //设置导航栏背景色
-    [self.navigationController.navigationBar setBackgroundImage:[UIImage imageWithColor:AppMainColor] forBarMetrics:UIBarMetricsDefault];
-    [self.navigationController.navigationBar setShadowImage:[UIImage imageNamed:@"透明"]];
+//    [self.navigationController.navigationBar setBackgroundImage:[UIImage imageWithColor:AppMainColor] forBarMetrics:UIBarMetricsDefault];
+//    [self.navigationController.navigationBar setShadowImage:[UIImage imageNamed:@"透明"]];
 }
 - (void)viewWillDisappear:(BOOL)animated
 {
@@ -84,7 +84,7 @@
     _tableView = [[UITableView alloc] initWithFrame:CGRectMake(0, 0, SCREEN_Width, SCREEN_Height - 49 - 64)];
     _tableView.delegate = self;
     _tableView.dataSource = self;
-    _tableView.backgroundColor = [UIColor groupTableViewBackgroundColor];
+    _tableView.backgroundColor = AppLightLineColor;
     _footerView = [[Xzb_FillOrderFooterView alloc] initWithFrame:CGRectMake(0, 0, SCREEN_Width, 60)];
     _tableView.tableFooterView = _footerView;
     _tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
@@ -99,34 +99,6 @@
     bottomBar.frame = CGRectMake(0, SCREEN_Height - 49 - 64, SCREEN_Width, 49);
     [self.view addSubview:bottomBar];
     
-    //区别全日房和钟点房
-//    NSString *hourTime = @"";
-//    if ([self.hotelModel.orderType intValue] == 1) {
-//        hourTime = @"晚";
-//    }else if ([self.hotelModel.orderType intValue] == 2)
-//    {
-//        //钟点房显示时间
-//        if ([self.hotelModel.timePeriod intValue] == 1) {
-//            hourTime = @"3小时";
-//        }else if ([self.hotelModel.timePeriod intValue] == 2){
-//            hourTime = @"4小时";
-//        }else if ([self.hotelModel.timePeriod intValue] == 3){
-//            hourTime = @"5小时";
-//        }
-//        
-//    }
-    //酒店报价
-    //    NSString *text = [NSString stringWithFormat:@"订单总额：¥%@",self.hotelModel.price];
-    
-//    _unitPriceLabel = [[UILabel alloc] init];
-//    _unitPriceLabel.text = [NSString stringWithFormat:@"订单总额：¥%@",self.hotelModel.roomPrice];
-//    _unitPriceLabel.backgroundColor = [UIColor blackColor];
-//    _unitPriceLabel.textColor = [UIColor whiteColor];
-//    _unitPriceLabel.textAlignment = NSTextAlignmentCenter;
-//    _unitPriceLabel.font = [UIFont systemFontOfSize:17];
-//    _unitPriceLabel.frame = CGRectMake(0, 0, SCREEN_Width * 0.5, 49);
-//    [bottomBar addSubview:_unitPriceLabel];
-    
     //分割线
     UIView *devider = [[UIView alloc] initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, 0.5)];
     devider.backgroundColor = AppLightLineColor;
@@ -137,8 +109,8 @@
     [submitButton setTitle:@"提交订单" forState:UIControlStateNormal];
     [submitButton setTitleColor:AppGreenTextColor forState:UIControlStateNormal];
     [submitButton addTarget:self action:@selector(submitOrder:) forControlEvents:UIControlEventTouchUpInside];
-    [submitButton addSubview:devider];
     [bottomBar addSubview:submitButton];
+    [submitButton addSubview:devider];
 }
 
 - (void)didReceiveMemoryWarning {
@@ -180,20 +152,6 @@
         };
         return cell;
     }else
-//        if (indexPath.row == 2) {
-//        Xzb_fillOrderTicketCell *cell = [Xzb_fillOrderTicketCell cellWithTableView:tableView];
-//        if (self.couponArray.count && !self.couponMony.length) {
-////            VouchersListModel *model = self.couponArray.firstObject;
-////            self.couponMony = model.coupon_money;
-////            self.couponId = [NSString stringWithFormat:@"%@",model.voucherID];
-//        }
-//        if ([self.couponMony integerValue] == -1 ) {
-//            cell.couponMony = NULL;
-//        }else {
-//            cell.couponMony = self.couponMony;
-//        }
-//        return cell;
-//    }else
         if (indexPath.row == 2) {
         Xzb_fillOrderPhoneCell *cell = [Xzb_fillOrderPhoneCell cellWithTableView:tableView];
         cell.selectionStyle = UITableViewCellSelectionStyleNone;
@@ -224,20 +182,8 @@
 
 -(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-//    if (indexPath.row == 0) {
-//        return 105;
-//    }else if (indexPath.row == 1 || indexPath.row == 3) {
-//        return 90;
-//    }else if (indexPath.row >= 5 ) {
-//        return 90;
-//    }
-//    else if (indexPath.row == 2 || indexPath.row == 4) {
-//        return 54;
-//    }else {
-//        return 45;
-//    }
     if (indexPath.row == 0) {
-        return 95;
+        return 115;
     }else if (indexPath.row == 1) {
         return 45;
     }else if (indexPath.row == 2) {
@@ -340,18 +286,7 @@
     _hotelModel = hotelModel;
     //    float totalPrice = [hotelModel.roomNum integerValue] * [hotelModel.nights integerValue] *[hotelModel.price doubleValue];
     _totalMony = [NSString stringWithFormat:@"%.2f",[hotelModel.totalPrice floatValue]];
-    //    RTLog(@"入住的总额为:%@",_totalMony);
     _unitPriceLabel.text = [NSString stringWithFormat:@"订单总额：¥%@",hotelModel.totalPrice];
-    //    if ([hotelModel.orderBusinessLevel integerValue] == 6) {
-    //        _unitPriceLabel.text = @"订单总额：¥1.00";
-    //        _hotelModel.price = @"1.00";
-    //    }
-    //    if (hotelModel.typeArray.count == 1) {
-    //        if ([hotelModel.typeArray.firstObject integerValue] == 2) {
-    //            _unitPriceLabel.text = [NSString stringWithFormat:@"订单总额：¥%.2f",totalPrice / 2];
-    //            _hotelModel.price = [NSString stringWithFormat:@"%.2f",totalPrice / 2];
-    //        }
-    //    }
 }
 
 - (void)scrollViewWillBeginDragging:(UIScrollView *)scrollView{
@@ -369,13 +304,11 @@
     UserAccount *account = [UserAccountTool account];
     NSDictionary *dic = @{USERID:account.userId,TOKEN:account.loginToken, @"state":@"0",@"orderId":self.hotelModel.orderId,@"orderRelId":_offerModel.orderRelId};
     [RTHttpTool get:GET_CUSOTEMER_COUPON addHUD:YES param:dic success:^(id responseObj) {
-//        id json = [RTHttpTool jsonWithResponseObj:responseObj];
         if ([responseObj[SUCCESS] intValue] == 1) {
-//            NSArray *vocherListArray = [VouchersListModel mj_objectArrayWithKeyValuesArray:json[ENTITIES][@"list"]];
-//            self.couponArray = (NSMutableArray *)vocherListArray;
             [self.tableView reloadData];
         }
         if ([responseObj[SUCCESS] intValue] == 0) {
+            //弹窗提示信息
             [[Toast makeText:responseObj[MESSAGE]] show];
         }
         self.NoCoupon = NO;
@@ -384,27 +317,27 @@
     }];
 }
 
-- (void)getCouponData {
-    UserAccount *account = [UserAccountTool account];
-    NSDictionary *dic = @{USERID:account.userId,TOKEN:account.loginToken, @"state":@"0",@"orderId":self.hotelModel.orderId,@"orderRelId":_offerModel.orderRelId};
-    [RTHttpTool get:GET_CUSOTEMER_COUPON addHUD:YES param:dic success:^(id responseObj) {
-//        id json = [RTHttpTool jsonWithResponseObj:responseObj];
-        NSLog(@"%@",responseObj);
-        if ([responseObj[SUCCESS] intValue] == 1) {
-//            NSArray *vocherListArray = [VouchersListModel mj_objectArrayWithKeyValuesArray:json[ENTITIES][@"list"]];
-//            self.couponArray = (NSMutableArray *)vocherListArray;
-            if (self.couponArray.count) {
-                if (!self.couponId.length) {
-                    [[Toast makeText:@"您未使用返现券！"] show];
-                }
-            }
-        }
-        if ([responseObj[SUCCESS] intValue] == 0) {
-            [[Toast makeText:responseObj[MESSAGE]] show];
-        }
-    } failure:^(NSError *error) {
-        
-    }];
-}
+//- (void)getCouponData {
+//    UserAccount *account = [UserAccountTool account];
+//    NSDictionary *dic = @{USERID:account.userId,TOKEN:account.loginToken, @"state":@"0",@"orderId":self.hotelModel.orderId,@"orderRelId":_offerModel.orderRelId};
+//    [RTHttpTool get:GET_CUSOTEMER_COUPON addHUD:YES param:dic success:^(id responseObj) {
+////        id json = [RTHttpTool jsonWithResponseObj:responseObj];
+//        NSLog(@"%@",responseObj);
+//        if ([responseObj[SUCCESS] intValue] == 1) {
+////            NSArray *vocherListArray = [VouchersListModel mj_objectArrayWithKeyValuesArray:json[ENTITIES][@"list"]];
+////            self.couponArray = (NSMutableArray *)vocherListArray;
+//            if (self.couponArray.count) {
+//                if (!self.couponId.length) {
+//                    [[Toast makeText:@"您未使用返现券！"] show];
+//                }
+//            }
+//        }
+//        if ([responseObj[SUCCESS] intValue] == 0) {
+//            [[Toast makeText:responseObj[MESSAGE]] show];
+//        }
+//    } failure:^(NSError *error) {
+//        
+//    }];
+//}
 
 @end

@@ -188,7 +188,7 @@
         self.selectedLineView = lineView;
         
         UIView *devider = [[UIView alloc] initWithFrame:CGRectMake(0, 48.5, ScreenWidth, 0.5)];
-        devider.backgroundColor = AppLineColor;
+        devider.backgroundColor = AppLightLineColor;
         [_pageSelectedBtnView addSubview:devider];
     }
     return _pageSelectedBtnView;
@@ -314,8 +314,8 @@
         [self.navigationController setNavigationBarHidden:NO animated:animated];
     }
     //设置导航栏背景色
-    [self.navigationController.navigationBar setBackgroundImage:[UIImage imageWithColor:AppMainColor] forBarMetrics:UIBarMetricsDefault];
-    self.navigationController.navigationBar.shadowImage =[UIImage imageWithColor:AppMainColor];
+//    [self.navigationController.navigationBar setBackgroundImage:[UIImage imageWithColor:AppMainColor] forBarMetrics:UIBarMetricsDefault];
+//    self.navigationController.navigationBar.shadowImage =[UIImage imageWithColor:AppMainColor];
     //移除通知
     [[NSNotificationCenter defaultCenter] removeObserver:self];
 }
@@ -502,7 +502,6 @@
                 selfWeak.commentStart = selfWeak.commentPage * selfWeak.commentLimit;
                 if (array.count < selfWeak.commentLimit) {
                     [selfWeak.tableView.mj_footer endRefreshingWithNoMoreData];
-//                    [[Toast makeText:@"没有更多数据"]show];
                 }else{
                     [selfWeak.tableView.mj_footer resetNoMoreData];
                     selfWeak.commentPage += 1;
@@ -1036,7 +1035,7 @@
     if ([scrollView isEqual:self.tableView]) {
         if (y == self.hoverOffsetH || y == self.onePageOffsetY || self.tempY == y) {
             //设置导航栏的背景颜色，透明状态值
-            [self.navigationController.navigationBar cnSetBackgroundColor:[[UIColor whiteColor] colorWithAlphaComponent:1]];
+//            [self.navigationController.navigationBar cnSetBackgroundColor:[[UIColor whiteColor] colorWithAlphaComponent:1]];
             self.navBGV.alpha = 1.0;
         }
         

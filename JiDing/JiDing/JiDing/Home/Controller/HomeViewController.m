@@ -33,8 +33,8 @@
 /*
  * 点击用户中心遮盖view
  */
-@property (strong, nonatomic) CustomRadioView *bigRoundCoverView;
-@property (strong, nonatomic) CustomRadioView *bigRoundCoverViewSetting;
+//@property (strong, nonatomic) CustomRadioView *bigRoundCoverView;
+//@property (strong, nonatomic) CustomRadioView *bigRoundCoverViewSetting;
 /*
  * 加减动画控件
  */
@@ -204,28 +204,6 @@ static HomeViewController *_instance = nil;
         _ktvTypeDataArray = (NSMutableArray *)@[@"小包厢",@"中包厢",@"大包厢"];
     }
     return _ktvTypeDataArray;
-}
-
-
-- (UIView *)bigRoundCoverView
-{
-    if (_bigRoundCoverView == nil) {
-        _bigRoundCoverView = [[CustomRadioView alloc] init];
-        _bigRoundCoverView.backgroundColor = [UIColor clearColor];
-        _bigRoundCoverView.frame = CGRectMake(SCREEN_WIDTH, SCREEN_HEIGHT, Radius * 2, Radius * 2);
-        RTLog(@"x:%f-----y:%f --- width:%f ----height:%f",_bigRoundCoverView.x,_bigRoundCoverView.y,_bigRoundCoverView.width,_bigRoundCoverView.height);
-    }
-    return _bigRoundCoverView;
-}
-- (UIView *)bigRoundCoverViewSetting
-{
-    if (_bigRoundCoverViewSetting == nil) {
-        _bigRoundCoverViewSetting = [[CustomRadioView alloc] init];
-        _bigRoundCoverViewSetting.backgroundColor = [UIColor clearColor];
-        _bigRoundCoverViewSetting.frame = CGRectMake(-(Radius * 2), SCREEN_HEIGHT, Radius * 2, Radius * 2);
-        RTLog(@"x:%f-----y:%f --- width:%f ----height:%f",_bigRoundCoverViewSetting.x,_bigRoundCoverViewSetting.y,_bigRoundCoverViewSetting.width,_bigRoundCoverViewSetting.height);
-    }
-    return _bigRoundCoverViewSetting;
 }
 - (UILabel *)addAndSubLabel
 {

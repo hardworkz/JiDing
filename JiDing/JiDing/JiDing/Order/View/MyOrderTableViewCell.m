@@ -55,20 +55,20 @@
 - (instancetype)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier
 {
     if (self = [super initWithStyle:style reuseIdentifier:reuseIdentifier]) {
-                [self setupView];
+        [self setupView];
     }
     return self;
 }
 
 - (void) setupView {
-    self.contentView.backgroundColor = AppLineColor;
+    self.contentView.backgroundColor = AppLightLineColor;
     
     _customView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, SCREEN_Width, 190)];
     _customView.backgroundColor = [UIColor whiteColor];
     [self.contentView addSubview:_customView];
     
     UIView *line = [[UIView alloc] initWithFrame:CGRectMake(0, 0, SCREEN_Width, 0.5)];
-    line.backgroundColor = AppLineColor;
+    line.backgroundColor = AppLightLineColor;
     [self.customView addSubview:line];
     
     _orderIdLabel = [[UILabel alloc] initWithFrame:CGRectMake(10, 0, ( SCREEN_Width - 20 ) / 2 + 100, 45)];
@@ -84,7 +84,7 @@
     [self.customView addSubview:_typeLabel];
     
     _firLine = [[UIView alloc] initWithFrame:CGRectMake(10, 45, SCREEN_Width - 10, 0.5)];
-    _firLine.backgroundColor = AppLineColor;
+    _firLine.backgroundColor = AppLightLineColor;
     [self.customView addSubview:_firLine];
     
     _hotelName = [[UIButton alloc] initWithFrame:CGRectMake(10, 45, SCREEN_Width - 20, 30)];
@@ -106,7 +106,7 @@
     [self.customView addSubview:_arriveTime];
     
     _secLine = [[UIView alloc] initWithFrame:CGRectMake(10, CGRectGetMaxY(_arriveTime.frame), SCREEN_Width - 10, 0.5)];
-    _secLine.backgroundColor = AppLineColor;
+    _secLine.backgroundColor = AppLightLineColor;
     [self.customView addSubview:_secLine];
     
     _orderTime = [[UILabel alloc] initWithFrame:CGRectMake(10, CGRectGetMaxY(_arriveTime.frame), ( SCREEN_Width - 20 ) / 2, 50)];
@@ -127,9 +127,9 @@
     [self.customView addSubview:_cancleButton];
     
     _sureButton = [[UIButton alloc] initWithFrame:CGRectMake(CGRectGetMaxX(_cancleButton.frame) + 10, CGRectGetMaxY(_arriveTime.frame) + 10, CGRectGetWidth(_cancleButton.frame), 30)];
-    [_sureButton setTitleColor:AppMainColor forState:UIControlStateNormal];
+    [_sureButton setTitleColor:AppGreenBtnColor forState:UIControlStateNormal];
     [_sureButton setTitle:@"查看订单" forState:UIControlStateNormal];
-    _sureButton.layer.borderColor = [AppMainColor CGColor];
+    _sureButton.layer.borderColor = [AppGreenBtnColor CGColor];
     _sureButton.titleLabel.font = [UIFont systemFontOfSize:13];
     _sureButton.layer.borderWidth = .5f;
     _sureButton.layer.masksToBounds = YES;
@@ -139,7 +139,7 @@
     
     _priceLabel = [[UILabel alloc] initWithFrame:CGRectMake(CGRectGetMaxX(_roomLabel.frame), CGRectGetMaxY(_hotelName.frame) - 5, SCREEN_Width - CGRectGetWidth(_roomLabel.frame) - 10 - 30, 35)];
     _priceLabel.font = [UIFont systemFontOfSize:14];
-    _priceLabel.textColor = AppMainColor;
+    _priceLabel.textColor = AppGreenTextColor;
     _priceLabel.textAlignment = NSTextAlignmentRight;
     [self.customView addSubview:_priceLabel];
     
@@ -147,7 +147,7 @@
     [_countDownBtn setTitleColor:[UIColor lightGrayColor] forState:UIControlStateNormal];
     _countDownBtn.titleLabel.font = [UIFont systemFontOfSize:12];
     _countDownBtn.contentHorizontalAlignment = UIControlContentHorizontalAlignmentRight;
-    [_countDownBtn setImage:[UIImage imageNamed:@"闹钟"] forState:UIControlStateNormal];
+    [_countDownBtn setImage:[UIImage imageNamed:@"订单倒计时1"] forState:UIControlStateNormal];
     [self.customView addSubview:_countDownBtn];
     
 }
@@ -268,7 +268,6 @@
         default:
             break;
     }
-//    [_countDownBtn setTitle:model.orderDate forState:UIControlStateNormal];
     [self.hotelName setTitle:[NSString stringWithFormat:@" %@",model.businessName] forState:UIControlStateNormal];
     self.orderIdLabel.text = [NSString stringWithFormat:@"订单号：%@",model.orderCode];
     self.roomLabel.text = model.roomName;
@@ -304,7 +303,6 @@
             _cancleButton.hidden = YES;
         }
         _countDownBtn.hidden = YES;
-//        [_countDownBtn setTitle:model.orderDate forState:UIControlStateNormal];
     }
 }
 

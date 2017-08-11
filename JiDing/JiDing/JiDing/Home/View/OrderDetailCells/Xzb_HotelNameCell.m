@@ -34,16 +34,17 @@
 }
 - (void)setupView
 {
-    UIImageView *iconImageView = [[UIImageView alloc] init];
-    iconImageView.image = [UIImage imageNamed:@"酒店图标"];
-    iconImageView.contentMode = UIViewContentModeCenter;
-    iconImageView.frame = CGRectMake(0, 0, 50, 60);
-    [self.contentView addSubview:iconImageView];
-    self.iconImageView = iconImageView;
+//    UIImageView *iconImageView = [[UIImageView alloc] init];
+//    iconImageView.image = [UIImage imageNamed:@"酒店图标"];
+//    iconImageView.contentMode = UIViewContentModeCenter;
+//    iconImageView.frame = CGRectMake(0, 0, 50, 49);
+//    [self.contentView addSubview:iconImageView];
+//    self.iconImageView = iconImageView;
     
     UILabel *hotelNameLabel = [[UILabel alloc] init];
-    hotelNameLabel.font = [UIFont systemFontOfSize:17];
-    hotelNameLabel.frame = CGRectMake(CGRectGetMaxX(iconImageView.frame) - 10, 0, (ScreenWidth-CGRectGetMaxX(iconImageView.frame)) - 20, 60);
+    hotelNameLabel.font = [UIFont boldSystemFontOfSize:17.];
+    hotelNameLabel.frame = CGRectMake(0, 0, ScreenWidth, 49);
+    hotelNameLabel.textAlignment = NSTextAlignmentCenter;
     hotelNameLabel.textColor = AppMainGrayTextColor;
     [self.contentView addSubview:hotelNameLabel];
     self.hotelNameLabel = hotelNameLabel;

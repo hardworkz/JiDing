@@ -114,6 +114,11 @@
 		6993820E1EDFA7F400BD2319 /* UserAccountTool.m in Sources */ = {isa = PBXBuildFile; fileRef = 6993820D1EDFA7F400BD2319 /* UserAccountTool.m */; };
 		699382111EDFA80D00BD2319 /* UserAccount.m in Sources */ = {isa = PBXBuildFile; fileRef = 699382101EDFA80D00BD2319 /* UserAccount.m */; };
 		699382151EDFAA2F00BD2319 /* MyOrderTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 699382141EDFAA2F00BD2319 /* MyOrderTableViewCell.m */; };
+		69A9FC461F3D932B00205109 /* Xzb_FeedBackViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 69A9FC451F3D932B00205109 /* Xzb_FeedBackViewController.m */; };
+		69A9FC4D1F3D94DA00205109 /* Xzb_AccountCenterController.m in Sources */ = {isa = PBXBuildFile; fileRef = 69A9FC481F3D94DA00205109 /* Xzb_AccountCenterController.m */; };
+		69A9FC4E1F3D94DA00205109 /* Xzb_AccountSetNewPhoneController.m in Sources */ = {isa = PBXBuildFile; fileRef = 69A9FC4A1F3D94DA00205109 /* Xzb_AccountSetNewPhoneController.m */; };
+		69A9FC4F1F3D94DA00205109 /* Xzb_AccountSetNewPwdController.m in Sources */ = {isa = PBXBuildFile; fileRef = 69A9FC4C1F3D94DA00205109 /* Xzb_AccountSetNewPwdController.m */; };
+		69A9FC521F3DADD200205109 /* Xzb_ImagePickerController.m in Sources */ = {isa = PBXBuildFile; fileRef = 69A9FC511F3DADD200205109 /* Xzb_ImagePickerController.m */; };
 		74023B711EF561EC001782A2 /* AutoImageViewHeightFrameModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 74023B701EF561EC001782A2 /* AutoImageViewHeightFrameModel.m */; };
 		74023B741EF56219001782A2 /* AutoImageTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 74023B731EF56219001782A2 /* AutoImageTableViewCell.m */; };
 		74023B771EF56C31001782A2 /* YJImageBrowserView.m in Sources */ = {isa = PBXBuildFile; fileRef = 74023B761EF56C31001782A2 /* YJImageBrowserView.m */; };
@@ -220,7 +225,6 @@
 		7412F43E1EE296EF00744C86 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7412F43D1EE296EF00744C86 /* Foundation.framework */; };
 		7412F4401EE296FB00744C86 /* CFNetwork.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7412F43F1EE296FB00744C86 /* CFNetwork.framework */; };
 		7412F4421EE2970300744C86 /* CoreMotion.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7412F4411EE2970300744C86 /* CoreMotion.framework */; };
-		7414CFED1EE6F90200AB096C /* CustomRadioView.m in Sources */ = {isa = PBXBuildFile; fileRef = 7414CFEC1EE6F90200AB096C /* CustomRadioView.m */; };
 		744F9FD31EE02E9C0007E53D /* Xzb_MapViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 744F9FD21EE02E9C0007E53D /* Xzb_MapViewController.m */; };
 		744F9FDB1EE02F680007E53D /* CustomTextField.m in Sources */ = {isa = PBXBuildFile; fileRef = 744F9FDA1EE02F680007E53D /* CustomTextField.m */; };
 		744F9FDE1EE02FE70007E53D /* Xzb_OpenCityModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 744F9FDD1EE02FE70007E53D /* Xzb_OpenCityModel.m */; };
@@ -461,6 +465,16 @@
 		699382121EDFA87F00BD2319 /* InterfaceAPIHeader.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = InterfaceAPIHeader.h; sourceTree = "<group>"; };
 		699382131EDFAA2F00BD2319 /* MyOrderTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MyOrderTableViewCell.h; sourceTree = "<group>"; };
 		699382141EDFAA2F00BD2319 /* MyOrderTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MyOrderTableViewCell.m; sourceTree = "<group>"; };
+		69A9FC441F3D932B00205109 /* Xzb_FeedBackViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Xzb_FeedBackViewController.h; sourceTree = "<group>"; };
+		69A9FC451F3D932B00205109 /* Xzb_FeedBackViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Xzb_FeedBackViewController.m; sourceTree = "<group>"; };
+		69A9FC471F3D94DA00205109 /* Xzb_AccountCenterController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Xzb_AccountCenterController.h; sourceTree = "<group>"; };
+		69A9FC481F3D94DA00205109 /* Xzb_AccountCenterController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Xzb_AccountCenterController.m; sourceTree = "<group>"; };
+		69A9FC491F3D94DA00205109 /* Xzb_AccountSetNewPhoneController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Xzb_AccountSetNewPhoneController.h; sourceTree = "<group>"; };
+		69A9FC4A1F3D94DA00205109 /* Xzb_AccountSetNewPhoneController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Xzb_AccountSetNewPhoneController.m; sourceTree = "<group>"; };
+		69A9FC4B1F3D94DA00205109 /* Xzb_AccountSetNewPwdController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Xzb_AccountSetNewPwdController.h; sourceTree = "<group>"; };
+		69A9FC4C1F3D94DA00205109 /* Xzb_AccountSetNewPwdController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Xzb_AccountSetNewPwdController.m; sourceTree = "<group>"; };
+		69A9FC501F3DADD200205109 /* Xzb_ImagePickerController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Xzb_ImagePickerController.h; sourceTree = "<group>"; };
+		69A9FC511F3DADD200205109 /* Xzb_ImagePickerController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Xzb_ImagePickerController.m; sourceTree = "<group>"; };
 		74023B6F1EF561EC001782A2 /* AutoImageViewHeightFrameModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AutoImageViewHeightFrameModel.h; sourceTree = "<group>"; };
 		74023B701EF561EC001782A2 /* AutoImageViewHeightFrameModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AutoImageViewHeightFrameModel.m; sourceTree = "<group>"; };
 		74023B721EF56219001782A2 /* AutoImageTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AutoImageTableViewCell.h; sourceTree = "<group>"; };
@@ -736,8 +750,6 @@
 		7412F43D1EE296EF00744C86 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		7412F43F1EE296FB00744C86 /* CFNetwork.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CFNetwork.framework; path = System/Library/Frameworks/CFNetwork.framework; sourceTree = SDKROOT; };
 		7412F4411EE2970300744C86 /* CoreMotion.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreMotion.framework; path = System/Library/Frameworks/CoreMotion.framework; sourceTree = SDKROOT; };
-		7414CFEB1EE6F90200AB096C /* CustomRadioView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CustomRadioView.h; sourceTree = "<group>"; };
-		7414CFEC1EE6F90200AB096C /* CustomRadioView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CustomRadioView.m; sourceTree = "<group>"; };
 		744F9FD11EE02E9C0007E53D /* Xzb_MapViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Xzb_MapViewController.h; sourceTree = "<group>"; };
 		744F9FD21EE02E9C0007E53D /* Xzb_MapViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Xzb_MapViewController.m; sourceTree = "<group>"; };
 		744F9FD91EE02F680007E53D /* CustomTextField.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CustomTextField.h; sourceTree = "<group>"; };
@@ -881,6 +893,8 @@
 			children = (
 				6983A18D1ED943B10032CF36 /* UserCenterViewController.h */,
 				6983A18E1ED943B10032CF36 /* UserCenterViewController.m */,
+				69A9FC501F3DADD200205109 /* Xzb_ImagePickerController.h */,
+				69A9FC511F3DADD200205109 /* Xzb_ImagePickerController.m */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -900,6 +914,14 @@
 			children = (
 				6983A1951ED963A20032CF36 /* SettingViewController.h */,
 				6983A1961ED963A20032CF36 /* SettingViewController.m */,
+				69A9FC441F3D932B00205109 /* Xzb_FeedBackViewController.h */,
+				69A9FC451F3D932B00205109 /* Xzb_FeedBackViewController.m */,
+				69A9FC471F3D94DA00205109 /* Xzb_AccountCenterController.h */,
+				69A9FC481F3D94DA00205109 /* Xzb_AccountCenterController.m */,
+				69A9FC491F3D94DA00205109 /* Xzb_AccountSetNewPhoneController.h */,
+				69A9FC4A1F3D94DA00205109 /* Xzb_AccountSetNewPhoneController.m */,
+				69A9FC4B1F3D94DA00205109 /* Xzb_AccountSetNewPwdController.h */,
+				69A9FC4C1F3D94DA00205109 /* Xzb_AccountSetNewPwdController.m */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -1705,8 +1727,6 @@
 				7412F39A1EE2588800744C86 /* HotelDetailCells */,
 				7412F2F01EE24E9E00744C86 /* fillOrderCells */,
 				7412F3AC1EE2588800744C86 /* OrderDetailCells */,
-				7414CFEB1EE6F90200AB096C /* CustomRadioView.h */,
-				7414CFEC1EE6F90200AB096C /* CustomRadioView.m */,
 				698754211EE7972A00AE8B72 /* CustomRadioViewTwo.h */,
 				698754221EE7972A00AE8B72 /* CustomRadioViewTwo.m */,
 				7412F2ED1EE24E6B00744C86 /* Xzb_FillOrderFooterView.h */,
@@ -2177,7 +2197,6 @@
 				749921701EDBDAF700459E5C /* RTHttpTool.m in Sources */,
 				6983A1A01ED967BF0032CF36 /* DQAlertView.m in Sources */,
 				699381DA1EDFA61900BD2319 /* DJCameraViewController.m in Sources */,
-				7414CFED1EE6F90200AB096C /* CustomRadioView.m in Sources */,
 				699381661EDFA3C700BD2319 /* STPhotoBrowserView.m in Sources */,
 				7412F3BE1EE2588800744C86 /* PageTypeTwoTableViewCell.m in Sources */,
 				7412F3C41EE2588800744C86 /* Xzb_OrderDetailCell.m in Sources */,
@@ -2189,6 +2208,7 @@
 				699382151EDFAA2F00BD2319 /* MyOrderTableViewCell.m in Sources */,
 				7412F3051EE24E9E00744C86 /* Xzb_fillOrderTicketCell.m in Sources */,
 				7412F2E91EE24D4400744C86 /* WXPayUtils.m in Sources */,
+				69A9FC521F3DADD200205109 /* Xzb_ImagePickerController.m in Sources */,
 				7412F3C01EE2588800744C86 /* TwoTableViewCell.m in Sources */,
 				6993820E1EDFA7F400BD2319 /* UserAccountTool.m in Sources */,
 				749921661EDBD5F700459E5C /* RegisterViewController.m in Sources */,
@@ -2255,6 +2275,7 @@
 				7412F4011EE25AFF00744C86 /* HZPhotoBrowserView.m in Sources */,
 				6993818C1EDFA44500BD2319 /* JKAssetsGroupCell.m in Sources */,
 				74023B771EF56C31001782A2 /* YJImageBrowserView.m in Sources */,
+				69A9FC4E1F3D94DA00205109 /* Xzb_AccountSetNewPhoneController.m in Sources */,
 				7408CC281EE44CF3004140AD /* UIView+Extension.m in Sources */,
 				7412F3001EE24E9E00744C86 /* Xzb_fillOrderAddCheckManCell.m in Sources */,
 				7412F3021EE24E9E00744C86 /* Xzb_fillOrderPayTypeCell.m in Sources */,
@@ -2276,6 +2297,7 @@
 				6988A6771ED7C553002CABAE /* GTMBase64.m in Sources */,
 				7412F3EB1EE25A9000744C86 /* MJPhoto.m in Sources */,
 				7412F3DA1EE2598200744C86 /* Xzb_UserCommentFrameModel.m in Sources */,
+				69A9FC4D1F3D94DA00205109 /* Xzb_AccountCenterController.m in Sources */,
 				6988A65C1ED7BFC0002CABAE /* RootViewController.m in Sources */,
 				699381611EDFA3C700BD2319 /* STUI.m in Sources */,
 				699381641EDFA3C700BD2319 /* STIndicatorView.m in Sources */,
@@ -2301,6 +2323,7 @@
 				7412F3EE1EE25A9000744C86 /* MJPhotoLoadingView.m in Sources */,
 				744F9FDE1EE02FE70007E53D /* Xzb_OpenCityModel.m in Sources */,
 				7412F3921EE256B800744C86 /* RSADataVerifier.m in Sources */,
+				69A9FC4F1F3D94DA00205109 /* Xzb_AccountSetNewPwdController.m in Sources */,
 				699382081EDFA6F800BD2319 /* Xzb_MyOrderInfosModel.m in Sources */,
 				699381941EDFA44500BD2319 /* JKUtil.m in Sources */,
 				7412F3F21EE25A9000744C86 /* SDWebImageManager+MJ.m in Sources */,
@@ -2321,6 +2344,7 @@
 				6993818B1EDFA44500BD2319 /* JKAssetsCollectionFooterView.m in Sources */,
 				7412F3221EE2549D00744C86 /* OnlineFriendsView.m in Sources */,
 				7412F38B1EE256B800744C86 /* base64.m in Sources */,
+				69A9FC461F3D932B00205109 /* Xzb_FeedBackViewController.m in Sources */,
 				699381471EDFA30200BD2319 /* Xzb_myOrderHandler.m in Sources */,
 				7412F3D71EE2598200744C86 /* Xzb_BusinessFacilitiesModel.m in Sources */,
 				6983A19B1ED966FD0032CF36 /* SettingCell.m in Sources */,
@@ -2496,6 +2520,7 @@
 				CODE_SIGN_ENTITLEMENTS = JiDing/JiDing.entitlements;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				DEVELOPMENT_TEAM = JA62234AND;
+				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/JiDing/JiDing/Library/AliSDK",
@@ -2535,6 +2560,7 @@
 				CODE_SIGN_ENTITLEMENTS = JiDing/JiDing.entitlements;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				DEVELOPMENT_TEAM = JA62234AND;
+				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/JiDing/JiDing/Library/AliSDK",

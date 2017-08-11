@@ -10,7 +10,7 @@
 
 @interface Xzb_fillOrderRemarkCell ()<UITextFieldDelegate>
 
-@property (nonatomic, strong) UILabel *remarkLabel;
+@property (nonatomic, strong) UIButton *remarkBtn;
 @property (nonatomic, strong) UIView *customView;
 
 @end
@@ -56,25 +56,21 @@
     _customView.backgroundColor = [UIColor whiteColor];
     [self.contentView addSubview:_customView];
     
-    _remarkLabel = [[UILabel alloc] init];
-    _remarkLabel.text = @"备注";
-    _remarkLabel.textColor = AppMainGrayTextColor;
-    _remarkLabel.font = [UIFont systemFontOfSize:14];
-    [_remarkLabel sizeToFit];
-    _remarkLabel.frame = CGRectMake(10, (self.contentView.frame.size.height - _remarkLabel.frame.size.height) / 2, _remarkLabel.frame.size.width, _remarkLabel.frame.size.height);
-    [_customView addSubview:_remarkLabel];
+    _remarkBtn = [[UIButton alloc] initWithFrame:CGRectMake(10, 0, (SCREEN_Width - 20)/ 2, 45)];
+    [_remarkBtn setTitleColor:AppMainGrayTextColor forState:UIControlStateNormal];
+    [_remarkBtn setTitle:@" 备注" forState:UIControlStateNormal];
+    [_remarkBtn setImage:[UIImage imageNamed:@"其他要求"] forState:UIControlStateNormal];
+    _remarkBtn.titleLabel.font = [UIFont systemFontOfSize:14];
+    _remarkBtn.contentHorizontalAlignment = UIControlContentHorizontalAlignmentLeft;
+    [_customView addSubview:_remarkBtn];
     
-    _remarkField = [[UITextField alloc] initWithFrame:CGRectMake(CGRectGetMaxX(_remarkLabel.frame) + 10, 0, SCREEN_Width - CGRectGetWidth(_remarkLabel.frame) - 30, 45)];
+    _remarkField = [[UITextField alloc] initWithFrame:CGRectMake(CGRectGetMaxX(_remarkBtn.frame) + 10, 0, SCREEN_Width - CGRectGetWidth(_remarkBtn.frame) - 30, 45)];
     _remarkField.font = [UIFont systemFontOfSize:14];
     _remarkField.textAlignment = NSTextAlignmentRight;
     _remarkField.placeholder = @"选填";
     _remarkField.returnKeyType = UIReturnKeyDone;
     _remarkField.delegate  = self;
     [_customView addSubview:_remarkField];
-    
-//    UIView *line = [[UIView alloc] initWithFrame:CGRectMake(0, CGRectGetMaxY(_remarkField.frame) - 0.5, SCREEN_Width, 0.5)];
-//    line.backgroundColor = AppLineColor;
-//    [self.contentView addSubview:line];
 }
 - (BOOL)textFieldShouldReturn:(UITextField *)textField
 {

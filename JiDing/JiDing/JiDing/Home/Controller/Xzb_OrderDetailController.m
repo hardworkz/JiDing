@@ -57,7 +57,7 @@
 }
 - (void)back_clicked
 {
-    if (self.isPopRootVC) {
+    if (_isPopRootVC) {
         [self.navigationController popToRootViewControllerAnimated:YES];
     }else{
         [self.navigationController popViewControllerAnimated:YES];
@@ -66,6 +66,23 @@
 #pragma mark - viewDidLoad
 - (void)viewDidLoad {
     [super viewDidLoad];
+    self.title = @"确认订单";
+    
+    //自定义返回按钮
+    UIImage * imgOn = [UIImage imageNamed:@"返回"];
+    UIImage * imgOff = [UIImage imageNamed:@"返回"];
+    UIButton * btn = [UIButton buttonWithType:UIButtonTypeCustom];
+    CGSize size = CGSizeMake(25, 25);
+    CGRect rect = CGRectMake(0, 0, size.width, size.height);
+    btn.contentEdgeInsets = UIEdgeInsetsMake(0, -10, 0, 0);
+    btn.frame = rect;
+    [btn setImage:imgOn forState:UIControlStateNormal];
+    [btn setImage:imgOff forState:UIControlStateHighlighted];
+    [btn addTarget:self action:@selector(back_clicked) forControlEvents:UIControlEventTouchUpInside];
+    UIBarButtonItem * barItem = [[UIBarButtonItem alloc] initWithCustomView:btn];
+    barItem.accessibilityLabel = @"返回";
+    self.navigationItem.leftBarButtonItem = barItem;
+    
     //关闭手势返回
     self.fd_interactivePopDisabled = YES;
     
@@ -83,7 +100,6 @@
     self.wxmanager = manager;
     
     //设置导航栏标题
-    self.title = @"确认订单";
     _tableView = [[UITableView alloc] initWithFrame:CGRectMake(0, 0, SCREEN_Width, SCREEN_Height - 64)];
     _tableView.delegate = self;
     _tableView.dataSource = self;
@@ -236,8 +252,10 @@
 }
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
     if (section == 0) {
-        return 6;
+        return 4;
     }else if (section == 1){
+        return 2;
+    }else if (section == 2){
         return 1;
     }else{
         return 3;
@@ -251,13 +269,6 @@
     cell.selectionStyle = UITableViewCellSelectionStyleNone;
     
     if (indexPath.section == 0) {
-//        if (indexPath.row == 0) {
-//            Xzb_OrderDetailHeadCell *cell = [Xzb_OrderDetailHeadCell cellWithTableView:tableView];
-//            cell.selectionStyle = UITableViewCellSelectionStyleNone;
-//            cell.model = self.model;
-//            self.headCellHeight = cell.cellHeight;
-//            return cell;
-//        }else
             if (indexPath.row == 0){
             Xzb_HotelNameCell *cell = [Xzb_HotelNameCell cellWithTableView:tableView];
             cell.hotelNameLabel.text = self.model.businessName;
@@ -266,18 +277,12 @@
         }else if (indexPath.row == 1){
             cell.contentLabel.text = @"付款方式";
             cell.iconImageView.image = [UIImage imageNamed:@"付款方式"];
-            if ([self.model.payType intValue] == 1) {
-                cell.accessoryLabel.text = @"预付";
-            }else if ([self.model.payType intValue] == 2){
-                cell.accessoryLabel.text = @"担保交易";
-            }else if ([self.model.payType intValue] == 3){
-                cell.accessoryLabel.text = @"到付";
-            }
+            cell.accessoryLabel.text = @"全额";
             cell.accessoryLabel.textColor = AppGreenBtnColor;
             return cell;
         }else if (indexPath.row == 2){
             cell.contentLabel.text = self.model.roomName;
-            cell.iconImageView.image = [UIImage imageNamed:@"豪华大床房1"];
+            cell.iconImageView.image = [UIImage imageNamed:@"大床房"];
             cell.accessoryLabel.text = [NSString stringWithFormat:@"¥%@",self.model.price?self.model.price:@"0.00"];
             cell.accessoryLabel.textColor = AppMainColor;
             return cell;
@@ -292,37 +297,24 @@
 //                cell.accessoryLabel.textColor = AppMainColor;
 //            }
             
-            cell.contentLabel.text = @"订单号：6666666666666666666";
-            cell.iconImageView.image = [UIImage imageNamed:@"返现券1"];
+            cell.contentLabel.text = @"订单号：6666666666666";
+            cell.iconImageView.image = [UIImage imageNamed:@"订单号"];
             cell.accessoryLabel.text = string;
             
             return cell;
-        }else
-//            if (indexPath.row == 3){
-//            
-//            cell.contentLabel.text = @"实付款";
-//            cell.iconImageView.image = [UIImage imageNamed:@"实付款"];
-//            cell.accessoryLabel.text = [NSString stringWithFormat:@"¥%@",self.model.realPrice?self.model.realPrice:@"0.00"];
-//            cell.accessoryLabel.textColor = AppMainColor;
-//            
-//            return cell;
-//        }else
-//            if (indexPath.row == 6){
-//            Xzb_PayIntroTableViewCell *cell = [Xzb_PayIntroTableViewCell cellWithTableView:tableView];
-//            cell.selectionStyle = UITableViewCellSelectionStyleNone;
-//            return cell;
-//        }else
-            if (indexPath.row == 4){
-            Xzb_TimeTableViewCell *cell = [Xzb_TimeTableViewCell cellWithTableView:tableView];
-            cell.model = self.model;
-            cell.selectionStyle = UITableViewCellSelectionStyleNone;
-            return cell;
-        }else if (indexPath.row == 5){
-            Xzb_FunctionTableViewCell *cell = [Xzb_FunctionTableViewCell cellWithTableView:tableView];
-            cell.selectionStyle = UITableViewCellSelectionStyleNone;
-            return cell;
         }
     }else if (indexPath.section == 1){
+            if (indexPath.row == 0){
+                Xzb_TimeTableViewCell *cell = [Xzb_TimeTableViewCell cellWithTableView:tableView];
+                cell.model = self.model;
+                cell.selectionStyle = UITableViewCellSelectionStyleNone;
+                return cell;
+            }else if (indexPath.row == 1){
+                Xzb_FunctionTableViewCell *cell = [Xzb_FunctionTableViewCell cellWithTableView:tableView];
+                cell.selectionStyle = UITableViewCellSelectionStyleNone;
+                return cell;
+            }
+    }else if (indexPath.section == 2){
         Xzb_fillOrderCheckManCell *cell = [Xzb_fillOrderCheckManCell cellWithTableView:tableView];
         cell.selectionStyle = UITableViewCellSelectionStyleNone;
         cell.name.placeholder = @"";
@@ -369,20 +361,23 @@
 {
     if (indexPath.section == 0) {
         if (indexPath.row == 0) {
-            return self.headCellHeight;
+            return 49;
         }else if (indexPath.row == 1){
             return CELL_NORMAL_H;
         }else if (indexPath.row == 2){
             return CELL_NORMAL_H;
         }else if (indexPath.row == 3){
             return CELL_NORMAL_H;
-        }else if (indexPath.row == 4){
-            return CELL_NORMAL_H;
-        }else if (indexPath.row == 5){
-            return 70;
         }
         return CELL_NORMAL_H;
     }else if (indexPath.section == 1){
+        if (indexPath.row == 0){
+            return CELL_NORMAL_H;
+        }else if (indexPath.row == 1){
+            return 70;
+        }
+        return 0;
+    }else if (indexPath.section == 2){
         return 90;
     }else{
         return CELL_NORMAL_H;

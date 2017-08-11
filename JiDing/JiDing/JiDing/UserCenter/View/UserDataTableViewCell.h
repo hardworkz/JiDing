@@ -9,5 +9,8 @@
 #import <UIKit/UIKit.h>
 
 @interface UserDataTableViewCell : UITableViewCell
+
+@property (strong, nonatomic) void (^changeHeader)(UIImageView *imageView);
+
 +(UserDataTableViewCell *)cellWithTableView:(UITableView *)tableView;
 @end

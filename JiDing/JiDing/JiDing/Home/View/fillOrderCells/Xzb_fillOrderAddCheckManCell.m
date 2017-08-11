@@ -59,7 +59,7 @@
     [self.contentView addSubview:_addButton];
     
     UIView *bottomline = [[UIView alloc] initWithFrame:CGRectMake(0, CGRectGetMaxY(_addButton.frame) - 0.5, SCREEN_Width, 0.5)];
-    bottomline.backgroundColor = AppLineColor;
+    bottomline.backgroundColor = AppLightLineColor;
     [self.contentView addSubview:bottomline];
 }
 

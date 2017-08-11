@@ -12,7 +12,7 @@
 @interface OneTableViewCell ()
 @property (nonatomic,strong)  UIView *contentsView;
 @property (nonatomic,weak)  UILabel *hotelTypeLabel;
-@property (nonatomic,weak)  UILabel *payTypeLabel;
+//@property (nonatomic,weak)  UILabel *payTypeLabel;
 @property (nonatomic,weak)  UILabel *addressLabel;
 @property (nonatomic,weak)  UILabel *starTimeLabel;
 @property (nonatomic,weak)  UILabel *endTimeLabel;
@@ -70,32 +70,32 @@
         self.contentsView = contentView;
         
         UILabel *hotelTypeLabel = [[UILabel alloc] init];
-        hotelTypeLabel.text = @"经济型";
-        hotelTypeLabel.font = [UIFont systemFontOfSize:13];
-        hotelTypeLabel.frame = CGRectMake(10, 10, 60, 20);
-        hotelTypeLabel.textColor = AppMainColor;
-        hotelTypeLabel.textAlignment = NSTextAlignmentCenter;
-        hotelTypeLabel.layer.borderColor = AppMainColor.CGColor;
-        hotelTypeLabel.layer.borderWidth = 1;
-        hotelTypeLabel.layer.cornerRadius = 10;
+//        hotelTypeLabel.text = @"经济型";
+        hotelTypeLabel.font = [UIFont systemFontOfSize:18.];
+        hotelTypeLabel.frame = CGRectMake(10, 10, 100, 20);
+        hotelTypeLabel.textColor = AppGreenTextColor;
+//        hotelTypeLabel.textAlignment = NSTextAlignmentl;
+//        hotelTypeLabel.layer.borderColor = AppMainColor.CGColor;
+//        hotelTypeLabel.layer.borderWidth = 1;
+//        hotelTypeLabel.layer.cornerRadius = 10;
         [contentView addSubview:hotelTypeLabel];
         self.hotelTypeLabel = hotelTypeLabel;
         
-        UILabel *payTypeLabel = [[UILabel alloc] init];
-        payTypeLabel.text = @"预付";
-        payTypeLabel.font = [UIFont systemFontOfSize:13];
-        payTypeLabel.frame = CGRectMake(CGRectGetMaxX(hotelTypeLabel.frame) + 10, hotelTypeLabel.y, 60, 20);
-        payTypeLabel.textColor = AppGreenBtnColor;
-        payTypeLabel.textAlignment = NSTextAlignmentCenter;
-        payTypeLabel.layer.borderColor = AppGreenBtnColor.CGColor;
-        payTypeLabel.layer.borderWidth = 1;
-        payTypeLabel.layer.cornerRadius = 10;
-        [contentView addSubview:payTypeLabel];
-        self.payTypeLabel = payTypeLabel;
+//        UILabel *payTypeLabel = [[UILabel alloc] init];
+//        payTypeLabel.text = @"预付";
+//        payTypeLabel.font = [UIFont systemFontOfSize:13];
+//        payTypeLabel.frame = CGRectMake(CGRectGetMaxX(hotelTypeLabel.frame) + 10, hotelTypeLabel.y, 60, 20);
+//        payTypeLabel.textColor = AppGreenBtnColor;
+//        payTypeLabel.textAlignment = NSTextAlignmentCenter;
+//        payTypeLabel.layer.borderColor = AppGreenBtnColor.CGColor;
+//        payTypeLabel.layer.borderWidth = 1;
+//        payTypeLabel.layer.cornerRadius = 10;
+//        [contentView addSubview:payTypeLabel];
+//        self.payTypeLabel = payTypeLabel;
         
         UIButton *hotelPhoneBtn = [[UIButton alloc] init];
         hotelPhoneBtn.frame = CGRectMake(ScreenWidth - 60 , -15, 50, 100);
-        [hotelPhoneBtn setImage:[UIImage imageNamed:@"电话"] forState:UIControlStateNormal];
+        [hotelPhoneBtn setImage:[UIImage imageNamed:@"酒店详情-电话"] forState:UIControlStateNormal];
         hotelPhoneBtn.imageView.contentMode = UIViewContentModeCenter;
         [hotelPhoneBtn addTarget:self action:@selector(hotelPhoneBtnClicked) forControlEvents:UIControlEventTouchUpInside];
         [contentView addSubview:hotelPhoneBtn];
@@ -110,36 +110,36 @@
         [contentView addSubview:addressLabel];
         self.addressLabel = addressLabel;
         
-        _devider = [[UIView alloc] initWithFrame:CGRectMake(10, CGRectGetMaxY(addressLabel.frame) + 10, ScreenWidth, 1)];
-        _devider.backgroundColor = AppLineColor;
+        _devider = [[UIView alloc] initWithFrame:CGRectMake(10, CGRectGetMaxY(addressLabel.frame) + 10, ScreenWidth, 0.5)];
+        _devider.backgroundColor = AppLightLineColor;
         [contentView addSubview:_devider];
         
         //入住日期
         UILabel *starTimeLabel = [[UILabel alloc] init];
-        [starTimeLabel setAppFontWithSize:16.0];
-        starTimeLabel.frame = CGRectMake(0, CGRectGetMaxY(_devider.frame) + 10, (SCREEN_WIDTH - NumDayW - 25)* 0.5, 40);
+        [starTimeLabel setAppFontWithSize:15.0];
+        starTimeLabel.frame = CGRectMake(0, CGRectGetMaxY(_devider.frame), (SCREEN_WIDTH - NumDayW - 25)* 0.5, 60);
         starTimeLabel.textColor = AppMainGrayTextColor;
         starTimeLabel.textAlignment = NSTextAlignmentCenter;
         starTimeLabel.numberOfLines = 0;
         [contentView addSubview:starTimeLabel];
         self.starTimeLabel = starTimeLabel;
         //箭头和至
-        UIImageView *rightArrow = [[UIImageView alloc] initWithFrame:CGRectMake(CGRectGetMaxX(starTimeLabel.frame), starTimeLabel.y, 25, 25)];
+        UIImageView *rightArrow = [[UIImageView alloc] initWithFrame:CGRectMake(CGRectGetMaxX(starTimeLabel.frame), starTimeLabel.y + 10, 25, 25)];
         rightArrow.image = [UIImage imageNamed:@"入住箭头"];
         rightArrow.contentMode = UIViewContentModeCenter;
         [contentView addSubview:rightArrow];
         
         UILabel *zhi = [[UILabel alloc] init];
-        zhi.font = [UIFont systemFontOfSize:16];
-        zhi.frame = CGRectMake(0, CGRectGetMaxY(rightArrow.frame), 25, 25);
+        zhi.font = [UIFont systemFontOfSize:15];
+        zhi.frame = CGRectMake(rightArrow.x, CGRectGetMaxY(rightArrow.frame) - 3, 25, 25);
         zhi.text = @"至";
         zhi.textColor = AppMainGrayTextColor;
         zhi.textAlignment = NSTextAlignmentCenter;
         [contentView addSubview:zhi];
         //离店日期
         UILabel *endTimeLabel = [[UILabel alloc] init];
-        [endTimeLabel setAppFontWithSize:16.0];
-        endTimeLabel.frame = CGRectMake(SCREEN_WIDTH - NumDayW - (SCREEN_WIDTH - NumDayW - 25)* 0.5, CGRectGetMaxY(_devider.frame) + 10, (SCREEN_WIDTH - NumDayW - 25)* 0.5, 40);
+        [endTimeLabel setAppFontWithSize:15.0];
+        endTimeLabel.frame = CGRectMake(SCREEN_WIDTH - NumDayW - (SCREEN_WIDTH - NumDayW - 25)* 0.5, CGRectGetMaxY(_devider.frame), (SCREEN_WIDTH - NumDayW - 25)* 0.5, 60);
         endTimeLabel.textColor = AppMainGrayTextColor;
         endTimeLabel.textAlignment = NSTextAlignmentCenter;
         endTimeLabel.numberOfLines = 0;
@@ -147,47 +147,18 @@
         self.endTimeLabel = endTimeLabel;
         //时钟图标
         UIImageView *timeIconImageView = [[UIImageView alloc] initWithFrame:CGRectMake(SCREEN_WIDTH - NumDayW, starTimeLabel.y - 5 -3, NumDayW, 30)];
-        timeIconImageView.image = [UIImage imageNamed:@"时钟"];
+        timeIconImageView.image = [UIImage imageNamed:@"入住时间"];
         timeIconImageView.contentMode = UIViewContentModeCenter;
         [contentView addSubview:timeIconImageView];
         self.timeIconImageView = timeIconImageView;
         //共几晚label
         UILabel *numOfDayLabel = [[UILabel alloc] init];
         numOfDayLabel.font = [UIFont systemFontOfSize:16];
-        numOfDayLabel.frame = CGRectMake(SCREEN_WIDTH - NumDayW, starTimeLabel.y + 20, NumDayW, 20);
-        numOfDayLabel.textColor = AppMainColor;
+        numOfDayLabel.frame = CGRectMake(SCREEN_WIDTH - NumDayW, starTimeLabel.y + 30, NumDayW, 20);
+        numOfDayLabel.textColor = AppGreenTextColor;
         numOfDayLabel.textAlignment = NSTextAlignmentCenter;
         [contentView addSubview:numOfDayLabel];
         self.numOfDayLabel = numOfDayLabel;
-        
-//        for (int i = 0; i<2; i++) {
-//            UILabel *timeLabel = [[UILabel alloc] init];
-//            timeLabel.font = [UIFont systemFontOfSize:16];
-//            timeLabel.frame = CGRectMake(ScreenWidth * 0.5 * i, CGRectGetMaxY(_devider.frame) + 10, ScreenWidth * 0.5 , 40);
-//            timeLabel.textColor = AppMainGrayTextColor;
-//            timeLabel.textAlignment = NSTextAlignmentCenter;
-//            timeLabel.numberOfLines = 0;
-//            [contentView addSubview:timeLabel];
-//            if (i == 0) {
-//                self.starTimeLabel = timeLabel;
-//                //共几晚label
-//                UILabel *numOfDayLabel = [[UILabel alloc] init];
-//                numOfDayLabel.font = [UIFont systemFontOfSize:16];
-//                numOfDayLabel.frame = CGRectMake(0, CGRectGetMaxY(timeLabel.frame) + 5, ScreenWidth, 20);
-//                numOfDayLabel.textColor = AppMainColor;
-//                numOfDayLabel.textAlignment = NSTextAlignmentCenter;
-//                [contentView addSubview:numOfDayLabel];
-//                self.numOfDayLabel = numOfDayLabel;
-//                
-//                UIImageView *timeIconImageView = [[UIImageView alloc] initWithFrame:CGRectMake((ScreenWidth - 30) * 0.5, timeLabel.y - 5 -3, 30, 30)];
-//                timeIconImageView.image = [UIImage imageNamed:@"时钟"];
-//                timeIconImageView.contentMode = UIViewContentModeCenter;
-//                [contentView addSubview:timeIconImageView];
-//                self.timeIconImageView = timeIconImageView;
-//            }else{
-//                self.endTimeLabel = timeLabel;
-//            }
-//        }
     }
     return self;
 }
@@ -197,13 +168,14 @@
     if (model == nil) {
         return;
     }
+    self.hotelTypeLabel.text = [NSString stringWithFormat:@"¥%@/晚",model.price];
     
     //酒店地址
     CGSize addressSize = [model.location boundingRectWithSize:CGSizeMake(ScreenWidth - 20 - 50, MAXFLOAT) options:NSStringDrawingUsesLineFragmentOrigin attributes:@{NSFontAttributeName:[UIFont systemFontOfSize:14]} context:nil].size;
     self.addressLabel.height = addressSize.height;
     self.addressLabel.text = model.location;
     
-    _devider.frame = CGRectMake(10, CGRectGetMaxY(_addressLabel.frame) + 10, ScreenWidth, 1);
+    _devider.frame = CGRectMake(10, CGRectGetMaxY(_addressLabel.frame) + 10, ScreenWidth, 0.5);
     if ([model.orderType intValue] == 1) {//全日房
         //入住时间 和 离店时间
         if (model.checkinDate.length >= 10) {
@@ -219,12 +191,11 @@
         self.starTimeLabel.text = [NSString stringWithFormat:@"预计到店时间\n%@ %@",[model.checkinDate substringToIndex:10],model.arriveTime];
     }
     
+    self.starTimeLabel.y = CGRectGetMaxY(_devider.frame) + addressSize.height - 10;
+    self.endTimeLabel.y = _starTimeLabel.y;
     
-    self.starTimeLabel.y = CGRectGetMaxY(_devider.frame) + 10 +addressSize.height * 0.5;
-    self.endTimeLabel.y = CGRectGetMaxY(_devider.frame) + 10 +addressSize.height * 0.5;
-    
-    self.timeIconImageView.y = self.starTimeLabel.y - 5;
-    self.numOfDayLabel.y = CGRectGetMaxY(self.timeIconImageView.frame) - 5;
+    self.timeIconImageView.y = self.starTimeLabel.y;
+    self.numOfDayLabel.y = CGRectGetMaxY(self.timeIconImageView.frame) + 3;
     self.contentsView.height = 140 - 9 + addressSize.height * 0.5;
     //支付类型（预付）
     NSArray *payTypeArray = [model.payType componentsSeparatedByString:@","];
@@ -242,10 +213,10 @@
         }
     }
     
-    self.payTypeLabel.text = payTypeString;
+//    self.payTypeLabel.text = payTypeString;
     
-    CGSize payTypeLabelSize = [payTypeString boundingRectWithSize:CGSizeMake(MAXFLOAT, MAXFLOAT) options:NSStringDrawingUsesLineFragmentOrigin attributes:@{NSFontAttributeName:self.payTypeLabel.font} context:nil].size;
-    self.payTypeLabel.width = payTypeLabelSize.width + 20;
+//    CGSize payTypeLabelSize = [payTypeString boundingRectWithSize:CGSizeMake(MAXFLOAT, MAXFLOAT) options:NSStringDrawingUsesLineFragmentOrigin attributes:@{NSFontAttributeName:self.payTypeLabel.font} context:nil].size;
+//    self.payTypeLabel.width = payTypeLabelSize.width + 20;
     
     //区别全日房和钟点房
     NSString *hourTime = @"";

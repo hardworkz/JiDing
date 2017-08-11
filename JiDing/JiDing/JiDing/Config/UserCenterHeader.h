@@ -10,6 +10,7 @@
 #define UserCenterHeader_h
 
 #import "UserCenterViewController.h"
+#import "Xzb_ImagePickerController.h"
 
 #import "UserDataTableViewCell.h"
 #import "UserCenterOrderCell.h"
