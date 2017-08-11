@@ -40,7 +40,7 @@
         header.layer.cornerRadius = header.width*0.5;
         header.clipsToBounds = YES;
         header.userInteractionEnabled = YES;
-        UITapGestureRecognizer *tapHeader = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(changeHeader)];
+        UITapGestureRecognizer *tapHeader = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(changeHeader:)];
         [header addGestureRecognizer:tapHeader];
         [self.contentView addSubview:header];
         [header sd_setImageWithURL:[NSURL URLWithString:account.userPhoto] placeholderImage:[UIImage imageNamed:PLACEHOLDERIMAGE]];

@@ -109,8 +109,17 @@
     }
     self.handlers = tempArr;
     self.tableViews = tempTableViewArr;
+    
+    
+    UISwipeGestureRecognizer *rightSwipe = [[UISwipeGestureRecognizer alloc]initWithTarget:self action:@selector(back)];
+    [rightSwipe setDirection:UISwipeGestureRecognizerDirectionRight];
+    [self.view addGestureRecognizer:rightSwipe];
+    UISwipeGestureRecognizer *back = [[UISwipeGestureRecognizer alloc]initWithTarget:self action:@selector(back)];
+    [_scrollView addGestureRecognizer:back];
 }
-
+- (void)back{
+    [self.navigationController popViewControllerAnimated:YES];
+}
 - (void)selectButton:(NSInteger )tag {
     [self.scrollView setContentOffset:CGPointMake(tag * self.scrollView.width, 0) animated:YES];
 }
