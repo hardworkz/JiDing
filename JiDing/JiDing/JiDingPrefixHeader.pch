@@ -57,7 +57,7 @@
 #import "Xzb_ApplicationData.h"
 #import "Xzb_ApplicationDataTool.h"
 
-#define PLACEHOLDERIMAGE @"个人"
+#define PLACEHOLDERIMAGE @"个人-拷贝-2"
 //定义宏（限制输入内容）
 #define kAlphaNum  @"ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789"
 #define kAlpha      @"ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz"

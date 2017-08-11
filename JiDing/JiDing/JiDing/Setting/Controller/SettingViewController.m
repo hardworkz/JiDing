@@ -141,6 +141,7 @@
         //账号中心
         Xzb_AccountCenterController *accountCenterVC = [[Xzb_AccountCenterController alloc] init];
         accountCenterVC.title = @"账户中心";
+        accountCenterVC.view.backgroundColor = AppLightLineColor;
         [self.navigationController pushViewController:accountCenterVC animated:YES];
     }else if (indexPath.row == 1) {
         //消息推送

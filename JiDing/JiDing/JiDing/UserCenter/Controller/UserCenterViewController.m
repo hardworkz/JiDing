@@ -33,6 +33,20 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    //自定义返回按钮
+    UIImage * imgOn = [UIImage imageNamed:@"设置-"];
+    UIImage * imgOff = [UIImage imageNamed:@"设置-"];
+    UIButton * btn = [UIButton buttonWithType:UIButtonTypeCustom];
+    CGSize size = CGSizeMake(25, 25);
+    CGRect rect = CGRectMake(0, 0, size.width, size.height);
+    btn.contentEdgeInsets = UIEdgeInsetsMake(0, -10, 0, 0);
+    btn.frame = rect;
+    [btn setImage:imgOn forState:UIControlStateNormal];
+    [btn setImage:imgOff forState:UIControlStateHighlighted];
+    [btn addTarget:self action:@selector(edit_clicked) forControlEvents:UIControlEventTouchUpInside];
+    UIBarButtonItem * barItem = [[UIBarButtonItem alloc] initWithCustomView:btn];
+    barItem.accessibilityLabel = @"设置-";
+    self.navigationItem.rightBarButtonItem = barItem;
     
     self.fd_interactivePopDisabled = YES;
     
@@ -44,6 +58,10 @@
     UISwipeGestureRecognizer *rightSwipe = [[UISwipeGestureRecognizer alloc]initWithTarget:self action:@selector(actionAutoBack:)];
     [rightSwipe setDirection:UISwipeGestureRecognizerDirectionRight];
     [self.view addGestureRecognizer:rightSwipe];
+}
+- (void)edit_clicked
+{
+    
 }
 - (void)actionAutoBack:(UIBarButtonItem *)barItem
 {
